@@ -1,8 +1,8 @@
-request = function(polygon, composition = NULL, year = NULL, resolution = NULL) {
+request = function(polygon, where = NULL) {
   require("sf")
   require("jsonlite")
 
-  if (!is.null(composition) && !(composition %in% c("B/W", "RGB", "CIR"))) stop("incorrect composition (should be 'B/W', 'RGB' or 'CIR'")
+  if (!is.null(where) && !is.character(where)) stop("'where' must be string")
   if (nrow(polygon) == 0) stop("no geometries")
 
   epsg = st_crs(polygon)$epsg
@@ -14,6 +14,12 @@ request = function(polygon, composition = NULL, year = NULL, resolution = NULL) 
   outFields = "&outFields=*"
   returnGeometry = "&returnGeometry=false"
   file = "&f=json"
+
+  # user input
+  empty_where = "&where="
+  if (!is.null(where)) {
+    empty_where = paste0(empty_where, where)
+  }
 
   # initial empty df
   empty_df = data.frame(godlo = character(),
@@ -44,7 +50,7 @@ request = function(polygon, composition = NULL, year = NULL, resolution = NULL) 
     geometry = paste0("geometry={'xmin':", bbox[1], ", 'ymin':", bbox[2], ", 'xmax':", bbox[3], ", 'ymax':", bbox[4], ", 'spatialReference':{'wkid':", epsg, "}}")
 
     prepared_URL = paste0(base_URL, geometry, geometryType, spatialRel, outFields,
-                          returnGeometry, file)
+                          returnGeometry, file, empty_where)
 
     output = fromJSON(prepared_URL)
     output = output$features[[1]]
