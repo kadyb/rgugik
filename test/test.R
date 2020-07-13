@@ -13,4 +13,4 @@ req_df4 = request(polygon = polygon, where = "akt_rok >= 2016")
 
 
 # download only first image
-download.file(req_df1[1, "url_do_pobrania"], paste0(req_df[1, "nazwa_pliku"], ".tif"), mode = "wb")
+download.file(req_df1[1, "url_do_pobrania"], paste0(req_df1[1, "nazwa_pliku"], ".tif"), mode = "wb")
