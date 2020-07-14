@@ -52,6 +52,10 @@ request = function(polygon, where = NULL) {
 
     output = jsonlite::fromJSON(prepared_URL)
     output = output$features[[1]]
+
+    # MaxRecordCount: 1000
+    if (nrow(output) == 1000) warning("maximum number of records, reduce the area or add filtering")
+
     empty_df = rbind(empty_df, output)
   }
 
