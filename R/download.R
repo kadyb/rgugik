@@ -1,11 +1,9 @@
 request = function(polygon, where = NULL) {
-  require("sf")
-  require("jsonlite")
 
   if (!is.null(where) && !is.character(where)) stop("'where' must be string")
   if (nrow(polygon) == 0) stop("no geometries")
 
-  epsg = st_crs(polygon)$epsg
+  epsg = sf::st_crs(polygon)$epsg
 
   # hard coded URL and parameters
   base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/0/query?"
@@ -44,7 +42,7 @@ request = function(polygon, where = NULL) {
   )
 
   for (i in 1:nrow(polygon)) {
-    bbox = st_bbox(st_geometry(polygon)[[i]])
+    bbox = sf::st_bbox(st_geometry(polygon)[[i]])
 
     # user input
     geometry = paste0("geometry={'xmin':", bbox[1], ", 'ymin':", bbox[2], ", 'xmax':", bbox[3], ", 'ymax':", bbox[4], ", 'spatialReference':{'wkid':", epsg, "}}")
@@ -52,7 +50,7 @@ request = function(polygon, where = NULL) {
     prepared_URL = paste0(base_URL, geometry, geometryType, spatialRel, outFields,
                           returnGeometry, file, empty_where)
 
-    output = fromJSON(prepared_URL)
+    output = jsonlite::fromJSON(prepared_URL)
     output = output$features[[1]]
     empty_df = rbind(empty_df, output)
   }
