@@ -5,8 +5,8 @@ orto_download = function(df_req) {
   if (nrow(df_req) == 0) stop("empty df")
 
   for (i in nrow(df_req)) {
-    download.file(req_df[i, "url_do_pobrania"],
-                  paste0(req_df[i, "nazwa_pliku"], ".tif"),
+    download.file(df_req[i, "url_do_pobrania"],
+                  paste0(df_req[i, "nazwa_pliku"], ".tif"),
                   mode = "wb")
   }
 
