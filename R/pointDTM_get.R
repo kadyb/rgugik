@@ -24,6 +24,9 @@ pointDTM_get = function(polygon) {
   n_last = nrow(pts) %% 500
   
   for (i in 0:iter) {
+    
+    writeLines(paste0(i, "/", iter))
+    
     if (i < iter) {
       sel_pts = pts[(i * 500 + 1):(i * 500 + 500), ]
       str_pts = paste(sel_pts[, 1], sel_pts[, 2])
@@ -34,6 +37,7 @@ pointDTM_get = function(polygon) {
       str_output = unlist(strsplit(str_output, " "))
       elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
       empty_output = c(empty_output, elev)
+      Sys.sleep(2) # wait 2 sec
     } else {
       sel_pts = pts[(i * 500 + 1):(i * 500 + n_last), ]
       str_pts = paste(sel_pts[, 1], sel_pts[, 2])
@@ -45,7 +49,6 @@ pointDTM_get = function(polygon) {
       elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
       empty_output = c(empty_output, elev)
     }
-    Sys.sleep(2) # wait 2 sec
   }
   
   empty_output = as.numeric(empty_output)
@@ -59,4 +62,5 @@ pointDTM_get = function(polygon) {
   # wysokość jest zwracana w układzie PL-KRON86-NH
   # czy przed 'as.integer' powinno byc 'round'?
   # moze dodac sprawdzenie czy poligon lezy w bboxie Polski?
+  # moze warto dodac sampling (np. co 4 punkt)?
 }
