@@ -14,6 +14,7 @@ pointDTM_get = function(polygon) {
   pts = sf::st_make_grid(polygon, cellsize = 1, what = "corners") # source DTM is 1 x 1 m resolution
   pts = sf::st_coordinates(pts)
   pts = apply(pts, 2, as.integer) # make it integer
+  pts = as.data.frame(pts)
 
   # initial empty character vector
   empty_output = character()
@@ -48,8 +49,10 @@ pointDTM_get = function(polygon) {
   }
   
   empty_output = as.numeric(empty_output)
+  pts = cbind(pts, Z = empty_output)
+  pts = st_as_sf(pts, coords = c("X", "Y"), crs = 2180)
   
-  return(empty_output)
+  return(pts)
   
   # TODO:
   # czy usluga moze zwrocic NA (pewnie tak, dla obszarów spoza Polski)?
