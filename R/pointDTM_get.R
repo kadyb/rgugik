@@ -1,11 +1,15 @@
 pointDTM_get = function(polygon) {
 
-  base_URL = "https://services.gugik.gov.pl/nmt/?request=GetHByPointList&list="
+  if (nrow(polygon) != 1) stop("polygon must contain one object")
   
   # input EPSG must be 2180
   if (!st_crs(polygon)$epsg == 2180) {
     polygon = st_transform(sfc, 2180)
   }
+  
+  if (st_area(polygon) > 500000) stop("maximum area is 50 ha") # [m^2]
+  
+  base_URL = "https://services.gugik.gov.pl/nmt/?request=GetHByPointList&list="
   
   pts = st_make_grid(polygon, cellsize = 1, what = "corners") # source DTM is 1 x 1 m resolution
   pts = st_coordinates(pts)
@@ -25,6 +29,7 @@ pointDTM_get = function(polygon) {
   # czy przed 'as.integer' powinno byc 'round'?
   # dodac iteracje po poligonach i punktach
   # moze dodac sprawdzenie czy poligon lezy w bboxie Polski?
+  # dodac 'wait' pomiedzy iteracjami
 }
 
 #############
