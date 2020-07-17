@@ -37,3 +37,4 @@ orto_download(req_df1[1, ]) # download only first image
 img = brick("43_67170_N-34-139-A-c-1-2.tif")
 plotRGB(img)
 ```
+<img src="figures/orto_download.png"/>
