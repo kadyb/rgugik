@@ -38,3 +38,18 @@ img = brick("43_67170_N-34-139-A-c-1-2.tif")
 plotRGB(img)
 ```
 <img src="figures/orto_download.png"/>
+
+### DTM (as XYZ):
+
+```r
+library("sf")
+polygon = read_sf("polygon.gpkg")
+DTM = pointDTM_get(polygon)
+
+summary(DTM$elev)
+#>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+#>  548.7   554.8   557.4   558.2   561.4   571.5 
+
+plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
+```
+<img src="figures/pointDTM_get.png"/>
