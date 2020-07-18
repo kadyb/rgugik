@@ -1,7 +1,11 @@
 orto_request = function(polygon, where = NULL) {
 
-  if (!is.null(where) && !is.character(where)) stop("'where' must be string")
-  if (nrow(polygon) == 0) stop("no geometries")
+  if (!is.null(where) && !is.character(where)){
+    stop("'where' must be string")
+  }
+  if (nrow(polygon) == 0) {
+    stop("no geometries")
+  }
 
   selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zrDanych",
                   "url_do_pobrania", "idSerie", "sha1", "nazwa_pliku")
@@ -46,7 +50,7 @@ orto_request = function(polygon, where = NULL) {
   )
 
   for (i in 1:nrow(polygon)) {
-    bbox = sf::st_bbox(st_geometry(polygon)[[i]])
+    bbox = sf::st_bbox(sf::st_geometry(polygon)[[i]])
 
     # user input
     geometry = paste0("geometry={'xmin':", bbox[1], ", 'ymin':", bbox[2], ", 'xmax':", bbox[3], ", 'ymax':", bbox[4], ", 'spatialReference':{'wkid':", epsg, "}}")
@@ -58,7 +62,9 @@ orto_request = function(polygon, where = NULL) {
     output = output$features[[1]]
 
     # MaxRecordCount: 1000
-    if (nrow(output) == 1000) warning("maximum number of records, reduce the area or add filtering")
+    if (nrow(output) == 1000) {
+      warning("maximum number of records, reduce the area or add filtering")
+    }
 
     empty_df = rbind(empty_df, output)
   }
