@@ -1,0 +1,86 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# rgugik
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+**rgugik** is an R package for downloading open data from resources of [Polish Head Office of Geodesy and Cartography](http://www.gugik.gov.pl/).
+Currently you can download:
+
+  - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
+  - [Digital Terrain Models](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu) as XYZ vector points with 1 m resolution
+
+## Installation
+
+<!-- You can install the released version of rgugik from [CRAN](https://CRAN.R-project.org) with: -->
+
+<!-- ``` r -->
+<!-- install.packages("rgugik") -->
+<!-- ``` -->
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("kadyb/rgugik")
+```
+
+## Usage
+
+### Ortophotomap
+  
+- `orto_request()` - returns a data frame with metadata and links to the orthoimages in a given polygon
+- `orto_download()` - downloads orthoimages based on the data frame obtained using the `orto_request()` function
+  
+```{r}
+library(rgugik)
+library(sf)
+library(raster)
+polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
+polygon = read_sf(polygon_path)
+req_df = orto_request(polygon)
+str(req_df)
+orto_download(req_df[1, ]) # download the first image only
+img = brick("41_3756_N-33-130-D-b-2-3.tif")
+plotRGB(img)
+```
+
+```{r, echo=FALSE, message=FALSE}
+invisible(file.remove("41_3756_N-33-130-D-b-2-3.tif"))
+```
+
+### DTM (as XYZ)
+
+```{r, eval=FALSE}
+library(rgugik)
+library(sf)
+polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
+polygon = read_sf(polygon_path)
+DTM = pointDTM_get(polygon)
+summary(DTM$elev)
+plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
+```
+
+## Acknowledgment
+
+<!-- please add the content here-->
+
+## Contribution
+
+Contributions to this package are welcome. 
+The preferred method of contribution is through a GitHub pull request. 
+Feel also free to contact us by creating [an issue](https://github.com/ kadyb/rgugik/issues).
