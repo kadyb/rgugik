@@ -49,7 +49,7 @@ orto_request = function(polygon, where = NULL) {
                         #ESRI_OID = integer()
   )
 
-  for (i in 1:nrow(polygon)) {
+  for (i in seq_len(nrow(polygon))) {
     bbox = sf::st_bbox(sf::st_geometry(polygon)[[i]])
 
     # user input

@@ -14,13 +14,13 @@ orto_download = function(df_req, check_SHA = FALSE, ...) {
 
   if (!check_SHA) {
     # only download files
-    for (i in 1:nrow(df_req)) {
+    for (i in seq_len(nrow(df_req))) {
       name_file = paste0(df_req[i, "nazwa_pliku"], ".tif")
       utils::download.file(df_req[i, "url_do_pobrania"], name_file, mode = "wb", ...)
     }
   } else {
     # download files and check their checksum
-    for (i in 1:nrow(df_req)) {
+    for (i in seq_len(nrow(df_req))) {
       name_file = paste0(df_req[i, "nazwa_pliku"], ".tif")
       utils::download.file(df_req[i, "url_do_pobrania"], name_file, mode = "wb", ...)
       # reference checksum is SHA-1
