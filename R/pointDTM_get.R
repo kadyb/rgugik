@@ -1,4 +1,4 @@
-pointDTM_get = function(polygon) {
+pointDTM_get = function(polygon, distance = 1) {
 
   if (nrow(polygon) != 1) {
     stop("polygon must contain one object")
@@ -10,15 +10,23 @@ pointDTM_get = function(polygon) {
     polygon = sf::st_transform(polygon, 2180)
   }
 
-  if (as.vector(sf::st_area(polygon)) > 200000){
+  if (as.vector(sf::st_area(polygon)) > 200000) {
     stop("maximum area is 20 ha") # [m^2]
+  }
+  
+  if (distnace < 1) {
+    stop("distance between the points cannot be less than 1 m")
+  }
+  
+  if (!as.integer(distance) == distance) {
+    stop("'distance' must contain an integer")
   }
 
   base_URL = "https://services.gugik.gov.pl/nmt/?request=GetHByPointList&list="
 
-  pts = sf::st_make_grid(polygon, cellsize = 1, what = "corners") # source DTM is 1 x 1 m resolution
+  pts = sf::st_make_grid(polygon, cellsize = distance, what = "corners") # source DTM is 1 x 1 m resolution
   pts = sf::st_coordinates(pts)
-  pts = apply(pts, 2, as.integer) # make it integer
+  pts = apply(pts, 2, as.integer) # make it integer because minimum distance is 1 m
   pts = as.data.frame(pts)
 
   # initial empty character vector
