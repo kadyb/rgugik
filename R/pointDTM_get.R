@@ -14,7 +14,7 @@ pointDTM_get = function(polygon, distance = 1) {
     stop("maximum area is 20 ha") # [m^2]
   }
   
-  if (distnace < 1) {
+  if (distance < 1) {
     stop("distance between the points cannot be less than 1 m")
   }
   
@@ -32,6 +32,18 @@ pointDTM_get = function(polygon, distance = 1) {
   # initial empty character vector
   empty_output = character()
 
+  # helper function (get elevation values from URL)
+  get_elev = function(points, URL) {
+    str_pts = paste(sel_pts[, 2], sel_pts[, 1]) # X, Y coordinates are inverted
+    str_pts = paste(str_pts, collapse = ",")
+    prepared_URL = paste0(base_URL, str_pts)
+    str_output = readLines(prepared_URL, warn = FALSE)
+    str_output = unlist(strsplit(str_output, ","))
+    str_output = unlist(strsplit(str_output, " "))
+    elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
+    return(elev)
+    }
+  
   # request may only contain 500 points
   iter = floor(nrow(pts) / 500)
   n_last = nrow(pts) %% 500
@@ -50,13 +62,7 @@ pointDTM_get = function(polygon, distance = 1) {
 
     if (i < iter) {
       sel_pts = pts[(i * 500 + 1):(i * 500 + 500), ]
-      str_pts = paste(sel_pts[, 2], sel_pts[, 1]) # X, Y coordinates are inverted
-      str_pts = paste(str_pts, collapse = ",")
-      prepared_URL = paste0(base_URL, str_pts)
-      str_output = readLines(prepared_URL, warn = FALSE)
-      str_output = unlist(strsplit(str_output, ","))
-      str_output = unlist(strsplit(str_output, " "))
-      elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
+      elev = get_elev(sel_pts, base_URL)
       i = i + 1
 
       if (all(elev %in% "0.0")) {
@@ -66,17 +72,13 @@ pointDTM_get = function(polygon, distance = 1) {
         Sys.sleep(2) # wait 2 sec
         next
       }
+      
       empty_output = c(empty_output, elev)
       Sys.sleep(2) # wait 2 sec
+      
     } else {
       sel_pts = pts[(i * 500 + 1):(i * 500 + n_last), ]
-      str_pts = paste(sel_pts[, 2], sel_pts[, 1]) # X, Y coordinates are inverted
-      str_pts = paste(str_pts, collapse = ",")
-      prepared_URL = paste0(base_URL, str_pts)
-      str_output = readLines(prepared_URL, warn = FALSE)
-      str_output = unlist(strsplit(str_output, ","))
-      str_output = unlist(strsplit(str_output, " "))
-      elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
+      elev = get_elev(sel_pts, base_URL)
       empty_output = c(empty_output, elev)
       i = i + 1
     }
