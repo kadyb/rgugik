@@ -6,7 +6,7 @@ pointDTM_get = function(polygon, distance = 1) {
 
   # input EPSG must be 2180
   if (!sf::st_crs(polygon)$epsg == 2180) {
-    warning("input EPSG must be 2180, trying to transform")
+    warning("input EPSG must be 2180, trying to transform", immediate. = TRUE)
     polygon = sf::st_transform(polygon, 2180)
   }
 
