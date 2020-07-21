@@ -1,3 +1,12 @@
+#' Title
+#'
+#' @param polygon
+#' @param where
+#'
+#' @return
+#' @export
+#'
+#' @examples
 orto_request = function(polygon, where = NULL) {
 
   if (!is.null(where) && !is.character(where)){

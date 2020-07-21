@@ -1,3 +1,12 @@
+#' Title
+#'
+#' @param polygon
+#' @param distance
+#'
+#' @return
+#' @export
+#'
+#' @examples
 pointDTM_get = function(polygon, distance = 1) {
 
   if (nrow(polygon) != 1) {
@@ -13,11 +22,11 @@ pointDTM_get = function(polygon, distance = 1) {
   if (as.vector(sf::st_area(polygon)) > 200000) {
     stop("maximum area is 20 ha") # [m^2]
   }
-  
+
   if (distance < 1) {
     stop("distance between the points cannot be less than 1 m")
   }
-  
+
   if (!as.integer(distance) == distance) {
     stop("'distance' must contain an integer")
   }
@@ -43,7 +52,7 @@ pointDTM_get = function(polygon, distance = 1) {
     elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
     return(elev)
     }
-  
+
   # request may only contain 500 points
   iter = floor(nrow(pts) / 500)
   n_last = nrow(pts) %% 500
@@ -72,10 +81,10 @@ pointDTM_get = function(polygon, distance = 1) {
         Sys.sleep(2) # wait 2 sec
         next
       }
-      
+
       empty_output = c(empty_output, elev)
       Sys.sleep(2) # wait 2 sec
-      
+
     } else {
       sel_pts = pts[(i * 500 + 1):(i * 500 + n_last), ]
       elev = get_elev(sel_pts, base_URL)
