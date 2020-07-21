@@ -19,16 +19,18 @@ pointDTM_get = function(polygon, distance = 1) {
     polygon = sf::st_transform(polygon, 2180)
   }
 
-  if (as.vector(sf::st_area(polygon)) > 200000) {
-    stop("maximum area is 20 ha") # [m^2]
-  }
-
   if (distance < 1) {
     stop("distance between the points cannot be less than 1 m")
   }
 
   if (!as.integer(distance) == distance) {
     stop("'distance' must contain an integer")
+  }
+  
+  # the greater distance between points, the larger area can be used
+  # input area unit is [m^2]
+  if (as.vector(sf::st_area(polygon)) > 200000 * distance) {
+    stop(paste("maximum area is", 20 * distance, "ha"))
   }
 
   base_URL = "https://services.gugik.gov.pl/nmt/?request=GetHByPointList&list="
