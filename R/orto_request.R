@@ -24,8 +24,9 @@ orto_request = function(polygon, where = NULL) {
     stop("no geometries")
   }
 
-  selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zrDanych",
-                  "url_do_pobrania", "idSerie", "sha1", "nazwa_pliku")
+  selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zrDanych", "ukladXY",
+                    "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1",
+                    "nazwa_pliku")
   selected_cols = paste(selected_cols, collapse = ",")
 
   epsg = sf::st_crs(polygon)$epsg
@@ -50,10 +51,10 @@ orto_request = function(polygon, where = NULL) {
                         piksel = numeric(),
                         kolor = character(),
                         zrDanych = character(),
-                        #ukladXY = character(),
+                        ukladXY = character(),
                         #modulArch = character(),
                         #nrZglosz = character(),
-                        #czy_ark_wypelniony = character(),
+                        czy_ark_wypelniony = character(),
                         #daneAktualne = integer(),
                         #daneAktDo10cm = integer(),
                         #lok_orto = character(),
