@@ -1,13 +1,21 @@
-#' Title
+#' downloads orthoimages based on the data frame obtained using 
+#' the orto_request() function
 #'
-#' @param df_req
-#' @param check_SHA
+#' @param df_req a data frame obtained using the orto_request() function
+#' @param check_SHA check the integrity of downloaded files 
+#' (logical parameter, default = FALSE)
 #' @param ...
 #'
-#' @return
+#' @return georeferenced orthoimages .tif with properties 
+#' (resolution, composition, etc.) as specified in the input data frame
 #' @export
 #'
 #' @examples
+#' library(sf)
+#' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
+#' polygon = read_sf(polygon_path)
+#' req_df = orto_request(polygon)
+#' orto_download(req_df[1, ]) # download the first image only
 orto_download = function(df_req, check_SHA = FALSE, ...) {
 
   if (!all(c("url_do_pobrania", "nazwa_pliku") %in% names(df_req))) {

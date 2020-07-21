@@ -1,12 +1,14 @@
-#' Title
+#' downloads Digital Terrain Models with 100 m resolution for entire voivodeships
 #'
-#' @param voivodeship
+#' @param voivodeship selected voivodships in Polish or English
 #' @param ...
 #'
-#' @return
+#' @return text files with X, Y, Z columns (EPSG:2180)
 #' @export
 #'
 #' @examples
+#' pointDTM_100_download(c("mazowieckie", "wielkopolskie"))
+#' pointDTM_100_download(c("Subcarpathian", "Silesian"))
 pointDTM_100_download = function(voivodeship, ...) {
 
   voivodeship_pl = c("dolnośląskie",

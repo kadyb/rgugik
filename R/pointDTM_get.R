@@ -1,12 +1,20 @@
-#' Title
+#' returns a data frame with vector points and terrain elevation for a given polygon
 #'
-#' @param polygon
-#' @param distance
+#' @param polygon the polygon layer with only one object
+#' (its area is limited to the 20 ha * distance parameter),
+#' the input coordinate system must be EPSG:2180
+#' @param distance distance between points in meters 
+#' (must be integer and greater than 1)
 #'
-#' @return
+#' @return a data frame with vector points and terrain elevation 
+#' (EPSG:2180, Vertical Reference System:PL-KRON86-NH)
 #' @export
 #'
 #' @examples
+#' library(sf)
+#' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
+#' polygon = read_sf(polygon_path)
+#' DTM = pointDTM_get(polygon, distance = 2)
 pointDTM_get = function(polygon, distance = 1) {
 
   if (nrow(polygon) != 1) {
