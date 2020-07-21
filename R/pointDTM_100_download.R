@@ -71,7 +71,7 @@ pointDTM_100_download = function(voivodeship, ...) {
 
   df_voivodeship = data.frame(pl = voivodeship_pl, en = voivodeship_en, URL = URLs)
 
-  download = function(df, local_col) {
+  download = function(df, local_col, ...) {
     filename = paste0(local_col[i], ".zip")
     utils::download.file(df[i, "URL"], filename, mode = "wb", ...)
     utils::unzip(filename)
