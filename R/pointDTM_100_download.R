@@ -1,6 +1,7 @@
 #' downloads Digital Terrain Models with 100 m resolution for entire voivodeships
 #'
-#' @param voivodeship selected voivodships in Polish or English
+#' @param voivodeship selected voivodeships in Polish or English, or TERC
+#' (function 'voivodeships_names' can by helpful)
 #' @param ...
 #'
 #' @return text files with X, Y, Z columns (EPSG:2180)
@@ -9,51 +10,36 @@
 #' @examples
 #' pointDTM_100_download(c("mazowieckie", "wielkopolskie"))
 #' pointDTM_100_download(c("Subcarpathian", "Silesian"))
-pointDTM_100_download = function(voivodeship, ...) {
+pointDTM_100_download = function(string, ...) {
 
-  voivodeship_pl = c("dolnośląskie",
-                     "kujawsko-pomorskie",
-                     "lubelskie",
-                     "lubuskie",
-                     "łódzkie",
-                     "małopolskie",
-                     "mazowieckie",
-                     "opolskie",
-                     "podkarpackie",
-                     "podlaskie",
-                     "pomorskie",
-                     "śląskie",
-                     "świętokrzyskie",
-                     "warmińsko-mazurskie",
-                     "wielkopolskie",
-                     "zachodniopomorskie")
-
-  voivodeship_en = c("Lower Silesia",
-                     "Kuyavian-Pomeranian",
-                     "Lublin",
-                     "Lubusz",
-                     "Lodz",
-                     "Lesser Poland",
-                     "Mazovian",
-                     "Opole",
-                     "Subcarpathian",
-                     "Podlaskie",
-                     "Pomeranian",
-                     "Silesian",
-                     "Swietokrzyskie",
-                     "Warmian-Masurian",
-                     "Greater Poland",
-                     "West Pomeranian")
-
-  local = character()
-  if (all(voivodeship %in% voivodeship_pl)) {
-    local = "PL"
-  } else if (all(voivodeship %in% voivodeship_en)) {
-    local = "EN"
-  } else {
-    stop("incorrect voivodeship names, check the documentation")
+  if (!is.character(string) | length(string) == 0) {
+    stop("enter names or TERC")
   }
-
+  
+  df_names = voivodeships_names()
+  
+  type = character()
+  sel_vector = logical()
+  
+  if (all(string %in% df_names[, "PL"])) {
+    
+    sel_vector = df_names[, "PL"] %in% string
+    type = "PL"
+    
+  } else if (all(string %in% df_names[, "EN"])) {
+    
+    sel_vector = df_names[, "EN"] %in% string
+    type = "EN"
+    
+  } else if (all(string %in% df_names[, "TERC"])) {
+    
+    sel_vector = df_names[, "TERC"] %in% string
+    type = "TERC"
+    
+  } else {
+    stop("invalid names or TERC, please use 'voivodeships_names' function")
+  }
+  
   URLs = c("ftp://91.223.135.109/nmt/dolnoslaskie_grid100.zip",
            "ftp://91.223.135.109/nmt/kujawsko-pomorskie_grid100.zip",
            "ftp://91.223.135.109/nmt/lubelskie_grid100.zip",
@@ -71,24 +57,15 @@ pointDTM_100_download = function(voivodeship, ...) {
            "ftp://91.223.135.109/nmt/wielkopolskie_grid100.zip",
            "ftp://91.223.135.109/nmt/zachodniopomorskie_grid100.zip")
 
-  df_voivodeship = data.frame(pl = voivodeship_pl, en = voivodeship_en, URL = URLs)
+  
+  df_names = cbind(df_names, URL = URLs)
 
-  download = function(df, local_col, ...) {
-    filename = paste0(local_col[i], ".zip")
-    utils::download.file(df[i, "URL"], filename, mode = "wb", ...)
+  df_names = df_names[sel_vector, ]
+  
+  for (i in seq_len(nrow(df_names))) {
+    filename = paste0(df_names[i, type], ".zip")
+    utils::download.file(df_names[i, "URL"], filename, mode = "wb", ...)
     utils::unzip(filename)
   }
-
-  if (local == "PL") {
-    df_sel = df_voivodeship[df_voivodeship$pl %in% voivodeship, ]
-    for (i in seq_len(nrow(df_sel))) {
-      download(df_sel, df_sel$pl)
-    }
-  } else {
-    df_sel = df_voivodeship[df_voivodeship$en %in% voivodeship, ]
-    for (i in seq_len(nrow(df_sel))) {
-      download(df_sel, df_sel$en)
-    }
-  }
-
+  
 }
