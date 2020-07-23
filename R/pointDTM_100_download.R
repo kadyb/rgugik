@@ -1,6 +1,6 @@
 #' downloads Digital Terrain Models with 100 m resolution for entire voivodeships
 #'
-#' @param voivodeship selected voivodeships in Polish or English, or TERC
+#' @param voivodeships selected voivodeships in Polish or English, or TERC
 #' (function 'voivodeships_names' can by helpful)
 #' @param ...
 #'
@@ -10,9 +10,10 @@
 #' @examples
 #' pointDTM_100_download(c("mazowieckie", "wielkopolskie"))
 #' pointDTM_100_download(c("Subcarpathian", "Silesian"))
-pointDTM_100_download = function(string, ...) {
+#' pointDTM_100_download(c("02", "16"))
+pointDTM_100_download = function(voivodeships, ...) {
 
-  if (!is.character(string) | length(string) == 0) {
+  if (!is.character(voivodeships) | length(voivodeships) == 0) {
     stop("enter names or TERC")
   }
   
@@ -21,19 +22,19 @@ pointDTM_100_download = function(string, ...) {
   type = character()
   sel_vector = logical()
   
-  if (all(string %in% df_names[, "PL"])) {
+  if (all(voivodeships %in% df_names[, "PL"])) {
     
-    sel_vector = df_names[, "PL"] %in% string
+    sel_vector = df_names[, "PL"] %in% voivodeships
     type = "PL"
     
-  } else if (all(string %in% df_names[, "EN"])) {
+  } else if (all(voivodeships %in% df_names[, "EN"])) {
     
-    sel_vector = df_names[, "EN"] %in% string
+    sel_vector = df_names[, "EN"] %in% voivodeships
     type = "EN"
     
-  } else if (all(string %in% df_names[, "TERC"])) {
+  } else if (all(voivodeships %in% df_names[, "TERC"])) {
     
-    sel_vector = df_names[, "TERC"] %in% string
+    sel_vector = df_names[, "TERC"] %in% voivodeships
     type = "TERC"
     
   } else {
@@ -57,7 +58,6 @@ pointDTM_100_download = function(string, ...) {
            "ftp://91.223.135.109/nmt/wielkopolskie_grid100.zip",
            "ftp://91.223.135.109/nmt/zachodniopomorskie_grid100.zip")
 
-  
   df_names = cbind(df_names, URL = URLs)
 
   df_names = df_names[sel_vector, ]
