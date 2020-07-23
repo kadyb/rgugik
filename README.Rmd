@@ -24,6 +24,7 @@ Currently you can download:
   - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
   - [Digital Terrain Models](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu) as XYZ vector points with 1 m resolution
   - Digital Terrain Models as XYZ text files with 100 m resolution for entire voivodeships
+  - [General Geographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
 
 ## Installation
 
