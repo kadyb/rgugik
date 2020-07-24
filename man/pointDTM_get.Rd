@@ -2,16 +2,28 @@
 % Please edit documentation in R/pointDTM_get.R
 \name{pointDTM_get}
 \alias{pointDTM_get}
-\title{Title}
+\title{returns a data frame with vector points and terrain elevation for a given polygon}
 \usage{
 pointDTM_get(polygon, distance = 1)
 }
 \arguments{
-\item{distance}{}
+\item{polygon}{the polygon layer with only one object
+(its area is limited to the 20 ha * distance parameter),
+the input coordinate system must be EPSG:2180}
+
+\item{distance}{distance between points in meters 
+(must be integer and greater than 1)}
 }
 \value{
-
+a data frame with vector points and terrain elevation 
+(EPSG:2180, Vertical Reference System:PL-KRON86-NH)
 }
 \description{
-Title
+returns a data frame with vector points and terrain elevation for a given polygon
+}
+\examples{
+library(sf)
+polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
+polygon = read_sf(polygon_path)
+DTM = pointDTM_get(polygon, distance = 2)
 }

@@ -2,16 +2,28 @@
 % Please edit documentation in R/orto_request.R
 \name{orto_request}
 \alias{orto_request}
-\title{Title}
+\title{returns a data frame with metadata and links to the orthoimages in a given polygon}
 \usage{
 orto_request(polygon, where = NULL)
 }
 \arguments{
-\item{where}{}
+\item{polygon}{the polygon layer (may consist of n objects)}
+
+\item{where}{SQL WHERE clause to filter records
+(filtering is better done on the R client side 
+rather than on the SQL server)}
 }
 \value{
-
+a data frame with metadata and links to the orthoimages
 }
 \description{
-Title
+returns a data frame with metadata and links to the orthoimages in a given polygon
+}
+\examples{
+library(sf)
+polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
+polygon = read_sf(polygon_path)
+req_df = orto_request(polygon)
+req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")
+req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")
 }
