@@ -11,11 +11,11 @@ pointDTM_get(polygon, distance = 1)
 (its area is limited to the 20 ha * distance parameter),
 the input coordinate system must be EPSG:2180}
 
-\item{distance}{distance between points in meters 
+\item{distance}{distance between points in meters
 (must be integer and greater than 1)}
 }
 \value{
-a data frame with vector points and terrain elevation 
+a data frame with vector points and terrain elevation
 (EPSG:2180, Vertical Reference System:PL-KRON86-NH)
 }
 \description{
@@ -24,6 +24,6 @@ returns a data frame with vector points and terrain elevation for a given polygo
 \examples{
 library(sf)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
-polygon = read_sf(polygon_path)
-DTM = pointDTM_get(polygon, distance = 2)
+polygon = st_read(polygon_path)
+# DTM = pointDTM_get(polygon, distance = 2) #error
 }

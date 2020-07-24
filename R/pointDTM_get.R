@@ -3,18 +3,18 @@
 #' @param polygon the polygon layer with only one object
 #' (its area is limited to the 20 ha * distance parameter),
 #' the input coordinate system must be EPSG:2180
-#' @param distance distance between points in meters 
+#' @param distance distance between points in meters
 #' (must be integer and greater than 1)
 #'
-#' @return a data frame with vector points and terrain elevation 
+#' @return a data frame with vector points and terrain elevation
 #' (EPSG:2180, Vertical Reference System:PL-KRON86-NH)
 #' @export
 #'
 #' @examples
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
-#' polygon = read_sf(polygon_path)
-#' DTM = pointDTM_get(polygon, distance = 2)
+#' polygon = st_read(polygon_path)
+#' # DTM = pointDTM_get(polygon, distance = 2) #error
 pointDTM_get = function(polygon, distance = 1) {
 
   if (nrow(polygon) != 1) {
@@ -34,7 +34,7 @@ pointDTM_get = function(polygon, distance = 1) {
   if (!as.integer(distance) == distance) {
     stop("'distance' must contain an integer")
   }
-  
+
   # the greater distance between points, the larger area can be used
   # input area unit is [m^2]
   if (as.vector(sf::st_area(polygon)) > 200000 * distance) {

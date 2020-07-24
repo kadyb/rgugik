@@ -2,7 +2,7 @@
 #'
 #' @param polygon the polygon layer (may consist of n objects)
 #' @param where SQL WHERE clause to filter records
-#' (filtering is better done on the R client side 
+#' (filtering is better done on the R client side
 #' rather than on the SQL server)
 #'
 #' @return a data frame with metadata and links to the orthoimages
@@ -11,10 +11,10 @@
 #' @examples
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
-#' polygon = read_sf(polygon_path)
+#' polygon = st_read(polygon_path)
 #' req_df = orto_request(polygon)
 #' req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")
-#' req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")
+#' # req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")
 orto_request = function(polygon, where = NULL) {
 
   if (!is.null(where) && !is.character(where)){
