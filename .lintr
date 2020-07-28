@@ -1,5 +1,5 @@
-# https://github.com/jimhester/lintr#available-linters
 linters: with_defaults(
+   # https://github.com/jimhester/lintr#available-linters
    Syntax errors,
    object_usage_linter,
    absolute_path_linter,
