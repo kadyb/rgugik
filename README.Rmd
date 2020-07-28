@@ -26,6 +26,7 @@ Currently you can download:
   - Digital Terrain Models as XYZ text files with 100 m resolution for entire voivodeships
   - [General Geographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
   - [State Register of Geographical Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
+  - Location of cadastral parcels using TERYT (parcel ID) or coordinates
 
 ## Installation
 
