@@ -17,7 +17,7 @@
 #' # req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")
 orto_request = function(polygon, where = NULL) {
 
-  if (!is.null(where) && !is.character(where)){
+  if (!is.null(where) && !is.character(where)) {
     stop("'where' must be string")
   }
   if (nrow(polygon) == 0) {
