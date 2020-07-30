@@ -27,6 +27,7 @@ Currently you can download:
   - [General Geographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
   - [State Register of Geographical Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
   - Location of cadastral parcels using TERYT (parcel ID) or coordinates
+  - 3D models of buildings (LOD1, LOD2)
 
 ## Installation
 
