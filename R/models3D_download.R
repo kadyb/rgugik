@@ -2,8 +2,8 @@
 #'
 #' @param county county name in Polish
 #' @param TERYT county ID (4 characters)
-#' @param LOD Level of detail for building models ("LOD1" or "LOD2", "LOD1" is default).
-#' "LOD2" is only available for ten voivodeships
+#' @param LOD level of detail for building models ("LOD1" or "LOD2").
+#' "LOD1" is default. "LOD2" is only available for ten voivodeships
 #' (TERC: "04", "06", "12", "14", "16", "18", "20", "24", "26", "28").
 #' Check 'voivodeships_names' function.
 #' @param ...
