@@ -11,7 +11,7 @@ geonames_download(type, format, ...)
 
 \item{format}{data format ("GML", "SHP" and/or "XLSX")}
 
-\item{...}{additional argument for \code{utils::download.file()}}
+\item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }
 \value{
 a selected data type in the specified format

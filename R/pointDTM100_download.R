@@ -2,7 +2,7 @@
 #'
 #' @param voivodeships selected voivodeships in Polish or English, or TERC
 #' (function 'voivodeships_names' can by helpful)
-#' @param ... additional argument for `utils::download.file()`
+#' @param ... additional argument for [`utils::download.file()`]
 #'
 #' @return text files with X, Y, Z columns (EPSG:2180)
 #' @export

@@ -16,7 +16,7 @@ models3D_download(county = NULL, TERYT = NULL, LOD = "LOD1", ...)
 (TERC: "04", "06", "12", "14", "16", "18", "20", "24", "26", "28").
 Check 'voivodeships_names' function.}
 
-\item{...}{additional argument for \code{utils::download.file()}}
+\item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }
 \value{
 models of buildings in Geography Markup Language format (.GML)

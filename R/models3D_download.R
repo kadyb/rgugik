@@ -6,7 +6,7 @@
 #' "LOD1" is default. "LOD2" is only available for ten voivodeships
 #' (TERC: "04", "06", "12", "14", "16", "18", "20", "24", "26", "28").
 #' Check 'voivodeships_names' function.
-#' @param ... additional argument for `utils::download.file()`
+#' @param ... additional argument for [`utils::download.file()`]
 #'
 #' @return models of buildings in Geography Markup Language format (.GML)
 #'

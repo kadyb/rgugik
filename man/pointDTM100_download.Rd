@@ -10,7 +10,7 @@ pointDTM100_download(voivodeships, ...)
 \item{voivodeships}{selected voivodeships in Polish or English, or TERC
 (function 'voivodeships_names' can by helpful)}
 
-\item{...}{additional argument for \code{utils::download.file()}}
+\item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }
 \value{
 text files with X, Y, Z columns (EPSG:2180)

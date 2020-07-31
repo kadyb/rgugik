@@ -2,7 +2,7 @@
 #'
 #' @param voivodeships selected voivodeships in Polish or English, or TERC
 #' (function 'voivodeships_names' can by helpful)
-#' @param ... additional argument for `utils::download.file()`
+#' @param ... additional argument for [`utils::download.file()`]
 #'
 #' @return a database in Geography Markup Language format (.GML),
 #' the content and detail level corresponds to the general
