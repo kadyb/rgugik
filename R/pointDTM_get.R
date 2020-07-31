@@ -74,7 +74,7 @@ pointDTM_get = function(polygon, distance = 1) {
 
   while (i < iter + 1) {
 
-    if (attempt == n_attempts){
+    if (attempt == n_attempts) {
       stop("server does not return values, try again later")
     }
 
