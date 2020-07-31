@@ -2,8 +2,10 @@
 
 export(geodb_download)
 export(geonames_download)
+export(models3D_download)
 export(orto_download)
 export(orto_request)
+export(parcel_get)
 export(pointDTM_100_download)
 export(pointDTM_get)
 export(voivodeships_names)
