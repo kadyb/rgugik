@@ -3,3 +3,5 @@
 ^README\.Rmd$
 ^test
 ^LICENSE\.md$
+.lintr
+.github
