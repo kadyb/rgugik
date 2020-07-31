@@ -2,7 +2,7 @@
 #'
 #' @param type names of places ("place") and/or physiographic objects ("object")
 #' @param format data format ("GML", "SHP" and/or "XLSX")
-#' @param ...
+#' @param ... additional argument for `utils::download.file()`
 #'
 #' @return a selected data type in the specified format
 #'

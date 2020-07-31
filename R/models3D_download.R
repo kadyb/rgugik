@@ -6,47 +6,47 @@
 #' "LOD1" is default. "LOD2" is only available for ten voivodeships
 #' (TERC: "04", "06", "12", "14", "16", "18", "20", "24", "26", "28").
 #' Check 'voivodeships_names' function.
-#' @param ...
+#' @param ... additional argument for `utils::download.file()`
 #'
 #' @return models of buildings in Geography Markup Language format (.GML)
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' models3D_download(county = "Toruń")
 #' models3D_download(TERYT = c("2462", "0401"), LOD = "LOD2")
 models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
-  
+
   df_names = utils::read.csv("supp/TERYT_county.csv",
                              colClasses = c("TERYT" = "character"))
-  
+
   if (is.null(county) && is.null(TERYT)) {
     stop("'county' and 'TERYT' are empty")
   }
-  
+
   if (!is.null(county) && !is.null(TERYT)) {
     stop("use only one input")
   }
-  
+
   if (!all(county %in% df_names$NAZWA)) {
     stop("incorrect county name")
   }
-  
+
   if (!is.null(TERYT) && any(nchar(TERYT) != 4)) {
     stop("incorrect TERYT")
   }
-  
+
   if (!LOD %in% c("LOD1", "LOD2")) {
     stop("inncorect LOD, should be 'LOD1' or 'LOD2'")
   }
-  
+
   if (LOD == "LOD1") {
     base_URL = "https://integracja.gugik.gov.pl/Budynki3D/pobierz.php?plik=powiaty/lod1/"
   } else {
     # LOD 2
     base_URL = "https://integracja.gugik.gov.pl/Budynki3D/pobierz.php?plik=powiaty/"
   }
-  
+
   if (!is.null(county)) {
     sel_vector = df_names[, "NAZWA"] %in% county
     df_names = df_names[sel_vector, ]
@@ -54,7 +54,7 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
     sel_vector = df_names[, "TERYT"] %in% TERYT
     df_names = df_names[sel_vector, ]
   }
-  
+
   # detect missing LOD2 counties
   if (LOD == "LOD2" && sum(df_names$LOD2) != nrow(df_names)) {
     warning("LOD2 is unavibile, trying drop missing counties", immediate. = TRUE)
@@ -63,12 +63,12 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
       stop("LOD2 is unavibile, use 'LOD1'")
     }
   }
-  
+
   for (i in seq_len(nrow(df_names))) {
     prepared_URL = paste0(base_URL, df_names[i, "TERYT"], "_gml.zip")
     filename = paste0(df_names[i, "TERYT"], "_gml.zip")
     utils::download.file(prepared_URL, filename, mode = "wb", ...)
     utils::unzip(filename)
   }
-  
+
 }

@@ -10,7 +10,7 @@ geodb_download(voivodeships, ...)
 \item{voivodeships}{selected voivodeships in Polish or English, or TERC
 (function 'voivodeships_names' can by helpful)}
 
-\item{...}{}
+\item{...}{additional argument for \code{utils::download.file()}}
 }
 \value{
 a database in Geography Markup Language format (.GML),

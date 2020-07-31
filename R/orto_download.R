@@ -4,7 +4,7 @@
 #' @param df_req a data frame obtained using the orto_request() function
 #' @param check_SHA check the integrity of downloaded files
 #' (logical parameter, default = FALSE)
-#' @param ...
+#' @param ... additional argument for `utils::download.file()`
 #'
 #' @return georeferenced orthoimages .tif with properties
 #' (resolution, composition, etc.) as specified in the input data frame

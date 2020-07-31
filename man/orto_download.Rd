@@ -13,7 +13,7 @@ orto_download(df_req, check_SHA = FALSE, ...)
 \item{check_SHA}{check the integrity of downloaded files
 (logical parameter, default = FALSE)}
 
-\item{...}{}
+\item{...}{additional argument for \code{utils::download.file()}}
 }
 \value{
 georeferenced orthoimages .tif with properties
