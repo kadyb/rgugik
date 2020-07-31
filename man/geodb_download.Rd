@@ -14,7 +14,7 @@ geodb_download(voivodeships, ...)
 }
 \value{
 a database in Geography Markup Language format (.GML),
-the content and detail level corresponds to the general 
+the content and detail level corresponds to the general
 geographic map in the scale of 1:250000
 }
 \description{
@@ -26,7 +26,7 @@ geodb_download(c("Subcarpathian", "Silesian"))
 geodb_download(c("02", "16"))
 }
 \references{
-description of topographical and general geographical databases, 
+description of topographical and general geographical databases,
 and technical standards for making maps
 http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf
 }

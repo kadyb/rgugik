@@ -14,7 +14,7 @@ parcel_get(TERYT = NULL, X = NULL, Y = NULL)
 \item{Y}{latitude (EPSG: 2180)}
 }
 \value{
-a simple feature geometry (in case of TERYT) or data frame with simple 
+a simple feature geometry (in case of TERYT) or data frame with simple
 feature geometry and TERYT (in case of coordinates)
 }
 \description{
