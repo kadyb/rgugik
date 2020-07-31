@@ -2,6 +2,7 @@
 #'
 #' @return a data frame with Polish and English names of voivodeships and their TERC
 #' TERC - territorial division units (voivodeship level, 2 digits)
+#' 
 #' @export
 #'
 #' @examples

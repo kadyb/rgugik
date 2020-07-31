@@ -6,6 +6,7 @@
 #' rather than on the SQL server)
 #'
 #' @return a data frame with metadata and links to the orthoimages
+#' 
 #' @export
 #'
 #' @examples

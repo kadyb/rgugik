@@ -8,6 +8,7 @@
 #'
 #' @return a data frame with vector points and terrain elevation
 #' (EPSG:2180, Vertical Reference System:PL-KRON86-NH)
+#' 
 #' @export
 #'
 #' @examples

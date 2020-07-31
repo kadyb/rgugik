@@ -8,6 +8,7 @@
 #'
 #' @return georeferenced orthoimages .tif with properties
 #' (resolution, composition, etc.) as specified in the input data frame
+#' 
 #' @export
 #'
 #' @examples

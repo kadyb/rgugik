@@ -7,6 +7,7 @@
 #' @return a database in Geography Markup Language format (.GML),
 #' the content and detail level corresponds to the general
 #' geographic map in the scale of 1:250000
+#' 
 #' @export
 #'
 #' @references
