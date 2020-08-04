@@ -12,10 +12,12 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 #' polygon = st_read(polygon_path)
 #' # DTM = pointDTM_get(polygon, distance = 2) #error
+#' }
 pointDTM_get = function(polygon, distance = 1) {
 
   if (nrow(polygon) != 1) {

@@ -16,9 +16,11 @@
 #' http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf
 #'
 #' @examples
+#' \donttest{
 #' geodb_download(c("mazowieckie", "wielkopolskie"))
 #' geodb_download(c("Subcarpathian", "Silesian"))
 #' geodb_download(c("02", "16"))
+#' }
 geodb_download = function(voivodeships, ...) {
 
   if (!is.character(voivodeships) | length(voivodeships) == 0) {

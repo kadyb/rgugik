@@ -13,8 +13,10 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' models3D_download(county = "Toruń")
 #' models3D_download(TERYT = c("2462", "0401"), LOD = "LOD2")
+#' }
 models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
 
   load("data/TERYT_county.rda", package = "rgugik")

@@ -12,11 +12,13 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 #' polygon = st_read(polygon_path)
 #' req_df = orto_request(polygon)
 #' orto_download(req_df[1, ]) # download the first image only
+#' }
 orto_download = function(df_req, check_SHA = FALSE, ...) {
 
   if (!all(c("url_do_pobrania", "nazwa_pliku") %in% names(df_req))) {

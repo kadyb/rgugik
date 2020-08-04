@@ -9,9 +9,11 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' pointDTM100_download(c("mazowieckie", "wielkopolskie"))
 #' pointDTM100_download(c("Subcarpathian", "Silesian"))
 #' pointDTM100_download(c("02", "16"))
+#' }
 pointDTM100_download = function(voivodeships, ...) {
 
   if (!is.character(voivodeships) | length(voivodeships) == 0) {

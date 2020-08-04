@@ -10,8 +10,10 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' parcel = parcel_get(TERYT = "141201_1.0001.6509")
 #' parcel = parcel_get(X = 313380.5, Y = 460166.4)
+#' }
 parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
   
   if (!is.null(TERYT)) {
