@@ -18,7 +18,7 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
   
   if (!is.null(TERYT)) {
     
-    # by ID
+    # get by TERYT (parcel ID)
     prepared_URL = paste0("https://uldk.gugik.gov.pl/?request=GetParcelById&id=", TERYT,
                           "&result=geom_wkb")
     
@@ -36,7 +36,7 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
     result = paste(result, collapse = ",")
     coords = paste(Y, X, sep = ",") # X, Y coordinates are inverted
     
-    # by XY
+    # get by XY
     prepared_URL = paste0("https://uldk.gugik.gov.pl/?request=GetParcelByXY&xy=", coords,
                           "&result=", result)
     
