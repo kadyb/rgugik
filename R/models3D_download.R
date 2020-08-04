@@ -19,7 +19,7 @@
 #' }
 models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
 
-  load("data/TERYT_county.rda", package = "rgugik")
+  load("data/TERYT_county.rda")
 
   if (is.null(county) && is.null(TERYT)) {
     stop("'county' and 'TERYT' are empty")
