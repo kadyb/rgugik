@@ -46,7 +46,8 @@ pointDTM_get = function(polygon, distance = 1) {
 
   base_URL = "https://services.gugik.gov.pl/nmt/?request=GetHByPointList&list="
 
-  pts = sf::st_make_grid(polygon, cellsize = distance, what = "corners") # source DTM is 1 x 1 m resolution
+  # source DTM is 1 x 1 m resolution
+  pts = sf::st_make_grid(polygon, cellsize = distance, what = "corners")
   pts = sf::st_coordinates(pts)
   pts = apply(pts, 2, as.integer) # make it integer because minimum distance is 1 m
   pts = as.data.frame(pts)
