@@ -6,10 +6,13 @@
 \alias{rgugik-package}
 \title{rgugik: Search and Retrieve Spatial Data from GUGiK}
 \description{
-Automatic open data acquisition from resources of Polish Head Office of Geodesy and Cartography
-             ("Główny Urząd Geodezji i Kartografii"). Various types of numeric, raster and vector data such as 
-             orthophotomaps, Digital Terrain Models, General Geographic Database, State Register of Geographical Names,
-             geometry of cadastral parcels or 3D models of buildings in LOD1 and LOD2 standards.
+Automatic open data acquisition from resources of Polish Head Office 
+    of Geodesy and Cartography ("Główny Urząd Geodezji i Kartografii") 
+    (<TUTAJDODAJLINK>).
+    Available datasets include various types of numeric, raster and vector data, 
+    such as orthophotomaps, Digital Terrain Models, General Geographic Database,
+    State Register of Geographical Names, geometries of cadastral parcels, and
+    3D models of buildings in LOD1 and LOD2 standards.
 }
 \seealso{
 Useful links:

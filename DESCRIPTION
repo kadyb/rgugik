@@ -1,7 +1,7 @@
 Package: rgugik
 Type: Package
 Title: Search and Retrieve Spatial Data from GUGiK
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(person(given = "Krzysztof",
            family = "Dyba",
            role = c("aut", "cre"),
@@ -13,11 +13,16 @@ Authors@R: c(person(given = "Krzysztof",
            email = "nowosad.jakub@gmail.com", 
            comment = c(ORCID = "0000-0002-1057-3721")),
            person("GUGiK", role = "ctb", comment = "source of the data"))
-Description: Automatic open data acquisition from resources of Polish Head Office of Geodesy and Cartography
-             ("Główny Urząd Geodezji i Kartografii"). Various types of numeric, raster and vector data such as 
-             orthophotomaps, Digital Terrain Models, General Geographic Database, State Register of Geographical Names,
-             geometry of cadastral parcels or 3D models of buildings in LOD1 and LOD2 standards.
+Description: Automatic open data acquisition from resources of Polish Head Office 
+    of Geodesy and Cartography ("Główny Urząd Geodezji i Kartografii") 
+    (<TUTAJDODAJLINK>).
+    Available datasets include various types of numeric, raster and vector data, 
+    such as orthophotomaps, Digital Terrain Models, General Geographic Database,
+    State Register of Geographical Names, geometries of cadastral parcels, and
+    3D models of buildings in LOD1 and LOD2 standards.
 License: MIT + file LICENSE
+Depends: 
+    R (>= 3.5)
 Imports: 
     sf,
     jsonlite,
