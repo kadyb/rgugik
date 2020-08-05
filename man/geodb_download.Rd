@@ -21,9 +21,11 @@ geographic map in the scale of 1:250000
 downloads General Geographic Databases for entire voivodeships
 }
 \examples{
+\donttest{
 geodb_download(c("mazowieckie", "wielkopolskie"))
 geodb_download(c("Subcarpathian", "Silesian"))
 geodb_download(c("02", "16"))
+}
 }
 \references{
 description of topographical and general geographical databases,

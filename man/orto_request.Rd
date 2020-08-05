@@ -20,10 +20,12 @@ a data frame with metadata and links to the orthoimages
 returns a data frame with metadata and links to the orthoimages in a given polygon
 }
 \examples{
+\donttest{
 library(sf)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = st_read(polygon_path)
 req_df = orto_request(polygon)
 req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")
 # req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")
+}
 }
