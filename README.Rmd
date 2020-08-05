@@ -4,7 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-**rgugik** is an R package for downloading open data from resources of [Polish Head Office of Geodesy and Cartography](http://www.gugik.gov.pl/).
+**rgugik** is an R package for downloading open data from resources of [Polish Head Office of Geodesy and Cartography](http://www.gugik.gov.pl).
 Currently you can download:
 
   - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
@@ -28,6 +28,20 @@ Currently you can download:
   - [State Register of Geographical Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)
+  
+**Corresponding functions**
+
+```{r echo=FALSE}
+ds_pl = c("Ortofotomapa", "Numeryczny Model Terenu", "Baza Danych Obiektów Ogólnogeograficznych", "Państwowy Rejestr Nazw Geograficznych", "Lokalizacja działek katastralnych", "Modele 3D budynków")
+ds_en = c("Orthophotomap", "Digital Terrain Models", "General Geographic Database", "State Register of Geographical Names", "Location of cadastral parcels", "3D models of buildings")
+fun = c("orto_request, orto_download", "pointDTM_get, pointDTM100_download", "geodb_download", "geonames_download", "parcel_get", "models3D_download")
+input = c("polygon", "polygon, voivodeship (TERC)", "voivodeship (TERC)", "place, object", "parcel ID, coordinates", "county (TERYT)")
+
+df = data.frame(ds_pl, ds_en, fun, input)
+colnames(df) = c("Dastaset PL", "Dataset EN", "Function", "Input")
+
+knitr::kable(df)
+```
 
 ## Installation
 
@@ -37,7 +51,7 @@ Currently you can download:
 <!-- install.packages("rgugik") -->
 <!-- ``` -->
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com) with:
 
 ```{r message=FALSE}
 # install.packages("remotes")

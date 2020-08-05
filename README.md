@@ -9,7 +9,7 @@
 
 **rgugik** is an R package for downloading open data from resources of
 [Polish Head Office of Geodesy and
-Cartography](http://www.gugik.gov.pl/). Currently you can download:
+Cartography](http://www.gugik.gov.pl). Currently you can download:
 
   - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
   - [Digital Terrain
@@ -25,6 +25,17 @@ Cartography](http://www.gugik.gov.pl/). Currently you can download:
     coordinates
   - 3D models of buildings (LOD1, LOD2)
 
+**Corresponding functions**
+
+| Dastaset PL                               | Dataset EN                           | Function                             | Input                       |
+| :---------------------------------------- | :----------------------------------- | :----------------------------------- | :-------------------------- |
+| Ortofotomapa                              | Orthophotomap                        | orto\_request, orto\_download        | polygon                     |
+| Numeryczny Model Terenu                   | Digital Terrain Models               | pointDTM\_get, pointDTM100\_download | polygon, voivodeship (TERC) |
+| Baza Danych Obiektów Ogólnogeograficznych | General Geographic Database          | geodb\_download                      | voivodeship (TERC)          |
+| Państwowy Rejestr Nazw Geograficznych     | State Register of Geographical Names | geonames\_download                   | place, object               |
+| Lokalizacja działek katastralnych         | Location of cadastral parcels        | parcel\_get                          | parcel ID, coordinates      |
+| Modele 3D budynków                        | 3D models of buildings               | models3D\_download                   | county (TERYT)              |
+
 ## Installation
 
 <!-- You can install the released version of rgugik from [CRAN](https://CRAN.R-project.org) with: -->
@@ -36,7 +47,7 @@ Cartography](http://www.gugik.gov.pl/). Currently you can download:
 <!-- ``` -->
 
 You can install the development version from
-[GitHub](https://github.com/) with:
+[GitHub](https://github.com) with:
 
 ``` r
 # install.packages("remotes")
@@ -84,7 +95,7 @@ img = brick("41_3756_N-33-130-D-b-2-3.tif")
 plotRGB(img)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
 ### DTM (as XYZ)
 
