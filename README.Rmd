@@ -39,7 +39,7 @@ Currently you can download:
 
 You can install the development version from [GitHub](https://github.com/) with:
 
-``` r
+```{r message=FALSE}
 # install.packages("remotes")
 remotes::install_github("kadyb/rgugik")
 ```
@@ -51,32 +51,39 @@ remotes::install_github("kadyb/rgugik")
 - `orto_request()` - returns a data frame with metadata and links to the orthoimages in a given polygon
 - `orto_download()` - downloads orthoimages based on the data frame obtained using the `orto_request()` function
   
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(rgugik)
 library(sf)
 library(raster)
+
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
+
 req_df = orto_request(polygon)
-str(req_df)
-orto_download(req_df[1, ]) # download the first image only
+
+# show metadata and download the first image only
+t(req_df[1, ])
+orto_download(req_df[1, ])
+
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
 plotRGB(img)
 ```
 
-```{r, echo=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE}
 invisible(file.remove("41_3756_N-33-130-D-b-2-3.tif"))
 ```
 
 ### DTM (as XYZ)
 
-```{r, eval=FALSE}
+```{r eval=FALSE}
 library(rgugik)
 library(sf)
+
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
+
 DTM = pointDTM_get(polygon)
-summary(DTM$elev)
+
 plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
 ```
 

@@ -21,7 +21,8 @@ Cartography](http://www.gugik.gov.pl/). Currently you can download:
     Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
   - [State Register of Geographical
     Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
-  - Location of cadastral parcels using TERYT (parcel ID) or coordinates
+  - Location (geometry) of cadastral parcels using TERYT (parcel ID) or
+    coordinates
   - 3D models of buildings (LOD1, LOD2)
 
 ## Installation
@@ -56,43 +57,46 @@ remotes::install_github("kadyb/rgugik")
 ``` r
 library(rgugik)
 library(sf)
-#> Linking to GEOS 3.8.1, GDAL 3.0.4, PROJ 6.3.2
 library(raster)
-#> Loading required package: sp
+
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
+
 req_df = orto_request(polygon)
-str(req_df)
-#> 'data.frame':    15 obs. of  11 variables:
-#>  $ godlo             : chr  "N-33-130-D-b-2-3" "N-33-130-D-b-2-3" "N-33-130-D-b-2-3" "N-33-130-D-b-2-3" ...
-#>  $ akt_rok           : int  2001 2007 2011 2011 2012 2012 2017 2017 2017 2014 ...
-#>  $ piksel            : num  1 0.5 0.25 0.25 0.1 0.1 0.25 0.25 0.25 0.25 ...
-#>  $ kolor             : chr  "RGB" "RGB" "CIR" "RGB" ...
-#>  $ zrDanych          : chr  "Scena sat." "Zdj. analogowe" "Zdj. cyfrowe" "Zdj. cyfrowe" ...
-#>  $ ukladXY           : chr  "PL-1992" "PL-1992" "PL-1992" "PL-1992" ...
-#>  $ czy_ark_wypelniony: chr  "TAK" "TAK" "TAK" "TAK" ...
-#>  $ url_do_pobrania   : chr  "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif" "https://opendata.geoportal.gov.pl/ortofotomapa/45/45_68485_N-33-130-D-b-2-3.tif" "https://opendata.geoportal.gov.pl/ortofotomapa/69749/69749_128813_N-33-130-D-b-2-3.tif" "https://opendata.geoportal.gov.pl/ortofotomapa/69750/69750_140010_N-33-130-D-b-2-3.tif" ...
-#>  $ idSerie           : int  41 45 69749 69750 229 64923 69883 69884 66266 70086 ...
-#>  $ sha1              : chr  "312c81963a31e268fc20c442733c48e1aa33838f" "163ee031bd0f1511bed96c579167951f2dd9acca" "ac120d34bab91855976d0f0700b75f8e416369c3" "959b66a5b71c7c05a1b4826de7f6c56942de371c" ...
-#>  $ nazwa_pliku       : chr  "41_3756_N-33-130-D-b-2-3" "45_68485_N-33-130-D-b-2-3" "69749_128813_N-33-130-D-b-2-3" "69750_140010_N-33-130-D-b-2-3" ...
-orto_download(req_df[1, ]) # download the first image only
+
+# show metadata and download the first image only
+t(req_df[1, ])
+#>                    1                                                                               
+#> godlo              "N-33-130-D-b-2-3"                                                              
+#> akt_rok            "2001"                                                                          
+#> piksel             "1"                                                                             
+#> kolor              "RGB"                                                                           
+#> zrDanych           "Scena sat."                                                                    
+#> ukladXY            "PL-1992"                                                                       
+#> czy_ark_wypelniony "TAK"                                                                           
+#> url_do_pobrania    "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif"
+#> idSerie            "41"                                                                            
+#> sha1               "312c81963a31e268fc20c442733c48e1aa33838f"                                      
+#> nazwa_pliku        "41_3756_N-33-130-D-b-2-3"
+orto_download(req_df[1, ])
+
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
-#> Warning in showSRID(uprojargs, format = "PROJ", multiline = "NO"): Discarded
-#> datum Unknown based on GRS80 ellipsoid in CRS definition
 plotRGB(img)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
 
 ### DTM (as XYZ)
 
 ``` r
 library(rgugik)
 library(sf)
+
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
+
 DTM = pointDTM_get(polygon)
-summary(DTM$elev)
+
 plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
 ```
 
