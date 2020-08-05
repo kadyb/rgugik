@@ -3,19 +3,21 @@ Type: Package
 Title: Search and Retrieve Spatial Data from GUGiK
 Version: 0.1.2
 Authors@R: c(person(given = "Krzysztof",
-           family = "Dyba",
-           role = c("aut", "cre"),
-           email = "adres7@gmail.com",
-           comment = c(ORCID = "0000-0002-8614-3816")),
-           person(given = "Jakub", 
-           family = "Nowosad", 
-           role = "aut",
-           email = "nowosad.jakub@gmail.com", 
-           comment = c(ORCID = "0000-0002-1057-3721")),
-           person("GUGiK", role = "ctb", comment = "source of the data"))
+                    family = "Dyba",
+                    role = c("aut", "cre"),
+                    email = "adres7@gmail.com",
+                    comment = c(ORCID = "0000-0002-8614-3816")),
+             person(given = "Jakub", 
+                    family = "Nowosad", 
+                    role = "aut",
+                    email = "nowosad.jakub@gmail.com", 
+                    comment = c(ORCID = "0000-0002-1057-3721")),
+             person("GUGiK",
+                    role = "ctb",
+                    comment = "source of the data"))
 Description: Automatic open data acquisition from resources of Polish Head Office 
     of Geodesy and Cartography ("Główny Urząd Geodezji i Kartografii") 
-    (<TUTAJDODAJLINK>).
+    (<www.gugik.gov.pl>).
     Available datasets include various types of numeric, raster and vector data, 
     such as orthophotomaps, Digital Terrain Models, General Geographic Database,
     State Register of Geographical Names, geometries of cadastral parcels, and
