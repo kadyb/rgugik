@@ -13,8 +13,10 @@ Authors@R: c(person(given = "Krzysztof",
            email = "nowosad.jakub@gmail.com", 
            comment = c(ORCID = "0000-0002-1057-3721")),
            person("GUGiK", role = "ctb", comment = "source of the data"))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Automatic open data acquisition from resources of Polish Head Office of Geodesy and Cartography
+             ("Główny Urząd Geodezji i Kartografii"). Various types of numeric, raster and vector data such as 
+             orthophotomaps, Digital Terrain Models, General Geographic Database, State Register of Geographical Names,
+             geometry of cadastral parcels or 3D models of buildings in LOD1 and LOD2 standards.
 License: MIT + file LICENSE
 Imports: 
     sf,
