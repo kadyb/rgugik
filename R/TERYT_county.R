@@ -1,12 +1,12 @@
 #' @name TERYT_county
-#' @title 
+#' @title toDo
 #'
-#' @description 
-#' 
+#' @description toDo
+#'
 #' @importFrom utils data
 #'
 #' @docType data
-#' @keywords datasets meteo
+#' @keywords datasets
 #' @examples
 #' data(TERYT_county)
 "TERYT_county"
