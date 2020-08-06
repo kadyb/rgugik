@@ -19,6 +19,8 @@
 #' }
 models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
 
+  df_names = rgugik::TERYT_county
+  
   if (is.null(county) && is.null(TERYT)) {
     stop("'county' and 'TERYT' are empty")
   }
@@ -27,7 +29,7 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
     stop("use only one input")
   }
 
-  if (!all(county %in% TERYT_county$NAZWA)) {
+  if (!all(county %in% df_names$NAZWA)) {
     stop("incorrect county name")
   }
 
@@ -47,25 +49,25 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
   }
 
   if (!is.null(county)) {
-    sel_vector = TERYT_county[, "NAZWA"] %in% county
-    TERYT_county = TERYT_county[sel_vector, ]
+    sel_vector = df_names[, "NAZWA"] %in% county
+    df_names = df_names[sel_vector, ]
   } else {
-    sel_vector = TERYT_county[, "TERYT"] %in% TERYT
-    TERYT_county = TERYT_county[sel_vector, ]
+    sel_vector = df_names[, "TERYT"] %in% TERYT
+    df_names = df_names[sel_vector, ]
   }
 
   # detect missing LOD2 counties
-  if (LOD == "LOD2" && sum(TERYT_county$LOD2) != nrow(TERYT_county)) {
+  if (LOD == "LOD2" && sum(df_names$LOD2) != nrow(df_names)) {
     warning("LOD2 is unavibile, trying drop missing counties", immediate. = TRUE)
-    TERYT_county = TERYT_county[TERYT_county$LOD2 == TRUE, ]
-    if (nrow(TERYT_county == 0)) {
+    df_names = df_names[df_names$LOD2 == TRUE, ]
+    if (nrow(df_names == 0)) {
       stop("LOD2 is unavibile, use 'LOD1'")
     }
   }
 
-  for (i in seq_len(nrow(TERYT_county))) {
-    prepared_URL = paste0(base_URL, TERYT_county[i, "TERYT"], "_gml.zip")
-    filename = paste0(TERYT_county[i, "TERYT"], "_gml.zip")
+  for (i in seq_len(nrow(df_names))) {
+    prepared_URL = paste0(base_URL, df_names[i, "TERYT"], "_gml.zip")
+    filename = paste0(df_names[i, "TERYT"], "_gml.zip")
     utils::download.file(prepared_URL, filename, mode = "wb", ...)
     utils::unzip(filename)
   }
