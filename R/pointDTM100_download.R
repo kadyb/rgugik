@@ -20,20 +20,20 @@ pointDTM100_download = function(voivodeships, ...) {
     stop("enter names or TERC")
   }
 
-  df_names = voivodeships_names()
+  df_names = rgugik::voivodeship_names
 
   type = character()
   sel_vector = logical()
 
-  if (all(voivodeships %in% df_names[, "PL"])) {
+  if (all(voivodeships %in% df_names[, "NAME_PL"])) {
 
-    sel_vector = df_names[, "PL"] %in% voivodeships
-    type = "PL"
+    sel_vector = df_names[, "NAME_PL"] %in% voivodeships
+    type = "NAME_PL"
 
-  } else if (all(voivodeships %in% df_names[, "EN"])) {
+  } else if (all(voivodeships %in% df_names[, "NAME_EN"])) {
 
-    sel_vector = df_names[, "EN"] %in% voivodeships
-    type = "EN"
+    sel_vector = df_names[, "NAME_EN"] %in% voivodeships
+    type = "NAME_EN"
 
   } else if (all(voivodeships %in% df_names[, "TERC"])) {
 
