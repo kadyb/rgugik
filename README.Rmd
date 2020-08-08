@@ -28,14 +28,39 @@ Currently you can download:
   - [State Register of Geographical Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)
-  
+
+It is also possible to geocode addresses or objects using the `geocode` function.
+
 **Corresponding functions**
 
 ```{r echo=FALSE}
-ds_pl = c("Ortofotomapa", "Numeryczny Model Terenu", "Baza Danych Obiektów Ogólnogeograficznych", "Państwowy Rejestr Nazw Geograficznych", "Lokalizacja działek katastralnych", "Modele 3D budynków")
-ds_en = c("Orthophotomap", "Digital Terrain Models", "General Geographic Database", "State Register of Geographical Names", "Location of cadastral parcels", "3D models of buildings")
-fun = c("orto_request, orto_download", "pointDTM_get, pointDTM100_download", "geodb_download", "geonames_download", "parcel_get", "models3D_download")
-input = c("polygon", "polygon, voivodeship (TERC)", "voivodeship (TERC)", "place, object", "parcel ID, coordinates", "county (TERYT)")
+ds_pl = c("Ortofotomapa",
+          "Numeryczny Model Terenu",
+          "Baza Danych Obiektów Ogólnogeograficznych",
+          "Państwowy Rejestr Nazw Geograficznych",
+          "Lokalizacja działek katastralnych",
+          "Modele 3D budynków")
+
+ds_en = c("Orthophotomap",
+          "Digital Terrain Models",
+          "General Geographic Database",
+          "State Register of Geographical Names",
+          "Location of cadastral parcels",
+          "3D models of buildings")
+
+fun = c("orto_request, orto_download",
+        "pointDTM_get, pointDTM100_download",
+        "geodb_download",
+        "geonames_download",
+        "parcel_get",
+        "models3D_download")
+
+input = c("polygon",
+          "polygon, voivodeship (TERC)",
+          "voivodeship (TERC)",
+          "place, object",
+          "parcel ID, coordinates",
+          "county (TERYT)")
 
 df = data.frame(ds_pl, ds_en, fun, input)
 colnames(df) = c("Dastaset PL", "Dataset EN", "Function", "Input")
@@ -53,7 +78,7 @@ knitr::kable(df)
 
 You can install the development version from [GitHub](https://github.com) with:
 
-```{r message=FALSE}
+```{r message=FALSE, warning=FALSE}
 # install.packages("remotes")
 remotes::install_github("kadyb/rgugik")
 ```
@@ -110,3 +135,7 @@ plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
 Contributions to this package are welcome. 
 The preferred method of contribution is through a GitHub pull request. 
 Feel also free to contact us by creating [an issue](https://github.com/kadyb/rgugik/issues).
+
+## Related project
+
+If you don't feel familiar with R, there are similar tools to [QGIS](https://www.qgis.org) in the [EnviroSolutions](https://github.com/envirosolutionspl) repository.

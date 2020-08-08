@@ -25,6 +25,9 @@ Cartography](http://www.gugik.gov.pl). Currently you can download:
     coordinates
   - 3D models of buildings (LOD1, LOD2)
 
+It is also possible to geocode addresses or objects using the `geocode`
+function.
+
 **Corresponding functions**
 
 | Dastaset PL                               | Dataset EN                           | Function                             | Input                       |
@@ -120,3 +123,9 @@ plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
 Contributions to this package are welcome. The preferred method of
 contribution is through a GitHub pull request. Feel also free to contact
 us by creating [an issue](https://github.com/kadyb/rgugik/issues).
+
+## Related project
+
+If you don’t feel familiar with R, there are similar tools to
+[QGIS](https://www.qgis.org) in the
+[EnviroSolutions](https://github.com/envirosolutionspl) repository.
