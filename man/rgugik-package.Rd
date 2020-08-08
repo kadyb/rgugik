@@ -13,6 +13,7 @@ Automatic open data acquisition from resources of Polish Head Office
     such as orthophotomaps, Digital Terrain Models, General Geographic Database,
     State Register of Geographical Names, geometries of cadastral parcels, and
     3D models of buildings in LOD1 and LOD2 standards.
+    It is also possible to geocode addresses or objects using the geocode function.
 }
 \seealso{
 Useful links:

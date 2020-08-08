@@ -8,7 +8,7 @@ geodb_download(voivodeships, ...)
 }
 \arguments{
 \item{voivodeships}{selected voivodeships in Polish or English, or TERC
-(function 'voivodeships_names' can by helpful)}
+(function 'voivodeship_names' can by helpful)}
 
 \item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }
