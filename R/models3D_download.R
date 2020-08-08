@@ -19,7 +19,7 @@
 #' }
 models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
 
-  df_names = rgugik::TERYT_county
+  df_names = rgugik::county_names
   
   if (is.null(county) && is.null(TERYT)) {
     stop("'county' and 'TERYT' are empty")
@@ -29,7 +29,7 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
     stop("use only one input")
   }
 
-  if (!all(county %in% df_names$NAZWA)) {
+  if (!all(county %in% df_names$NAME)) {
     stop("incorrect county name")
   }
 
@@ -49,7 +49,7 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", ...) {
   }
 
   if (!is.null(county)) {
-    sel_vector = df_names[, "NAZWA"] %in% county
+    sel_vector = df_names[, "NAME"] %in% county
     df_names = df_names[sel_vector, ]
   } else {
     sel_vector = df_names[, "TERYT"] %in% TERYT
