@@ -29,7 +29,7 @@ returns a list with metadata and coordinates for a given type of input
 geocode(address = "Marki") # place
 geocode(address = "Marki, Andersa") # place and street
 geocode(address = "Marki, Andersa 1") # place, street and house number
-geocode(address = "KrĂłlewskie Brzeziny 13") # place and house number
+geocode(address = "Królewskie Brzeziny 13") # place and house number
 
 geocode(road = "632") # road number
 geocode(road = "632 55") # road number and mileage

@@ -26,7 +26,7 @@ downloads 3D models of buildings for counties
 }
 \examples{
 \donttest{
-models3D_download(county = "ToruĹ„")
+models3D_download(county = "Toruń")
 models3D_download(TERYT = c("2462", "0401"), LOD = "LOD2")
 }
 }
