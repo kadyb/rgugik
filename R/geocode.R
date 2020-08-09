@@ -53,7 +53,7 @@ geocode = function(address = NULL, road = NULL, rail_crossing = NULL, geoname = 
   } else if (!is.null(rail_crossing)) {
     
     if (!nchar(rail_crossing) == 11) {
-      stop("rail crossing ID must be 6 characters long")
+      stop("rail crossing ID must be 11 characters long")
     } else {
       
       base_URL = "https://services.gugik.gov.pl/uug/?request=GetLevelCrossing&location="
