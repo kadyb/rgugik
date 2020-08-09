@@ -6,14 +6,14 @@
 #' rather than on the SQL server)
 #'
 #' @return a data frame with metadata and links to the orthoimages
-#' 
+#'
 #' @export
 #'
 #' @examples
 #' \donttest{
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
-#' polygon = st_read(polygon_path)
+#' polygon = read_sf(polygon_path)
 #' req_df = orto_request(polygon)
 #' req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")
 #' # req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")

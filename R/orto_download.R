@@ -8,14 +8,14 @@
 #'
 #' @return georeferenced orthoimages .tif with properties
 #' (resolution, composition, etc.) as specified in the input data frame
-#' 
+#'
 #' @export
 #'
 #' @examples
 #' \donttest{
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
-#' polygon = st_read(polygon_path)
+#' polygon = read_sf(polygon_path)
 #' req_df = orto_request(polygon)
 #' orto_download(req_df[1, ]) # download the first image only
 #' }
