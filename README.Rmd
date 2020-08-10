@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # rgugik
 
 <!-- badges: start -->
+[![R build status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://github.com/kadyb/rgugik/actions)
 <!-- badges: end -->
 
 **rgugik** is an R package for downloading open data from resources of [Polish Head Office of Geodesy and Cartography](http://www.gugik.gov.pl).
@@ -78,7 +79,7 @@ knitr::kable(df)
 
 You can install the development version from [GitHub](https://github.com) with:
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 # install.packages("remotes")
 remotes::install_github("kadyb/rgugik")
 ```
