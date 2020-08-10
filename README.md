@@ -112,9 +112,22 @@ polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
 
 DTM = pointDTM_get(polygon)
+#> 0/10
+#> 1/10
+#> 2/10
+#> 3/10
+#> 4/10
+#> 5/10
+#> 6/10
+#> 7/10
+#> 8/10
+#> 9/10
+#> 10/10
 
 plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
 ```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 ## Acknowledgment
 

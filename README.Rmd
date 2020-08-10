@@ -115,7 +115,7 @@ invisible(file.remove("41_3756_N-33-130-D-b-2-3.tif"))
 
 ### DTM (as XYZ)
 
-```{r eval=FALSE}
+```{r}
 library(rgugik)
 library(sf)
 
