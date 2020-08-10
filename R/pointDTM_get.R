@@ -60,6 +60,7 @@ pointDTM_get = function(polygon, distance = 1) {
     str_pts = paste(sel_pts[, 2], sel_pts[, 1]) # X, Y coordinates are inverted
     str_pts = paste(str_pts, collapse = ",")
     prepared_URL = paste0(base_URL, str_pts)
+    prepared_URL = gsub(" ", "%20", prepared_URL)
     str_output = readLines(prepared_URL, warn = FALSE)
     str_output = unlist(strsplit(str_output, ","))
     str_output = unlist(strsplit(str_output, " "))
