@@ -16,7 +16,7 @@
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 #' polygon = read_sf(polygon_path)
-#' # DTM = pointDTM_get(polygon, distance = 2) #error
+#' DTM = pointDTM_get(polygon, distance = 2)
 #' }
 pointDTM_get = function(polygon, distance = 1) {
 
