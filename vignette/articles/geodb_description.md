@@ -1,8 +1,7 @@
-General Geographic Database
+General Geographic Database  
+Baza Danych Obiektów Ogólnogeograficznych
 ================
 2020-08-11
-
-## Baza Danych Obiektów Ogólnogeograficznych (BDOO)<br>General Geographic Database
 
 ### Main categories of data
 
