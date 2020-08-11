@@ -6,4 +6,4 @@
 .lintr
 .github
 ^data-raw$
-^docs$
+^vignettes/articles$
