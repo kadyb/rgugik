@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @references
-#' http://isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20150000219/O/D20150219.pdf
+#' \url{http://isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20150000219/O/D20150219.pdf}
 #'
 #' @examples
 #' \donttest{

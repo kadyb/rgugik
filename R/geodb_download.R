@@ -13,10 +13,10 @@
 #' @references
 #' description of topographical and general geographical databases,
 #' and technical standards for making maps (in Polish):
-#' http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf
+#' \url{http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf}
 #'
 #' brief description of categories and layer names (in English and Polish):
-#' https://github.com/kadyb/rgugik/blob/master/docs/geodb_description.md
+#' \url{https://github.com/kadyb/rgugik/blob/master/vignette/articles/geodb_description.md}
 #'
 #' @examples
 #' \donttest{
