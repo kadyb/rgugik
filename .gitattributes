@@ -1,1 +1,9 @@
-* text=auto
+# https://stackoverflow.com/a/10855862/2602477
+# Auto detect text files and perform LF normalization
+*        text=auto
+
+# absolute paths are ok, as are globs
+/**/postinst* text eol=lf
+
+# paths that don't start with / are treated relative to the .gitattributes folder
+relative/path/*.txt text eol=lf
