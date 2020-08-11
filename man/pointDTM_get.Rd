@@ -26,6 +26,6 @@ returns a data frame with vector points and terrain elevation for a given polygo
 library(sf)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
-# DTM = pointDTM_get(polygon, distance = 2) #error
+DTM = pointDTM_get(polygon, distance = 2)
 }
 }

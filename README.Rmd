@@ -30,7 +30,7 @@ Currently you can download:
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)
 
-It is also possible to geocode addresses or objects using the `geocode` function.
+It is also possible to geocode addresses or objects using the `geocodePL_get` function.
 
 **Corresponding functions**
 

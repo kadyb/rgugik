@@ -27,19 +27,19 @@ Cartography](http://www.gugik.gov.pl). Currently you can download:
     coordinates
   - 3D models of buildings (LOD1, LOD2)
 
-It is also possible to geocode addresses or objects using the `geocode`
-function.
+It is also possible to geocode addresses or objects using the
+`geocodePL_get` function.
 
 **Corresponding functions**
 
-| Dastaset PL                               | Dataset EN                           | Function                             | Input                       |
-| :---------------------------------------- | :----------------------------------- | :----------------------------------- | :-------------------------- |
-| Ortofotomapa                              | Orthophotomap                        | orto\_request, orto\_download        | polygon                     |
-| Numeryczny Model Terenu                   | Digital Terrain Models               | pointDTM\_get, pointDTM100\_download | polygon, voivodeship (TERC) |
-| Baza Danych Obiektów Ogólnogeograficznych | General Geographic Database          | geodb\_download                      | voivodeship (TERC)          |
-| Państwowy Rejestr Nazw Geograficznych     | State Register of Geographical Names | geonames\_download                   | place, object               |
-| Lokalizacja działek katastralnych         | Location of cadastral parcels        | parcel\_get                          | parcel ID, coordinates      |
-| Modele 3D budynków                        | 3D models of buildings               | models3D\_download                   | county (TERYT)              |
+| Dastaset PL                               | Dataset EN                           | Function                             | Input                  |
+| :---------------------------------------- | :----------------------------------- | :----------------------------------- | :--------------------- |
+| Ortofotomapa                              | Orthophotomap                        | orto\_request, orto\_download        | polygon                |
+| Numeryczny Model Terenu                   | Digital Terrain Model                | pointDTM\_get, pointDTM100\_download | polygon, voivodeship   |
+| Baza Danych Obiektów Ogólnogeograficznych | General Geographic Database          | geodb\_download                      | voivodeship            |
+| Państwowy Rejestr Nazw Geograficznych     | State Register of Geographical Names | geonames\_download                   | place, object          |
+| Lokalizacja działek katastralnych         | Location of cadastral parcels        | parcel\_get                          | parcel ID, coordinates |
+| Modele 3D budynków                        | 3D models of buildings               | models3D\_download                   | county                 |
 
 ## Installation
 
