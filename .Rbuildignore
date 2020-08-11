@@ -6,3 +6,4 @@
 .lintr
 .github
 ^data-raw$
+^docs$
