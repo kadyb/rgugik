@@ -1,7 +1,7 @@
 
-### Baza Danych Obiektów Ogólnogeograficznych (BDOO)<br>General Geographic Database
+## Baza Danych Obiektów Ogólnogeograficznych (BDOO)<br>General Geographic Database
 
-#### Main categories of data
+### Main categories of data
 
 | ABBRE | POLISH               | ENGLISH               |
 | :---- | :------------------- | :-------------------- |
@@ -13,7 +13,7 @@
 | SW    | Sieć wodna           | Water network         |
 | SK    | Sieć komunikacyjna   | Communication network |
 
-#### Second level of categories (names of vector layers)
+### Second level of categories (names of vector layers)
 
 | ABBRE | POLISH                                         | ENGLISH                                |
 | :---- | :--------------------------------------------- | :------------------------------------- |
@@ -62,7 +62,7 @@ The last character in a vector layer name means:
   - **L** - line
   - **A** - area
 
-#### Other files
+### Other files
 
 1.  **UzytkownikXX** (UserXX) - contact details for the Voivodeship
     Marshal’s Office. “XX” contains TERC (voivodeship ID).
