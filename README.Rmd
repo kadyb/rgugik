@@ -43,7 +43,7 @@ ds_pl = c("Ortofotomapa",
           "Modele 3D budynków")
 
 ds_en = c("Orthophotomap",
-          "Digital Terrain Models",
+          "Digital Terrain Model",
           "General Geographic Database",
           "State Register of Geographical Names",
           "Location of cadastral parcels",
