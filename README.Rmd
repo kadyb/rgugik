@@ -57,11 +57,11 @@ fun = c("orto_request, orto_download",
         "models3D_download")
 
 input = c("polygon",
-          "polygon, voivodeship (TERC)",
-          "voivodeship (TERC)",
+          "polygon, voivodeship",
+          "voivodeship",
           "place, object",
           "parcel ID, coordinates",
-          "county (TERYT)")
+          "county")
 
 df = data.frame(ds_pl, ds_en, fun, input)
 colnames(df) = c("Dastaset PL", "Dataset EN", "Function", "Input")
