@@ -189,5 +189,5 @@ The last character in a vector layer name means:
 
 ### Other files
 
-1. **UzytkownikXX** (UserXX) - contact details for the Voivodeship Marshal's Office. "XX" contains TERC (voivodeship ID).
+1. "**UzytkownikXX** (UserXX)" - contact details for the Voivodeship Marshal's Office. "XX" contains TERC (voivodeship ID).
 2. Files with names: "**Ciek** (Watercourse)", "**LiniaKolejowa** (Railway line)", "**SzlakDrogowy** (Road trail)", "**WezelKolejowy** (Railway junction)", "**ZbiornikWodny** (Reservoir)" contain metadata for these objects.
