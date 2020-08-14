@@ -16,19 +16,19 @@
 #' \url{http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf}
 #'
 #' brief description of categories and layer names (in English and Polish):
-#' \url{https://github.com/kadyb/rgugik/blob/master/vignette/articles/geodb_description.md}
+#' \url{https://github.com/kadyb/rgugik/blob/master/vignettes/articles/geodb_description.md}
 #'
 #' @examples
 #' \donttest{
 #' geodb_download(c("mazowieckie", "wielkopolskie"))
 #' geodb_download(c("Subcarpathian", "Silesian"))
 #' geodb_download(c("02", "16"))
-#' 
+#'
 #' library("sf")
 #' # load roads and territory from "opolskie" (TERC 16)
 #' roads = read_sf("PL.PZGiK.201.16/BDOO/PL.PZGIK.201.16__OT_SKDR_L.xml")
 #' territory = read_sf("PL.PZGiK.201.16/BDOO/PL.PZGIK.201.16__OT_ADJA_A.xml")
-#' 
+#'
 #' # plot them together
 #' plot(territory$geometry)
 #' plot(roads$geometry, add = TRUE, col = "red")
