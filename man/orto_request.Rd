@@ -10,7 +10,7 @@ orto_request(polygon, where = NULL)
 \item{polygon}{the polygon layer (may consist of n objects)}
 
 \item{where}{SQL WHERE clause to filter records
-(filtering is better done on the R client side
+(filtering is much faster on the R client side
 rather than on the SQL server)}
 }
 \value{
@@ -25,7 +25,9 @@ library(sf)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
 req_df = orto_request(polygon)
-req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")
+
+# it is not recommended to use WHERE clause
+# req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")
 # req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")
 }
 }
