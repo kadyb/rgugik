@@ -1,9 +1,6 @@
 #' returns a data frame with metadata and links to the orthoimages in a given polygon
 #'
 #' @param polygon the polygon layer (may consist of n objects)
-#' @param where SQL WHERE clause to filter records
-#' (filtering is much faster on the R client side
-#' rather than on the SQL server)
 #'
 #' @return a data frame with metadata and links to the orthoimages
 #'
@@ -16,15 +13,12 @@
 #' polygon = read_sf(polygon_path)
 #' req_df = orto_request(polygon)
 #'
-#' # it is not recommended to use WHERE clause
-#' # req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")
-#' # req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")
+#' # simple filtering by attributes
+#' req_df = req_df[req_df$kolor == "CIR", ]
+#' req_df = req_df[req_df$piksel <= 0.25 & req_df$akt_rok >= 2016, ]
 #' }
 orto_request = function(polygon, where = NULL) {
 
-  if (!is.null(where) && !is.character(where)) {
-    stop("'where' must be string")
-  }
   if (nrow(polygon) == 0) {
     stop("no geometries")
   }
@@ -43,12 +37,6 @@ orto_request = function(polygon, where = NULL) {
   outFields = paste0("&outFields=", selected_cols)
   returnGeometry = "&returnGeometry=false"
   file = "&f=json"
-
-  # user input
-  empty_where = "&where="
-  if (!is.null(where)) {
-    empty_where = paste0(empty_where, where)
-  }
 
   # initial empty df (columns must be identical as in 'selected_cols')
   empty_df = data.frame(godlo = character(),
@@ -81,7 +69,7 @@ orto_request = function(polygon, where = NULL) {
                       "'spatialReference':{'wkid':", epsg, "}}")
 
     prepared_URL = paste0(base_URL, geometry, geometryType, spatialRel, outFields,
-                          returnGeometry, file, empty_where)
+                          returnGeometry, file)
 
     output = jsonlite::fromJSON(prepared_URL)
     output = output$features[[1]]
