@@ -17,7 +17,7 @@
 #' req_df = req_df[req_df$kolor == "CIR", ]
 #' req_df = req_df[req_df$piksel <= 0.25 & req_df$akt_rok >= 2016, ]
 #' }
-orto_request = function(polygon, where = NULL) {
+orto_request = function(polygon) {
 
   if (nrow(polygon) == 0) {
     stop("no geometries")
