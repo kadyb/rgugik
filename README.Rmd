@@ -129,7 +129,9 @@ plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
 
 ## Acknowledgment
 
-<!-- please add the content here-->
+<!-- https://dziennikustaw.gov.pl/DU/2020/782https://dziennikustaw.gov.pl/DU/2020/782 -->
+<!-- [Geoportal](https://www.geoportal.gov.pl/) -->
+[Head Office of Geodesy and Cartography in Poland](http://www.gugik.gov.pl/) is the main source of the data.
 
 ## Contribution
 
