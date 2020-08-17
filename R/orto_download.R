@@ -21,7 +21,7 @@
 #' }
 orto_download = function(df_req, check_SHA = FALSE, ...) {
 
-  if (!all(c("url_do_pobrania", "nazwa_pliku") %in% names(df_req))) {
+  if (!all(c("URL", "filename") %in% names(df_req))) {
     stop("data frame should come from 'request_orto'")
   }
 
@@ -36,14 +36,14 @@ orto_download = function(df_req, check_SHA = FALSE, ...) {
   if (!check_SHA) {
     # only download files
     for (i in seq_len(nrow(df_req))) {
-      name_file = paste0(df_req[i, "nazwa_pliku"], ".tif")
-      utils::download.file(df_req[i, "url_do_pobrania"], name_file, mode = "wb", ...)
+      name_file = paste0(df_req[i, "filename"], ".tif")
+      utils::download.file(df_req[i, "URL"], name_file, mode = "wb", ...)
     }
   } else {
     # download files and check their checksum
     for (i in seq_len(nrow(df_req))) {
-      name_file = paste0(df_req[i, "nazwa_pliku"], ".tif")
-      utils::download.file(df_req[i, "url_do_pobrania"], name_file, mode = "wb", ...)
+      name_file = paste0(df_req[i, "filename"], ".tif")
+      utils::download.file(df_req[i, "URL"], name_file, mode = "wb", ...)
       # reference checksum is SHA-1
       tmp_SHA = as.character(openssl::sha1(file(name_file)))
 

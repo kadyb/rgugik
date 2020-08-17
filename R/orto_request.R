@@ -84,5 +84,17 @@ orto_request = function(polygon) {
 
   # remove duplicated images
   empty_df = empty_df[!duplicated(empty_df$nazwa_pliku), ]
+
+  # postprocessing
+  colnames(empty_df) = c("sheetID", "year", "resolution", "composition",
+                         "sensor", "CRS", "isFilled", "URL", "seriesID",
+                         "sha1", "filename")
+  empty_df$composition = as.factor(empty_df$composition)
+  empty_df$CRS = as.factor(empty_df$CRS)
+  empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
+  empty_df$sensor = factor(empty_df$sensor,
+             levels = c("Scena sat.", "Zdj. analogowe", "Zdj. cyfrowe"),
+             labels = c("Satellite", "Analog", "Digital"))
+
   return(empty_df)
 }
