@@ -76,7 +76,7 @@ orto_request = function(polygon) {
 
     # MaxRecordCount: 1000
     if (nrow(output) == 1000) {
-      warning("maximum number of records, reduce the area or add filtering")
+      warning("maximum number of records, reduce the area")
     }
 
     empty_df = rbind(empty_df, output)
