@@ -131,12 +131,15 @@ plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
 
 ## Acknowledgment
 
-<!-- https://dziennikustaw.gov.pl/DU/2020/782https://dziennikustaw.gov.pl/DU/2020/782 -->
-
-<!-- [Geoportal](https://www.geoportal.gov.pl/) -->
-
 [Head Office of Geodesy and Cartography in
-Poland](http://www.gugik.gov.pl/) is the main source of the data.
+Poland](http://www.gugik.gov.pl/) is the main source of the data. The
+data is made available in accordance with the [Act of May 17, 1989
+Geodetic and Cartographic
+Law](http://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19890300163)
+(amended on 16 April 2020).
+
+The main source of spatial data in Poland is the
+[Geoportal](https://mapy.geoportal.gov.pl).
 
 ## Contribution
 
