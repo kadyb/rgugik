@@ -82,18 +82,18 @@ req_df = orto_request(polygon)
 
 # show metadata and download the first image only
 t(req_df[1, ])
-#>                    1                                                                               
-#> godlo              "N-33-130-D-b-2-3"                                                              
-#> akt_rok            "2001"                                                                          
-#> piksel             "1"                                                                             
-#> kolor              "RGB"                                                                           
-#> zrDanych           "Scena sat."                                                                    
-#> ukladXY            "PL-1992"                                                                       
-#> czy_ark_wypelniony "TAK"                                                                           
-#> url_do_pobrania    "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif"
-#> idSerie            "41"                                                                            
-#> sha1               "312c81963a31e268fc20c442733c48e1aa33838f"                                      
-#> nazwa_pliku        "41_3756_N-33-130-D-b-2-3"
+#>             1                                                                               
+#> sheetID     "N-33-130-D-b-2-3"                                                              
+#> year        "2001"                                                                          
+#> resolution  "1"                                                                             
+#> composition "RGB"                                                                           
+#> sensor      "Satellite"                                                                     
+#> CRS         "PL-1992"                                                                       
+#> isFilled    "TRUE"                                                                          
+#> URL         "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif"
+#> seriesID    "41"                                                                            
+#> sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      
+#> filename    "41_3756_N-33-130-D-b-2-3"
 orto_download(req_df[1, ])
 
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
