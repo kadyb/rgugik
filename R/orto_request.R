@@ -14,8 +14,8 @@
 #' req_df = orto_request(polygon)
 #'
 #' # simple filtering by attributes
-#' req_df = req_df[req_df$kolor == "CIR", ]
-#' req_df = req_df[req_df$piksel <= 0.25 & req_df$akt_rok >= 2016, ]
+#' req_df = req_df[req_df$composition == "CIR", ]
+#' req_df = req_df[req_df$resolution <= 0.25 & req_df$year >= 2016, ]
 #' }
 orto_request = function(polygon) {
 
