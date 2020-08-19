@@ -4,14 +4,10 @@
 \alias{orto_request}
 \title{returns a data frame with metadata and links to the orthoimages in a given polygon}
 \usage{
-orto_request(polygon, where = NULL)
+orto_request(polygon)
 }
 \arguments{
 \item{polygon}{the polygon layer (may consist of n objects)}
-
-\item{where}{SQL WHERE clause to filter records
-(filtering is much faster on the R client side
-rather than on the SQL server)}
 }
 \value{
 a data frame with metadata and links to the orthoimages
@@ -26,8 +22,8 @@ polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
 req_df = orto_request(polygon)
 
-# it is not recommended to use WHERE clause
-# req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")
-# req_df = orto_request(polygon, where = "piksel <= 0.25 AND akt_rok >= 2016")
+# simple filtering by attributes
+req_df = req_df[req_df$composition == "CIR", ]
+req_df = req_df[req_df$resolution <= 0.25 & req_df$year >= 2016, ]
 }
 }

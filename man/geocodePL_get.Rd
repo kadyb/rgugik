@@ -34,7 +34,7 @@ returns a list with metadata and coordinates for a given type of input
 geocodePL_get(address = "Marki") # place
 geocodePL_get(address = "Marki, Andersa") # place and street
 geocodePL_get(address = "Marki, Andersa 1") # place, street and house number
-geocodePL_get(address = "Królewskie Brzeziny 13") # place and house number
+geocodePL_get(address = "KrĂłlewskie Brzeziny 13") # place and house number
 
 geocodePL_get(road = "632") # road number
 geocodePL_get(road = "632 55") # road number and mileage
