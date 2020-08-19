@@ -38,16 +38,19 @@ tile_download = function(df_req, check_SHA = FALSE, ...) {
     stop("empty df")
   }
 
+  # get name index from URL
+  idx_name = length(unlist(strsplit(df_req[1, "URL"], "/")))
+
   if (!check_SHA) {
     # only download files
     for (i in seq_len(nrow(df_req))) {
-      name_file = unlist(strsplit(df_req[i, "URL"], "/"))[7]
+      name_file = unlist(strsplit(df_req[i, "URL"], "/"))[idx_name]
       utils::download.file(df_req[i, "URL"], name_file, mode = "wb", ...)
     }
   } else {
     # download files and check their checksum
     for (i in seq_len(nrow(df_req))) {
-      name_file = unlist(strsplit(df_req[i, "URL"], "/"))[7]
+      name_file = unlist(strsplit(df_req[i, "URL"], "/"))[idx_name]
       utils::download.file(df_req[i, "URL"], name_file, mode = "wb", ...)
 
       # reference checksum is SHA-1
