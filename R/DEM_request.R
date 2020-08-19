@@ -19,6 +19,7 @@
 #' # simple filtering by attributes
 #' req_df = req_df[req_df$year > 2018, ]
 #' req_df = req_df[req_df$product == "PointCloud" & req_df$format == "LAS", ]
+#' }
 DEM_request = function(polygon) {
 
   if (nrow(polygon) == 0) {
