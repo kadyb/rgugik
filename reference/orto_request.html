@@ -131,7 +131,7 @@
     <p>returns a data frame with metadata and links to the orthoimages in a given polygon</p>
     </div>
 
-    <pre class="usage"><span class='fu'>orto_request</span>(<span class='no'>polygon</span>, <span class='kw'>where</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>orto_request</span>(<span class='no'>polygon</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,12 +139,6 @@
     <tr>
       <th>polygon</th>
       <td><p>the polygon layer (may consist of n objects)</p></td>
-    </tr>
-    <tr>
-      <th>where</th>
-      <td><p>SQL WHERE clause to filter records
-(filtering is much faster on the R client side
-rather than on the SQL server)</p></td>
     </tr>
     </table>
 
@@ -159,9 +153,9 @@ rather than on the SQL server)</p></td>
 <span class='no'>polygon</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>read_sf</a></span>(<span class='no'>polygon_path</span>)
 <span class='no'>req_df</span> <span class='kw'>=</span> <span class='fu'>orto_request</span>(<span class='no'>polygon</span>)
 
-<span class='co'># it is not recommended to use WHERE clause</span>
-<span class='co'># req_df = orto_request(polygon, where = "kolor LIKE 'CIR'")</span>
-<span class='co'># req_df = orto_request(polygon, where = "piksel &lt;= 0.25 AND akt_rok &gt;= 2016")</span>
+<span class='co'># simple filtering by attributes</span>
+<span class='no'>req_df</span> <span class='kw'>=</span> <span class='no'>req_df</span>[<span class='no'>req_df</span>$<span class='no'>composition</span> <span class='kw'>==</span> <span class='st'>"CIR"</span>, ]
+<span class='no'>req_df</span> <span class='kw'>=</span> <span class='no'>req_df</span>[<span class='no'>req_df</span>$<span class='no'>resolution</span> <span class='kw'>&lt;=</span> <span class='fl'>0.25</span> <span class='kw'>&amp;</span> <span class='no'>req_df</span>$<span class='no'>year</span> <span class='kw'>&gt;=</span> <span class='fl'>2016</span>, ]
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

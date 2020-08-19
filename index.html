@@ -179,7 +179,7 @@
 <li>
 <code><a href="reference/orto_request.html">orto_request()</a></code> - returns a data frame with metadata and links to the orthoimages in a given polygon</li>
 <li>
-<code><a href="reference/orto_download.html">orto_download()</a></code> - downloads orthoimages based on the data frame obtained using the <code><a href="reference/orto_request.html">orto_request()</a></code> function</li>
+<code>orto_download()</code> - downloads orthoimages based on the data frame obtained using the <code><a href="reference/orto_request.html">orto_request()</a></code> function</li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rgugik</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>)
@@ -204,7 +204,7 @@
 <span class="co">#&gt; seriesID    "41"                                                                            </span>
 <span class="co">#&gt; sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      </span>
 <span class="co">#&gt; filename    "41_3756_N-33-130-D-b-2-3"</span>
-<span class="fu"><a href="reference/orto_download.html">orto_download</a></span>(<span class="no">req_df</span>[<span class="fl">1</span>, ])
+<span class="fu">orto_download</span>(<span class="no">req_df</span>[<span class="fl">1</span>, ])
 
 <span class="no">img</span> <span class="kw">=</span> <span class="fu">brick</span>(<span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span>)
 <span class="fu">plotRGB</span>(<span class="no">img</span>)</pre></div>

@@ -6,8 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>returns a list with metadata and coordinates for a given type of input
-(geocoding addresses and objects) — geocodePL_get • rgugik</title>
+<title>downloads tiles based on the data frame obtained using
+the orto_request() and DEM_request() functions — tile_download • rgugik</title>
 
 
 <!-- jquery -->
@@ -40,10 +40,10 @@
 
 
 
-<meta property="og:title" content="returns a list with metadata and coordinates for a given type of input
-(geocoding addresses and objects) — geocodePL_get" />
-<meta property="og:description" content="returns a list with metadata and coordinates for a given type of input
-(geocoding addresses and objects)" />
+<meta property="og:title" content="downloads tiles based on the data frame obtained using
+the orto_request() and DEM_request() functions — tile_download" />
+<meta property="og:description" content="downloads tiles based on the data frame obtained using
+the orto_request() and DEM_request() functions" />
 
 
 
@@ -125,63 +125,55 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>returns a list with metadata and coordinates for a given type of input
-(geocoding addresses and objects)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kadyb/rgugik/blob/master/R/geocodePL_get.R'><code>R/geocodePL_get.R</code></a></small>
-    <div class="hidden name"><code>geocodePL_get.Rd</code></div>
+    <h1>downloads tiles based on the data frame obtained using
+the orto_request() and DEM_request() functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kadyb/rgugik/blob/master/R/tile_download.R'><code>R/tile_download.R</code></a></small>
+    <div class="hidden name"><code>tile_download.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>returns a list with metadata and coordinates for a given type of input
-(geocoding addresses and objects)</p>
+    <p>downloads tiles based on the data frame obtained using
+the orto_request() and DEM_request() functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geocodePL_get</span>(
-  <span class='kw'>address</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>road</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>rail_crossing</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>geoname</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>tile_download</span>(<span class='no'>df_req</span>, <span class='kw'>check_SHA</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>address</th>
-      <td><p>place with or without street and house number</p></td>
+      <th>df_req</th>
+      <td><p>a data frame obtained using the orto_request() and
+DEM_request() functions</p></td>
     </tr>
     <tr>
-      <th>road</th>
-      <td><p>road number with or without mileage</p></td>
+      <th>check_SHA</th>
+      <td><p>check the integrity of downloaded files
+(logical parameter, default = FALSE)</p></td>
     </tr>
     <tr>
-      <th>rail_crossing</th>
-      <td><p>rail crossing identifier
-(11 characters including 2 spaces, format: "XXX XXX XXX")</p></td>
-    </tr>
-    <tr>
-      <th>geoname</th>
-      <td><p>name of the geographical object from State Register
-of Geographical Names (function geonames_download)</p></td>
+      <th>...</th>
+      <td><p>additional argument for <code><a href='https://rdrr.io/r/utils/download.file.html'>utils::download.file()</a></code></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a list(s) with metadata and coordinates (EPSG: 2180)</p>
+    <p>georeferenced tiles with properties (resolution, year, etc.)
+as specified in the input data frame</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='fu'>geocodePL_get</span>(<span class='kw'>address</span> <span class='kw'>=</span> <span class='st'>"Marki"</span>) <span class='co'># place</span>
-<span class='fu'>geocodePL_get</span>(<span class='kw'>address</span> <span class='kw'>=</span> <span class='st'>"Marki, Andersa"</span>) <span class='co'># place and street</span>
-<span class='fu'>geocodePL_get</span>(<span class='kw'>address</span> <span class='kw'>=</span> <span class='st'>"Marki, Andersa 1"</span>) <span class='co'># place, street and house number</span>
-<span class='fu'>geocodePL_get</span>(<span class='kw'>address</span> <span class='kw'>=</span> <span class='st'>"KrĂłlewskie Brzeziny 13"</span>) <span class='co'># place and house number</span>
+    <pre class="examples"><span class='co'># \donttest{</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)
+<span class='no'>polygon_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"datasets/search_area.gpkg"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"rgugik"</span>)
+<span class='no'>polygon</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>read_sf</a></span>(<span class='no'>polygon_path</span>)
 
-<span class='fu'>geocodePL_get</span>(<span class='kw'>road</span> <span class='kw'>=</span> <span class='st'>"632"</span>) <span class='co'># road number</span>
-<span class='fu'>geocodePL_get</span>(<span class='kw'>road</span> <span class='kw'>=</span> <span class='st'>"632 55"</span>) <span class='co'># road number and mileage</span>
+<span class='no'>req_df</span> <span class='kw'>=</span> <span class='fu'><a href='orto_request.html'>orto_request</a></span>(<span class='no'>polygon</span>)
+<span class='fu'>tile_download</span>(<span class='no'>req_df</span>[<span class='fl'>1</span>, ]) <span class='co'># download the first image only</span>
 
-<span class='fu'>geocodePL_get</span>(<span class='kw'>rail_crossing</span> <span class='kw'>=</span> <span class='st'>"001 018 478"</span>)
-
-<span class='fu'>geocodePL_get</span>(<span class='kw'>geoname</span> <span class='kw'>=</span> <span class='st'>"Las Mierzei"</span>) <span class='co'># physiographic object</span></pre>
+<span class='no'>req_df</span> <span class='kw'>=</span> <span class='fu'><a href='DEM_request.html'>DEM_request</a></span>(<span class='no'>polygon</span>)
+<span class='fu'>tile_download</span>(<span class='no'>req_df</span>[<span class='fl'>1</span>, ]) <span class='co'># download the first DEM only</span>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
