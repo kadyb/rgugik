@@ -1,11 +1,11 @@
 ---
-title: |
-  | General Geographic Database
-  | Baza Danych Obiektów Ogólnogeograficznych
+title: General Geographic Database
 date: "`r Sys.Date()`"
 output: github_document
 ---
 
+<!-- General Geographic Database -->
+<!-- Baza Danych Obiektów Ogólnogeograficznych -->
 
 ### Main categories of data
 
