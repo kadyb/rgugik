@@ -29,7 +29,7 @@ Currently you can download:
   - 3D models of buildings (LOD1, LOD2)
   - Various Digital Elevation Models as:
     - [Digital Terrain Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
-    - [Digital Surface Model](www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
+    - [Digital Surface Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
     - [Point Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
   - *Digital Terrain Model as vector points with 1 m resolution and as text files with 100 m resolution for entire voivodeships
 

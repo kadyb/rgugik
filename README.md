@@ -25,7 +25,7 @@ Cartography](http://www.gugik.gov.pl). Currently you can download:
       - [Digital Terrain
         Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
       - [Digital Surface
-        Model](www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
+        Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
       - [Point
         Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
   - \*Digital Terrain Model as vector points with 1 m resolution and as
