@@ -107,63 +107,69 @@
 </li>
 <li>*Digital Terrain Model as vector points with 1 m resolution and as text files with 100 m resolution for entire voivodeships</li>
 </ul>
-<p>It is also possible to geocode addresses or objects using the <code>geocodePL_get</code> function.</p>
+<p>It is also possible to geocode addresses or objects using the <code><a href="reference/geocodePL_get.html">geocodePL_get()</a></code> function.</p>
 <p><strong>Corresponding functions</strong></p>
 <table class="table">
 <colgroup>
-<col width="30%">
-<col width="26%">
-<col width="26%">
-<col width="16%">
+<col width="29%">
+<col width="15%">
+<col width="25%">
+<col width="29%">
 </colgroup>
 <thead><tr class="header">
-<th align="left">Dastaset PL</th>
-<th align="left">Dataset EN</th>
 <th align="left">Function</th>
 <th align="left">Input</th>
+<th align="left">Dastaset EN</th>
+<th align="left">Dataset PL</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Ortofotomapa</td>
+<td align="left">
+<code><a href="reference/orto_request.html">orto_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
+</td>
+<td align="left">polygon</td>
 <td align="left">Orthophotomap</td>
-<td align="left">orto_request, tile_download</td>
-<td align="left">polygon</td>
+<td align="left">Ortofotomapa</td>
 </tr>
 <tr class="even">
-<td align="left">Baza Danych Obiektów Ogólnogeograficznych</td>
-<td align="left">General Geographic Database</td>
-<td align="left">geodb_download</td>
+<td align="left"><code><a href="reference/geodb_download.html">geodb_download()</a></code></td>
 <td align="left">voivodeship</td>
+<td align="left">General Geographic Database</td>
+<td align="left">Baza Danych Obiektów Ogólnogeograficznych</td>
 </tr>
 <tr class="odd">
-<td align="left">Państwowy Rejestr Nazw Geograficznych</td>
-<td align="left">State Register of Geographical Names</td>
-<td align="left">geonames_download</td>
+<td align="left"><code><a href="reference/geonames_download.html">geonames_download()</a></code></td>
 <td align="left">place, object</td>
+<td align="left">State Register of Geographical Names</td>
+<td align="left">Państwowy Rejestr Nazw Geograficznych</td>
 </tr>
 <tr class="even">
-<td align="left">Lokalizacja działek katastralnych</td>
-<td align="left">Location of cadastral parcels</td>
-<td align="left">parcel_get</td>
+<td align="left"><code><a href="reference/parcel_get.html">parcel_get()</a></code></td>
 <td align="left">parcel ID, coordinates</td>
+<td align="left">Location of cadastral parcels</td>
+<td align="left">Lokalizacja działek katastralnych</td>
 </tr>
 <tr class="odd">
-<td align="left">Modele 3D budynków</td>
-<td align="left">3D models of buildings</td>
-<td align="left">models3D_download</td>
+<td align="left"><code><a href="reference/models3D_download.html">models3D_download()</a></code></td>
 <td align="left">county</td>
+<td align="left">3D models of buildings</td>
+<td align="left">Modele 3D budynków</td>
 </tr>
 <tr class="even">
-<td align="left">Cyfrowe Modele Wysokościowe</td>
-<td align="left">Digital Elevation Models</td>
-<td align="left">DEM_request, tile_download</td>
+<td align="left">
+<code><a href="reference/DEM_request.html">DEM_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
+</td>
 <td align="left">polygon</td>
+<td align="left">Digital Elevation Models</td>
+<td align="left">Cyfrowe Modele Wysokościowe</td>
 </tr>
 <tr class="odd">
-<td align="left">*Numeryczny Model Terenu</td>
-<td align="left">*Digital Terrain Model</td>
-<td align="left">pointDTM_get, pointDTM100_download</td>
+<td align="left">
+<code><a href="reference/pointDTM_get.html">pointDTM_get()</a></code>, <code><a href="reference/pointDTM100_download.html">pointDTM100_download()</a></code>
+</td>
 <td align="left">polygon, voivodeship</td>
+<td align="left">*Digital Terrain Model</td>
+<td align="left">*Numeryczny Model Terenu</td>
 </tr>
 </tbody>
 </table>
@@ -230,6 +236,8 @@
 
 <span class="no">DTM</span> <span class="kw">=</span> <span class="fu"><a href="reference/pointDTM_get.html">pointDTM_get</a></span>(<span class="no">polygon</span>)
 <span class="co">#&gt; 0/10</span>
+<span class="co">#&gt; Warning in pointDTM_get(polygon): empty return, next attempt</span>
+<span class="co">#&gt; 0/10</span>
 <span class="co">#&gt; 1/10</span>
 <span class="co">#&gt; 2/10</span>
 <span class="co">#&gt; 3/10</span>
@@ -256,10 +264,10 @@
 <a href="#contribution" class="anchor"></a>Contribution</h2>
 <p>Contributions to this package are welcome. The preferred method of contribution is through a GitHub pull request. Feel also free to contact us by creating <a href="https://github.com/kadyb/rgugik/issues">an issue</a>.</p>
 </div>
-<div id="related-project" class="section level2">
+<div id="related-projects" class="section level2">
 <h2 class="hasAnchor">
-<a href="#related-project" class="anchor"></a>Related project</h2>
-<p>If you don’t feel familiar with R, there are similar tools to <a href="https://www.qgis.org">QGIS</a> in the <a href="https://github.com/envirosolutionspl">EnviroSolutions</a> repository.</p>
+<a href="#related-projects" class="anchor"></a>Related projects</h2>
+<p>If you don’t feel familiar with R, there is a similar <a href="https://www.qgis.org">QGIS</a> tool in the <a href="https://github.com/envirosolutionspl">EnviroSolutions</a> repository.</p>
 </div>
 </div>
   </div>
