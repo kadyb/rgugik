@@ -23,12 +23,15 @@ knitr::opts_chunk$set(
 Currently you can download:
 
   - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
-  - [Digital Terrain Models](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu) as XYZ vector points with 1 m resolution
-  - Digital Terrain Models as XYZ text files with 100 m resolution for entire voivodeships
   - [General Geographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
   - [State Register of Geographical Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)
+  - Various Digital Elevation Models as:
+    - [Digital Terrain Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
+    - [Digital Surface Model](www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
+    - [Point Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
+  - *Digital Terrain Model as vector points with 1 m resolution and as text files with 100 m resolution for entire voivodeships
 
 It is also possible to geocode addresses or objects using the `geocodePL_get` function.
 
@@ -36,32 +39,36 @@ It is also possible to geocode addresses or objects using the `geocodePL_get` fu
 
 ```{r echo=FALSE}
 ds_pl = c("Ortofotomapa",
-          "Numeryczny Model Terenu",
           "Baza Danych Obiektów Ogólnogeograficznych",
           "Państwowy Rejestr Nazw Geograficznych",
           "Lokalizacja działek katastralnych",
-          "Modele 3D budynków")
+          "Modele 3D budynków",
+          "Cyfrowe Modele Wysokościowe",
+          "*Numeryczny Model Terenu")
 
 ds_en = c("Orthophotomap",
-          "Digital Terrain Model",
           "General Geographic Database",
           "State Register of Geographical Names",
           "Location of cadastral parcels",
-          "3D models of buildings")
+          "3D models of buildings",
+          "Digital Elevation Models",
+          "*Digital Terrain Model")
 
-fun = c("orto_request, orto_download",
-        "pointDTM_get, pointDTM100_download",
+fun = c("orto_request, tile_download",
         "geodb_download",
         "geonames_download",
         "parcel_get",
-        "models3D_download")
+        "models3D_download",
+        "DEM_request, tile_download",
+        "pointDTM_get, pointDTM100_download")
 
 input = c("polygon",
-          "polygon, voivodeship",
           "voivodeship",
           "place, object",
           "parcel ID, coordinates",
-          "county")
+          "county",
+          "polygon",
+          "polygon, voivodeship")
 
 df = data.frame(ds_pl, ds_en, fun, input)
 colnames(df) = c("Dastaset PL", "Dataset EN", "Function", "Input")
@@ -89,7 +96,7 @@ remotes::install_github("kadyb/rgugik")
 ### Ortophotomap
   
 - `orto_request()` - returns a data frame with metadata and links to the orthoimages in a given polygon
-- `orto_download()` - downloads orthoimages based on the data frame obtained using the `orto_request()` function
+- `tile_download()` - downloads orthoimages based on the data frame obtained using the `orto_request()` function
   
 ```{r message=FALSE, warning=FALSE}
 library(rgugik)
@@ -103,7 +110,7 @@ req_df = orto_request(polygon)
 
 # show metadata and download the first image only
 t(req_df[1, ])
-orto_download(req_df[1, ])
+tile_download(req_df[1, ])
 
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
 plotRGB(img)

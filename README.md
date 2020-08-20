@@ -14,11 +14,6 @@ status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://
 Cartography](http://www.gugik.gov.pl). Currently you can download:
 
   - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
-  - [Digital Terrain
-    Models](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
-    as XYZ vector points with 1 m resolution
-  - Digital Terrain Models as XYZ text files with 100 m resolution for
-    entire voivodeships
   - [General Geographic
     Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
   - [State Register of Geographical
@@ -26,6 +21,15 @@ Cartography](http://www.gugik.gov.pl). Currently you can download:
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or
     coordinates
   - 3D models of buildings (LOD1, LOD2)
+  - Various Digital Elevation Models as:
+      - [Digital Terrain
+        Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
+      - [Digital Surface
+        Model](www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
+      - [Point
+        Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
+  - \*Digital Terrain Model as vector points with 1 m resolution and as
+    text files with 100 m resolution for entire voivodeships
 
 It is also possible to geocode addresses or objects using the
 `geocodePL_get` function.
@@ -34,12 +38,13 @@ It is also possible to geocode addresses or objects using the
 
 | Dastaset PL                               | Dataset EN                           | Function                             | Input                  |
 | :---------------------------------------- | :----------------------------------- | :----------------------------------- | :--------------------- |
-| Ortofotomapa                              | Orthophotomap                        | orto\_request, orto\_download        | polygon                |
-| Numeryczny Model Terenu                   | Digital Terrain Model                | pointDTM\_get, pointDTM100\_download | polygon, voivodeship   |
+| Ortofotomapa                              | Orthophotomap                        | orto\_request, tile\_download        | polygon                |
 | Baza Danych Obiektów Ogólnogeograficznych | General Geographic Database          | geodb\_download                      | voivodeship            |
 | Państwowy Rejestr Nazw Geograficznych     | State Register of Geographical Names | geonames\_download                   | place, object          |
 | Lokalizacja działek katastralnych         | Location of cadastral parcels        | parcel\_get                          | parcel ID, coordinates |
 | Modele 3D budynków                        | 3D models of buildings               | models3D\_download                   | county                 |
+| Cyfrowe Modele Wysokościowe               | Digital Elevation Models             | DEM\_request, tile\_download         | polygon                |
+| \*Numeryczny Model Terenu                 | \*Digital Terrain Model              | pointDTM\_get, pointDTM100\_download | polygon, voivodeship   |
 
 ## Installation
 
@@ -65,7 +70,7 @@ remotes::install_github("kadyb/rgugik")
 
   - `orto_request()` - returns a data frame with metadata and links to
     the orthoimages in a given polygon
-  - `orto_download()` - downloads orthoimages based on the data frame
+  - `tile_download()` - downloads orthoimages based on the data frame
     obtained using the `orto_request()` function
 
 <!-- end list -->
@@ -94,7 +99,7 @@ t(req_df[1, ])
 #> seriesID    "41"                                                                            
 #> sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      
 #> filename    "41_3756_N-33-130-D-b-2-3"
-orto_download(req_df[1, ])
+tile_download(req_df[1, ])
 
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
 plotRGB(img)
