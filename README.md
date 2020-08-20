@@ -32,19 +32,19 @@ Cartography](http://www.gugik.gov.pl). Currently you can download:
     text files with 100 m resolution for entire voivodeships
 
 It is also possible to geocode addresses or objects using the
-`geocodePL_get` function.
+`geocodePL_get()` function.
 
 **Corresponding functions**
 
-| Dastaset PL                               | Dataset EN                           | Function                             | Input                  |
-| :---------------------------------------- | :----------------------------------- | :----------------------------------- | :--------------------- |
-| Ortofotomapa                              | Orthophotomap                        | orto\_request, tile\_download        | polygon                |
-| Baza Danych Obiektów Ogólnogeograficznych | General Geographic Database          | geodb\_download                      | voivodeship            |
-| Państwowy Rejestr Nazw Geograficznych     | State Register of Geographical Names | geonames\_download                   | place, object          |
-| Lokalizacja działek katastralnych         | Location of cadastral parcels        | parcel\_get                          | parcel ID, coordinates |
-| Modele 3D budynków                        | 3D models of buildings               | models3D\_download                   | county                 |
-| Cyfrowe Modele Wysokościowe               | Digital Elevation Models             | DEM\_request, tile\_download         | polygon                |
-| \*Numeryczny Model Terenu                 | \*Digital Terrain Model              | pointDTM\_get, pointDTM100\_download | polygon, voivodeship   |
+| Function                                   | Input                  | Dastaset EN                          | Dataset PL                                |
+| :----------------------------------------- | :--------------------- | :----------------------------------- | :---------------------------------------- |
+| `orto_request()`, `tile_download()`        | polygon                | Orthophotomap                        | Ortofotomapa                              |
+| `geodb_download()`                         | voivodeship            | General Geographic Database          | Baza Danych Obiektów Ogólnogeograficznych |
+| `geonames_download()`                      | place, object          | State Register of Geographical Names | Państwowy Rejestr Nazw Geograficznych     |
+| `parcel_get()`                             | parcel ID, coordinates | Location of cadastral parcels        | Lokalizacja działek katastralnych         |
+| `models3D_download()`                      | county                 | 3D models of buildings               | Modele 3D budynków                        |
+| `DEM_request()`, `tile_download()`         | polygon                | Digital Elevation Models             | Cyfrowe Modele Wysokościowe               |
+| `pointDTM_get()`, `pointDTM100_download()` | polygon, voivodeship   | \*Digital Terrain Model              | \*Numeryczny Model Terenu                 |
 
 ## Installation
 
@@ -118,6 +118,8 @@ polygon = read_sf(polygon_path)
 
 DTM = pointDTM_get(polygon)
 #> 0/10
+#> Warning in pointDTM_get(polygon): empty return, next attempt
+#> 0/10
 #> 1/10
 #> 2/10
 #> 3/10
@@ -152,8 +154,8 @@ Contributions to this package are welcome. The preferred method of
 contribution is through a GitHub pull request. Feel also free to contact
 us by creating [an issue](https://github.com/kadyb/rgugik/issues).
 
-## Related project
+## Related projects
 
-If you don’t feel familiar with R, there are similar tools to
-[QGIS](https://www.qgis.org) in the
+If you don’t feel familiar with R, there is a similar
+[QGIS](https://www.qgis.org) tool in the
 [EnviroSolutions](https://github.com/envirosolutionspl) repository.

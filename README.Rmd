@@ -33,7 +33,7 @@ Currently you can download:
     - [Point Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
   - *Digital Terrain Model as vector points with 1 m resolution and as text files with 100 m resolution for entire voivodeships
 
-It is also possible to geocode addresses or objects using the `geocodePL_get` function.
+It is also possible to geocode addresses or objects using the `geocodePL_get()` function.
 
 **Corresponding functions**
 
@@ -54,13 +54,13 @@ ds_en = c("Orthophotomap",
           "Digital Elevation Models",
           "*Digital Terrain Model")
 
-fun = c("orto_request, tile_download",
-        "geodb_download",
-        "geonames_download",
-        "parcel_get",
-        "models3D_download",
-        "DEM_request, tile_download",
-        "pointDTM_get, pointDTM100_download")
+fun = c("`orto_request()`, `tile_download()`",
+        "`geodb_download()`",
+        "`geonames_download()`",
+        "`parcel_get()`",
+        "`models3D_download()`",
+        "`DEM_request()`, `tile_download()`",
+        "`pointDTM_get()`, `pointDTM100_download()`")
 
 input = c("polygon",
           "voivodeship",
@@ -70,8 +70,8 @@ input = c("polygon",
           "polygon",
           "polygon, voivodeship")
 
-df = data.frame(ds_pl, ds_en, fun, input)
-colnames(df) = c("Dastaset PL", "Dataset EN", "Function", "Input")
+df = data.frame(fun, input, ds_en, ds_pl)
+colnames(df) = c("Function", "Input", "Dastaset EN", "Dataset PL")
 
 knitr::kable(df)
 ```
@@ -146,6 +146,6 @@ Contributions to this package are welcome.
 The preferred method of contribution is through a GitHub pull request. 
 Feel also free to contact us by creating [an issue](https://github.com/kadyb/rgugik/issues).
 
-## Related project
+## Related projects
 
-If you don't feel familiar with R, there are similar tools to [QGIS](https://www.qgis.org) in the [EnviroSolutions](https://github.com/envirosolutionspl) repository.
+If you don't feel familiar with R, there is a similar [QGIS](https://www.qgis.org) tool in the [EnviroSolutions](https://github.com/envirosolutionspl) repository.
