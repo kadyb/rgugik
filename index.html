@@ -96,13 +96,18 @@
 <p><strong>rgugik</strong> is an R package for downloading open data from resources of <a href="http://www.gugik.gov.pl">Polish Head Office of Geodesy and Cartography</a>. Currently you can download:</p>
 <ul>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa">Orthophotomaps</a></li>
-<li>
-<a href="http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu">Digital Terrain Models</a> as XYZ vector points with 1 m resolution</li>
-<li>Digital Terrain Models as XYZ text files with 100 m resolution for entire voivodeships</li>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych">General Geographic Database</a></li>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych">State Register of Geographical Names</a></li>
 <li>Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates</li>
 <li>3D models of buildings (LOD1, LOD2)</li>
+<li>Various Digital Elevation Models as:
+<ul>
+<li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu">Digital Terrain Model</a></li>
+<li><a href="www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu">Digital Surface Model</a></li>
+<li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe">Point Cloud</a></li>
+</ul>
+</li>
+<li>*Digital Terrain Model as vector points with 1 m resolution and as text files with 100 m resolution for entire voivodeships</li>
 </ul>
 <p>It is also possible to geocode addresses or objects using the <code>geocodePL_get</code> function.</p>
 <p><strong>Corresponding functions</strong></p>
@@ -123,38 +128,44 @@
 <tr class="odd">
 <td align="left">Ortofotomapa</td>
 <td align="left">Orthophotomap</td>
-<td align="left">orto_request, orto_download</td>
+<td align="left">orto_request, tile_download</td>
 <td align="left">polygon</td>
 </tr>
 <tr class="even">
-<td align="left">Numeryczny Model Terenu</td>
-<td align="left">Digital Terrain Model</td>
-<td align="left">pointDTM_get, pointDTM100_download</td>
-<td align="left">polygon, voivodeship</td>
-</tr>
-<tr class="odd">
 <td align="left">Baza Danych Obiektów Ogólnogeograficznych</td>
 <td align="left">General Geographic Database</td>
 <td align="left">geodb_download</td>
 <td align="left">voivodeship</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Państwowy Rejestr Nazw Geograficznych</td>
 <td align="left">State Register of Geographical Names</td>
 <td align="left">geonames_download</td>
 <td align="left">place, object</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Lokalizacja działek katastralnych</td>
 <td align="left">Location of cadastral parcels</td>
 <td align="left">parcel_get</td>
 <td align="left">parcel ID, coordinates</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Modele 3D budynków</td>
 <td align="left">3D models of buildings</td>
 <td align="left">models3D_download</td>
 <td align="left">county</td>
+</tr>
+<tr class="even">
+<td align="left">Cyfrowe Modele Wysokościowe</td>
+<td align="left">Digital Elevation Models</td>
+<td align="left">DEM_request, tile_download</td>
+<td align="left">polygon</td>
+</tr>
+<tr class="odd">
+<td align="left">*Numeryczny Model Terenu</td>
+<td align="left">*Digital Terrain Model</td>
+<td align="left">pointDTM_get, pointDTM100_download</td>
+<td align="left">polygon, voivodeship</td>
 </tr>
 </tbody>
 </table>
@@ -179,7 +190,7 @@
 <li>
 <code><a href="reference/orto_request.html">orto_request()</a></code> - returns a data frame with metadata and links to the orthoimages in a given polygon</li>
 <li>
-<code>orto_download()</code> - downloads orthoimages based on the data frame obtained using the <code><a href="reference/orto_request.html">orto_request()</a></code> function</li>
+<code><a href="reference/tile_download.html">tile_download()</a></code> - downloads orthoimages based on the data frame obtained using the <code><a href="reference/orto_request.html">orto_request()</a></code> function</li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rgugik</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">sf</span>)
@@ -204,7 +215,7 @@
 <span class="co">#&gt; seriesID    "41"                                                                            </span>
 <span class="co">#&gt; sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      </span>
 <span class="co">#&gt; filename    "41_3756_N-33-130-D-b-2-3"</span>
-<span class="fu">orto_download</span>(<span class="no">req_df</span>[<span class="fl">1</span>, ])
+<span class="fu"><a href="reference/tile_download.html">tile_download</a></span>(<span class="no">req_df</span>[<span class="fl">1</span>, ])
 
 <span class="no">img</span> <span class="kw">=</span> <span class="fu">brick</span>(<span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span>)
 <span class="fu">plotRGB</span>(<span class="no">img</span>)</pre></div>
