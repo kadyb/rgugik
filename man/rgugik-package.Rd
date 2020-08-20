@@ -19,7 +19,7 @@ Automatic open data acquisition from resources of Polish Head Office
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/kadyb/rgugik}
+  \item \url{https://kadyb.github.io/rgugik/}
   \item Report bugs at \url{https://github.com/kadyb/rgugik/issues}
 }
 
