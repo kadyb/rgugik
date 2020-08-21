@@ -1,0 +1,303 @@
+---
+title: "rgugik: pobieranie danych z GUGiK w R"
+author: "Krzysztof Dyba"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    df_print: kable
+---
+
+```{r setup, include=FALSE, purl=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+<style>
+body {text-align: justify}
+</style>
+
+# Wstęp
+
+**R** jest jednym z najbardziej popularnych języków programowania używanym do analizy danych (tuż obok **Pythona**). **R** znalazł szczególne zastosowanie w takich dziedzinach jak ekologia, leśnictwo, hydrologia czy teledetekcja dzięki swojej prostocie, automatyzacji oraz ogromnemu wsparciu przez jego społeczność.
+
+Niniejszy poradnik prezentuje w jaki sposób pozyskać najpopularniejsze dane przestrzenne, tj. ortofotomapa i Cyfrowe Modele Wysokościowe z zasobów Głównego Urzędu Geodezji i Kartografii oraz proste przykłady ich praktycznego wykorzystania.
+
+# Instalacja
+
+Niezbędnym narzędziem będzie interpreter **R**, który można pobrać z [tego](https://cran.revolutionanalytics.com/bin/windows/base/R-4.0.2-win.exe) miejsca (wersja 4.0.2 Windows). Kolejnym niezwykle pomocnym narzędziem będzie edytor kodu - RStudio, który można pobrać z [tego](https://download1.rstudio.org/desktop/windows/RStudio-1.3.1073.exe) miejsca (wersja 1.3.1073 Windows). Oczywiście, oba te programy są całkowicie **darmowe**. Instalacja przebiega w standardowy sposób.
+
+# Pierwsze uruchomienie
+
+Uruchamiamy RStudio, które pobraliśmy i klikamy *File > New File > R Script* (lub kombinacja klawiszy "*CTRL + SHIFT + N*"). Otworzy się nowe puste okienko i możemy przystąpić do pisania naszego kodu.
+
+Na początku musimy zainstalować potrzebne pakiety. Do instalacji nowych pakietów służy funkcja `install.packages()`.
+
+```{r eval=FALSE}
+pakiety = c("sf", "raster", "remotes")
+install.packages(pakiety)
+```
+
+Do zmiennej `pakiety` przypisaliśmy trzy nazwy. Pakiet **sf** obsługuje dane wektorowe, **raster** dane rastrowe, a pakiet **remotes** umożliwi pobranie nam pakietu **rgugik** w fazie testowej.
+
+```{r eval=FALSE}
+remotes::install_github("kadyb/rgugik")
+```
+
+W taki sposób pobierzemy najnowsza wersje pakietu **rgugik**, która umożliwia przeszukiwanie i pobieranie danych z zasobów GUGiK.
+
+# Wczytanie danych
+
+Ze strony Generalnej Dyrekcji Ochrony Środowiska pobierzmy dane wektorowe zawierające [rezerwaty przyrody](http://sdi.gdos.gov.pl/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=GDOS:Rezerwaty&SRSNAME=EPSG:2180&outputFormat=shape-zip&format_options=charset:windows-1250) w formacie .shp. Rozpakujmy je do folderu o tej samej nazwie na Pulpicie.
+
+W kolejnym kroku wczytajmy pakiety, które zainstalowaliśmy wcześniej. Do tego celu służy funkcja `library()`.
+
+```{r message=FALSE}
+library("sf")
+library("raster")
+```
+
+Teraz wczytajmy nasze dane przy pomocy funkcji `read_sf()`, która jako argument przyjmuje ścieżkę do pliku. Oprócz tego, jako argument funkcji, musimy ustawić odpowiedni kodowanie polskich znaków (*WINDOWS-1250*).
+
+```{r}
+rezerwaty = read_sf("C:/Users/Krzysztof/Desktop/Rezerwaty/RezerwatyPolygon.shp",
+                    options = "ENCODING=WINDOWS-1250")
+```
+
+Sprawdźmy jak wyglądają nasze dane (funkcja `str`):
+
+```{r}
+str(rezerwaty)
+```
+Jest to tabela (ramka danych) składająca się z 4 kolumn (ID, nazwa, kod INSPIRE oraz geometria) i 1674 obiektów (rezerwatów przyrodniczych).
+
+Na potrzebny analizy wybierzmy sobie jeden. Bedzie to rezerwat Krajkowo położony w województwie wielkopolskim.
+
+```{r}
+# selekcja poprzez atrybut
+krajkowo = rezerwaty[rezerwaty$nazwa == "Krajkowo", ]
+```
+
+Mozemy wyswietlic jego geometrie wykorzystujac funkcje `plot`.
+
+```{r}
+plot(krajkowo$geometry)
+```
+
+# Ortofotomapa
+
+## Pobieranie
+
+Jak poprzednio, wczytujemy wymagany pakiet.
+
+```{r}
+library("rgugik")
+```
+
+Następnie użyjemy funkcji `orto_request`, która pokaże nam jakie dostępne są ortoobrazy na analizowanym obszarze. Jako argumentu funkcji użyjemy naszego poligonu Krajkowo.
+
+```{r}
+req_df = orto_request(krajkowo)
+```
+
+Tabele wynikowa z dostępnymi ortoobrazami możemy wyświetlić (oprócz poniższego sposobu bardzo pomocna jest funkcja `View()`).
+
+```{r}
+# wyświetlamy 10 pierwszych wyników oraz 6 pierwszych kolumn
+req_df[1:10, 1:6]
+```
+
+W ramach ćwiczeń pobierzemy kompozycje w podczerwieni, obrazującą najaktualniejszy stan. Mamy już naszą tabelę z dostępnymi ortoobrazami `req_df`, więc w kolejnym kroku dokonajmy selekcji.
+
+```{r}
+# wybieramy obrazy w podczerwieni i nadpisujemy obiekt req_df
+req_df = req_df[req_df$composition == "CIR", ]
+```
+
+Następnie posortujmy tabele według roku wykonania zdjęcia, gdzie na początku będziemy mieli te najaktualniejsze.
+
+```{r}
+# minus oznacza kolejność malejącą
+req_df = req_df[order(-req_df$year), ]
+```
+
+Wyświetlmy tabelę ponownie i wybierzmy najnowsze kompozycje.
+
+```{r}
+req_df[, 1:6]
+req_df = req_df[req_df$year == 2016, ]
+```
+
+Zwróćmy uwagę, że w wyniku otrzymaliśmy dwa obiekty (obrazy). Oznacza to, że nasz rezerwat Krajkowo jest zobrazowany na dwóch zdjęciach w ramach jednej serii. Atrybut *seriesID* służy więc do łączenia mniejszych obrazów w większe mozaiki.
+
+Do pobrania ortoobrazow z serwerów GUGiK służy funkcja `tile_download` i jako argument przyjmuje naszą wyselekcjonowana tabelę.
+
+Pobierane dane domyślnie zapisywane są do aktualnego katalogu roboczego, który można sprawdzić funkcją `getwd`. Zmieńmy naszą ścieżkę do katalogu roboczego, tak aby zdjęcia zostały zapisane w folderze z naszym poligonem. Do tego posłuży nam funkcja `setwd`.
+
+```{r warning=FALSE}
+setwd("C:/Users/Krzysztof/Desktop/Rezerwaty")
+```
+
+```{r message=FALSE}
+tile_download(req_df)
+```
+
+## Przetwarzanie
+
+Wczytajmy pobrane ortoobrazy za pomocą funkcji `brick`, umożliwia ona wczytanie rastrów składających sie z kilku kanałów (w naszym przypadku 3: NIR, R, G).
+
+```{r}
+img1 = brick("69837_329609_N-33-142-B-d-4-2.tif")
+img2 = brick("69837_329613_N-33-142-B-d-4-4.tif")
+```
+
+Następnie przeprowadzimy operacje: połączenia, docięcia do obszaru rezerwatu i zamaskowania pikseli poza zasięgiem poligonu.
+
+```{r message=FALSE, warning=FALSE}
+# łączenie rastrów
+img = merge(img1, img2)
+# docięcie rastrów do poligonu
+img = crop(img, krajkowo)
+# zamaskowanie pikseli poza poligonem
+img = mask(img, krajkowo)
+```
+
+```{r include=FALSE}
+rm(img1)
+rm(img2)
+```
+
+Wyświetlmy efekt końcowy - funkcja `plotRGB`.
+
+```{r}
+plotRGB(img)
+```
+
+W ostatnim kroku obliczmy wskaźnik NDVI wykorzystując kanały podczerwieni (1) i czerwieni (2).
+
+```{r}
+ndvi = (img[[1]] - img[[2]]) / (img[[1]] + img[[2]])
+plot(ndvi, main = "NDVI")
+```
+
+Zadziwiającym spostrzeżeniem są niskie wartości NDVI jak dla obszaru leśnego. Przyczyny są dwie, tj. zdjęcia wykonywane są w okresie jesiennym oraz prawdopodobnie nie zostały skalibrowane. Z tego powodu lepszym źródłem danych do analiz mogą być zdjęcia satelitarne, które podlegają kalibracji spektralnej i stanowią ciągły zasób danych (jeśli nie wystąpi zachmurzenie).
+
+```{r include=FALSE}
+rm(img)
+rm(ndvi)
+```
+
+# Cyfrowe Modele Wysokościowe
+
+## Pobieranie
+
+W tej sekcji przeprowadzimy analogiczną procedurę, ale tym razem pobierzemy dane wysokościowe dla tego samego obszaru. Funkcja, która nam do tego posłuży to `DEM_request`, działa ona identycznie jak `orto_request`.
+
+```{r}
+req_df = DEM_request(krajkowo)
+```
+
+Do analizy wykorzystamy Numeryczny Model Terenu (DTM) oraz Numeryczny Model Pokrycia Terenu (DSM). Posłużą one do obliczenia wysokości drzew i budynków. Aby ułatwić selekcje danych, stworzymy dwie tabele, a na końcu je złączymy.
+
+```{r}
+req_df_DTM = req_df[req_df$format == "ARC/INFO ASCII GRID" &
+                    req_df$product == "DTM" &
+                    req_df$year == 2011, ]
+req_df_DSM = req_df[req_df$format == "ARC/INFO ASCII GRID" &
+                    req_df$product == "DSM" &
+                    req_df$year == 2011, ]
+# łączenie tabel
+req_df = rbind(req_df_DTM, req_df_DSM)
+```
+
+```{r include=FALSE}
+rm(req_df_DTM)
+rm(req_df_DSM)
+```
+
+Pobierzmy dane.
+
+```{r message=FALSE}
+tile_download(req_df)
+```
+
+## Przetwarzanie
+
+Wczytajmy je za pomocą funkcji `raster` (w odróżnieniu od funkcji `brick` wczytuje tylko rastry składające sie z jednego kanału).
+
+```{r}
+# DTM
+DTM1 = raster("4072_8123_N-33-142-B-d-4-2.asc")
+DTM2 = raster("4072_8125_N-33-142-B-d-4-4.asc")
+
+# DSM
+DSM1 = raster("3182_10015_N-33-142-B-d-4-2.asc")
+DSM2 = raster("3182_10017_N-33-142-B-d-4-4.asc")
+```
+
+Połączmy nasze rastry.
+
+```{r}
+DTM = merge(DTM1, DTM2)
+DSM = merge(DSM1, DSM2)
+```
+
+```{r include=FALSE}
+rm(DTM1)
+rm(DTM2)
+rm(DSM1)
+rm(DSM2)
+```
+
+Nałóżmy je na siebie w kolejności NMPT (DSM), NMP (DTM).
+
+```{r}
+DEM = brick(DSM, DTM)
+# nadajmy nazwy naszym warstwom
+names(DEM) = c("DSM", "DTM")
+```
+
+```{r include=FALSE}
+rm(DTM)
+rm(DSM)
+```
+
+Dotnijmy do zasięgu poligonu.
+
+```{r warning=FALSE}
+DEM = crop(DEM, krajkowo)
+DEM = mask(DEM, krajkowo)
+```
+
+I wyświetlmy.
+
+```{r}
+plot(DEM)
+```
+
+Teraz możemy obliczyć wysokość drzew i budynków.
+
+```{r}
+diffDEM = DEM[[1]] - DEM[[2]]
+```
+
+Ostatnim krokiem jest wizualizacja wyniku różnicy.
+
+```{r}
+plot(diffDEM, main = "Wysokość obiektów [m]")
+```
+
+# Informacje o rgugik
+
+Strona projektu: [https://kadyb.github.io/rgugik/](https://kadyb.github.io/rgugik/)
+
+GitHub: [https://github.com/kadyb/rgugik/](https://github.com/kadyb/rgugik/)
+
+Obsługiwane zbiory danych:
+
+  - ortofotomapa,
+  - Baza Danych Obiektów Ogólnogeograficznych (BDOO),
+  - Państwowy Rejestr Nazw Geograficznych (PRNG),
+  - geometria działek katastralnych,
+  - modele 3D budynków (LOD1, LOD2),
+  - Cyfrowe Modele Wysokościowe (NMT, NMPT, chmura punktów).
