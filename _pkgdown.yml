@@ -1,0 +1,10 @@
+articles:
+- title: All vignettes
+  desc: ~
+  contents:
+      - text: "General Geographic Database"
+      icon: fa fa-magic
+      href: articles/geodb_description.html
+      - text: "Pobieranie danych z GUGiK w R"
+      icon: fa fa-magic
+      href: articles/poradnik.html
