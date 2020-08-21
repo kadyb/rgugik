@@ -118,8 +118,6 @@ polygon = read_sf(polygon_path)
 
 DTM = pointDTM_get(polygon)
 #> 0/10
-#> Warning in pointDTM_get(polygon): empty return, next attempt
-#> 0/10
 #> 1/10
 #> 2/10
 #> 3/10
