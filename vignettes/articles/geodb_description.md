@@ -1,7 +1,11 @@
 General Geographic Database  
 Baza Danych Obiektów Ogólnogeograficznych
 ================
-2020-08-14
+2020-08-21
+
+<!-- General Geographic Database -->
+
+<!-- Baza Danych Obiektów Ogólnogeograficznych -->
 
 ### Main categories of data
 
