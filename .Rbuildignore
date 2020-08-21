@@ -7,3 +7,6 @@
 .github
 ^data-raw$
 ^vignettes/articles$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

@@ -1,5 +1,6 @@
 ---
-title: General Geographic Database
+title: | 
+    General Geographic Database | Baza Danych Obiektów Ogólnogeograficznych
 date: "`r Sys.Date()`"
 output: github_document
 ---
