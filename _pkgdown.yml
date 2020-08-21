@@ -1,10 +1,14 @@
-articles:
-- title: All vignettes
-  desc: ~
-  contents:
+navbar:
+  structure:
+    left:  [home, intro, reference, articles, tutorials, news]
+    right: [github]
+
+components:
+  home: ~
+  articles:
+    text: All vignettes
+    menu:
       - text: "General Geographic Database"
-      icon: fa fa-magic
-      href: articles/geodb_description.html
+        href: articles/geodb_description.html
       - text: "Pobieranie danych z GUGiK w R"
-      icon: fa fa-magic
-      href: articles/poradnik.html
+        href: articles/poradnik.html
