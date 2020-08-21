@@ -3,12 +3,10 @@ navbar:
     left:  [home, intro, reference, articles, tutorials, news]
     right: [github]
 
-components:
-  home: ~
-  articles:
-    text: All vignettes
-    menu:
-      - text: "General Geographic Database"
-        href: articles/geodb_description.html
-      - text: "Pobieranie danych z GUGiK w R"
-        href: articles/poradnik.html
+articles:
+  text: All vignettes
+  menu:
+    - text: "General Geographic Database"
+      href: articles/geodb_description.html
+    - text: "Pobieranie danych z GUGiK w R"
+      href: articles/poradnik.html
