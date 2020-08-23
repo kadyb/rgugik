@@ -4,12 +4,16 @@
 \alias{geonames_download}
 \title{downloads State Register of Geographical Names}
 \usage{
-geonames_download(type, format, ...)
+geonames_download(type, outdir = ".", unzip = TRUE, format = "SHP", ...)
 }
 \arguments{
 \item{type}{names of places ("place") and/or physiographic objects ("object")}
 
-\item{format}{data format ("GML", "SHP" and/or "XLSX")}
+\item{outdir}{(optional) name of the output directory}
+
+\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed}
+
+\item{format}{data format ("GML", "SHP" (default) and/or "XLSX")}
 
 \item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }

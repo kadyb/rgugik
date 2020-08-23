@@ -2,6 +2,8 @@
 #'
 #' @param voivodeships selected voivodeships in Polish or English, or TERC
 #' (function 'voivodeship_names' can by helpful)
+#' @param outdir (optional) name of the output directory
+#' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed
 #' @param ... additional argument for [`utils::download.file()`]
 #'
 #' @return a database in Geography Markup Language format (.GML),
@@ -33,7 +35,7 @@
 #' plot(territory$geometry)
 #' plot(roads$geometry, add = TRUE, col = "red")
 #' }
-geodb_download = function(voivodeships, ...) {
+geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
 
   if (!is.character(voivodeships) | length(voivodeships) == 0) {
     stop("enter names or TERC")
@@ -86,10 +88,14 @@ geodb_download = function(voivodeships, ...) {
 
   df_names = df_names[sel_vector, ]
 
-  for (i in seq_len(nrow(df_names))) {
-    filename = paste0(df_names[i, type], ".zip")
-    utils::download.file(df_names[i, "URL"], filename, mode = "wb", ...)
-    utils::unzip(filename)
-  }
+  if (!dir.exists(outdir)) dir.create(outdir)
 
+  for (i in seq_len(nrow(df_names))) {
+    filename = paste0(outdir, "/", df_names[i, type], ".zip")
+    utils::download.file(df_names[i, "URL"], filename, mode = "wb", ...)
+    if (unzip) {
+      utils::unzip(filename, exdir = outdir)
+      file.remove(filename)
+    }
+  }
 }

@@ -1,7 +1,9 @@
 #' downloads State Register of Geographical Names
 #'
 #' @param type names of places ("place") and/or physiographic objects ("object")
-#' @param format data format ("GML", "SHP" and/or "XLSX")
+#' @param outdir (optional) name of the output directory
+#' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed
+#' @param format data format ("GML", "SHP" (default) and/or "XLSX")
 #' @param ... additional argument for [`utils::download.file()`]
 #'
 #' @return a selected data type in the specified format
@@ -16,7 +18,7 @@
 #' geonames_download(type = c("place", "object"), format = "SHP")
 #' geonames_download(type = "object", format = c("GML", "XSLX"))
 #' }
-geonames_download = function(type, format, ...) {
+geonames_download = function(type, outdir = ".", unzip = TRUE, format = "SHP", ...) {
 
   if (!any(type %in% c("place", "object"))) {
     stop("incorrect type, should be 'place' or 'object'")
@@ -43,10 +45,16 @@ geonames_download = function(type, format, ...) {
 
   df = df[sel, ]
 
+  if (!dir.exists(outdir)) dir.create(outdir)
+
   for (i in seq_len(nrow(df))) {
-    filename = paste0(df[i, "type"], "_", df[i, "format"], ".zip")
+    filename = paste0(outdir, "/", df[i, "type"], "_",
+                      df[i, "format"], ".zip")
     utils::download.file(df[i, "URL"], filename, mode = "wb", ...)
-    utils::unzip(filename)
+    if (unzip) {
+      utils::unzip(filename, exdir = outdir)
+      file.remove(filename)
+    }
   }
 
 }
