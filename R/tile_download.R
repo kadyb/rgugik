@@ -3,7 +3,8 @@
 #'
 #' @param df_req a data frame obtained using the orto_request() and
 #' DEM_request() functions
-#' @param outdir (optional) name of the output directory
+#' @param outdir (optional) name of the output directory;
+#' by default, files are saved in the working directory
 #' @param check_SHA check the integrity of downloaded files
 #' (logical parameter, default = FALSE)
 #' @param ... additional argument for [`utils::download.file()`]

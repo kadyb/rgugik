@@ -6,8 +6,10 @@
 #' "LOD1" is default. "LOD2" is only available for ten voivodeships
 #' (TERC: "04", "06", "12", "14", "16", "18", "20", "24", "26", "28").
 #' Check 'voivodeships_names' function.
-#' @param outdir (optional) name of the output directory
-#' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed
+#' @param outdir (optional) name of the output directory;
+#' by default, files are saved in the working directory
+#' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
+#' be extracted and removed
 #' @param ... additional argument for [`utils::download.file()`]
 #'
 #' @return models of buildings in Geography Markup Language format (.GML)
@@ -19,7 +21,8 @@
 #' models3D_download(county = "Toruń")
 #' models3D_download(TERYT = c("2462", "0401"), LOD = "LOD2")
 #' }
-models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1", outdir = ".", unzip = TRUE, ...) {
+models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1",
+                             outdir = ".", unzip = TRUE, ...) {
 
   df_names = rgugik::county_names
 
