@@ -106,9 +106,15 @@ Na potrzebny analizy wybierzmy sobie jeden - [rezerwat Krajkowo](https://pl.wiki
 krajkowo = rezerwaty[rezerwaty$nazwa == "Krajkowo", ]
 ```
 
-Możemy wyświetlić jego geometrię wykorzystując funkcję `plot()`.
+Wyświetlić geometrię poligonu możemy na dwa sposoby:
+	
+1. Wykorzystując funkcję `plot` i bezpośrednio podając kolumnę z geometrią obiektu: `plot(krajkowo$geometry)`
+2. Wykorzystując funkcje `plot` oraz `st_geometry`, która pozyska geometrię z poligonu.
+W przypadku pierwszym musimy znać nazwę kolumny z geometrią, natomiast w drugim przypadku geometria zostanie przekazana automatycznie (jest to bezpieczniejszy sposób).
 
 ```{r}
+# najpierw pobieramy geometrię obiektu,
+# a następnie wyświetlamy ją (funkcja zagnieżdżona)
 plot(st_geometry(krajkowo))
 ```
 
@@ -161,10 +167,13 @@ req_df = req_df[req_df$year == 2016, ]
 
 Zwróćmy uwagę, że w wyniku otrzymaliśmy dwa obiekty (obrazy).
 Oznacza to, że nasz rezerwat Krajkowo jest zobrazowany na dwóch zdjęciach w ramach jednej serii. 
-Atrybut *seriesID* (niewidoczny w poniższej uproszczonej tabeli) służy więc do łączenia mniejszych obrazów w większe mozaiki.
+Atrybut *seriesID* służy więc do łączenia mniejszych obrazów w większe mozaiki.
 
 ```{r}
-req_df[, 1:6]
+# wybór kolumn (atrybutów) poprzez ich indeks
+# 1: "sheetID", 2: "year", 3: "resolution", itd.
+# zostały wybrane kolumny od 1 do 6 oraz 9
+req_df[, c(1:6, 9)]
 ```
 
 Do pobrania ortoobrazow z serwerów GUGiK służy funkcja `tile_download()`, która jako główny argument przyjmuje naszą wyselekcjonowaną tabelę.
