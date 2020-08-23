@@ -19,16 +19,19 @@ body {text-align: justify}
 
 # Wstęp
 
-**R** jest jednym z najbardziej popularnych języków programowania używanym do analizy danych (tuż obok **Pythona**). **R** znalazł szczególne zastosowanie w takich dziedzinach jak ekologia, leśnictwo, hydrologia czy teledetekcja dzięki swojej prostocie, automatyzacji oraz ogromnemu wsparciu przez jego społeczność. Jest również używany w profesjonalnych zastosowaniach przez takie firmy jak [Microsoft, Facebook, Twitter czy Google](https://github.com/ThinkR-open/companies-using-r#readme).
+**R**, tuż obok **Pythona**, jest jednym z najbardziej popularnych języków programowania używanych do analizy danych.
+**R** znalazł szczególne zastosowanie w takich dziedzinach jak ekologia, leśnictwo, hydrologia czy teledetekcja dzięki swojej prostocie, automatyzacji oraz ogromnemu wsparciu przez jego społeczność.
+Jest również używany w profesjonalnych zastosowaniach przez takie firmy jak [Microsoft, Facebook, Twitter czy Google](https://github.com/ThinkR-open/companies-using-r#readme).
 
-Niniejszy poradnik prezentuje w jaki sposób pozyskać najpopularniejsze dane przestrzenne, tj. ortofotomapy i Cyfrowe Modele Wysokościowe z zasobów Głównego Urzędu Geodezji i Kartografii używając języka **R** i pakietu **rgugik**.
+Niniejszy poradnik prezentuje w jaki sposób pozyskać najpopularniejsze dane przestrzenne, tj. ortofotomapy i Cyfrowe Modele Wysokościowe z zasobów [Głównego Urzędu Geodezji i Kartografii](http://www.gugik.gov.pl/) używając języka **R** i pakietu **rgugik**.
 Dodatkowo, zawiera on praktyczne przykłady wykorzystania tych danych.
 
-Jeśli chciałbyś rozszerzyć swoją wiedzę i zdobyć praktyczne umiejętności analizy danych, to zachęcamy do uczestnictwa w [bezpłatnym kursie online](http://pogromcydanych.icm.edu.pl) przygotowanym przez [Uniwersytet Warszawski](https://www.icm.edu.pl) dla początkujących w języku polskim.
+Jeśli chciałbyś rozszerzyć swoją wiedzę i zdobyć praktyczne umiejętności analizy danych nieprzestrzennych, to zachęcamy do uczestnictwa w [bezpłatnym kursie online](http://pogromcydanych.icm.edu.pl) przygotowanym przez [Uniwersytet Warszawski](https://www.icm.edu.pl) dla początkujących w języku polskim lub przeczytania książki [Elementarz programisty: Wstęp do programowania używając R](https://nowosad.github.io/elp/).
+Więcej na temat analizy danych przestrzennych można natomiast przeczytać po angielsku na stronie [Geocomputation with R](https://geocompr.robinlovelace.net/).
 
 # Instalacja
 
-Niezbędnym narzędziem będzie interpreter **R**, który można pobrać na system:
+Niezbędnym narzędziem w tym poradniku będzie interpreter **R**, który można pobrać na system:
 
 - [Windows](https://cloud.r-project.org/bin/windows/base/R-4.0.2-win.exe)
 - [Linux](https://cloud.r-project.org/)
@@ -41,7 +44,6 @@ Oba te programy są całkowicie **darmowe**, a ich instalacja przebiega w standa
 
 Uruchamiamy RStudio i wybieramy *File > New Project... > New Directory > New Project*.
 W ostatnim oknie podajemy nazwę nowego folderu (np. `dane_gugik`) oraz jego lokalizację (np. Moje Dokumenty). 
-
 Następnie klikamy *File > New File > R Script* (lub kombinacja klawiszy "*CTRL + SHIFT + N*"). 
 Otworzy się nowe puste okienko i możemy przystąpić do pisania naszego kodu.
 
@@ -53,7 +55,7 @@ pakiety = c("sf", "raster", "remotes")
 install.packages(pakiety)
 ```
 
-Do zmiennej `pakiety` przypisaliśmy trzy nazwy. 
+Do zmiennej `pakiety` przypisaliśmy trzy nazwy pakietów (zbiorów dodatkowych funkcji) w R: 
 **sf** obsługuje dane wektorowe, **raster** dane rastrowe, a pakiet **remotes** umożliwi pobranie nam wesji testowej pakietu **rgugik**.
 
 ```{r eval=FALSE}
@@ -64,15 +66,16 @@ Powyższa linia kodu pobierze najnowszą wersję pakietu **rgugik**, który umo�
 
 # Wczytanie danych
 
+Zacznijmy od pobrania i wczytania danych bez używania pakietu **rgugik**.
 Ze strony Generalnej Dyrekcji Ochrony Środowiska pobierzmy dane wektorowe zawierające [rezerwaty przyrody](http://sdi.gdos.gov.pl/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=GDOS:Rezerwaty&SRSNAME=EPSG:2180&outputFormat=shape-zip&format_options=charset:windows-1250) w formacie `.shp`.
-Rozpakujmy je do podfolderu o tej samej nazwie ("Rezerwaty") w głównym folderze `dane_gugik`.
+Rozpakujmy je do podfolderu o tej samej nazwie (`"Rezerwaty"`) w głównym folderze `dane_gugik`.
 
 ```{r echo=FALSE, message=FALSE}
 download.file("http://sdi.gdos.gov.pl/wfs?SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=GDOS:Rezerwaty&SRSNAME=EPSG:2180&outputFormat=shape-zip&format_options=charset:windows-1250", destfile = "Rezerwaty.zip", mode = "wb")
 unzip("Rezerwaty.zip", exdir = "Rezerwaty")
 ```
 
-W kolejnym kroku wczytajmy pakiety, które zainstalowaliśmy wcześniej. 
+W kolejnym kroku załadujmy pakiety, które zainstalowaliśmy wcześniej. 
 Do tego celu służy funkcja `library()`.
 
 ```{r message=FALSE}
@@ -80,17 +83,18 @@ library(sf)
 library(raster)
 ```
 
-Teraz wczytajmy nasze dane przy pomocy funkcji `read_sf()`, która jako argument przyjmuje ścieżkę do pliku. Oprócz tego, jako argument funkcji, musimy ustawić odpowiednie kodowanie polskich znaków (*WINDOWS-1250*).
+Teraz wczytajmy nasze dane przy pomocy funkcji `read_sf()`, która jako argument przyjmuje ścieżkę do pliku. 
+Oprócz tego, musimy ustawić odpowiednie kodowanie polskich znaków (*WINDOWS-1250*) jako argument tej funkcji.
 
 ```{r}
 rezerwaty = read_sf("Rezerwaty/RezerwatyPolygon.shp",
                     options = "ENCODING=WINDOWS-1250")
 ```
 
-Sprawdźmy jak wygląda struktura naszych danych (funkcja `str()`):
+Sprawdźmy jak wygląda struktura naszych danych:
 
 ```{r}
-str(rezerwaty)
+head(rezerwaty)
 ```
 
 Jest to tabela (ramka danych) składająca się z czterech kolumn (`gid`, `nazwa`, `kodinspire` oraz `geometry`) i 1674 obiektów (rezerwatów przyrody).
@@ -105,7 +109,7 @@ krajkowo = rezerwaty[rezerwaty$nazwa == "Krajkowo", ]
 Możemy wyświetlić jego geometrię wykorzystując funkcję `plot()`.
 
 ```{r}
-plot(krajkowo$geometry)
+plot(st_geometry(krajkowo))
 ```
 
 # Ortofotomapa
@@ -113,14 +117,14 @@ plot(krajkowo$geometry)
 ## Pobieranie
 
 Do pobrania danych ortofoto użyjemy pakietu **rgugik**.
-Wczytamy go do R identycznie jak poprzednie pakiety używając funkcji `library()`.
+Załadujemy go do R identycznie jak poprzednie pakiety używając funkcji `library()`.
 
 ```{r}
 library(rgugik)
 ```
 
 Następnie wykorzystamy funkcję `orto_request()`, która pokaże nam jakie są dostępne ortoobrazy na analizowanym obszarze. 
-Jako argument tej funkcji podamy nasz poligon Krajkowo.
+Jako argument tej funkcji podamy nasz poligon Krajkowo (obiekt `krajkowo`).
 
 ```{r}
 req_df = orto_request(krajkowo)
@@ -133,8 +137,8 @@ Tabelę wynikową z dostępnymi ortoobrazami możemy wyświetlić używając pon
 req_df[1:10, 1:6]
 ```
 
-W ramach ćwiczeń pobierzemy kompozycje w podczerwieni, obrazującą najbardziej aktualne dane. 
-Mamy już naszą tabelę z dostępnymi ortoobrazami (`req_df`), więc w kolejnym kroku dokonajmy selekcji poprzez wybór tych wierszy, dla których kolumna `composition` przyjmuje wartość `"CIR"`.
+W ramach ćwiczeń pobierzemy kompozycję w podczerwieni obrazującą najbardziej aktualne dane. 
+Mamy już naszą tabelę z dostępnymi ortoobrazami (`req_df`), więc w kolejnym kroku możemy dokonać selekcji poprzez wybór tych wierszy, dla których kolumna `composition` przyjmuje wartość `"CIR"`.
 
 ```{r}
 # wybieramy obrazy w podczerwieni i nadpisujemy obiekt req_df
@@ -157,7 +161,7 @@ req_df = req_df[req_df$year == 2016, ]
 
 Zwróćmy uwagę, że w wyniku otrzymaliśmy dwa obiekty (obrazy).
 Oznacza to, że nasz rezerwat Krajkowo jest zobrazowany na dwóch zdjęciach w ramach jednej serii. 
-Atrybut *seriesID* służy więc do łączenia mniejszych obrazów w większe mozaiki.
+Atrybut *seriesID* (niewidoczny w poniższej uproszczonej tabeli) służy więc do łączenia mniejszych obrazów w większe mozaiki.
 
 ```{r}
 req_df[, 1:6]
@@ -173,7 +177,7 @@ tile_download(req_df)
 
 ## Przetwarzanie
 
-Wczytajmy pobrane ortoobrazy za pomocą funkcji `brick()` z pakietu **raster**, umożliwia ona wczytanie rastrów składających się z kilku kanałów (w naszym przypadku trzech: NIR, R, G).
+Wczytajmy pobrane ortoobrazy za pomocą funkcji `brick()` z pakietu **raster**, która umożliwia ona pracę na rastrach składających się z kilku kanałów - w naszym przypadku trzech: NIR, R, G.
 
 ```{r}
 img1 = brick("69837_329609_N-33-142-B-d-4-2.TIF")
@@ -197,20 +201,22 @@ rm(img1)
 rm(img2)
 ```
 
-Wyświetlmy efekt końcowy używając funkcji `plotRGB()`. Poniższa kompozycja przedstawiona jest w podczerwieni, a nie w barwach naturalnych, co mylnie może wynikać z nazwy funkcji.
+Wyświetlmy efekt końcowy używając funkcji `plotRGB()`. 
+Funkcja `plotRGB()` tworzy wizualizację poprzez połączenie wartości trzech warstw rastrowych.
+Poniższa kompozycja przedstawiona jest w podczerwieni, a nie w barwach naturalnych, co może mylnie interpretować z nazwy funkcji.
 
 ```{r}
 plotRGB(img)
 ```
 
-W ostatnim kroku obliczmy wskaźnik [NDVI](https://pl.wikipedia.org/wiki/Znormalizowany_r%C3%B3%C5%BCnicowy_wska%C5%BAnik_wegetacji) wykorzystując kanały podczerwieni (1) i czerwieni (2).
+W ostatnim kroku obliczmy wskaźnik znormalizowany różnicowy wskaźnik wegetacji [NDVI](https://pl.wikipedia.org/wiki/Znormalizowany_r%C3%B3%C5%BCnicowy_wska%C5%BAnik_wegetacji) wykorzystując kanały podczerwieni (1) i czerwieni (2).
 
 ```{r}
 ndvi = (img[[1]] - img[[2]]) / (img[[1]] + img[[2]])
 plot(ndvi, main = "NDVI")
 ```
 
-Zadziwiającym spostrzeżeniem są niskie wartości NDVI jak dla obszaru leśnego. 
+Zadziwiającym spostrzeżeniem są względnie niskie wartości NDVI dla obszaru leśnego. 
 Przyczyny są dwie, tj. zdjęcia wykonywane są w okresie jesiennym oraz prawdopodobnie nie zostały skalibrowane. 
 Z tego powodu lepszym źródłem danych do analiz mogą być zdjęcia satelitarne, które podlegają kalibracji spektralnej i stanowią ciągły zasób danych (jeśli nie wystąpi zachmurzenie).
 
