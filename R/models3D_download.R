@@ -77,7 +77,9 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1",
     filename = paste0(outdir, "/", df_names[i, "TERYT"], "_gml.zip")
     utils::download.file(prepared_URL, filename, mode = "wb", ...)
     if (unzip) {
-      utils::unzip(filename, exdir = outdir)
+      # remove ".zip" from filename and use it as exdir
+      exdir_name = substr(filename, 1, nchar(filename) - 4)
+      utils::unzip(filename, exdir = exdir_name, junkpaths = TRUE)
       file.remove(filename)
     }
   }
