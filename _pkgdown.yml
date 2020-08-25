@@ -9,5 +9,5 @@ navbar:
       menu:
         - text: "General Geographic Database"
           href: articles/articles/geodb_description.html
-        - text: "Pobieranie danych z GUGiK w R"
-          href: articles/articles/poradnik.html
+        #- text: "Pobieranie danych z GUGiK w R"
+        #  href: articles/articles/poradnik.html
