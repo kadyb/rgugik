@@ -53,13 +53,6 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
                       unlist(strsplit(df_req[i, "URL"], "/"))[idx_name])
     utils::download.file(df_req[i, "URL"], filename, mode = "wb", ...)
 
-    # get file extension
-    ext = substr(df_req[i, "URL"], nchar(df_req[i, "URL"]) - 2, nchar(df_req[i, "URL"]))
-    if (unzip && ext == "zip") {
-      utils::unzip(filename, exdir = outdir)
-      file.remove(filename)
-    }
-
     # compare checksums (reference is SHA-1)
     if (!check_SHA) {
       tmp_SHA = as.character(openssl::sha1(file(filename)))
@@ -67,7 +60,14 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
       if (!tmp_SHA == df_req[i, "sha1"]) {
         warning(paste(filename, "incorrect SHA"), immediate. = TRUE)
       }
-
     }
+
+    # get file extension and unzip
+    ext = substr(df_req[i, "URL"], nchar(df_req[i, "URL"]) - 2, nchar(df_req[i, "URL"]))
+    if (unzip && ext == "zip") {
+      utils::unzip(filename, exdir = outdir)
+      file.remove(filename)
+    }
+
   }
 }
