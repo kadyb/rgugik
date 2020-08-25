@@ -54,7 +54,7 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
     utils::download.file(df_req[i, "URL"], filename, mode = "wb", ...)
 
     # compare checksums (reference is SHA-1)
-    if (!check_SHA) {
+    if (check_SHA) {
       tmp_SHA = as.character(openssl::sha1(file(filename)))
 
       if (!tmp_SHA == df_req[i, "sha1"]) {
