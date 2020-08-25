@@ -58,7 +58,7 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
       tmp_SHA = as.character(openssl::sha1(file(filename)))
 
       if (!tmp_SHA == df_req[i, "sha1"]) {
-        warning(paste(filename, "incorrect SHA"), immediate. = TRUE)
+        warning(paste(df_req[i, "filename"], "incorrect SHA"), immediate. = TRUE)
       }
     }
 
