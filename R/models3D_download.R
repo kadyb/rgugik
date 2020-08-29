@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' models3D_download(county = "Toruń")
 #' models3D_download(TERYT = c("2462", "0401"), LOD = "LOD2")
 #' }

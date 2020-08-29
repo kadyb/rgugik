@@ -23,7 +23,7 @@ text files with X, Y, Z columns (EPSG:2180)
 downloads Digital Terrain Models with 100 m resolution for entire voivodeships
 }
 \examples{
-\donttest{
+\dontrun{
 pointDTM100_download(c("mazowieckie", "wielkopolskie"))
 pointDTM100_download(c("Subcarpathian", "Silesian"))
 pointDTM100_download(c("02", "16"))

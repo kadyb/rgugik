@@ -21,7 +21,7 @@
 #' \url{https://github.com/kadyb/rgugik/blob/master/vignettes/articles/geodb_description.md}
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' geodb_download(c("mazowieckie", "wielkopolskie"))
 #' geodb_download(c("Subcarpathian", "Silesian"))
 #' geodb_download(c("02", "16"))

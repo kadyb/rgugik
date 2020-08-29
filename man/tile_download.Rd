@@ -27,7 +27,7 @@ downloads tiles based on the data frame obtained using
 the orto_request() and DEM_request() functions
 }
 \examples{
-\donttest{
+\dontrun{
 library(sf)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)

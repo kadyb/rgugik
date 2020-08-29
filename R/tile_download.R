@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 #' polygon = read_sf(polygon_path)

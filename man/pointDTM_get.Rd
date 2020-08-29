@@ -22,7 +22,7 @@ a data frame with vector points and terrain elevation
 returns a data frame with vector points and terrain elevation for a given polygon
 }
 \examples{
-\donttest{
+\dontrun{
 library(sf)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)

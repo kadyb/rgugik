@@ -24,7 +24,7 @@ a selected data type in the specified format
 downloads State Register of Geographical Names
 }
 \examples{
-\donttest{
+\dontrun{
 geonames_download(type = c("place", "object"), format = "SHP")
 geonames_download(type = "object", format = c("GML", "XSLX"))
 }
