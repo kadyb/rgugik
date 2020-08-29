@@ -1,8 +1,10 @@
 #' downloads State Register of Geographical Names
 #'
 #' @param type names of places ("place") and/or physiographic objects ("object")
-#' @param outdir (optional) name of the output directory
-#' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed
+#' @param outdir (optional) name of the output directory;
+#' by default, files are saved in the working directory
+#' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
+#' be extracted and removed
 #' @param format data format ("GML", "SHP" (default) and/or "XLSX")
 #' @param ... additional argument for [`utils::download.file()`]
 #'
