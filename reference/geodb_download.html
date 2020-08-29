@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rgugik</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
       </span>
     </div>
 
@@ -123,7 +123,7 @@
     <p>downloads General Geographic Databases for entire voivodeships</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geodb_download</span>(<span class='no'>voivodeships</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>geodb_download</span>(<span class='no'>voivodeships</span>, <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>unzip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -132,6 +132,14 @@
       <th>voivodeships</th>
       <td><p>selected voivodeships in Polish or English, or TERC
 (function 'voivodeship_names' can by helpful)</p></td>
+    </tr>
+    <tr>
+      <th>outdir</th>
+      <td><p>(optional) name of the output directory</p></td>
+    </tr>
+    <tr>
+      <th>unzip</th>
+      <td><p>TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -153,7 +161,7 @@ and technical standards for making maps (in Polish):
 <a href='https://github.com/kadyb/rgugik/blob/master/vignettes/articles/geodb_description.md'>https://github.com/kadyb/rgugik/blob/master/vignettes/articles/geodb_description.md</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># \donttest{</span>
+    <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>geodb_download</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mazowieckie"</span>, <span class='st'>"wielkopolskie"</span>))
 <span class='fu'>geodb_download</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Subcarpathian"</span>, <span class='st'>"Silesian"</span>))
 <span class='fu'>geodb_download</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"02"</span>, <span class='st'>"16"</span>))
@@ -166,7 +174,7 @@ and technical standards for making maps (in Polish):
 <span class='co'># plot them together</span>
 <span class='fu'><a href='https://rdrr.io/pkg/sf/man/plot.html'>plot</a></span>(<span class='no'>territory</span>$<span class='no'>geometry</span>)
 <span class='fu'><a href='https://rdrr.io/pkg/sf/man/plot.html'>plot</a></span>(<span class='no'>roads</span>$<span class='no'>geometry</span>, <span class='kw'>add</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"red"</span>)
-<span class='co'># }</span></pre>
+}</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
