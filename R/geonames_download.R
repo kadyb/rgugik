@@ -16,7 +16,7 @@
 #' @examples
 #' \dontrun{
 #' geonames_download(type = c("place", "object"), format = "SHP")
-#' geonames_download(type = "object", format = c("GML", "XSLX"))
+#' geonames_download(type = "object", format = c("GML", "XLSX"))
 #' }
 geonames_download = function(type, outdir = ".", unzip = TRUE, format = "SHP", ...) {
 
