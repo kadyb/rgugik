@@ -26,7 +26,7 @@ downloads State Register of Geographical Names
 \examples{
 \dontrun{
 geonames_download(type = c("place", "object"), format = "SHP")
-geonames_download(type = "object", format = c("GML", "XSLX"))
+geonames_download(type = "object", format = c("GML", "XLSX"))
 }
 }
 \references{
