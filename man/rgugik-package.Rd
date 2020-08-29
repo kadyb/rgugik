@@ -10,16 +10,17 @@ Automatic open data acquisition from resources of Polish Head Office
     of Geodesy and Cartography ("Główny Urząd Geodezji i Kartografii") 
     (<www.gugik.gov.pl>).
     Available datasets include various types of numeric, raster and vector data, 
-    such as orthophotomaps, Digital Terrain Models, General Geographic Database,
-    State Register of Geographical Names, geometries of cadastral parcels, and
-    3D models of buildings in LOD1 and LOD2 standards.
+    such as orthophotomaps, Digital Elevation Models (DTM, DSM, Point Cloud),
+    General Geographic Database, State Register of Geographical Names, geometries 
+    of cadastral parcels, and 3D models of buildings in LOD1 and LOD2 standards.
     It is also possible to geocode addresses or objects using the "geocodePL_get" 
     function.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://kadyb.github.io/rgugik/}
+  \item \url{https://kadyb.github.io/rgugik}
+  \item \url{https://github.com/kadyb/rgugik}
   \item Report bugs at \url{https://github.com/kadyb/rgugik/issues}
 }
 

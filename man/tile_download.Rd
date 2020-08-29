@@ -5,11 +5,13 @@
 \title{downloads tiles based on the data frame obtained using
 the orto_request() and DEM_request() functions}
 \usage{
-tile_download(df_req, check_SHA = FALSE, ...)
+tile_download(df_req, outdir = ".", check_SHA = FALSE, ...)
 }
 \arguments{
 \item{df_req}{a data frame obtained using the orto_request() and
 DEM_request() functions}
+
+\item{outdir}{(optional) name of the output directory}
 
 \item{check_SHA}{check the integrity of downloaded files
 (logical parameter, default = FALSE)}
@@ -25,7 +27,7 @@ downloads tiles based on the data frame obtained using
 the orto_request() and DEM_request() functions
 }
 \examples{
-\donttest{
+\dontrun{
 library(sf)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)

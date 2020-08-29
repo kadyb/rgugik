@@ -4,11 +4,15 @@
 \alias{geodb_download}
 \title{downloads General Geographic Databases for entire voivodeships}
 \usage{
-geodb_download(voivodeships, ...)
+geodb_download(voivodeships, outdir = ".", unzip = TRUE, ...)
 }
 \arguments{
 \item{voivodeships}{selected voivodeships in Polish or English, or TERC
 (function 'voivodeship_names' can by helpful)}
+
+\item{outdir}{(optional) name of the output directory}
+
+\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed}
 
 \item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }
@@ -21,7 +25,7 @@ geographic map in the scale of 1:250000
 downloads General Geographic Databases for entire voivodeships
 }
 \examples{
-\donttest{
+\dontrun{
 geodb_download(c("mazowieckie", "wielkopolskie"))
 geodb_download(c("Subcarpathian", "Silesian"))
 geodb_download(c("02", "16"))

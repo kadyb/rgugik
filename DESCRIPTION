@@ -1,7 +1,7 @@
 Package: rgugik
 Type: Package
 Title: Search and Retrieve Spatial Data from GUGiK
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: c(person(given = "Krzysztof",
                     family = "Dyba",
                     role = c("aut", "cre"),
@@ -34,7 +34,8 @@ Imports:
 Suggests:
     curl,
     knitr,
-    rmarkdown
+    rmarkdown,
+    tibble
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1

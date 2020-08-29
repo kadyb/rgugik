@@ -4,7 +4,14 @@
 \alias{models3D_download}
 \title{downloads 3D models of buildings for counties}
 \usage{
-models3D_download(county = NULL, TERYT = NULL, LOD = "LOD1", ...)
+models3D_download(
+  county = NULL,
+  TERYT = NULL,
+  LOD = "LOD1",
+  outdir = ".",
+  unzip = TRUE,
+  ...
+)
 }
 \arguments{
 \item{county}{county name in Polish}
@@ -16,6 +23,10 @@ models3D_download(county = NULL, TERYT = NULL, LOD = "LOD1", ...)
 (TERC: "04", "06", "12", "14", "16", "18", "20", "24", "26", "28").
 Check 'voivodeships_names' function.}
 
+\item{outdir}{(optional) name of the output directory}
+
+\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed}
+
 \item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }
 \value{
@@ -25,7 +36,7 @@ models of buildings in Geography Markup Language format (.GML)
 downloads 3D models of buildings for counties
 }
 \examples{
-\donttest{
+\dontrun{
 models3D_download(county = "Toruń")
 models3D_download(TERYT = c("2462", "0401"), LOD = "LOD2")
 }

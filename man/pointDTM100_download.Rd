@@ -4,11 +4,15 @@
 \alias{pointDTM100_download}
 \title{downloads Digital Terrain Models with 100 m resolution for entire voivodeships}
 \usage{
-pointDTM100_download(voivodeships, ...)
+pointDTM100_download(voivodeships, outdir = ".", unzip = TRUE, ...)
 }
 \arguments{
 \item{voivodeships}{selected voivodeships in Polish or English, or TERC
 (function 'voivodeship_names' can by helpful)}
+
+\item{outdir}{(optional) name of the output directory}
+
+\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed}
 
 \item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }
@@ -19,7 +23,7 @@ text files with X, Y, Z columns (EPSG:2180)
 downloads Digital Terrain Models with 100 m resolution for entire voivodeships
 }
 \examples{
-\donttest{
+\dontrun{
 pointDTM100_download(c("mazowieckie", "wielkopolskie"))
 pointDTM100_download(c("Subcarpathian", "Silesian"))
 pointDTM100_download(c("02", "16"))
