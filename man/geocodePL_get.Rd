@@ -21,7 +21,7 @@ geocodePL_get(
 (11 characters including 2 spaces, format: "XXX XXX XXX")}
 
 \item{geoname}{name of the geographical object from State Register
-of Geographical Names (function geonames_download)}
+of Geographical Names (function \code{\link[=geonames_download]{geonames_download()}})}
 }
 \value{
 a list(s) with metadata and coordinates (EPSG: 2180)
@@ -34,7 +34,7 @@ returns a list with metadata and coordinates for a given type of input
 geocodePL_get(address = "Marki") # place
 geocodePL_get(address = "Marki, Andersa") # place and street
 geocodePL_get(address = "Marki, Andersa 1") # place, street and house number
-geocodePL_get(address = "Królewskie Brzeziny 13") # place and house number
+geocodePL_get(address = "KrĂłlewskie Brzeziny 13") # place and house number
 
 geocodePL_get(road = "632") # road number
 geocodePL_get(road = "632 55") # road number and mileage

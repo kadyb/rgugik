@@ -6,7 +6,7 @@
 #' @param rail_crossing rail crossing identifier
 #' (11 characters including 2 spaces, format: "XXX XXX XXX")
 #' @param geoname name of the geographical object from State Register
-#' of Geographical Names (function geonames_download)
+#' of Geographical Names (function [`geonames_download()`])
 #'
 #' @return a list(s) with metadata and coordinates (EPSG: 2180)
 #'
