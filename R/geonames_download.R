@@ -22,11 +22,11 @@
 #' }
 geonames_download = function(type, outdir = ".", unzip = TRUE, format = "SHP", ...) {
 
-  if (!any(type %in% c("place", "object"))) {
+  if (!all(type %in% c("place", "object"))) {
     stop("incorrect type, should be 'place' or 'object'")
   }
 
-  if (!any(format %in% c("GML", "SHP", "XLSX"))) {
+  if (!all(format %in% c("GML", "SHP", "XLSX"))) {
     stop("incorrect format, should be 'GML', 'SHP' or 'XLSX'")
   }
 
