@@ -64,7 +64,7 @@ geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
     type = "TERC"
 
   } else {
-    stop("invalid names or TERC, please use 'voivodeships_names' function")
+    stop("invalid names or TERC, please use 'voivodeship_names()' function")
   }
 
   URLs = c(
