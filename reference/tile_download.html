@@ -128,7 +128,7 @@ the orto_request() and DEM_request() functions</h1>
 the orto_request() and DEM_request() functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tile_download</span>(<span class='no'>df_req</span>, <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>check_SHA</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>tile_download</span>(<span class='no'>df_req</span>, <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>unzip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>check_SHA</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,7 +140,13 @@ DEM_request() functions</p></td>
     </tr>
     <tr>
       <th>outdir</th>
-      <td><p>(optional) name of the output directory</p></td>
+      <td><p>(optional) name of the output directory;
+by default, files are saved in the working directory</p></td>
+    </tr>
+    <tr>
+      <th>unzip</th>
+      <td><p>TRUE (default) or FALSE, when TRUE the downloaded archive will
+be extracted and removed; only suitable for certain elevation data</p></td>
     </tr>
     <tr>
       <th>check_SHA</th>
