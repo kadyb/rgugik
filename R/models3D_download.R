@@ -1,11 +1,11 @@
 #' downloads 3D models of buildings for counties
 #'
-#' @param county county name in Polish
+#' @param county county name in Polish. Check [`county_names()`] function.
 #' @param TERYT county ID (4 characters)
 #' @param LOD level of detail for building models ("LOD1" or "LOD2").
 #' "LOD1" is default. "LOD2" is only available for ten voivodeships
 #' (TERC: "04", "06", "12", "14", "16", "18", "20", "24", "26", "28").
-#' Check 'voivodeships_names' function.
+#' Check [`voivodeship_names()`] function.
 #' @param outdir (optional) name of the output directory;
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
