@@ -8,11 +8,13 @@ pointDTM100_download(voivodeships, outdir = ".", unzip = TRUE, ...)
 }
 \arguments{
 \item{voivodeships}{selected voivodeships in Polish or English, or TERC
-(function 'voivodeship_names' can by helpful)}
+(function \code{\link[=voivodeship_names]{voivodeship_names()}} can by helpful)}
 
-\item{outdir}{(optional) name of the output directory}
+\item{outdir}{(optional) name of the output directory;
+by default, files are saved in the working directory}
 
-\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed}
+\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will
+be extracted and removed}
 
 \item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }

@@ -5,13 +5,17 @@
 \title{downloads tiles based on the data frame obtained using
 the orto_request() and DEM_request() functions}
 \usage{
-tile_download(df_req, outdir = ".", check_SHA = FALSE, ...)
+tile_download(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, ...)
 }
 \arguments{
 \item{df_req}{a data frame obtained using the orto_request() and
 DEM_request() functions}
 
-\item{outdir}{(optional) name of the output directory}
+\item{outdir}{(optional) name of the output directory;
+by default, files are saved in the working directory}
+
+\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will
+be extracted and removed; only suitable for certain elevation data}
 
 \item{check_SHA}{check the integrity of downloaded files
 (logical parameter, default = FALSE)}
