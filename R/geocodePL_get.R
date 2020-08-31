@@ -38,8 +38,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       output = output[[1]]
     }
 
+    return(output)
+  }
+
   # geocode road
-  } else if (!is.null(road)) {
+  if (!is.null(road)) {
 
     base_URL = "https://services.gugik.gov.pl/uug?request=GetRoadMarker&location="
     prepared_URL = utils::URLencode(paste0(base_URL, road))
@@ -49,8 +52,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     sel = c("road", "marker", "number", "x", "y")
     output = output[[1]][sel]
 
+    return(output)
+  }
+
   # geocode rail crossing
-  } else if (!is.null(rail_crossing)) {
+  if (!is.null(rail_crossing)) {
 
     if (!nchar(rail_crossing) == 11) {
       stop("rail crossing ID must be 11 characters long")
@@ -66,8 +72,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
       }
 
+    return(output)
+  }
+
   # geocode geographical name
-  } else if (!is.null(geoname)) {
+  if (!is.null(geoname)) {
 
     base_URL = "https://services.gugik.gov.pl/uug/?request=GetLocation&location="
     prepared_URL = paste0(base_URL, geoname)
@@ -78,10 +87,10 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       output = output[[1]]
     }
 
-  } else {
-    stop("all inputs are empty")
+    return(output)
   }
 
-  return(output)
+  # user did not enter any argument
+  stop("all inputs are empty")
 
 }
