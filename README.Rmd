@@ -24,6 +24,7 @@ Currently you can download:
 
   - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
   - [General Geographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
+  - [Topographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k)
   - [State Register of Geographical Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)
@@ -40,6 +41,7 @@ It is also possible to geocode addresses or objects using the `geocodePL_get()` 
 ```{r echo=FALSE}
 ds_pl = c("Ortofotomapa",
           "Baza Danych Obiektów Ogólnogeograficznych",
+          "Baza Danych Obiektów Topograficznych",
           "Państwowy Rejestr Nazw Geograficznych",
           "Lokalizacja działek katastralnych",
           "Modele 3D budynków",
@@ -48,6 +50,7 @@ ds_pl = c("Ortofotomapa",
 
 ds_en = c("Orthophotomap",
           "General Geographic Database",
+          "Topographic Database",
           "State Register of Geographical Names",
           "Location of cadastral parcels",
           "3D models of buildings",
@@ -56,6 +59,7 @@ ds_en = c("Orthophotomap",
 
 fun = c("`orto_request()`, `tile_download()`",
         "`geodb_download()`",
+        "`topodb_download()`",
         "`geonames_download()`",
         "`parcel_get()`",
         "`models3D_download()`",
@@ -64,6 +68,7 @@ fun = c("`orto_request()`, `tile_download()`",
 
 input = c("polygon",
           "voivodeship",
+          "county",
           "place, object",
           "parcel ID, coordinates",
           "county",
