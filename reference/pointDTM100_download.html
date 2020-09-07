@@ -131,7 +131,7 @@
     <p>downloads Digital Terrain Models with 100 m resolution for entire voivodeships</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pointDTM100_download</span>(<span class='no'>voivodeships</span>, <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>unzip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>pointDTM100_download</span>(<span class='kw'>voivodeships</span>, outdir = <span class='st'>"."</span>, unzip = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,11 +162,12 @@ be extracted and removed</p></td>
     <p>text files with X, Y, Z columns (EPSG:2180)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='fu'>pointDTM100_download</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"mazowieckie"</span>, <span class='st'>"wielkopolskie"</span>))
 <span class='fu'>pointDTM100_download</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Subcarpathian"</span>, <span class='st'>"Silesian"</span>))
 <span class='fu'>pointDTM100_download</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"02"</span>, <span class='st'>"16"</span>))
-}</pre>
+}
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -182,7 +183,7 @@ be extracted and removed</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

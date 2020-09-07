@@ -132,12 +132,12 @@
     </div>
 
     <pre class="usage"><span class='fu'>models3D_download</span>(
-  <span class='kw'>county</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>TERYT</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>LOD</span> <span class='kw'>=</span> <span class='st'>"LOD1"</span>,
-  <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"."</span>,
-  <span class='kw'>unzip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
+  county = <span class='kw'>NULL</span>,
+  TERYT = <span class='kw'>NULL</span>,
+  LOD = <span class='st'>"LOD1"</span>,
+  outdir = <span class='st'>"."</span>,
+  unzip = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -179,10 +179,11 @@ be extracted and removed</p></td>
     <p>models of buildings in Geography Markup Language format (.GML)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>models3D_download</span>(<span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>"ToruĹ„"</span>)
-<span class='fu'>models3D_download</span>(<span class='kw'>TERYT</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2462"</span>, <span class='st'>"0401"</span>), <span class='kw'>LOD</span> <span class='kw'>=</span> <span class='st'>"LOD2"</span>)
-}</pre>
+    <pre class="examples"><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>models3D_download</span>(county = <span class='st'>"ToruĹ„"</span>)
+<span class='fu'>models3D_download</span>(TERYT = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2462"</span>, <span class='st'>"0401"</span>), LOD = <span class='st'>"LOD2"</span>)
+}
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -198,7 +199,7 @@ be extracted and removed</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

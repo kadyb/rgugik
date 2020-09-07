@@ -131,7 +131,7 @@
     <p>returns a data frame with vector points and terrain elevation for a given polygon</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pointDTM_get</span>(<span class='no'>polygon</span>, <span class='kw'>distance</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>pointDTM_get</span>(<span class='kw'>polygon</span>, distance = <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,12 +155,13 @@ the input coordinate system must be EPSG:2180</p></td>
 (EPSG:2180, Vertical Reference System:PL-KRON86-NH)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>sf</span>)
-<span class='no'>polygon_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"datasets/search_area.gpkg"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"rgugik"</span>)
-<span class='no'>polygon</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>read_sf</a></span>(<span class='no'>polygon_path</span>)
-<span class='no'>DTM</span> <span class='kw'>=</span> <span class='fu'>pointDTM_get</span>(<span class='no'>polygon</span>, <span class='kw'>distance</span> <span class='kw'>=</span> <span class='fl'>2</span>)
-}</pre>
+    <pre class="examples"><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='https://r-spatial.github.io/sf'>sf</a></span>)
+<span class='kw'>polygon_path</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"datasets/search_area.gpkg"</span>, package = <span class='st'>"rgugik"</span>)
+<span class='kw'>polygon</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/sf/man/st_read.html'>read_sf</a></span>(<span class='kw'>polygon_path</span>)
+<span class='kw'>DTM</span> <span class='op'>=</span> <span class='fu'>pointDTM_get</span>(<span class='kw'>polygon</span>, distance = <span class='fl'>2</span>)
+}
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -176,7 +177,7 @@ the input coordinate system must be EPSG:2180</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

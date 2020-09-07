@@ -131,7 +131,7 @@
     <p>downloads Topographic Databases for counties</p>
     </div>
 
-    <pre class="usage"><span class='fu'>topodb_download</span>(<span class='kw'>county</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>TERYT</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>outdir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>unzip</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>topodb_download</span>(county = <span class='kw'>NULL</span>, TERYT = <span class='kw'>NULL</span>, outdir = <span class='st'>"."</span>, unzip = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,12 +165,18 @@ be extracted and removed</p></td>
     <p>a database in Geography Markup Language format (.GML),
 the content and detail level corresponds to the topographic map
 in the scale of 1:10000</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>description of topographical and general geographical databases,
+and technical standards for making maps (in Polish):
+<a href='http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf'>http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>topodb_download</span>(<span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>"ToruĹ„"</span>)
-<span class='fu'>topodb_download</span>(<span class='kw'>TERYT</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2462"</span>, <span class='st'>"0401"</span>))
-}</pre>
+    <pre class="examples"><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>topodb_download</span>(county = <span class='st'>"ToruĹ„"</span>)
+<span class='fu'>topodb_download</span>(TERYT = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2462"</span>, <span class='st'>"0401"</span>))
+}
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -186,7 +192,7 @@ in the scale of 1:10000</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
