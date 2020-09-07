@@ -20,7 +20,7 @@
 #' topodb_download(TERYT = c("2462", "0401"))
 #' }
 topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
-                             unzip = TRUE, ...) {
+                           unzip = TRUE, ...) {
 
   df_names = rgugik::county_names
 
