@@ -8,8 +8,8 @@ the orto_request() and DEM_request() functions}
 tile_download(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, ...)
 }
 \arguments{
-\item{df_req}{a data frame obtained using the orto_request() and
-DEM_request() functions}
+\item{df_req}{a data frame obtained using the \code{\link[=orto_request]{orto_request()}} and
+\code{\link[=DEM_request]{DEM_request()}} functions}
 
 \item{outdir}{(optional) name of the output directory;
 by default, files are saved in the working directory}

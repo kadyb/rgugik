@@ -1,8 +1,8 @@
 #' downloads tiles based on the data frame obtained using
 #' the orto_request() and DEM_request() functions
 #'
-#' @param df_req a data frame obtained using the orto_request() and
-#' DEM_request() functions
+#' @param df_req a data frame obtained using the [`orto_request()`] and
+#' [`DEM_request()`] functions
 #' @param outdir (optional) name of the output directory;
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
