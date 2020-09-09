@@ -108,16 +108,15 @@
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe">Point Cloud</a></li>
 </ul>
 </li>
-<li>*Digital Terrain Model as vector points with 1 m resolution and as text files with 100 m resolution for entire voivodeships</li>
 </ul>
 <p>It is also possible to geocode addresses or objects using the <code><a href="reference/geocodePL_get.html">geocodePL_get()</a></code> function.</p>
 <p><strong>Corresponding functions</strong></p>
 <table class="table">
 <colgroup>
-<col width="29%">
-<col width="15%">
-<col width="25%">
-<col width="29%">
+<col width="26%">
+<col width="16%">
+<col width="26%">
+<col width="30%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Function</th>
@@ -172,16 +171,17 @@
 <td align="left">Digital Elevation Models</td>
 <td align="left">Cyfrowe Modele Wysokościowe</td>
 </tr>
-<tr class="even">
-<td align="left">
-<code><a href="reference/pointDTM_get.html">pointDTM_get()</a></code>, <code><a href="reference/pointDTM100_download.html">pointDTM100_download()</a></code>
-</td>
-<td align="left">polygon, voivodeship</td>
-<td align="left">*Digital Terrain Model</td>
-<td align="left">*Numeryczny Model Terenu</td>
-</tr>
 </tbody>
 </table>
+<p>There are the additional functions for obtaining Digital Terrain Model:</p>
+<ul>
+<li>
+<code><a href="reference/pointDTM_get.html">pointDTM_get()</a></code> for small areas (high resolution grid)</li>
+<li>
+<code><a href="reference/pointDTM100_download.html">pointDTM100_download()</a></code> for voivodeships areas (low resolution grid)</li>
+<li>
+<code><a href="reference/minmaxDTM_get.html">minmaxDTM_get()</a></code> to find the minimum and maximum elevation (small areas)</li>
+</ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
