@@ -30,24 +30,29 @@ Cartography](http://www.gugik.gov.pl). Currently you can download:
         Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
       - [Point
         Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
-  - \*Digital Terrain Model as vector points with 1 m resolution and as
-    text files with 100 m resolution for entire voivodeships
 
 It is also possible to geocode addresses or objects using the
 `geocodePL_get()` function.
 
 **Corresponding functions**
 
-| Function                                   | Input                  | Dastaset EN                          | Dataset PL                                |
-| :----------------------------------------- | :--------------------- | :----------------------------------- | :---------------------------------------- |
-| `orto_request()`, `tile_download()`        | polygon                | Orthophotomap                        | Ortofotomapa                              |
-| `geodb_download()`                         | voivodeship            | General Geographic Database          | Baza Danych Obiektów Ogólnogeograficznych |
-| `topodb_download()`                        | county                 | Topographic Database                 | Baza Danych Obiektów Topograficznych      |
-| `geonames_download()`                      | place, object          | State Register of Geographical Names | Państwowy Rejestr Nazw Geograficznych     |
-| `parcel_get()`                             | parcel ID, coordinates | Location of cadastral parcels        | Lokalizacja działek katastralnych         |
-| `models3D_download()`                      | county                 | 3D models of buildings               | Modele 3D budynków                        |
-| `DEM_request()`, `tile_download()`         | polygon                | Digital Elevation Models             | Cyfrowe Modele Wysokościowe               |
-| `pointDTM_get()`, `pointDTM100_download()` | polygon, voivodeship   | \*Digital Terrain Model              | \*Numeryczny Model Terenu                 |
+| Function                            | Input                  | Dastaset EN                          | Dataset PL                                |
+| :---------------------------------- | :--------------------- | :----------------------------------- | :---------------------------------------- |
+| `orto_request()`, `tile_download()` | polygon                | Orthophotomap                        | Ortofotomapa                              |
+| `geodb_download()`                  | voivodeship            | General Geographic Database          | Baza Danych Obiektów Ogólnogeograficznych |
+| `topodb_download()`                 | county                 | Topographic Database                 | Baza Danych Obiektów Topograficznych      |
+| `geonames_download()`               | place, object          | State Register of Geographical Names | Państwowy Rejestr Nazw Geograficznych     |
+| `parcel_get()`                      | parcel ID, coordinates | Location of cadastral parcels        | Lokalizacja działek katastralnych         |
+| `models3D_download()`               | county                 | 3D models of buildings               | Modele 3D budynków                        |
+| `DEM_request()`, `tile_download()`  | polygon                | Digital Elevation Models             | Cyfrowe Modele Wysokościowe               |
+
+There are the additional functions for obtaining Digital Terrain Model:
+
+  - `pointDTM_get()` for small areas (high resolution grid)
+  - `pointDTM100_download()` for voivodeships areas (low resolution
+    grid)
+  - `minmaxDTM_get()` to find the minimum and maximum elevation (small
+    areas)
 
 ## Installation
 

@@ -32,7 +32,6 @@ Currently you can download:
     - [Digital Terrain Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
     - [Digital Surface Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
     - [Point Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
-  - *Digital Terrain Model as vector points with 1 m resolution and as text files with 100 m resolution for entire voivodeships
 
 It is also possible to geocode addresses or objects using the `geocodePL_get()` function.
 
@@ -45,8 +44,7 @@ ds_pl = c("Ortofotomapa",
           "Państwowy Rejestr Nazw Geograficznych",
           "Lokalizacja działek katastralnych",
           "Modele 3D budynków",
-          "Cyfrowe Modele Wysokościowe",
-          "*Numeryczny Model Terenu")
+          "Cyfrowe Modele Wysokościowe")
 
 ds_en = c("Orthophotomap",
           "General Geographic Database",
@@ -54,8 +52,7 @@ ds_en = c("Orthophotomap",
           "State Register of Geographical Names",
           "Location of cadastral parcels",
           "3D models of buildings",
-          "Digital Elevation Models",
-          "*Digital Terrain Model")
+          "Digital Elevation Models")
 
 fun = c("`orto_request()`, `tile_download()`",
         "`geodb_download()`",
@@ -63,8 +60,7 @@ fun = c("`orto_request()`, `tile_download()`",
         "`geonames_download()`",
         "`parcel_get()`",
         "`models3D_download()`",
-        "`DEM_request()`, `tile_download()`",
-        "`pointDTM_get()`, `pointDTM100_download()`")
+        "`DEM_request()`, `tile_download()`")
 
 input = c("polygon",
           "voivodeship",
@@ -72,14 +68,19 @@ input = c("polygon",
           "place, object",
           "parcel ID, coordinates",
           "county",
-          "polygon",
-          "polygon, voivodeship")
+          "polygon")
 
 df = data.frame(fun, input, ds_en, ds_pl)
 colnames(df) = c("Function", "Input", "Dastaset EN", "Dataset PL")
 
 knitr::kable(df)
 ```
+
+There are the additional functions for obtaining Digital Terrain Model:
+
+  - `pointDTM_get()` for small areas (high resolution grid)
+  - `pointDTM100_download()` for voivodeships areas (low resolution grid)
+  - `minmaxDTM_get()` to find the minimum and maximum elevation (small areas)
 
 ## Installation
 
