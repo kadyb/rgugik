@@ -6,6 +6,8 @@
 \alias{rgugik-package}
 \title{rgugik: Search and Retrieve Spatial Data from GUGiK}
 \description{
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+
 Automatic open data acquisition from resources of Polish Head Office 
     of Geodesy and Cartography ("Główny Urząd Geodezji i Kartografii") 
     (<www.gugik.gov.pl>).
