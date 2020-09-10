@@ -22,7 +22,8 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
     prepared_URL = paste0("https://uldk.gugik.gov.pl/?request=GetParcelById&id=", TERYT,
                           "&result=geom_wkb")
 
-    output = readLines(prepared_URL, warn = FALSE)
+    test_url(prepared_URL)
+    output = try_obtain(readLines(prepared_URL, warn = FALSE))
     wkb = structure(list(output[2]), class = "WKB")
     geom = sf::st_as_sfc(wkb, EWKB = TRUE, crs = 2180)
 
@@ -40,7 +41,8 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
     prepared_URL = paste0("https://uldk.gugik.gov.pl/?request=GetParcelByXY&xy=", coords,
                           "&result=", result)
 
-    output = readLines(prepared_URL, warn = FALSE)
+    test_url(prepared_URL)
+    output = try_obtain(readLines(prepared_URL, warn = FALSE))
     output = output[2]
     output = unlist(strsplit(output, "\\|"))
     wkb = structure(list(output[1]), class = "WKB")

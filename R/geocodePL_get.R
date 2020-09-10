@@ -32,7 +32,9 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     base_URL = "https://services.gugik.gov.pl/uug/?request=GetAddress&address="
     prepared_URL = paste0(base_URL, address)
     prepared_URL = gsub(" ", "%20", prepared_URL)
-    output = jsonlite::fromJSON(prepared_URL)[["results"]]
+    test_url(prepared_URL)
+    output = try_obtain(jsonlite::fromJSON(prepared_URL))
+    output = output[["results"]]
 
     if (length(output) == 1) {
       output = output[[1]]
@@ -46,7 +48,9 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
     base_URL = "https://services.gugik.gov.pl/uug?request=GetRoadMarker&location="
     prepared_URL = utils::URLencode(paste0(base_URL, road))
-    output = jsonlite::fromJSON(prepared_URL)[["results"]]
+    test_url(prepared_URL)
+    output = try_obtain(jsonlite::fromJSON(prepared_URL))
+    output = output[["results"]]
 
     # remove unnecessary attributes
     sel = c("road", "marker", "number", "x", "y")
@@ -64,7 +68,9 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
       base_URL = "https://services.gugik.gov.pl/uug/?request=GetLevelCrossing&location="
       prepared_URL = utils::URLencode(paste0(base_URL, rail_crossing))
-      output = jsonlite::fromJSON(prepared_URL)[["results"]]
+      test_url(prepared_URL)
+      output = try_obtain(jsonlite::fromJSON(prepared_URL))
+      output = output[["results"]]
 
       # remove unnecessary attributes
       sel = c("operator", "category", "phone", "mobile phone", "x", "y")
@@ -81,7 +87,9 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     base_URL = "https://services.gugik.gov.pl/uug/?request=GetLocation&location="
     prepared_URL = paste0(base_URL, geoname)
     prepared_URL = gsub(" ", "%20", prepared_URL)
-    output = jsonlite::fromJSON(prepared_URL)[["results"]]
+    test_url(prepared_URL)
+    output = try_obtain(jsonlite::fromJSON(prepared_URL))
+    output = output[["results"]]
 
     if (length(output) == 1) {
       output = output[[1]]

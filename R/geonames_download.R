@@ -52,7 +52,8 @@ geonames_download = function(type, outdir = ".", unzip = TRUE, format = "SHP", .
   for (i in seq_len(nrow(df))) {
     filename = paste0(outdir, "/", df[i, "type"], "_",
                       df[i, "format"], ".zip")
-    utils::download.file(df[i, "URL"], filename, mode = "wb", ...)
+    test_url(df[i, "URL"])
+    try_obtain(utils::download.file(df[i, "URL"], filename, mode = "wb", ...))
     if (unzip) {
       utils::unzip(filename, exdir = outdir)
       file.remove(filename)

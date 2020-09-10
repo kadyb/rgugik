@@ -73,7 +73,8 @@ DEM_request = function(polygon) {
     prepared_URL = paste0(base_URL, geometry, geometryType, spatialRel, outFields,
                           returnGeometry, file)
 
-    output = jsonlite::fromJSON(prepared_URL)
+    test_url(prepared_URL)
+    output = try_obtain(jsonlite::fromJSON(prepared_URL))
     output = output$features[[1]]
 
     # MaxRecordCount: 1000

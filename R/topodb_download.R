@@ -60,7 +60,8 @@ topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
   for (i in seq_len(nrow(df_names))) {
     prepared_URL = paste0(base_URL, df_names[i, "TERYT"])
     filename = paste0(outdir, "/", df_names[i, "TERYT"], ".zip")
-    utils::download.file(prepared_URL, filename, mode = "wb", ...)
+    test_url(prepared_URL)
+    try_obtain(utils::download.file(prepared_URL, filename, mode = "wb", ...))
     if (unzip) {
       utils::unzip(filename, exdir = outdir)
       file.remove(filename)

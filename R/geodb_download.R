@@ -94,7 +94,8 @@ geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
 
   for (i in seq_len(nrow(df_names))) {
     filename = paste0(outdir, "/", df_names[i, type], ".zip")
-    utils::download.file(df_names[i, "URL"], filename, mode = "wb", ...)
+    test_url(df_names[i, "URL"])
+    try_obtain(utils::download.file(df_names[i, "URL"], filename, mode = "wb", ...))
     if (unzip) {
       utils::unzip(filename, exdir = outdir)
       file.remove(filename)

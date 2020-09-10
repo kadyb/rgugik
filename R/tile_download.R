@@ -51,7 +51,8 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
   for (i in seq_len(nrow(df_req))) {
     filename = paste0(outdir, "/",
                       unlist(strsplit(df_req[i, "URL"], "/"))[idx_name])
-    utils::download.file(df_req[i, "URL"], filename, mode = "wb", ...)
+    test_url(df_req[i, "URL"])
+    try_obtain(utils::download.file(df_req[i, "URL"], filename, mode = "wb", ...))
 
     # compare checksums (reference is SHA-1)
     if (check_SHA) {

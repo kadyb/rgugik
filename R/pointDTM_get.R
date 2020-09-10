@@ -61,7 +61,8 @@ pointDTM_get = function(polygon, distance = 1) {
     str_pts = paste(str_pts, collapse = ",")
     prepared_URL = paste0(base_URL, str_pts)
     prepared_URL = gsub(" ", "%20", prepared_URL)
-    str_output = readLines(prepared_URL, warn = FALSE)
+    test_url(prepared_URL)
+    str_output = try_obtain(readLines(prepared_URL, warn = FALSE))
     str_output = unlist(strsplit(str_output, ","))
     str_output = unlist(strsplit(str_output, " "))
     elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
@@ -79,7 +80,8 @@ pointDTM_get = function(polygon, distance = 1) {
   while (i < iter + 1) {
 
     if (attempt == n_attempts) {
-      stop("server does not return values, try again later")
+      message("server does not return values, try again later")
+      break
     }
 
     writeLines(paste0(i, "/", iter))
@@ -90,7 +92,7 @@ pointDTM_get = function(polygon, distance = 1) {
       i = i + 1
 
       if (all(elev %in% "0.0")) {
-        warning("empty return, next attempt", immediate. = TRUE)
+        # warning("empty return, next attempt", immediate. = TRUE)
         i = i - 1
         attempt = attempt + 1
         Sys.sleep(2) # wait 2 sec
