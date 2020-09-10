@@ -6,7 +6,7 @@ test_url = function(url) {
     return(invisible(NULL))
   }
 
-  # try for timeout problem (3 secs)
+  # try for timeout problem (5 secs)
   timeout = try(httr::HEAD(url, httr::timeout(5)), silent = TRUE)
   if (class(timeout) == "try-error") {
     message("connection timeout")
