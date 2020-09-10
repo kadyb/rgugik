@@ -30,9 +30,10 @@ Depends:
 Imports: 
     sf,
     jsonlite,
-    openssl
+    openssl,
+    httr,
+    curl
 Suggests:
-    curl,
     knitr,
     rmarkdown,
     tibble
