@@ -1,12 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rgugik <img src="man/figures/logo.png" align="right" width="150" />
+# rgugik <img src="man/figures/logo.png" align="right" width="150"/>
 
 <!-- badges: start -->
 
 [![R build
 status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://github.com/kadyb/rgugik/actions)
+[![License:
+MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
 **rgugik** is an R package for downloading open data from resources of
