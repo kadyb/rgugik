@@ -22,6 +22,8 @@ Cartography](http://www.gugik.gov.pl). Currently you can download:
     Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k)
   - [State Register of Geographical
     Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
+  - [State Register of
+    Borders](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or
     coordinates
   - 3D models of buildings (LOD1, LOD2)
@@ -43,7 +45,8 @@ It is also possible to geocode addresses or objects using the
 | `orto_request()`, `tile_download()` | polygon                | Orthophotomap                        | Ortofotomapa                              |
 | `geodb_download()`                  | voivodeship            | General Geographic Database          | Baza Danych Obiektów Ogólnogeograficznych |
 | `topodb_download()`                 | county                 | Topographic Database                 | Baza Danych Obiektów Topograficznych      |
-| `geonames_download()`               | place, object          | State Register of Geographical Names | Państwowy Rejestr Nazw Geograficznych     |
+| `geonames_download()`               | type                   | State Register of Geographical Names | Państwowy Rejestr Nazw Geograficznych     |
+| `borders_download()`                | type                   | State Register of Borders            | Państwowy Rejestr Granic                  |
 | `parcel_get()`                      | parcel ID, coordinates | Location of cadastral parcels        | Lokalizacja działek katastralnych         |
 | `models3D_download()`               | county                 | 3D models of buildings               | Modele 3D budynków                        |
 | `DEM_request()`, `tile_download()`  | polygon                | Digital Elevation Models             | Cyfrowe Modele Wysokościowe               |
