@@ -67,24 +67,9 @@ geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
     stop("invalid names or TERC, please use 'voivodeship_names()' function")
   }
 
-  URLs = c(
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.02.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.04.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.06.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.08.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.10.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.12.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.14.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.16.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.18.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.20.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.22.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.24.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.26.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.28.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.30.zip",
-    "http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.32.zip"
-  )
+  # generate URLs using voivodeship TERC
+  URLs = paste0("http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.",
+                df_names$TERC, ".zip")
 
   df_names = cbind(df_names, URL = URLs)
 
@@ -100,4 +85,5 @@ geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
       file.remove(filename)
     }
   }
+
 }

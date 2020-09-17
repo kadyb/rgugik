@@ -48,22 +48,10 @@ pointDTM100_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
     stop("invalid names or TERC, please use 'voivodeships_names' function")
   }
 
-  URLs = c("ftp://91.223.135.109/nmt/dolnoslaskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/kujawsko-pomorskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/lubelskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/lubuskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/lodzkie_grid100.zip",
-           "ftp://91.223.135.109/nmt/malopolskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/mazowieckie_grid100.zip",
-           "ftp://91.223.135.109/nmt/opolskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/podkarpackie_grid100.zip",
-           "ftp://91.223.135.109/nmt/podlaskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/pomorskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/slaskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/swietokrzyskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/warminsko-mazurskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/wielkopolskie_grid100.zip",
-           "ftp://91.223.135.109/nmt/zachodniopomorskie_grid100.zip")
+  # generate URLs using voivodeship NAME_PL
+  # first convert polish characters to ASCII
+  df_names$NAME_PL = iconv(df_names$NAME_PL, "WINDOWS-1250", "ASCII//TRANSLIT")
+  URLs = paste0("ftp://91.223.135.109/nmt/", df_names$NAME_PL, "_grid100.zip")
 
   df_names = cbind(df_names, URL = URLs)
 
