@@ -26,6 +26,7 @@ Currently you can download:
   - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
   - [General Geographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
   - [Topographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k)
+  - [Register of Towns, Streets and Addresses](https://emuia.gugik.gov.pl)
   - [State Register of Geographical Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
   - [State Register of Borders](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
@@ -43,6 +44,7 @@ It is also possible to geocode addresses or objects using the `geocodePL_get()` 
 ds_pl = c("Ortofotomapa",
           "Baza Danych Obiektów Ogólnogeograficznych",
           "Baza Danych Obiektów Topograficznych",
+          "Ewidencja Miejscowości, Ulic i Adresów",
           "Państwowy Rejestr Nazw Geograficznych",
           "Państwowy Rejestr Granic",
           "Lokalizacja działek katastralnych",
@@ -52,6 +54,7 @@ ds_pl = c("Ortofotomapa",
 ds_en = c("Orthophotomap",
           "General Geographic Database",
           "Topographic Database",
+          "Register of Towns, Streets and Addresses",
           "State Register of Geographical Names",
           "State Register of Borders",
           "Location of cadastral parcels",
@@ -61,6 +64,7 @@ ds_en = c("Orthophotomap",
 fun = c("`orto_request()`, `tile_download()`",
         "`geodb_download()`",
         "`topodb_download()`",
+        "`emuia_download()`",
         "`geonames_download()`",
         "`borders_download()`",
         "`parcel_get()`",
@@ -70,6 +74,7 @@ fun = c("`orto_request()`, `tile_download()`",
 input = c("polygon",
           "voivodeship",
           "county",
+          "commune",
           "type",
           "type",
           "parcel ID, coordinates",
@@ -87,6 +92,12 @@ There are the additional functions for obtaining Digital Terrain Model:
   - `pointDTM_get()` for small areas (high resolution grid)
   - `pointDTM100_download()` for voivodeships areas (low resolution grid)
   - `minmaxDTM_get()` to find the minimum and maximum elevation (small areas)
+
+The names of administrative units and their IDs can be obtained using these functions:
+
+  - `voivodeship_names()` (16)
+  - `county_names()` (380)
+  - `commune_names()` (2477)
 
 ## Installation
 

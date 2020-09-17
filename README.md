@@ -20,6 +20,8 @@ Cartography](http://www.gugik.gov.pl). Currently you can download:
     Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
   - [Topographic
     Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k)
+  - [Register of Towns, Streets and
+    Addresses](https://emuia.gugik.gov.pl)
   - [State Register of Geographical
     Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
   - [State Register of
@@ -40,16 +42,17 @@ It is also possible to geocode addresses or objects using the
 
 **Corresponding functions**
 
-| Function                            | Input                  | Dastaset EN                          | Dataset PL                                |
-| :---------------------------------- | :--------------------- | :----------------------------------- | :---------------------------------------- |
-| `orto_request()`, `tile_download()` | polygon                | Orthophotomap                        | Ortofotomapa                              |
-| `geodb_download()`                  | voivodeship            | General Geographic Database          | Baza Danych Obiektów Ogólnogeograficznych |
-| `topodb_download()`                 | county                 | Topographic Database                 | Baza Danych Obiektów Topograficznych      |
-| `geonames_download()`               | type                   | State Register of Geographical Names | Państwowy Rejestr Nazw Geograficznych     |
-| `borders_download()`                | type                   | State Register of Borders            | Państwowy Rejestr Granic                  |
-| `parcel_get()`                      | parcel ID, coordinates | Location of cadastral parcels        | Lokalizacja działek katastralnych         |
-| `models3D_download()`               | county                 | 3D models of buildings               | Modele 3D budynków                        |
-| `DEM_request()`, `tile_download()`  | polygon                | Digital Elevation Models             | Cyfrowe Modele Wysokościowe               |
+| Function                            | Input                  | Dastaset EN                              | Dataset PL                                |
+| :---------------------------------- | :--------------------- | :--------------------------------------- | :---------------------------------------- |
+| `orto_request()`, `tile_download()` | polygon                | Orthophotomap                            | Ortofotomapa                              |
+| `geodb_download()`                  | voivodeship            | General Geographic Database              | Baza Danych Obiektów Ogólnogeograficznych |
+| `topodb_download()`                 | county                 | Topographic Database                     | Baza Danych Obiektów Topograficznych      |
+| `emuia_download()`                  | commune                | Register of Towns, Streets and Addresses | Ewidencja Miejscowości, Ulic i Adresów    |
+| `geonames_download()`               | type                   | State Register of Geographical Names     | Państwowy Rejestr Nazw Geograficznych     |
+| `borders_download()`                | type                   | State Register of Borders                | Państwowy Rejestr Granic                  |
+| `parcel_get()`                      | parcel ID, coordinates | Location of cadastral parcels            | Lokalizacja działek katastralnych         |
+| `models3D_download()`               | county                 | 3D models of buildings                   | Modele 3D budynków                        |
+| `DEM_request()`, `tile_download()`  | polygon                | Digital Elevation Models                 | Cyfrowe Modele Wysokościowe               |
 
 There are the additional functions for obtaining Digital Terrain Model:
 
@@ -58,6 +61,13 @@ There are the additional functions for obtaining Digital Terrain Model:
     grid)
   - `minmaxDTM_get()` to find the minimum and maximum elevation (small
     areas)
+
+The names of administrative units and their IDs can be obtained using
+these functions:
+
+  - `voivodeship_names()` (16)
+  - `county_names()` (380)
+  - `commune_names()` (2477)
 
 ## Installation
 
