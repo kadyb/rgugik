@@ -99,6 +99,7 @@
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych">General Geographic Database</a></li>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k">Topographic Database</a></li>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych">State Register of Geographical Names</a></li>
+<li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju">State Register of Borders</a></li>
 <li>Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates</li>
 <li>3D models of buildings (LOD1, LOD2)</li>
 <li>Various Digital Elevation Models as:
@@ -147,23 +148,29 @@
 </tr>
 <tr class="even">
 <td align="left"><code><a href="reference/geonames_download.html">geonames_download()</a></code></td>
-<td align="left">place, object</td>
+<td align="left">type</td>
 <td align="left">State Register of Geographical Names</td>
 <td align="left">Państwowy Rejestr Nazw Geograficznych</td>
 </tr>
 <tr class="odd">
+<td align="left"><code><a href="reference/borders_download.html">borders_download()</a></code></td>
+<td align="left">type</td>
+<td align="left">State Register of Borders</td>
+<td align="left">Państwowy Rejestr Granic</td>
+</tr>
+<tr class="even">
 <td align="left"><code><a href="reference/parcel_get.html">parcel_get()</a></code></td>
 <td align="left">parcel ID, coordinates</td>
 <td align="left">Location of cadastral parcels</td>
 <td align="left">Lokalizacja działek katastralnych</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code><a href="reference/models3D_download.html">models3D_download()</a></code></td>
 <td align="left">county</td>
 <td align="left">3D models of buildings</td>
 <td align="left">Modele 3D budynków</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">
 <code><a href="reference/DEM_request.html">DEM_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
 </td>
@@ -315,6 +322,7 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/kadyb/rgugik/actions"><img src="https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg" alt="R build status"></a></li>
+<li><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a></li>
 </ul>
 </div>
 </div>
@@ -326,7 +334,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

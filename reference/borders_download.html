@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>downloads Topographic Databases for counties — topodb_download • rgugik</title>
+<title>downloads State Register of Borders — borders_download • rgugik</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="downloads Topographic Databases for counties — topodb_download" />
-<meta property="og:description" content="downloads Topographic Databases for counties" />
+<meta property="og:title" content="downloads State Register of Borders — borders_download" />
+<meta property="og:description" content="downloads State Register of Borders" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -122,27 +122,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>downloads Topographic Databases for counties</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kadyb/rgugik/blob/master/R/topodb_download.R'><code>R/topodb_download.R</code></a></small>
-    <div class="hidden name"><code>topodb_download.Rd</code></div>
+    <h1>downloads State Register of Borders</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kadyb/rgugik/blob/master/R/borders_download.R'><code>R/borders_download.R</code></a></small>
+    <div class="hidden name"><code>borders_download.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>downloads Topographic Databases for counties</p>
+    <p>downloads State Register of Borders</p>
     </div>
 
-    <pre class="usage"><span class='fu'>topodb_download</span>(county = <span class='kw'>NULL</span>, TERYT = <span class='kw'>NULL</span>, outdir = <span class='st'>"."</span>, unzip = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>borders_download</span>(<span class='kw'>type</span>, outdir = <span class='st'>"."</span>, unzip = <span class='fl'>TRUE</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>county</th>
-      <td><p>county name in Polish. Check <code><a href='county_names.html'>county_names()</a></code> function.</p></td>
-    </tr>
-    <tr>
-      <th>TERYT</th>
-      <td><p>county ID (4 characters)</p></td>
+      <th>type</th>
+      <td><p>"administrative units", "special units" or "addresses"</p></td>
     </tr>
     <tr>
       <th>outdir</th>
@@ -162,19 +158,11 @@ be extracted and removed</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a database in Geography Markup Language format (.GML),
-the content and detail level corresponds to the topographic map
-in the scale of 1:10000</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>description of topographical and general geographical databases,
-and technical standards for making maps (in Polish):
-<a href='http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf'>http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf</a></p>
+    <p>a selected data type in SHP format</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>topodb_download</span>(county = <span class='st'>"ToruĹ„"</span>)
-<span class='fu'>topodb_download</span>(TERYT = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2462"</span>, <span class='st'>"0401"</span>))
+<span class='fu'>borders_download</span>(<span class='st'>"administrative units"</span>) <span class='co'># 375 MB</span>
 }
 </pre>
   </div>
