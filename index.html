@@ -98,6 +98,7 @@
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa">Orthophotomaps</a></li>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych">General Geographic Database</a></li>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k">Topographic Database</a></li>
+<li><a href="https://emuia.gugik.gov.pl">Register of Towns, Streets and Addresses</a></li>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych">State Register of Geographical Names</a></li>
 <li><a href="http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju">State Register of Borders</a></li>
 <li>Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates</li>
@@ -114,10 +115,10 @@
 <p><strong>Corresponding functions</strong></p>
 <table class="table">
 <colgroup>
-<col width="26%">
-<col width="16%">
-<col width="26%">
-<col width="30%">
+<col width="25%">
+<col width="15%">
+<col width="28%">
+<col width="29%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">Function</th>
@@ -147,30 +148,36 @@
 <td align="left">Baza Danych Obiektów Topograficznych</td>
 </tr>
 <tr class="even">
+<td align="left"><code><a href="reference/emuia_download.html">emuia_download()</a></code></td>
+<td align="left">commune</td>
+<td align="left">Register of Towns, Streets and Addresses</td>
+<td align="left">Ewidencja Miejscowości, Ulic i Adresów</td>
+</tr>
+<tr class="odd">
 <td align="left"><code><a href="reference/geonames_download.html">geonames_download()</a></code></td>
 <td align="left">type</td>
 <td align="left">State Register of Geographical Names</td>
 <td align="left">Państwowy Rejestr Nazw Geograficznych</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code><a href="reference/borders_download.html">borders_download()</a></code></td>
 <td align="left">type</td>
 <td align="left">State Register of Borders</td>
 <td align="left">Państwowy Rejestr Granic</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code><a href="reference/parcel_get.html">parcel_get()</a></code></td>
 <td align="left">parcel ID, coordinates</td>
 <td align="left">Location of cadastral parcels</td>
 <td align="left">Lokalizacja działek katastralnych</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code><a href="reference/models3D_download.html">models3D_download()</a></code></td>
 <td align="left">county</td>
 <td align="left">3D models of buildings</td>
 <td align="left">Modele 3D budynków</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">
 <code><a href="reference/DEM_request.html">DEM_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
 </td>
@@ -188,6 +195,15 @@
 <code><a href="reference/pointDTM100_download.html">pointDTM100_download()</a></code> for voivodeships areas (low resolution grid)</li>
 <li>
 <code><a href="reference/minmaxDTM_get.html">minmaxDTM_get()</a></code> to find the minimum and maximum elevation (small areas)</li>
+</ul>
+<p>The names of administrative units and their IDs can be obtained using these functions:</p>
+<ul>
+<li>
+<code><a href="reference/voivodeship_names.html">voivodeship_names()</a></code> (16)</li>
+<li>
+<code><a href="reference/county_names.html">county_names()</a></code> (380)</li>
+<li>
+<code><a href="reference/commune_names.html">commune_names()</a></code> (2477)</li>
 </ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
