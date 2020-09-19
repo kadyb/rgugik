@@ -12,8 +12,8 @@ MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/
 <!-- badges: end -->
 
 **rgugik** is an R package for downloading open data from resources of
-[Polish Head Office of Geodesy and
-Cartography](http://www.gugik.gov.pl). Currently you can download:
+[Polish Head Office of Geodesy and Cartography](http://www.gugik.gov.pl)
+including:
 
   - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
   - [General Geographic
