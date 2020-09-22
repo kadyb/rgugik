@@ -39,9 +39,6 @@ jobs:
           remotes::install_cran("covr")
         shell: Rscript {0}
 
-      - name: Install package
-        run: R CMD INSTALL .
-
       - name: Test coverage
         run: covr::package_coverage(quiet = FALSE)
         shell: Rscript {0}
