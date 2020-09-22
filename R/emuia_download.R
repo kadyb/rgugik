@@ -50,7 +50,7 @@ emuia_download = function(commune = NULL, TERYT = NULL, outdir = ".",
   df_names$TERYT = substr(df_names$TERYT, 1, 6)
 
   URLs = paste0("https://integracja.gugik.gov.pl/PRG/pobierz.php?teryt=",
-                df_names$TERYT ,"&adresy")
+                df_names$TERYT, "&adresy")
 
   df_names = cbind(df_names, URL = URLs)
 
