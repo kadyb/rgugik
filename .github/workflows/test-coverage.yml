@@ -43,5 +43,5 @@ jobs:
         run: R CMD INSTALL .
 
       - name: Test coverage
-        run: covr::codecov(quiet = FALSE)
+        run: covr::package_coverage(quiet = FALSE)
         shell: Rscript {0}
