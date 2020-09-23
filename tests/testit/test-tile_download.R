@@ -45,4 +45,4 @@ assert(
 )
 
 # test checkSHA_fun
-checkSHA_fun(refSHA = "X", fileSHA = "X")
+# checkSHA_fun(refSHA = "X", fileSHA = "X")
