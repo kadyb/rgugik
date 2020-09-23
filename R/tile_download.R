@@ -34,12 +34,23 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
     stop("data frame should come from 'request_orto'")
   }
 
+  if (!"filename" %in% names(df_req)) {
+    stop("data frame should come from 'request_orto'")
+  }
+
   if (check_SHA == TRUE && !"sha1" %in% names(df_req)) {
     stop("'sha1' column not found")
   }
 
   if (nrow(df_req) == 0) {
     stop("empty df")
+  }
+
+  # check SHA function
+  checkSHA_fun = function(refSHA, fileSHA) {
+    if (!fileSHA == refSHA) {
+      warning(paste(df_req[i, "filename"], "incorrect SHA"), immediate. = TRUE)
+    }
   }
 
   # get name index from URL
@@ -55,11 +66,8 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
 
     # compare checksums (reference is SHA-1)
     if (check_SHA) {
-      tmp_SHA = as.character(openssl::sha1(file(filename)))
-
-      if (!tmp_SHA == df_req[i, "sha1"]) {
-        warning(paste(df_req[i, "filename"], "incorrect SHA"), immediate. = TRUE)
-      }
+      fileSHA = as.character(openssl::sha1(file(filename)))
+      checkSHA_fun(refSHA = df_req[i, "sha1"], fileSHA = fileSHA)
     }
 
     # get file extension and unzip
