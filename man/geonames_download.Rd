@@ -9,9 +9,11 @@ geonames_download(type, outdir = ".", unzip = TRUE, format = "SHP", ...)
 \arguments{
 \item{type}{names of places ("place") and/or physiographic objects ("object")}
 
-\item{outdir}{(optional) name of the output directory}
+\item{outdir}{(optional) name of the output directory;
+by default, files are saved in the working directory}
 
-\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will be extracted and removed}
+\item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will
+be extracted and removed}
 
 \item{format}{data format ("GML", "SHP" (default) and/or "XLSX")}
 

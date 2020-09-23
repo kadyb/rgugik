@@ -29,7 +29,7 @@ downloads Topographic Databases for counties
 }
 \examples{
 \dontrun{
-topodb_download(county = "ToruĹ„")
+topodb_download(county = "Toruń")
 topodb_download(TERYT = c("2462", "0401"))
 }
 }
