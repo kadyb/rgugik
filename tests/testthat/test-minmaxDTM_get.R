@@ -16,3 +16,12 @@ test_that("check number of rows", {
 test_that("check number of columns", {
   expect_true(ncol(minmax) == 2)
 })
+
+
+# test EPSG 4326
+polygon_4326 = st_transform(polygon, 4326)
+minmax_4326 = minmaxDTM_get(polygon_4326)
+
+test_that("check if ouput is sf/data.frame", {
+  expect_equal(minmax, minmax_4326)
+})

@@ -1,0 +1,22 @@
+library(sf)
+
+polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
+polygon = read_sf(polygon_path)
+DTM = pointDTM_get(polygon, distance = 4)
+
+
+test_that("check if ouput is sf/data.frame", {
+  expect_s3_class(DTM, c("sf", "data.frame"))
+})
+
+test_that("check number of rows", {
+  expect_true(nrow(DTM) > 1)
+})
+
+test_that("check number of columns", {
+  expect_true(ncol(DTM) == 2)
+})
+
+test_that("check elevation sd", {
+  expect_true(sd(DTM$Z) > 0)
+})
