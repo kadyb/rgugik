@@ -1,0 +1,19 @@
+library(sf)
+
+parcel_byID = parcel_get(TERYT = "141201_1.0001.6509")
+parcel_byCOORDS = parcel_get(X = 313380.5, Y = 460166.4)
+
+
+test_that("check if ouput is sf/sfc", {
+  expect_s3_class(parcel_byID, "sfc")
+  expect_s3_class(parcel_byCOORDS, "sf")
+})
+
+test_that("check number of rows", {
+  expect_true(length(parcel_byID) == 1)
+  expect_true(nrow(parcel_byCOORDS) == 1)
+})
+
+test_that("check number of columns", {
+  expect_true(ncol(parcel_byCOORDS) == 2)
+})

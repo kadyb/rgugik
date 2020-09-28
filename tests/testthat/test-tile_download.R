@@ -1,5 +1,3 @@
-library(testit)
-
 base_URL = "https://opendata.geoportal.gov.pl/"
 
 sample_orto = paste0(base_URL, "ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif")
@@ -17,15 +15,14 @@ file_path = list.files(tmp, full.names = TRUE)
 file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
 
-assert(
-  "check file size",
-  file_size > 2
-)
+test_that("check file size", {
+  expect_true(file_size > 2)
+})
 
-assert(
-  "check file ext",
-  file_ext == "tif"
-)
+test_that("check file ext", {
+  expect_true(file_ext == "tif")
+})
+
 
 # DEM
 tmp = tempfile()
@@ -34,15 +31,10 @@ file_path = list.files(tmp, full.names = TRUE)
 file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
 
-assert(
-  "check file size",
-  file_size > 1
-)
+test_that("check file size", {
+  expect_true(file_size > 1)
+})
 
-assert(
-  "check file ext",
-  file_ext == "asc"
-)
-
-# test checkSHA_fun
-# checkSHA_fun(refSHA = "X", fileSHA = "X")
+test_that("check file ext", {
+  expect_true(file_ext == "asc")
+})
