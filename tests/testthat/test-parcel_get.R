@@ -1,5 +1,3 @@
-library(sf)
-
 parcel_byID = parcel_get(TERYT = "141201_1.0001.6509")
 parcel_byCOORDS = parcel_get(X = 313380.5, Y = 460166.4)
 
