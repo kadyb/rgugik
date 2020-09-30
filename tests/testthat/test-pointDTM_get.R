@@ -20,3 +20,12 @@ test_that("check number of columns", {
 test_that("check elevation sd", {
   expect_true(sd(DTM$Z) > 0)
 })
+
+
+# test stops
+test_that("check stops", {
+  expect_error(pointDTM_get(polygon, distance = 0),
+               "distance between the points cannot be less than 1 m")
+  expect_error(pointDTM_get(polygon, distance = 1.5),
+               "'distance' must contain an integer")
+})

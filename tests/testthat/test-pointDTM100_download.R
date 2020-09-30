@@ -12,3 +12,9 @@ test_that("check file size", {
 test_that("check file ext", {
   expect_true(file_ext == "zip")
 })
+
+
+# test stops
+test_that("check stops", {
+  expect_error(pointDTM100_download(voivodeships = NULL), "enter names or TERC")
+})

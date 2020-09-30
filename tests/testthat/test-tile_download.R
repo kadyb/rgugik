@@ -45,3 +45,10 @@ test_that("check checkSHA warning", {
   expect_warning(rgugik:::checkSHA_fun("fakeSHA", DEM$filename, file_path),
                  paste(DEM$filename, "incorrect SHA"))
 })
+
+
+# test stops
+df = data.frame("URL" = integer(), "filename" = integer(), "sha1" = integer())
+test_that("check stops", {
+  expect_error(tile_download(df), "empty df")
+})

@@ -15,3 +15,9 @@ test_that("check number of rows", {
 test_that("check number of columns", {
   expect_true(ncol(parcel_byCOORDS) == 2)
 })
+
+
+# test stops
+test_that("check stops", {
+  expect_error(parcel_get(X = NULL, Y = 0), "missing coordinates")
+})

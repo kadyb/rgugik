@@ -29,3 +29,12 @@ test_that("check number of files", {
 test_that("check if zip is removed", {
   expect_true(!"zip" %in% file_ext)
 })
+
+
+# test stops
+test_that("check stops", {
+  expect_error(emuia_download(), "'commune' and 'TERYT' are empty")
+  expect_error(emuia_download("Jejkowice", 2412032), "use only one input")
+  expect_error(emuia_download(commune = "XXX"), "incorrect county name")
+  expect_error(emuia_download(TERYT = "0"), "incorrect TERYT")
+})

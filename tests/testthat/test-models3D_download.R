@@ -31,3 +31,14 @@ test_that("check number of files", {
 test_that("check if zip is removed", {
   expect_true(!"zip" %in% file_ext)
 })
+
+
+# test stops
+test_that("check stops", {
+  expect_error(models3D_download(), "'county' and 'TERYT' are empty")
+  expect_error(models3D_download("Świętochłowice", 2476), "use only one input")
+  expect_error(models3D_download(county = "XXX"), "incorrect county name")
+  expect_error(models3D_download(TERYT = "0"), "incorrect TERYT")
+  expect_error(models3D_download(TERYT = 2476, LOD = "0"),
+               "inncorect LOD, should be 'LOD1' or 'LOD2'")
+})

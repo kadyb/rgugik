@@ -29,3 +29,12 @@ test_that("check number of files", {
 test_that("check if zip is removed", {
   expect_true(!"zip" %in% file_ext)
 })
+
+
+# test stops
+test_that("check stops", {
+  expect_error(topodb_download(), "'county' and 'TERYT' are empty")
+  expect_error(topodb_download("Świętochłowice", 2476), "use only one input")
+  expect_error(topodb_download(county = "XXX"), "incorrect county name")
+  expect_error(topodb_download(TERYT = "0"), "incorrect TERYT")
+})
