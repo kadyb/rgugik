@@ -46,13 +46,6 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
     stop("empty df")
   }
 
-  # check SHA function
-  checkSHA_fun = function(refSHA, fileSHA) {
-    if (!fileSHA == refSHA) {
-      warning(paste(df_req[i, "filename"], "incorrect SHA"), immediate. = TRUE)
-    }
-  }
-
   # get name index from URL
   idx_name = length(unlist(strsplit(df_req[1, "URL"], "/")))
 
@@ -60,22 +53,34 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
 
   # only download files
   for (i in seq_len(nrow(df_req))) {
-    filename = paste0(outdir, "/",
+    filepath = paste0(outdir, "/",
                       unlist(strsplit(df_req[i, "URL"], "/"))[idx_name])
-    utils::download.file(df_req[i, "URL"], filename, mode = "wb", ...)
+    utils::download.file(df_req[i, "URL"], filepath, mode = "wb", ...)
 
     # compare checksums (reference is SHA-1)
     if (check_SHA) {
-      fileSHA = as.character(openssl::sha1(file(filename)))
-      checkSHA_fun(refSHA = df_req[i, "sha1"], fileSHA = fileSHA)
+      checkSHA_fun(refSHA = df_req[i, "sha1"], filename = df_req[i, "filename"],
+                   filepath = filepath)
     }
 
     # get file extension and unzip
     ext = substr(df_req[i, "URL"], nchar(df_req[i, "URL"]) - 2, nchar(df_req[i, "URL"]))
     if (unzip && ext == "zip") {
-      utils::unzip(filename, exdir = outdir)
-      file.remove(filename)
+      utils::unzip(filepath, exdir = outdir)
+      file.remove(filepath)
     }
 
   }
+}
+
+
+# check SHA function
+checkSHA_fun = function(refSHA, filename, filepath) {
+
+  fileSHA = as.character(openssl::sha1(file(filepath)))
+
+  if (!fileSHA == refSHA) {
+    warning(paste(filename, "incorrect SHA"), call. = FALSE, immediate. = TRUE)
+  }
+
 }

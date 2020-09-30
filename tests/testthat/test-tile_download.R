@@ -38,3 +38,10 @@ test_that("check file size", {
 test_that("check file ext", {
   expect_true(file_ext == "asc")
 })
+
+
+# internal checkSHA function
+test_that("check checkSHA warning", {
+  expect_warning(rgugik:::checkSHA_fun("fakeSHA", DEM$filename, file_path),
+                 paste(DEM$filename, "incorrect SHA"))
+})
