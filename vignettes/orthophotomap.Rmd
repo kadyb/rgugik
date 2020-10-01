@@ -1,0 +1,218 @@
+---
+title: "Orthophotomap"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Orthophotomap}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+<style>
+body {text-align: justify}
+</style>
+
+```{r include = FALSE}
+startTime = Sys.time()
+```
+
+## Definition
+
+**Orthophotomap** is a raster, orthogonal and cartometric representation of the terrain surface, which was created by digital processing of aerial or satellite images.
+During the orthorectification, geometric distortions resulting from the land relief are removed by using Digital Elevation Models.
+The main advantage of an orthophotomap is the ability to measure geographic coordinates (it is georeferenced).
+
+The properties of the orthophotomap:
+
+1. Spatial resolution - is related to the size of the smallest object that can be detected by the sensor and is determined by the size of the image cell (pixel).
+The smaller the cell, the more detail it represents.
+Too large a pixel means that individual objects in the scene are no longer visible.
+2. Composition - analogue images will be in shades of gray, while digital images can be in natural colors (RGB) as standard or near infrared (NIR).
+
+## Purpose
+
+The purpose of this exercise is to assess the vegetation condition of the selected area. 
+We will do this based on remote sensing data (multichannel orthophotomap) and simple vegetation index.
+
+**NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and near infrared channels.
+Main application is monitoring and forecasting of agricultural production.
+It is calculated from the following formula:
+
+<center> $NDVI = \frac {NIR - RED} {NIR + RED}$ </center>
+
+Its value ranges from -1 to 1.
+The higher the value, the higher the biomass level.
+Values close to 0 and below are related to objects such as water, soil or buildings.
+
+## Analysis
+
+```{r message=FALSE}
+# read packages
+library("sf")
+library("raster")
+library("rgugik")
+```
+
+Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship. 
+It was established in 1958 in order to protect the breeding places of birds, especially the *grey heron* and the *great black cormorant*, and to protect the landscape of the Warta oxbow.
+
+### Vector data
+
+Data on nature reserves can be found in General Geographic Databases.
+We can get them using the function `geodb_download`.
+Let's do that.
+
+```{r message=FALSE}
+# 17.6 MB
+geodb_download("wielkopolskie", outdir = "./data")
+```
+
+Our database consists of many files in GML (*Geography Markup Language*) format.
+A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/geodb_description.html).
+The table with the nature reserves can be found in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file.
+We will use the **sf** package and the `read_sf` function to load it.
+
+```{r}
+reserves = read_sf("data/PL.PZGiK.201.30/BDOO/PL.PZGIK.201.30__OT_TCRZ_A.xml")
+```
+
+Let's check the structure of our data.
+
+```{r collapse=TRUE}
+ncol(reserves)
+nrow(reserves)
+```
+
+In simple terms, it is a spatial table consisting of 110 observations (rows) and 28 variables (columns).
+The names of the objects can be found in the **nazwa** column.
+We are interested in Krajkowo reserve, so let's choose it.
+
+```{r}
+# selection by attribute
+krajkowo = reserves[reserves$nazwa == "Krajkowo", ]
+```
+
+```{r include=FALSE}
+rm(reserves)
+```
+
+
+We can display it in two ways:
+
+1. Using the `plot` function and directly specifying the column with the object geometry: `plot(krajkowo$geometry)`
+2. Using the `plot` and `st_geometry` functions, which will obtain geometry from the vector layer. In the first case, we need to know the name of the column with geometry, while in the second case, the geometry will be selected automatically (it is the safer way).
+
+```{r}
+plot(st_geometry(krajkowo))
+```
+
+We can also calculate the area of this polygon.
+
+```{r}
+krajkowo_area = st_area(krajkowo) # [m^2]
+units::set_units(krajkowo_area, "ha") # convert to [ha]
+```
+
+The function `st_area` returned the area in m^2, after conversion we got the result 165 ha.
+
+### Raster data
+
+Now let's move on to the stage of downloading the orthophotomap.
+We will use the `orto_request()` function, which will show us what images are available in the analyzed area.
+As an argument of this function we will give our Krajkowo polygon.
+
+```{r}
+req_df = orto_request(krajkowo)
+```
+
+We can display the result table using the code below.
+
+```{r}
+# display the first 10 rows and the first 6 columns
+req_df[1:10, 1:6]
+```
+
+To complete the project task we need near infrared data, so in the next step select those rows for which the `composition` column has the value "CIR".
+
+```{r}
+# select IR images and overwrite the req_df object
+req_df = req_df[req_df$composition == "CIR", ]
+```
+
+Then let's sort the table according to the year the photo was taken, where the most recent images will be at the beginning.
+
+```{r}
+req_df = req_df[order(-req_df$year), ]
+```
+
+Let's display the table again and select the newest compositions.
+
+```{r}
+req_df[, c(1:6, 9)]
+```
+
+```{r}
+req_df = req_df[req_df$year == 2016, ]
+```
+
+Note that the result is pairs of objects (images).
+This means that our Krajkowo reserve is depicted in two photos within one series.
+Therefore, the `seriesID` column is used to combine smaller images into larger mosaics.
+
+```{r}
+req_df[, c(1:6, 9)]
+```
+
+The `tile_download()` function is used to download orthophotomaps, it takes our selected table as main argument.
+
+```{r message=FALSE}
+# 61.9 MB
+tile_download(req_df, outdir = "./data")
+```
+
+### Processing
+
+Let's load the downloaded orthophotomaps using the `brick()` function from the **raster** package, which allows to work on rasters consisting of several channels - in our case three: NIR, R, G.
+
+```{r}
+img1 = brick("data/69837_329609_N-33-142-B-d-4-2.TIF")
+img2 = brick("data/69837_329613_N-33-142-B-d-4-4.TIF")
+```
+
+Then we will perform three operations: rasters merging, cutting to the reserve area and masking pixels outside the polygon.
+This process may take several minutes.
+
+```{r message=FALSE, warning=FALSE}
+# merge rasters
+img = merge(img1, img2)
+# crop rasters to the polygon extent
+img = crop(img, krajkowo)
+# mask pixels outside the polygon
+img = mask(img, krajkowo)
+```
+
+Let's display the effect using the `plotRGB()` function.
+It creates a visualization by combining the values of three raster layers.
+The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the name of the function.
+
+```{r}
+plotRGB(img)
+```
+
+In the last step, calculate the NDVI using the near infrared (1) and red (2) channels.
+
+```{r}
+ndvi = (img[[1]] - img[[2]]) / (img[[1]] + img[[2]])
+plot(ndvi, main = "NDVI")
+```
+
+A surprising observation is the relatively low NDVI values for the forest area.
+There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated.
+For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).
+
+```{r include=FALSE}
+unlink("data", recursive = TRUE, force = TRUE)
+```
+
+<center> <font size = "1"> <i>
+The code was executed in `r round(difftime(Sys.time(), startTime, units = "mins"))` min.
+<center> </font> </i>
