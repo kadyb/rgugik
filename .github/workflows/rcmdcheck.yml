@@ -39,5 +39,5 @@ jobs:
       shell: Rscript {0}
 
     - name: rcmdcheck
-      run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-examples", "--as-cran"), error_on = "error", check_dir = "check")
+      run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--no-examples", "--no-vignettes", "--as-cran"), error_on = "error", check_dir = "check")
       shell: Rscript {0}
