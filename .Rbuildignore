@@ -10,3 +10,5 @@
 ^docs$
 ^pkgdown$
 ^codecov\.yml$
+^doc$
+^Meta$

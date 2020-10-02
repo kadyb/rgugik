@@ -7,6 +7,8 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+
+
 <style>
 body {text-align: justify}
 </style>
@@ -28,7 +30,7 @@ Too large a pixel means that individual objects in the scene are no longer visib
 
 ## Purpose
 
-The purpose of this exercise is to assess the vegetation condition of the selected area. 
+The purpose of this exercise is to assess the vegetation condition of the selected area.
 We will do this based on remote sensing data (multichannel orthophotomap) and simple vegetation index.
 
 **NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and near infrared channels.
@@ -51,7 +53,7 @@ library("raster")
 library("rgugik")
 ```
 
-Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship. 
+Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship.
 It was established in 1958 in order to protect the breeding places of birds, especially the *grey heron* and the *great black cormorant*, and to protect the landscape of the Warta oxbow.
 
 ### Vector data
@@ -109,7 +111,7 @@ We can display it in two ways:
 plot(st_geometry(krajkowo))
 ```
 
-![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png)
+![plot of chunk unnamed-chunk-9](rgugik-unnamed-chunk-9-1.png)
 
 We can also calculate the area of this polygon.
 
@@ -250,7 +252,7 @@ The composition below is shown in infrared, not in natural colors, which may be 
 plotRGB(img)
 ```
 
-![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20-1.png)
+![plot of chunk unnamed-chunk-21](rgugik-unnamed-chunk-21-1.png)
 
 In the last step, calculate the NDVI using the near infrared (1) and red (2) channels.
 
@@ -260,7 +262,7 @@ ndvi = (img[[1]] - img[[2]]) / (img[[1]] + img[[2]])
 plot(ndvi, main = "NDVI")
 ```
 
-![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21-1.png)
+![plot of chunk unnamed-chunk-22](rgugik-unnamed-chunk-22-1.png)
 
 A surprising observation is the relatively low NDVI values for the forest area.
 There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated.
@@ -269,5 +271,5 @@ For this reason, a better source of data for analysis may be satellite images, w
 
 
 <center> <font size = "1"> <i>
-The code was executed in 4 min.
+The code was executed in 5 min.
 <center> </font> </i>
