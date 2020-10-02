@@ -8,7 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(fig.path = "rgugik-")
+knitr::opts_chunk$set(fig.path = "rgugik-", fig.cap = "")
 ```
 
 <style>
