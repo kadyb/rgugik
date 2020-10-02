@@ -7,6 +7,10 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.path = "rgugik-")
+```
+
 <style>
 body {text-align: justify}
 </style>
@@ -30,7 +34,7 @@ Too large a pixel means that individual objects in the scene are no longer visib
 
 ## Purpose
 
-The purpose of this exercise is to assess the vegetation condition of the selected area. 
+The purpose of this exercise is to assess the vegetation condition of the selected area.
 We will do this based on remote sensing data (multichannel orthophotomap) and simple vegetation index.
 
 **NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and near infrared channels.
@@ -52,7 +56,7 @@ library("raster")
 library("rgugik")
 ```
 
-Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship. 
+Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship.
 It was established in 1958 in order to protect the breeding places of birds, especially the *grey heron* and the *great black cormorant*, and to protect the landscape of the Warta oxbow.
 
 ### Vector data
