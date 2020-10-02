@@ -233,7 +233,7 @@
 <!-- end list --><div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://kadyb.github.io/rgugik">rgugik</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/sf">sf</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">raster</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://rspatial.org/raster">raster</a></span>)
 
 <span class="kw">polygon_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"datasets/search_area.gpkg"</span>, package = <span class="st">"rgugik"</span>)
 <span class="kw">polygon</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="kw">polygon_path</span>)
@@ -241,7 +241,7 @@
 <span class="kw">req_df</span> <span class="op">=</span> <span class="fu"><a href="reference/orto_request.html">orto_request</a></span>(<span class="kw">polygon</span>)
 
 <span class="co"># show metadata and download the first image only</span>
-<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="kw">req_df</span>[<span class="fl">1</span>, ])
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/transpose.html">t</a></span>(<span class="kw">req_df</span>[<span class="fl">1</span>, ])
 <span class="co">#&gt;             1                                                                               </span>
 <span class="co">#&gt; sheetID     "N-33-130-D-b-2-3"                                                              </span>
 <span class="co">#&gt; year        "2001"                                                                          </span>
@@ -256,8 +256,8 @@
 <span class="co">#&gt; filename    "41_3756_N-33-130-D-b-2-3"</span>
 <span class="fu"><a href="reference/tile_download.html">tile_download</a></span>(<span class="kw">req_df</span>[<span class="fl">1</span>, ])
 
-<span class="kw">img</span> <span class="op">=</span> <span class="fu">brick</span>(<span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span>)
-<span class="fu">plotRGB</span>(<span class="kw">img</span>)
+<span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/brick.html">brick</a></span>(<span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plotRGB.html">plotRGB</a></span>(<span class="kw">img</span>)
 </pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 </div>
