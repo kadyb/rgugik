@@ -13,8 +13,6 @@ vignette: >
 body {text-align: justify}
 </style>
 
-
-
 ## Definition
 
 **Orthophotomap** is a raster, orthogonal and cartometric representation of the terrain surface, which was created by digital processing of aerial or satellite images.
@@ -30,7 +28,7 @@ Too large a pixel means that individual objects in the scene are no longer visib
 
 ## Purpose
 
-The purpose of this exercise is to assess the vegetation condition of the selected area.
+The purpose of this exercise is to assess the vegetation condition of the selected area. 
 We will do this based on remote sensing data (multichannel orthophotomap) and simple vegetation index.
 
 **NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and near infrared channels.
@@ -49,11 +47,11 @@ Values close to 0 and below are related to objects such as water, soil or buildi
 ```r
 # read packages
 library("sf")
-library("raster")
+library("stars")
 library("rgugik")
 ```
 
-Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship.
+Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship. 
 It was established in 1958 in order to protect the breeding places of birds, especially the *grey heron* and the *great black cormorant*, and to protect the landscape of the Warta oxbow.
 
 ### Vector data
@@ -100,7 +98,6 @@ krajkowo = reserves[reserves$nazwa == "Krajkowo", ]
 
 
 
-
 We can display it in two ways:
 
 1. Using the `plot` function and directly specifying the column with the object geometry: `plot(krajkowo$geometry)`
@@ -111,7 +108,7 @@ We can display it in two ways:
 plot(st_geometry(krajkowo))
 ```
 
-![plot of chunk unnamed-chunk-9](rgugik-unnamed-chunk-9-1.png)
+![](orto-GEOMETRY-1.png)
 
 We can also calculate the area of this polygon.
 
@@ -183,13 +180,20 @@ req_df[, c(1:6, 9)]
 ```
 
 ```
-##             sheetID year resolution composition  sensor     CRS seriesID
-## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992    69837
-## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992    69837
-## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital PL-1992    69903
-## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital PL-1992    69903
-## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992    69763
-## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992    69763
+##             sheetID year resolution composition  sensor     CRS
+## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
+## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
+## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital PL-1992
+## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital PL-1992
+## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992
+## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992
+##    seriesID
+## 7     69837
+## 9     69837
+## 22    69903
+## 24    69903
+## 5     69763
+## 6     69763
 ```
 
 
@@ -207,9 +211,12 @@ req_df[, c(1:6, 9)]
 ```
 
 ```
-##            sheetID year resolution composition  sensor     CRS seriesID
-## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992    69837
-## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992    69837
+##            sheetID year resolution composition  sensor     CRS
+## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
+## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
+##   seriesID
+## 7    69837
+## 9    69837
 ```
 
 The `tile_download()` function is used to download orthophotomaps, it takes our selected table as main argument.
@@ -222,54 +229,55 @@ tile_download(req_df, outdir = "./data")
 
 ### Processing
 
-Let's load the downloaded orthophotomaps using the `brick()` function from the **raster** package, which allows to work on rasters consisting of several channels - in our case three: NIR, R, G.
+Let's load the downloaded orthophotomaps using the `read_stars()` function from the **stars** package, which allows to work on spatiotemporal arrays.
+In our case it is a raster consisting of three bands (NIR, R, G) for only one year.
+We don't have to load the entire data array into memory (which is a very demanding task).
+We can read the file metadata and a certain amount of data by using the `proxy` argument and further process the data analogously.
 
 
 ```r
-img1 = brick("data/69837_329609_N-33-142-B-d-4-2.TIF")
-img2 = brick("data/69837_329613_N-33-142-B-d-4-4.TIF")
+img1 = read_stars("data/69837_329609_N-33-142-B-d-4-2.TIF", proxy = TRUE)
+img2 = read_stars("data/69837_329613_N-33-142-B-d-4-4.TIF", proxy = TRUE)
 ```
 
-Then we will perform three operations: rasters merging, cutting to the reserve area and masking pixels outside the polygon.
-This process may take several minutes.
+Then we will perform two operations: rasters merging and cutting to the reserve area.
+The use of a `proxy` allows to get the result immediately, while processing the entire image would take several minutes.
+Images have their own specific Coordinate Reference Systems, let's make sure it is correct (should be EPSG 2180) after merging.
 
 
 ```r
-# merge rasters
-img = merge(img1, img2)
-# crop rasters to the polygon extent
-img = crop(img, krajkowo)
-# mask pixels outside the polygon
-img = mask(img, krajkowo)
+img = st_mosaic(img1, img2)
+st_crs(img) = 2180 # overwrite CRS to be sure
+img = st_crop(img, krajkowo)
 ```
 
-Let's display the effect using the `plotRGB()` function.
-It creates a visualization by combining the values of three raster layers.
-The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the name of the function.
+
+
+Let's display the effect using the `plot()` function.
+Defining the input bands in the `rgb` argument creates a composition consisting of three bands.
+We use NIR, R and G bands.
+The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the `rgb` argument.
 
 
 ```r
-plotRGB(img)
+plot(img, rgb = c(1, 2, 3), main = NULL, axes = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-21](rgugik-unnamed-chunk-21-1.png)
+![](orto-CIR-1.png)
 
-In the last step, calculate the NDVI using the near infrared (1) and red (2) channels.
+In the last step, calculate the NDVI using the near infrared (1) and red (2) bands.
 
 
 ```r
-ndvi = (img[[1]] - img[[2]]) / (img[[1]] + img[[2]])
+calc_ndvi = function(img) (img[1] - img[2]) / (img[1] + img[2])
+ndvi = st_apply(img, MARGIN = c("x", "y"), FUN = calc_ndvi)
 plot(ndvi, main = "NDVI")
 ```
 
-![plot of chunk unnamed-chunk-22](rgugik-unnamed-chunk-22-1.png)
+![](orto-NDVI-1.png)
 
 A surprising observation is the relatively low NDVI values for the forest area.
 There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated.
 For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).
 
 
-
-<center> <font size = "1"> <i>
-The code was executed in 5 min.
-<center> </font> </i>

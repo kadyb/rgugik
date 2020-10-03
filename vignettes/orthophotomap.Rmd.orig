@@ -7,17 +7,13 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(fig.path = "rgugik-")
+```{r include = FALSE}
+knitr::opts_chunk$set(fig.path = "orto-", fig.cap = "")
 ```
 
 <style>
 body {text-align: justify}
 </style>
-
-```{r include = FALSE}
-startTime = Sys.time()
-```
 
 ## Definition
 
@@ -34,7 +30,7 @@ Too large a pixel means that individual objects in the scene are no longer visib
 
 ## Purpose
 
-The purpose of this exercise is to assess the vegetation condition of the selected area.
+The purpose of this exercise is to assess the vegetation condition of the selected area. 
 We will do this based on remote sensing data (multichannel orthophotomap) and simple vegetation index.
 
 **NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and near infrared channels.
@@ -52,11 +48,11 @@ Values close to 0 and below are related to objects such as water, soil or buildi
 ```{r message=FALSE}
 # read packages
 library("sf")
-library("raster")
+library("stars")
 library("rgugik")
 ```
 
-Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship.
+Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship. 
 It was established in 1958 in order to protect the breeding places of birds, especially the *grey heron* and the *great black cormorant*, and to protect the landscape of the Warta oxbow.
 
 ### Vector data
@@ -99,13 +95,12 @@ krajkowo = reserves[reserves$nazwa == "Krajkowo", ]
 rm(reserves)
 ```
 
-
 We can display it in two ways:
 
 1. Using the `plot` function and directly specifying the column with the object geometry: `plot(krajkowo$geometry)`
 2. Using the `plot` and `st_geometry` functions, which will obtain geometry from the vector layer. In the first case, we need to know the name of the column with geometry, while in the second case, the geometry will be selected automatically (it is the safer way).
 
-```{r}
+```{r GEOMETRY}
 plot(st_geometry(krajkowo))
 ```
 
@@ -175,37 +170,45 @@ tile_download(req_df, outdir = "./data")
 
 ### Processing
 
-Let's load the downloaded orthophotomaps using the `brick()` function from the **raster** package, which allows to work on rasters consisting of several channels - in our case three: NIR, R, G.
+Let's load the downloaded orthophotomaps using the `read_stars()` function from the **stars** package, which allows to work on spatiotemporal arrays.
+In our case it is a raster consisting of three bands (NIR, R, G) for only one year.
+We don't have to load the entire data array into memory (which is a very demanding task).
+We can read the file metadata and a certain amount of data by using the `proxy` argument and further process the data analogously.
 
 ```{r}
-img1 = brick("data/69837_329609_N-33-142-B-d-4-2.TIF")
-img2 = brick("data/69837_329613_N-33-142-B-d-4-4.TIF")
+img1 = read_stars("data/69837_329609_N-33-142-B-d-4-2.TIF", proxy = TRUE)
+img2 = read_stars("data/69837_329613_N-33-142-B-d-4-4.TIF", proxy = TRUE)
 ```
 
-Then we will perform three operations: rasters merging, cutting to the reserve area and masking pixels outside the polygon.
-This process may take several minutes.
-
-```{r message=FALSE, warning=FALSE}
-# merge rasters
-img = merge(img1, img2)
-# crop rasters to the polygon extent
-img = crop(img, krajkowo)
-# mask pixels outside the polygon
-img = mask(img, krajkowo)
-```
-
-Let's display the effect using the `plotRGB()` function.
-It creates a visualization by combining the values of three raster layers.
-The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the name of the function.
+Then we will perform two operations: rasters merging and cutting to the reserve area.
+The use of a `proxy` allows to get the result immediately, while processing the entire image would take several minutes.
+Images have their own specific Coordinate Reference Systems, let's make sure it is correct (should be EPSG 2180) after merging.
 
 ```{r}
-plotRGB(img)
+img = st_mosaic(img1, img2)
+st_crs(img) = 2180 # overwrite CRS to be sure
+img = st_crop(img, krajkowo)
 ```
 
-In the last step, calculate the NDVI using the near infrared (1) and red (2) channels.
+```{r include=FALSE}
+rm(img1)
+rm(img2)
+```
 
-```{r}
-ndvi = (img[[1]] - img[[2]]) / (img[[1]] + img[[2]])
+Let's display the effect using the `plot()` function.
+Defining the input bands in the `rgb` argument creates a composition consisting of three bands.
+We use NIR, R and G bands.
+The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the `rgb` argument.
+
+```{r CIR}
+plot(img, rgb = c(1, 2, 3), main = NULL, axes = TRUE)
+```
+
+In the last step, calculate the NDVI using the near infrared (1) and red (2) bands.
+
+```{r NDVI}
+calc_ndvi = function(img) (img[1] - img[2]) / (img[1] + img[2])
+ndvi = st_apply(img, MARGIN = c("x", "y"), FUN = calc_ndvi)
 plot(ndvi, main = "NDVI")
 ```
 
@@ -216,7 +219,3 @@ For this reason, a better source of data for analysis may be satellite images, w
 ```{r include=FALSE}
 unlink("data", recursive = TRUE, force = TRUE)
 ```
-
-<center> <font size = "1"> <i>
-The code was executed in `r round(difftime(Sys.time(), startTime, units = "mins"))` min.
-<center> </font> </i>
