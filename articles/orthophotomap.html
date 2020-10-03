@@ -122,7 +122,7 @@ body {text-align: justify}
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># read packages</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://r-spatial.github.io/sf">"sf"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://rspatial.org/raster">"raster"</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"stars"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://kadyb.github.io/rgugik">"rgugik"</a></span>)
 </pre></div>
 <p>Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship. It was established in 1958 in order to protect the breeding places of birds, especially the <em>grey heron</em> and the <em>great black cormorant</em>, and to protect the landscape of the Warta oxbow.</p>
@@ -159,9 +159,7 @@ body {text-align: justify}
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">krajkowo</span>))
 </pre></div>
-<div class="figure">
-<img src="rgugik-unnamed-chunk-9-1.png" alt=""><p class="caption">plot of chunk unnamed-chunk-9</p>
-</div>
+<p><img src="orto-GEOMETRY-1.png"></p>
 <p>We can also calculate the area of this polygon.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="kw">krajkowo_area</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area</a></span>(<span class="kw">krajkowo</span>) <span class="co"># [m^2]</span>
@@ -206,13 +204,20 @@ body {text-align: justify}
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="kw">req_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">9</span>)]
 </pre></div>
-<pre><code>##             sheetID year resolution composition  sensor     CRS seriesID
-## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992    69837
-## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992    69837
-## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital PL-1992    69903
-## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital PL-1992    69903
-## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992    69763
-## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992    69763</code></pre>
+<pre><code>##             sheetID year resolution composition  sensor     CRS
+## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
+## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
+## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital PL-1992
+## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital PL-1992
+## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992
+## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992
+##    seriesID
+## 7     69837
+## 9     69837
+## 22    69903
+## 24    69903
+## 5     69763
+## 6     69763</code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="kw">req_df</span> <span class="op">=</span> <span class="kw">req_df</span>[<span class="kw">req_df</span><span class="op">$</span><span class="kw">year</span> <span class="op">==</span> <span class="fl">2016</span>, ]
 </pre></div>
@@ -220,9 +225,12 @@ body {text-align: justify}
 <div class="sourceCode" id="cb17"><pre class="downlit">
 <span class="kw">req_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">9</span>)]
 </pre></div>
-<pre><code>##            sheetID year resolution composition  sensor     CRS seriesID
-## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992    69837
-## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992    69837</code></pre>
+<pre><code>##            sheetID year resolution composition  sensor     CRS
+## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
+## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
+##   seriesID
+## 7    69837
+## 9    69837</code></pre>
 <p>The <code><a href="../reference/tile_download.html">tile_download()</a></code> function is used to download orthophotomaps, it takes our selected table as main argument.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="co"># 61.9 MB</span>
@@ -232,42 +240,30 @@ body {text-align: justify}
 <div id="processing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#processing" class="anchor"></a>Processing</h3>
-<p>Let’s load the downloaded orthophotomaps using the <code><a href="https://rdrr.io/pkg/raster/man/brick.html">brick()</a></code> function from the <strong>raster</strong> package, which allows to work on rasters consisting of several channels - in our case three: NIR, R, G.</p>
+<p>Let’s load the downloaded orthophotomaps using the <code>read_stars()</code> function from the <strong>stars</strong> package, which allows to work on spatiotemporal arrays. In our case it is a raster consisting of three bands (NIR, R, G) for only one year. We don’t have to load the entire data array into memory (which is a very demanding task). We can read the file metadata and a certain amount of data by using the <code>proxy</code> argument and further process the data analogously.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit">
-<span class="kw">img1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/brick.html">brick</a></span>(<span class="st">"data/69837_329609_N-33-142-B-d-4-2.TIF"</span>)
-<span class="kw">img2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/brick.html">brick</a></span>(<span class="st">"data/69837_329613_N-33-142-B-d-4-4.TIF"</span>)
+<span class="kw">img1</span> <span class="op">=</span> <span class="fu">read_stars</span>(<span class="st">"data/69837_329609_N-33-142-B-d-4-2.TIF"</span>, proxy = <span class="fl">TRUE</span>)
+<span class="kw">img2</span> <span class="op">=</span> <span class="fu">read_stars</span>(<span class="st">"data/69837_329613_N-33-142-B-d-4-4.TIF"</span>, proxy = <span class="fl">TRUE</span>)
 </pre></div>
-<p>Then we will perform three operations: rasters merging, cutting to the reserve area and masking pixels outside the polygon. This process may take several minutes.</p>
+<p>Then we will perform two operations: rasters merging and cutting to the reserve area. The use of a <code>proxy</code> allows to get the result immediately, while processing the entire image would take several minutes. Images have their own specific Coordinate Reference Systems, let’s make sure it is correct (should be EPSG 2180) after merging.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="co"># merge rasters</span>
-<span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/merge.html">merge</a></span>(<span class="kw">img1</span>, <span class="kw">img2</span>)
-<span class="co"># crop rasters to the polygon extent</span>
-<span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/crop.html">crop</a></span>(<span class="kw">img</span>, <span class="kw">krajkowo</span>)
-<span class="co"># mask pixels outside the polygon</span>
-<span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/mask.html">mask</a></span>(<span class="kw">img</span>, <span class="kw">krajkowo</span>)
+<span class="kw">img</span> <span class="op">=</span> <span class="fu">st_mosaic</span>(<span class="kw">img1</span>, <span class="kw">img2</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crs.html">st_crs</a></span>(<span class="kw">img</span>) <span class="op">=</span> <span class="fl">2180</span> <span class="co"># overwrite CRS to be sure</span>
+<span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crop.html">st_crop</a></span>(<span class="kw">img</span>, <span class="kw">krajkowo</span>)
 </pre></div>
-<p>Let’s display the effect using the <code><a href="https://rdrr.io/pkg/raster/man/plotRGB.html">plotRGB()</a></code> function. It creates a visualization by combining the values of three raster layers. The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the name of the function.</p>
+<p>Let’s display the effect using the <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code> function. Defining the input bands in the <code>rgb</code> argument creates a composition consisting of three bands. We use NIR, R and G bands. The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the <code>rgb</code> argument.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/plotRGB.html">plotRGB</a></span>(<span class="kw">img</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">img</span>, rgb = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), main = <span class="kw">NULL</span>, axes = <span class="fl">TRUE</span>)
 </pre></div>
-<div class="figure">
-<img src="rgugik-unnamed-chunk-21-1.png" alt=""><p class="caption">plot of chunk unnamed-chunk-21</p>
-</div>
-<p>In the last step, calculate the NDVI using the near infrared (1) and red (2) channels.</p>
+<p><img src="orto-CIR-1.png"></p>
+<p>In the last step, calculate the NDVI using the near infrared (1) and red (2) bands.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit">
-<span class="kw">ndvi</span> <span class="op">=</span> (<span class="kw">img</span>[[<span class="fl">1</span>]] <span class="op">-</span> <span class="kw">img</span>[[<span class="fl">2</span>]]) <span class="op">/</span> (<span class="kw">img</span>[[<span class="fl">1</span>]] <span class="op">+</span> <span class="kw">img</span>[[<span class="fl">2</span>]])
+<span class="kw">calc_ndvi</span> <span class="op">=</span> <span class="fu">function</span>(<span class="kw">img</span>) (<span class="kw">img</span>[<span class="fl">1</span>] <span class="op">-</span> <span class="kw">img</span>[<span class="fl">2</span>]) <span class="op">/</span> (<span class="kw">img</span>[<span class="fl">1</span>] <span class="op">+</span> <span class="kw">img</span>[<span class="fl">2</span>])
+<span class="kw">ndvi</span> <span class="op">=</span> <span class="fu">st_apply</span>(<span class="kw">img</span>, MARGIN = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>), FUN = <span class="kw">calc_ndvi</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">ndvi</span>, main = <span class="st">"NDVI"</span>)
 </pre></div>
-<div class="figure">
-<img src="rgugik-unnamed-chunk-22-1.png" alt=""><p class="caption">plot of chunk unnamed-chunk-22</p>
-</div>
+<p><img src="orto-NDVI-1.png"></p>
 <p>A surprising observation is the relatively low NDVI values for the forest area. There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated. For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).</p>
-<center>
-<font size="1"> <i> The code was executed in 5 min.
-</i></font><center>
-<p> </p>
-</center>
-</center>
 </div>
 </div>
   </div>
