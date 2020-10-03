@@ -146,7 +146,7 @@ req_df = req_df[order(-req_df$year), ]
 Let's display the table again and select the newest compositions.
 
 ```{r}
-req_df[, c(1:6, 9)]
+req_df[, c(1:5, 9)]
 ```
 
 ```{r}
@@ -158,7 +158,7 @@ This means that our Krajkowo reserve is depicted in two photos within one series
 Therefore, the `seriesID` column is used to combine smaller images into larger mosaics.
 
 ```{r}
-req_df[, c(1:6, 9)]
+req_df[, c(1:5, 9)]
 ```
 
 The `tile_download()` function is used to download orthophotomaps, it takes our selected table as main argument.

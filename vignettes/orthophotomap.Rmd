@@ -176,24 +176,17 @@ Let's display the table again and select the newest compositions.
 
 
 ```r
-req_df[, c(1:6, 9)]
+req_df[, c(1:5, 9)]
 ```
 
 ```
-##             sheetID year resolution composition  sensor     CRS
-## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
-## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
-## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital PL-1992
-## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital PL-1992
-## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992
-## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992
-##    seriesID
-## 7     69837
-## 9     69837
-## 22    69903
-## 24    69903
-## 5     69763
-## 6     69763
+##             sheetID year resolution composition  sensor seriesID
+## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
+## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837
+## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital    69903
+## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital    69903
+## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital    69763
+## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital    69763
 ```
 
 
@@ -207,16 +200,13 @@ Therefore, the `seriesID` column is used to combine smaller images into larger m
 
 
 ```r
-req_df[, c(1:6, 9)]
+req_df[, c(1:5, 9)]
 ```
 
 ```
-##            sheetID year resolution composition  sensor     CRS
-## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
-## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
-##   seriesID
-## 7    69837
-## 9    69837
+##            sheetID year resolution composition  sensor seriesID
+## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
+## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837
 ```
 
 The `tile_download()` function is used to download orthophotomaps, it takes our selected table as main argument.
