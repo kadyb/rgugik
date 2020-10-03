@@ -7,7 +7,7 @@ navbar:
     articles:
       text: Articles
       menu:
-        - text: "General Geographic Database"
-          href: articles/articles/geodb_description.html
         - text: "Orthophotomap"
           href: articles/orthophotomap.html
+        - text: "General Geographic Database"
+          href: articles/articles/geodb_description.html
