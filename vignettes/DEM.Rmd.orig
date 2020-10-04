@@ -1,0 +1,184 @@
+---
+title: "Digital Elevation Model"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Digital Elevation Model}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(fig.path = "DEM-", fig.cap = "")
+```
+
+<style>
+body {text-align: justify}
+</style>
+
+## Definition
+
+**Digital Elevation Models** are models that describe the terrain surface.
+They are created as a result of the processing of aerial photos, laser scanning (LiDAR), geodetic surveying or radar interferometry (InSAR).
+DEMs are one of the key datasets in Geographic Information Systems (GIS) and constitute the basis for environmental spatial analyses.
+In addition, they are a source for derived products such as terrain slope and exposure.
+DEM is the general name for a group of models with different characteristics, including:
+
+1. **Digital Terrain Model** (DTM) - numerical representation of the terrain with its morphological forms.
+This model is devoid of any objects above the ground, such as buildings or trees.
+2. **Digital Surface Model** (DSM) - numerical representation of the terrain, including objects on its surface, such as buildings and trees.
+
+The properties of the DEMs:
+
+1. Format - we can distinguish three structures: **GRID** (point / cell), **TIN** (irregular topological triangle network) and **contour lines** (vector).
+Currently, the most used format is GRID.
+2. Accuracy - is related to the vertical measurement error.
+3. Spatial resolution - is related to the size of the smallest object that can be detected by the sensor and is determined by the size of the image cell (pixel).
+The larger the cell, the more generalized form of the terrain it presents.
+
+## Purpose
+
+The purpose of this exercise is to determine the elevation of the ground surface and objects in the selected area.
+The source of the data will be Airborne Laser Scanning already processed to GRID format.
+
+## Analysis
+
+```{r message=FALSE}
+# load packages
+library("sf")
+library("stars")
+library("rgugik")
+```
+
+Our analysis area will be the Morasko Meteorite nature reserve located in the Greater Poland voivodeship.
+It was established in 1976 in order to protect the area of impact craters, which, according to researchers, were formed in the fall of the Morasko meteorite about 5,000 years ago.
+In addition, the oak-hornbeam forest with rare species of plants (*lilium martagon*, *ceratophyllum submersum*) and birds (*european nightjar*, *black woodpecker*) are protected.
+
+### Vector data
+
+The centroid (geometric center) of the Morasko Meteorite nature reserve has X = 16.895 and Y = 52.487 coordinates in World Geodetic System 1984 (EPSG 4326).
+Let's create this point with the **sf** package.
+
+```{r}
+morasko = st_point(c(16.895, 52.489))
+morasko = st_sfc(morasko, crs = 4326) # set coordinate system
+morasko
+```
+
+Now we have our point which is embedded in space (has a spatial reference).
+In the next step, let's create an approximate zone that will include the area of the reserve.
+The function `st_buffer` will be used for this.
+Before this operation, we need to transform the coordinate system to a system with metric units, e.g. Poland CS92 (EPSG 2180), using `st_transform` function.
+
+```{r}
+morasko = st_transform(morasko, crs = 2180)
+morasko_buffer = st_buffer(morasko, dist = 400)
+```
+
+We have created a buffer with a radius of 400 meters.
+Then we can visualize it.
+
+```{r}
+plot(morasko_buffer)
+plot(morasko, add = TRUE)
+```
+
+Of course, the area shown is not exactly a reserve area.
+The exact area can be determined from the polygon layer as in [orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html) example using General Geographic Database.
+
+### Raster data
+
+Now we will search for available elevation data for this area using the `DEM_request` function (it is analogous to the `orto_request` function).
+The argument of the function is our buffer with reserve.
+Note, `DEM_request` takes data frame as input, and currently the morasko_buffer object is a list, so we need to convert it.
+
+```{r}
+morasko_buffer = st_sf(morasko_buffer) # set as data frame
+req_df = DEM_request(morasko_buffer)
+```
+
+Let's check the obtained results.
+
+```{r}
+# display the first 10 rows and the first 6 columns
+req_df[1:10, 1:6]
+```
+
+We have received many types of data with different formats, timeliness, resolution and accuracy.
+We need Digital Terrain Model and Digital Surface Model in "ARC/INFO ASCII GRID" format for our analysis.
+Let's make data selection by creating two tables and combining them at the end.
+
+```{r}
+req_df_DTM = req_df[req_df$format == "ARC/INFO ASCII GRID" &
+                    req_df$product == "DTM" &
+                    req_df$year == 2019, ]
+req_df_DSM = req_df[req_df$format == "ARC/INFO ASCII GRID" &
+                    req_df$product == "DSM" &
+                    req_df$year == 2019, ]
+
+# combine data tables
+req_df = rbind(req_df_DTM, req_df_DSM)
+req_df[, 1:6]
+```
+
+Now we can download the data using the `tile_download` function with our filtered data frame as input.
+
+```{r message=FALSE}
+# 168.7 MB
+tile_download(req_df, outdir = "./data")
+```
+
+### Processing
+
+Let’s load the downloaded numerical models using the `read_stars()` function from the **stars** package, which allows to work on spatiotemporal arrays.
+We have two files, one represents DTM and second represents DSM.
+
+```{r}
+# load data
+DTM = read_stars("data/73044_917579_N-33-130-D-b-1-1.asc", proxy = FALSE)
+DSM = read_stars("data/73043_917495_N-33-130-D-b-1-1.asc", proxy = FALSE)
+
+# name raster
+names(DTM) = "DTM"
+names(DSM) = "DSM"
+
+# set coordinate system
+st_crs(DTM) = 2180
+st_crs(DSM) = 2180
+```
+
+You probably noticed the fourfold difference in their size.
+It results from twice the cells resolution between these models.
+We need to reduce them to a common resolution to be able to combine them into one stack.
+It is much better to lower resolution than to increase it because we cannot get more information and the processing will be faster.
+Let's use the `st_warp` function to do this.
+
+```{r}
+DSM = st_warp(DSM, dest = DTM, cellsize = 1)
+```
+
+We will now combine our models into one stack.
+The matrix cells will contain exactly the same objects.
+
+```{r}
+DEM = c(DTM, DSM)
+```
+
+```{r include=FALSE}
+rm(DSM)
+rm(DTM)
+```
+
+Then let's cut the rasters to our buffer.
+
+```{r}
+DEM = st_crop(DEM, morasko_buffer)
+```
+
+Let's check what the visualization looks like.
+
+```{r}
+plot(DEM)
+```
+
+
+
