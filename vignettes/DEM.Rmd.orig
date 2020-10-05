@@ -177,7 +177,9 @@ DEM = st_crop(DEM, morasko_buffer)
 Let's check what the visualization looks like.
 
 ```{r}
-plot(DEM)
+paleta = hcl.colors(98, palette = "Temps")
+plot(DEM[1], nbreaks = 99, col = paleta)
+plot(DEM[2], nbreaks = 99, col = paleta)
 ```
 
 
