@@ -27,6 +27,8 @@ DEM is the general name for a group of models with different characteristics, in
 This model is devoid of any objects above the ground, such as buildings or trees.
 2. **Digital Surface Model** (DSM) - numerical representation of the terrain, including objects on its surface, such as buildings and trees.
 
+<center> ![DTM-DSM](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/DTM_DSM.svg/1024px-DTM_DSM.svg.png){ width=50% } </center>
+
 The properties of the DEMs:
 
 1. Format - we can distinguish three structures: **GRID** (point / cell), **TIN** (irregular topological triangle network) and **contour lines** (vector).
@@ -161,6 +163,7 @@ The matrix cells will contain exactly the same objects.
 
 ```{r}
 DEM = c(DTM, DSM)
+length(DEM)
 ```
 
 ```{r include=FALSE}
@@ -168,6 +171,19 @@ rm(DSM)
 rm(DTM)
 ```
 
+We got a DEM object that consists of two attributes (DTM and DSM).
+In fact, this is exactly one attribute related to elevation (same type of data).
+For example, another attribute can be a spectral reflection.
+Therefore, we should change the attribute to the dimension.
+Let's do that using `st_redimension`.
+
+```{r}
+DEM = st_redimension(DEM)
+names(st_dimensions(DEM))[3] = "elev" # name new data dim
+st_dimensions(DEM)
+```
+
+After this operation, our elevation attribute consists of the DTM and DSM layers (dimensions).
 Then let's cut the rasters to our buffer.
 
 ```{r}
@@ -177,10 +193,40 @@ DEM = st_crop(DEM, morasko_buffer)
 Let's check what the visualization looks like.
 
 ```{r}
-paleta = hcl.colors(98, palette = "Temps")
-plot(DEM[1], nbreaks = 99, col = paleta)
-plot(DEM[2], nbreaks = 99, col = paleta)
+plot(DEM, col = terrain.colors(99, alpha = NULL))
 ```
 
+In the first quadrant of the circle we can see 5 smaller circles.
+These are the craters formed after the impact of the Morasko meteorite.
+The largest found fragment weighs 272 kg and it is the largest meteorite found in Poland.
+The collection of found meteorites can be seen at the [Earth Museum](http://muzeumziemi.amu.edu.pl/) in Poznań.
 
+Let's calculate the crater width using the terrain transverse profile.
+We will use our centroid and the second example point towards 30 degrees N.
+
+```{r}
+pts_matrix = matrix(c(357121.7, 515765.5,
+                      357321.2, 516017.9),
+                    ncol = 2, byrow = TRUE)
+line = st_sfc(st_linestring(pts_matrix), crs = 2180)
+```
+
+```{r}
+line_elev = ""
+```
+
+```{r}
+length(as.vector(DEM[, , , 1]$DTM.DSM)) # 641601
+length(as.vector(DEM[line][, , , 1]$DTM.DSM)) # 50600
+```
+
+```{r}
+DEM2 = DEM[line]
+length(c(DEM2$DTM.DSM)) # 101200
+```
+
+```{r}
+line = st_line_sample(line, density = 1)
+st_extract(DEM, line)
+```
 
