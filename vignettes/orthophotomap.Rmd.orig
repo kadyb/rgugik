@@ -31,9 +31,9 @@ Too large a pixel means that individual objects in the scene are no longer recog
 ## Purpose
 
 The purpose of this exercise is to assess the vegetation condition of the selected area.
-It can be done based on remote sensing data (multichannel orthophotomap) and a simple vegetation index.
+It can be done based on remote sensing data (multispectral orthophotomap) and a simple vegetation index.
 
-**NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and the near infrared channels.
+**NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and the near infrared bands.
 Its main application is monitoring and forecasting of agricultural production.
 It is calculated using the following formula:
 
@@ -50,6 +50,7 @@ Values close to 0 and below are related to water, bare soil surfaces or building
 library(sf)
 library(stars)
 library(rgugik)
+library(RColorBrewer)
 ```
 
 The analysis area is the Krajkowo nature reserve located in the Greater Poland voivodeship.
@@ -101,7 +102,7 @@ We can display it in two basic ways:
 In the first case, we need to know the name of the column with geometries (e.g. `geometry`, `geom`, etc.), while in the second case, the geometry is selected automatically (it is the safer and preferable way).
 
 ```{r GEOMETRY}
-plot(st_geometry(krajkowo))
+plot(st_geometry(krajkowo), axes = TRUE, main = "Krajkowo reserve")
 ```
 
 We can also calculate the area of this polygon.
@@ -202,7 +203,7 @@ It creates a composition consisting of three bands: NIR, R and G in our case.
 The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the `rgb` argument name.
 
 ```{r CIR}
-plot(img, rgb = c(1, 2, 3), main = NULL, axes = TRUE)
+plot(img, rgb = c(1, 2, 3), main = NULL)
 ```
 
 In the last step, we calculate the NDVI using the near infrared (1) and red (2) bands.
@@ -210,7 +211,7 @@ In the last step, we calculate the NDVI using the near infrared (1) and red (2) 
 ```{r NDVI}
 calc_ndvi = function(img) (img[1] - img[2]) / (img[1] + img[2])
 ndvi = st_apply(img, MARGIN = c("x", "y"), FUN = calc_ndvi)
-plot(ndvi, main = "NDVI")
+plot(ndvi, main = "NDVI", col = brewer.pal(n = 10, name = "RdYlGn"))
 ```
 
 A surprising observation is the relatively low NDVI values for the forest area.
