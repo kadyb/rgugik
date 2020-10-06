@@ -19,7 +19,7 @@ body {text-align: justify}
 
 **Orthophotomap** is a raster, orthogonal and cartometric representation of the terrain surface created by digital processing of aerial or satellite images.
 During the orthorectification, geometric distortions resulting from the land relief are removed by using Digital Elevation Models (DEM).
-The main advantage of an orthophotomap is the ability to measure geographic coordinates (it is georeferenced). <!--jn: I do not understand this sentence...-->
+An orthophotomap is georeferenced, and therefore, allows to determine geographic coordinates for each of its cells.
 
 Orthophotomaps' properties:
 
@@ -46,7 +46,7 @@ Values close to 0 and below are related to water, bare soil surfaces or building
 ## Analysis
 
 ```{r message=FALSE}
-# read packages
+# attach packages
 library(sf)
 library(stars)
 library(rgugik)
@@ -83,7 +83,7 @@ nrow(reserves)
 ```
 
 In simple terms, it is a spatial table consisting of 110 observations (rows) and 28 variables (columns).
-The names of the objects are located in the **nazwa** column, which allow as to select the Krajkowo reserve only.
+The names of the objects are located in the **nazwa** column, which allow us to select the Krajkowo reserve only.
 
 ```{r}
 # selection by attribute
@@ -97,7 +97,7 @@ rm(reserves)
 We can display it in two basic ways:
 
 1. Using the `plot()` function and directly specifying the column with the object geometry: `plot(krajkowo$geometry)`
-2. Using the `plot()` and `st_geometry()` functions that obtain geometry from the vector layer. 
+2. Using the `plot()` and `st_geometry()` functions that obtain geometry from the vector layer.
 In the first case, we need to know the name of the column with geometries (e.g. `geometry`, `geom`, etc.), while in the second case, the geometry is selected automatically (it is the safer and preferable way).
 
 ```{r GEOMETRY}
@@ -182,7 +182,7 @@ img2 = read_stars("data/69837_329613_N-33-142-B-d-4-4.TIF", proxy = TRUE)
 ```
 
 Now we can perform two operations: rasters merging and cropping to the reserve area.
-The use of a `proxy` allows to get the result almost immediately while processing the entire image (`proxy = FALSE`) would take several minutes.
+The use of a `proxy` allows to get the result almost immediately, while processing the entire image (`proxy = FALSE`) would take several minutes.
 Images have their own specific Coordinate Reference Systems, so let's make sure it is the correct one after merging.
 It should be EPSG 2180 in this case.
 

@@ -15,49 +15,49 @@ body {text-align: justify}
 
 ## Definition
 
-**Orthophotomap** is a raster, orthogonal and cartometric representation of the terrain surface, which was created by digital processing of aerial or satellite images.
-During the orthorectification, geometric distortions resulting from the land relief are removed by using Digital Elevation Models.
-The main advantage of an orthophotomap is the ability to measure geographic coordinates (it is georeferenced).
+**Orthophotomap** is a raster, orthogonal and cartometric representation of the terrain surface created by digital processing of aerial or satellite images.
+During the orthorectification, geometric distortions resulting from the land relief are removed by using Digital Elevation Models (DEM).
+An orthophotomap is georeferenced, and therefore, allows to determine geographic coordinates for each of its cells.
 
-The properties of the orthophotomap:
+Orthophotomaps' properties:
 
-1. Spatial resolution - is related to the size of the smallest object that can be detected by the sensor and is determined by the size of the image cell (pixel).
+1. **Spatial resolution** - is related to the size of the smallest object that can be detected by the sensor and is determined by the size of the image cell (pixel).
 The smaller the cell, the more detail it represents.
-Too large a pixel means that individual objects in the scene are no longer visible.
-2. Composition - analogue images will be in shades of gray, while digital images can be in natural colors (RGB) as standard or near infrared (NIR).
+Too large a pixel means that individual objects in the scene are no longer recognizable.
+2. **Composition** - analog images are in shades of gray, while digital images can be in natural colors (RGB) or near infrared (NIR).
 
 ## Purpose
 
-The purpose of this exercise is to assess the vegetation condition of the selected area. 
-We will do this based on remote sensing data (multichannel orthophotomap) and simple vegetation index.
+The purpose of this exercise is to assess the vegetation condition of the selected area.
+It can be done based on remote sensing data (multichannel orthophotomap) and a simple vegetation index.
 
-**NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and near infrared channels.
-Main application is monitoring and forecasting of agricultural production.
-It is calculated from the following formula:
+**NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and the near infrared channels.
+Its main application is monitoring and forecasting of agricultural production.
+It is calculated using the following formula:
 
-<center> $NDVI = \frac {NIR - RED} {NIR + RED}$ </center>
+$$NDVI = \frac {NIR - RED} {NIR + RED}$$
 
 Its value ranges from -1 to 1.
 The higher the value, the higher the biomass level.
-Values close to 0 and below are related to objects such as water, soil or buildings.
+Values close to 0 and below are related to water, bare soil surfaces or buildings.
 
 ## Analysis
 
 
 ```r
-# read packages
-library("sf")
-library("stars")
-library("rgugik")
+# attach packages
+library(sf)
+library(stars)
+library(rgugik)
 ```
 
-Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship. 
+The analysis area is the Krajkowo nature reserve located in the Greater Poland voivodeship.
 It was established in 1958 in order to protect the breeding places of birds, especially the *grey heron* and the *great black cormorant*, and to protect the landscape of the Warta oxbow.
 
 ### Vector data
 
 Data on nature reserves can be found in General Geographic Databases.
-We can get them using the function `geodb_download`.
+We can obtain them using the `geodb_download()` function.
 Let's do that.
 
 
@@ -66,10 +66,10 @@ Let's do that.
 geodb_download("wielkopolskie", outdir = "./data")
 ```
 
-Our database consists of many files in GML (*Geography Markup Language*) format.
+The downloaded database consists of many files in the GML (*Geography Markup Language*) format.
 A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/geodb_description.html).
-The table with the nature reserves can be found in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file.
-We will use the **sf** package and the `read_sf` function to load it.
+The table with the nature reserves is in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file.
+We can use the **sf** package and its `read_sf()` function to load it.
 
 
 ```r
@@ -87,8 +87,7 @@ nrow(reserves)
 ```
 
 In simple terms, it is a spatial table consisting of 110 observations (rows) and 28 variables (columns).
-The names of the objects can be found in the **nazwa** column.
-We are interested in Krajkowo reserve, so let's choose it.
+The names of the objects are located in the **nazwa** column, which allow us to select the Krajkowo reserve only.
 
 
 ```r
@@ -98,10 +97,11 @@ krajkowo = reserves[reserves$nazwa == "Krajkowo", ]
 
 
 
-We can display it in two ways:
+We can display it in two basic ways:
 
-1. Using the `plot` function and directly specifying the column with the object geometry: `plot(krajkowo$geometry)`
-2. Using the `plot` and `st_geometry` functions, which will obtain geometry from the vector layer. In the first case, we need to know the name of the column with geometry, while in the second case, the geometry will be selected automatically (it is the safer way).
+1. Using the `plot()` function and directly specifying the column with the object geometry: `plot(krajkowo$geometry)`
+2. Using the `plot()` and `st_geometry()` functions that obtain geometry from the vector layer.
+In the first case, we need to know the name of the column with geometries (e.g. `geometry`, `geom`, etc.), while in the second case, the geometry is selected automatically (it is the safer and preferable way).
 
 
 ```r
@@ -122,20 +122,20 @@ units::set_units(krajkowo_area, "ha") # convert to [ha]
 ## 165.2744 [ha]
 ```
 
-The function `st_area` returned the area in m^2, after conversion we got the result 165 ha.
+The `st_area()` function returned the area in m^2, and after the conversion we got the result of 165 ha.
 
 ### Raster data
 
 Now let's move on to the stage of downloading the orthophotomap.
-We will use the `orto_request()` function, which will show us what images are available in the analyzed area.
-As an argument of this function we will give our Krajkowo polygon.
+We use the `orto_request()` function that show us which images are available for the analyzed area.
+We need to provide our Krajkowo polygon as the argument of this function.
 
 
 ```r
 req_df = orto_request(krajkowo)
 ```
 
-We can display the result table using the code below.
+We can display the resulting table using the code below.
 
 
 ```r
@@ -157,7 +157,8 @@ req_df[1:10, 1:6]
 ## 10 N-33-142-B-d-4-4 2016       0.25         RGB Digital PL-1992
 ```
 
-To complete the project task we need near infrared data, so in the next step select those rows for which the `composition` column has the value "CIR".
+To complete our task, we need to obtain a near infrared data.
+So in the next step, we select those rows for which the `composition` column has the value of "CIR".
 
 
 ```r
@@ -165,7 +166,7 @@ To complete the project task we need near infrared data, so in the next step sel
 req_df = req_df[req_df$composition == "CIR", ]
 ```
 
-Then let's sort the table according to the year the photo was taken, where the most recent images will be at the beginning.
+Then let's sort the table according to the year the photo was taken, with the most recent images at the top of the table.
 
 
 ```r
@@ -194,9 +195,9 @@ req_df[, c(1:5, 9)]
 req_df = req_df[req_df$year == 2016, ]
 ```
 
-Note that the result is pairs of objects (images).
+Note that the result has a pair of objects (images).
 This means that our Krajkowo reserve is depicted in two photos within one series.
-Therefore, the `seriesID` column is used to combine smaller images into larger mosaics.
+Therefore, the `seriesID` column is used to combine smaller images into a larger mosaic.
 
 
 ```r
@@ -209,7 +210,8 @@ req_df[, c(1:5, 9)]
 ## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837
 ```
 
-The `tile_download()` function is used to download orthophotomaps, it takes our selected table as main argument.
+The `tile_download()` function is used to download orthophotomaps by taking our selected table as the main argument.
+We can also specify the output folder with the `outdir` argument.
 
 
 ```r
@@ -219,10 +221,9 @@ tile_download(req_df, outdir = "./data")
 
 ### Processing
 
-Let's load the downloaded orthophotomaps using the `read_stars()` function from the **stars** package, which allows to work on spatiotemporal arrays.
-In our case it is a raster consisting of three bands (NIR, R, G) for only one year.
-We don't have to load the entire data array into memory (which is a very demanding task).
-We can read the file metadata and a certain amount of data by using the `proxy` argument and further process the data analogously.
+Let's load the downloaded orthophotomaps using the `read_stars()` function from the **stars** package, which allows to work with spatiotemporal arrays.
+In our case, it is a raster consisting of three bands (NIR, R, G) for only one point in time.
+We don't need to load the entire data array into memory - we can read the file's metadata instead by using the `proxy` argument.
 
 
 ```r
@@ -230,9 +231,10 @@ img1 = read_stars("data/69837_329609_N-33-142-B-d-4-2.TIF", proxy = TRUE)
 img2 = read_stars("data/69837_329613_N-33-142-B-d-4-4.TIF", proxy = TRUE)
 ```
 
-Then we will perform two operations: rasters merging and cutting to the reserve area.
-The use of a `proxy` allows to get the result immediately, while processing the entire image would take several minutes.
-Images have their own specific Coordinate Reference Systems, let's make sure it is correct (should be EPSG 2180) after merging.
+Now we can perform two operations: rasters merging and cropping to the reserve area.
+The use of a `proxy` allows to get the result almost immediately, while processing the entire image (`proxy = FALSE`) would take several minutes.
+Images have their own specific Coordinate Reference Systems, so let's make sure it is the correct one after merging.
+It should be EPSG 2180 in this case.
 
 
 ```r
@@ -243,10 +245,9 @@ img = st_crop(img, krajkowo)
 
 
 
-Let's display the effect using the `plot()` function.
-Defining the input bands in the `rgb` argument creates a composition consisting of three bands.
-We use NIR, R and G bands.
-The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the `rgb` argument.
+Let's display the effect using the `plot()` function, and define the input bands with the `rgb` argument.
+It creates a composition consisting of three bands: NIR, R and G in our case.
+The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the `rgb` argument name.
 
 
 ```r
@@ -255,7 +256,7 @@ plot(img, rgb = c(1, 2, 3), main = NULL, axes = TRUE)
 
 ![](orto-CIR-1.png)
 
-In the last step, calculate the NDVI using the near infrared (1) and red (2) bands.
+In the last step, we calculate the NDVI using the near infrared (1) and red (2) bands.
 
 
 ```r
