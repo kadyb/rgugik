@@ -129,9 +129,10 @@ body {text-align: justify}
 <a href="#analysis" class="anchor"></a>Analysis</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># load packages</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://r-spatial.github.io/sf">"sf"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://r-spatial.github.io/stars">"stars"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://kadyb.github.io/rgugik">"rgugik"</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/sf">sf</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/stars">stars</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://kadyb.github.io/rgugik">rgugik</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
 </pre></div>
 <p>Our analysis area will be the Morasko Meteorite nature reserve located in the Greater Poland voivodeship. It was established in 1976 in order to protect the area of impact craters, which, according to researchers, were formed in the fall of the Morasko meteorite about 5,000 years ago. In addition, the oak-hornbeam forest with rare species of plants (<em>lilium martagon</em>, <em>ceratophyllum submersum</em>) and birds (<em>european nightjar</em>, <em>black woodpecker</em>) are protected.</p>
 <div id="vector-data" class="section level3">
@@ -149,14 +150,14 @@ body {text-align: justify}
 ## bbox:           xmin: 16.895 ymin: 52.489 xmax: 16.895 ymax: 52.489
 ## geographic CRS: WGS 84</code></pre>
 <pre><code>## POINT (16.895 52.489)</code></pre>
-<p>Now we have our point which is embedded in space (has a spatial reference). In the next step, let’s create an approximate zone that will include the area of the reserve. The function <code>st_buffer</code> will be used for this. Before this operation, we need to transform the coordinate system to a system with metric units, e.g. Poland CS92 (EPSG 2180), using <code>st_transform</code> function.</p>
+<p>Now we have our point which is embedded in space (has a spatial reference). In the next step, let’s create an approximate zone that will include the area of the reserve. The function <code><a href="https://rdrr.io/pkg/sf/man/geos_unary.html">st_buffer()</a></code> will be used for this. Before this operation, we need to transform the coordinate system to a system with metric units, e.g. Poland CS92 (EPSG 2180), using <code><a href="https://rdrr.io/pkg/sf/man/st_transform.html">st_transform()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw">morasko</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_transform.html">st_transform</a></span>(<span class="kw">morasko</span>, crs = <span class="fl">2180</span>)
 <span class="kw">morasko_buffer</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_unary.html">st_buffer</a></span>(<span class="kw">morasko</span>, dist = <span class="fl">400</span>)
 </pre></div>
 <p>We have created a buffer with a radius of 400 meters. Then we can visualize it.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">morasko_buffer</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">morasko_buffer</span>, axes = <span class="fl">TRUE</span>, main = <span class="st">"Morasko reserve buffer"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">morasko</span>, add = <span class="fl">TRUE</span>)
 </pre></div>
 <p><img src="DEM-GEOMETRY-1.png"></p>
@@ -165,7 +166,7 @@ body {text-align: justify}
 <div id="raster-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#raster-data" class="anchor"></a>Raster data</h3>
-<p>Now we will search for available elevation data for this area using the <code>DEM_request</code> function (it is analogous to the <code>orto_request</code> function). The argument of the function is our buffer with reserve. Note, <code>DEM_request</code> takes data frame as input, and currently the morasko_buffer object is a list, so we need to convert it.</p>
+<p>Now we will search for available elevation data for this area using the <code><a href="../reference/DEM_request.html">DEM_request()</a></code> function (it is analogous to the <code><a href="../reference/orto_request.html">orto_request()</a></code> function). The argument of the function is our buffer with reserve. Note, <code><a href="../reference/DEM_request.html">DEM_request()</a></code> takes data frame as input, and currently the morasko_buffer object is a list, so we need to convert it.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="kw">morasko_buffer</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/sf.html">st_sf</a></span>(<span class="kw">morasko_buffer</span>) <span class="co"># set as data frame</span>
 <span class="kw">req_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/DEM_request.html">DEM_request</a></span>(<span class="kw">morasko_buffer</span>)
@@ -202,7 +203,7 @@ body {text-align: justify}
 <pre><code>##             sheetID year              format resolution avgElevErr
 ## 30 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      1.0 m        0.1
 ## 29 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      0.5 m        0.1</code></pre>
-<p>Now we can download the data using the <code>tile_download</code> function with our filtered data frame as input.</p>
+<p>Now we can download the data using the <code><a href="../reference/tile_download.html">tile_download()</a></code> function with our filtered data frame as input.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="co"># 168.7 MB</span>
 <span class="fu"><a href="../reference/tile_download.html">tile_download</a></span>(<span class="kw">req_df</span>, outdir = <span class="st">"./data"</span>)
@@ -225,7 +226,7 @@ body {text-align: justify}
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crs.html">st_crs</a></span>(<span class="kw">DTM</span>) <span class="op">=</span> <span class="fl">2180</span>
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crs.html">st_crs</a></span>(<span class="kw">DSM</span>) <span class="op">=</span> <span class="fl">2180</span>
 </pre></div>
-<p>You probably noticed the fourfold difference in their size. It results from twice the cells resolution between these models. We need to reduce them to a common resolution to be able to combine them into one stack. It is much better to lower resolution than to increase it because we cannot get more information and the processing will be faster. Let’s use the <code>st_warp</code> function to do this.</p>
+<p>You probably noticed the fourfold difference in their size. It results from twice the cells resolution between these models. We need to reduce them to a common resolution to be able to combine them into one stack. It is much better to lower resolution than to increase it because we cannot get more information and the processing will be faster. Let’s use the <code><a href="https://rdrr.io/pkg/stars/man/st_warp.html">st_warp()</a></code> function to do this.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="kw">DSM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_warp.html">st_warp</a></span>(<span class="kw">DSM</span>, dest = <span class="kw">DTM</span>, cellsize = <span class="fl">1</span>)
 </pre></div>
@@ -235,7 +236,7 @@ body {text-align: justify}
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">DEM</span>)
 </pre></div>
 <pre><code>## [1] 2</code></pre>
-<p>We got a DEM object that consists of two attributes (DTM and DSM). In fact, this is exactly one attribute related to elevation (same type of data). For example, another attribute can be a spectral reflection. Therefore, we should change the attribute to the dimension. Let’s do that using <code>st_redimension</code>.</p>
+<p>We got a DEM object that consists of two attributes (DTM and DSM). In fact, this is exactly one attribute related to elevation (same type of data). For example, another attribute can be a spectral reflection. Therefore, we should change the attribute to the dimension. Let’s do that using <code><a href="https://rdrr.io/pkg/stars/man/redimension.html">st_redimension()</a></code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit">
 <span class="kw">DEM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/redimension.html">st_redimension</a></span>(<span class="kw">DEM</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_dimensions.html">st_dimensions</a></span>(<span class="kw">DEM</span>))[<span class="fl">3</span>] <span class="op">=</span> <span class="st">"elev"</span> <span class="co"># name new data dim</span>
@@ -279,7 +280,7 @@ body {text-align: justify}
 <div class="sourceCode" id="cb23"><pre class="downlit">
 <span class="kw">calc</span> <span class="op">=</span> <span class="fu">function</span>(<span class="kw">DEM</span>) (<span class="kw">DEM</span>[<span class="fl">2</span>] <span class="op">-</span> <span class="kw">DEM</span>[<span class="fl">1</span>])
 <span class="kw">nDSM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_apply.html">st_apply</a></span>(<span class="kw">DEM</span>, MARGIN = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>), FUN = <span class="kw">calc</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">nDSM</span>, main = <span class="st">"Trees height [m]"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">nDSM</span>, main = <span class="st">"Trees height [m]"</span>, col = <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(n = <span class="fl">9</span>, name = <span class="st">"Greens"</span>))
 </pre></div>
 <p><img src="DEM-TREES-1.png"></p>
 </div>
