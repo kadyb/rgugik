@@ -125,7 +125,7 @@ body {text-align: justify}
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># attach packages</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/sf">sf</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">stars</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/stars">stars</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://kadyb.github.io/rgugik">rgugik</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
 </pre></div>
@@ -234,14 +234,14 @@ body {text-align: justify}
 <div id="processing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#processing" class="anchor"></a>Processing</h3>
-<p>Let’s load the downloaded orthophotomaps using the <code>read_stars()</code> function from the <strong>stars</strong> package, which allows to work with spatiotemporal arrays. In our case, it is a raster consisting of three bands (NIR, R, G) for only one point in time. We don’t need to load the entire data array into memory - we can read the file’s metadata instead by using the <code>proxy</code> argument.</p>
+<p>Let’s load the downloaded orthophotomaps using the <code><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars()</a></code> function from the <strong>stars</strong> package, which allows to work with spatiotemporal arrays. In our case, it is a raster consisting of three bands (NIR, R, G) for only one point in time. We don’t need to load the entire data array into memory - we can read the file’s metadata instead by using the <code>proxy</code> argument.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit">
-<span class="kw">img1</span> <span class="op">=</span> <span class="fu">read_stars</span>(<span class="st">"data/69837_329609_N-33-142-B-d-4-2.TIF"</span>, proxy = <span class="fl">TRUE</span>)
-<span class="kw">img2</span> <span class="op">=</span> <span class="fu">read_stars</span>(<span class="st">"data/69837_329613_N-33-142-B-d-4-4.TIF"</span>, proxy = <span class="fl">TRUE</span>)
+<span class="kw">img1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars</a></span>(<span class="st">"data/69837_329609_N-33-142-B-d-4-2.TIF"</span>, proxy = <span class="fl">TRUE</span>)
+<span class="kw">img2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars</a></span>(<span class="st">"data/69837_329613_N-33-142-B-d-4-4.TIF"</span>, proxy = <span class="fl">TRUE</span>)
 </pre></div>
 <p>Now we can perform two operations: rasters merging and cropping to the reserve area. The use of a <code>proxy</code> allows to get the result almost immediately, while processing the entire image (<code>proxy = FALSE</code>) would take several minutes. Images have their own specific Coordinate Reference Systems, so let’s make sure it is the correct one after merging. It should be EPSG 2180 in this case.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="kw">img</span> <span class="op">=</span> <span class="fu">st_mosaic</span>(<span class="kw">img1</span>, <span class="kw">img2</span>)
+<span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_mosaic.html">st_mosaic</a></span>(<span class="kw">img1</span>, <span class="kw">img2</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crs.html">st_crs</a></span>(<span class="kw">img</span>) <span class="op">=</span> <span class="fl">2180</span> <span class="co"># overwrite CRS to be sure</span>
 <span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crop.html">st_crop</a></span>(<span class="kw">img</span>, <span class="kw">krajkowo</span>)
 </pre></div>
@@ -253,8 +253,8 @@ body {text-align: justify}
 <p>In the last step, we calculate the NDVI using the near infrared (1) and red (2) bands.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit">
 <span class="kw">calc_ndvi</span> <span class="op">=</span> <span class="fu">function</span>(<span class="kw">img</span>) (<span class="kw">img</span>[<span class="fl">1</span>] <span class="op">-</span> <span class="kw">img</span>[<span class="fl">2</span>]) <span class="op">/</span> (<span class="kw">img</span>[<span class="fl">1</span>] <span class="op">+</span> <span class="kw">img</span>[<span class="fl">2</span>])
-<span class="kw">ndvi</span> <span class="op">=</span> <span class="fu">st_apply</span>(<span class="kw">img</span>, MARGIN = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>), FUN = <span class="kw">calc_ndvi</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">ndvi</span>, main = <span class="st">"NDVI"</span>, col = <span class="fu">brewer.pal</span>(n = <span class="fl">10</span>, name = <span class="st">"RdYlGn"</span>))
+<span class="kw">ndvi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_apply.html">st_apply</a></span>(<span class="kw">img</span>, MARGIN = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>), FUN = <span class="kw">calc_ndvi</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">ndvi</span>, main = <span class="st">"NDVI"</span>, col = <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span>(n = <span class="fl">10</span>, name = <span class="st">"RdYlGn"</span>))
 </pre></div>
 <p><img src="orto-NDVI-1.png"></p>
 <p>A surprising observation is the relatively low NDVI values for the forest area. There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated. For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).</p>

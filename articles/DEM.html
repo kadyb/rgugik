@@ -130,7 +130,7 @@ body {text-align: justify}
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># load packages</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://r-spatial.github.io/sf">"sf"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"stars"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://r-spatial.github.io/stars">"stars"</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://kadyb.github.io/rgugik">"rgugik"</a></span>)
 </pre></div>
 <p>Our analysis area will be the Morasko Meteorite nature reserve located in the Greater Poland voivodeship. It was established in 1976 in order to protect the area of impact craters, which, according to researchers, were formed in the fall of the Morasko meteorite about 5,000 years ago. In addition, the oak-hornbeam forest with rare species of plants (<em>lilium martagon</em>, <em>ceratophyllum submersum</em>) and birds (<em>european nightjar</em>, <em>black woodpecker</em>) are protected.</p>
@@ -211,11 +211,11 @@ body {text-align: justify}
 <div id="processing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#processing" class="anchor"></a>Processing</h3>
-<p>Let’s load the downloaded numerical models using the <code>read_stars()</code> function from the <strong>stars</strong> package, which allows to work on spatiotemporal arrays. We have two files, one represents DTM and second represents DSM.</p>
+<p>Let’s load the downloaded numerical models using the <code><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars()</a></code> function from the <strong>stars</strong> package, which allows to work on spatiotemporal arrays. We have two files, one represents DTM and second represents DSM.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="co"># load data</span>
-<span class="kw">DTM</span> <span class="op">=</span> <span class="fu">read_stars</span>(<span class="st">"data/73044_917579_N-33-130-D-b-1-1.asc"</span>, proxy = <span class="fl">FALSE</span>)
-<span class="kw">DSM</span> <span class="op">=</span> <span class="fu">read_stars</span>(<span class="st">"data/73043_917495_N-33-130-D-b-1-1.asc"</span>, proxy = <span class="fl">FALSE</span>)
+<span class="kw">DTM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars</a></span>(<span class="st">"data/73044_917579_N-33-130-D-b-1-1.asc"</span>, proxy = <span class="fl">FALSE</span>)
+<span class="kw">DSM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars</a></span>(<span class="st">"data/73043_917495_N-33-130-D-b-1-1.asc"</span>, proxy = <span class="fl">FALSE</span>)
 
 <span class="co"># name raster</span>
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="kw">DTM</span>) <span class="op">=</span> <span class="st">"DTM"</span>
@@ -227,7 +227,7 @@ body {text-align: justify}
 </pre></div>
 <p>You probably noticed the fourfold difference in their size. It results from twice the cells resolution between these models. We need to reduce them to a common resolution to be able to combine them into one stack. It is much better to lower resolution than to increase it because we cannot get more information and the processing will be faster. Let’s use the <code>st_warp</code> function to do this.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="kw">DSM</span> <span class="op">=</span> <span class="fu">st_warp</span>(<span class="kw">DSM</span>, dest = <span class="kw">DTM</span>, cellsize = <span class="fl">1</span>)
+<span class="kw">DSM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_warp.html">st_warp</a></span>(<span class="kw">DSM</span>, dest = <span class="kw">DTM</span>, cellsize = <span class="fl">1</span>)
 </pre></div>
 <p>We will now combine our models into one stack. The matrix cells will contain exactly the same objects.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit">
@@ -237,9 +237,9 @@ body {text-align: justify}
 <pre><code>## [1] 2</code></pre>
 <p>We got a DEM object that consists of two attributes (DTM and DSM). In fact, this is exactly one attribute related to elevation (same type of data). For example, another attribute can be a spectral reflection. Therefore, we should change the attribute to the dimension. Let’s do that using <code>st_redimension</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="kw">DEM</span> <span class="op">=</span> <span class="fu">st_redimension</span>(<span class="kw">DEM</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="fu">st_dimensions</span>(<span class="kw">DEM</span>))[<span class="fl">3</span>] <span class="op">=</span> <span class="st">"elev"</span> <span class="co"># name new data dim</span>
-<span class="fu">st_dimensions</span>(<span class="kw">DEM</span>)
+<span class="kw">DEM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/redimension.html">st_redimension</a></span>(<span class="kw">DEM</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_dimensions.html">st_dimensions</a></span>(<span class="kw">DEM</span>))[<span class="fl">3</span>] <span class="op">=</span> <span class="st">"elev"</span> <span class="co"># name new data dim</span>
+<span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_dimensions.html">st_dimensions</a></span>(<span class="kw">DEM</span>)
 </pre></div>
 <pre><code>##      from   to offset delta               refsys point   values    
 ## x       1 2188 355733     1 ETRS89 / Poland CS92  TRUE     NULL [x]
@@ -255,7 +255,7 @@ body {text-align: justify}
 </pre></div>
 <p><img src="DEM-PLOT-1.png"></p>
 <p>In the first quadrant of the circle we can see 5 smaller circles. These are the craters formed after the impact of the Morasko meteorite. The largest found fragment weighs 272 kg and it is the largest meteorite found in Poland. The collection of found meteorites can be seen at the <a href="http://muzeumziemi.amu.edu.pl/">Earth Museum</a> in Poznań.</p>
-<p>Let’s calculate the crater width using the terrain transverse profile. We will use our centroid and the second example point towards 30 degrees N. Next, we will connect these points into a line (<code><a href="https://rdrr.io/pkg/sf/man/st.html">st_linestring()</a></code>) and then sample this line every 1 m (<code><a href="https://rdrr.io/pkg/sf/man/st_line_sample.html">st_line_sample()</a></code>), because our DEM has this resolution. As a result, we will get one complicated geometry (<em>MULTIPOINT</em>), which we have to convert into simple geometry (<em>POINT</em>) consisting of many points. The function <code><a href="https://rdrr.io/pkg/sf/man/st_cast.html">st_cast()</a></code> is used for this. In the last step, we extract the elevation values for these points using <code>st_extract()</code>.</p>
+<p>Let’s calculate the crater width using the terrain transverse profile. We will use our centroid and the second example point towards 30 degrees N. Next, we will connect these points into a line (<code><a href="https://rdrr.io/pkg/sf/man/st.html">st_linestring()</a></code>) and then sample this line every 1 m (<code><a href="https://rdrr.io/pkg/sf/man/st_line_sample.html">st_line_sample()</a></code>), because our DEM has this resolution. As a result, we will get one complicated geometry (<em>MULTIPOINT</em>), which we have to convert into simple geometry (<em>POINT</em>) consisting of many points. The function <code><a href="https://rdrr.io/pkg/sf/man/st_cast.html">st_cast()</a></code> is used for this. In the last step, we extract the elevation values for these points using <code><a href="https://rdrr.io/pkg/stars/man/st_extract.html">st_extract()</a></code>.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit">
 <span class="kw">pts_matrix</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">357121.7</span>, <span class="fl">515765.5</span>,
                       <span class="fl">357321.2</span>, <span class="fl">516017.9</span>),
@@ -264,7 +264,7 @@ body {text-align: justify}
 <span class="kw">line</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_line_sample.html">st_line_sample</a></span>(<span class="kw">line</span>, density = <span class="fl">1</span>)
 <span class="kw">line</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_cast.html">st_cast</a></span>(<span class="kw">line</span>, <span class="st">"POINT"</span>)
 <span class="co"># take attribute with DTM and DSM layers</span>
-<span class="kw">elev_line</span> <span class="op">=</span> <span class="fu">st_extract</span>(<span class="kw">DEM</span>, <span class="kw">line</span>)[[<span class="fl">1</span>]]
+<span class="kw">elev_line</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_extract.html">st_extract</a></span>(<span class="kw">DEM</span>, <span class="kw">line</span>)[[<span class="fl">1</span>]]
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="kw">elev_line</span>) <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"DTM"</span>, <span class="st">"DSM"</span>)
 </pre></div>
 <p>Now we can see what our transverse profile looks like.</p>
@@ -278,7 +278,7 @@ body {text-align: justify}
 <p>Okay, we checked the terrain. In the last step, let’s examine the height of the objects on it. We will calculate the height of the trees by subtracting the DTM from the DSM. The product of this difference is called normalized DSM, because it takes the terrain elevation as a reference.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit">
 <span class="kw">calc</span> <span class="op">=</span> <span class="fu">function</span>(<span class="kw">DEM</span>) (<span class="kw">DEM</span>[<span class="fl">2</span>] <span class="op">-</span> <span class="kw">DEM</span>[<span class="fl">1</span>])
-<span class="kw">nDSM</span> <span class="op">=</span> <span class="fu">st_apply</span>(<span class="kw">DEM</span>, MARGIN = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>), FUN = <span class="kw">calc</span>)
+<span class="kw">nDSM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_apply.html">st_apply</a></span>(<span class="kw">DEM</span>, MARGIN = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>), FUN = <span class="kw">calc</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">nDSM</span>, main = <span class="st">"Trees height [m]"</span>)
 </pre></div>
 <p><img src="DEM-TREES-1.png"></p>
