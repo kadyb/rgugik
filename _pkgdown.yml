@@ -9,5 +9,7 @@ navbar:
       menu:
         - text: "Orthophotomap"
           href: articles/orthophotomap.html
+        - text: "Digital Elevation Model"
+          href: articles/DEM.html        
         - text: "General Geographic Database"
           href: articles/articles/geodb_description.html
