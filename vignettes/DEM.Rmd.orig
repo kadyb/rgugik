@@ -101,8 +101,8 @@ req_df = DEM_request(morasko_buffer)
 Let's check the obtained results.
 
 ```{r}
-# display the first 10 rows and the first 6 columns
-req_df[1:10, 1:6]
+# display the first 10 rows and the first 5 columns
+req_df[1:10, 1:5]
 ```
 
 We have received many types of data with different formats, timeliness, resolution and accuracy.
@@ -119,7 +119,7 @@ req_df_DSM = req_df[req_df$format == "ARC/INFO ASCII GRID" &
 
 # combine data tables
 req_df = rbind(req_df_DTM, req_df_DSM)
-req_df[, 1:6]
+req_df[, 1:5]
 ```
 
 Now we can download the data using the `tile_download` function with our filtered data frame as input.
