@@ -1,7 +1,7 @@
 #' downloads General Geographic Databases for entire voivodeships
 #'
 #' @param voivodeships selected voivodeships in Polish or English, or TERC
-#' (function [`voivodeship_names()`] can by helpful)
+#' (object [`voivodeship_names`] can by helpful)
 #' @param outdir (optional) name of the output directory;
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
