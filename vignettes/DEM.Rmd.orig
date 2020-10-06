@@ -46,9 +46,10 @@ The source of the data will be Airborne Laser Scanning already processed to GRID
 
 ```{r message=FALSE}
 # load packages
-library("sf")
-library("stars")
-library("rgugik")
+library(sf)
+library(stars)
+library(rgugik)
+library(RColorBrewer)
 ```
 
 Our analysis area will be the Morasko Meteorite nature reserve located in the Greater Poland voivodeship.
@@ -68,8 +69,8 @@ morasko
 
 Now we have our point which is embedded in space (has a spatial reference).
 In the next step, let's create an approximate zone that will include the area of the reserve.
-The function `st_buffer` will be used for this.
-Before this operation, we need to transform the coordinate system to a system with metric units, e.g. Poland CS92 (EPSG 2180), using `st_transform` function.
+The function `st_buffer()` will be used for this.
+Before this operation, we need to transform the coordinate system to a system with metric units, e.g. Poland CS92 (EPSG 2180), using `st_transform()` function.
 
 ```{r}
 morasko = st_transform(morasko, crs = 2180)
@@ -80,7 +81,7 @@ We have created a buffer with a radius of 400 meters.
 Then we can visualize it.
 
 ```{r GEOMETRY}
-plot(morasko_buffer)
+plot(morasko_buffer, axes = TRUE, main = "Morasko reserve buffer")
 plot(morasko, add = TRUE)
 ```
 
@@ -89,9 +90,9 @@ The exact area can be determined from the polygon layer as in [orthophotomap](ht
 
 ### Raster data
 
-Now we will search for available elevation data for this area using the `DEM_request` function (it is analogous to the `orto_request` function).
+Now we will search for available elevation data for this area using the `DEM_request()` function (it is analogous to the `orto_request()` function).
 The argument of the function is our buffer with reserve.
-Note, `DEM_request` takes data frame as input, and currently the morasko_buffer object is a list, so we need to convert it.
+Note, `DEM_request()` takes data frame as input, and currently the morasko_buffer object is a list, so we need to convert it.
 
 ```{r}
 morasko_buffer = st_sf(morasko_buffer) # set as data frame
@@ -122,7 +123,7 @@ req_df = rbind(req_df_DTM, req_df_DSM)
 req_df[, 1:5]
 ```
 
-Now we can download the data using the `tile_download` function with our filtered data frame as input.
+Now we can download the data using the `tile_download()` function with our filtered data frame as input.
 
 ```{r message=FALSE}
 # 168.7 MB
@@ -152,7 +153,7 @@ You probably noticed the fourfold difference in their size.
 It results from twice the cells resolution between these models.
 We need to reduce them to a common resolution to be able to combine them into one stack.
 It is much better to lower resolution than to increase it because we cannot get more information and the processing will be faster.
-Let's use the `st_warp` function to do this.
+Let's use the `st_warp()` function to do this.
 
 ```{r}
 DSM = st_warp(DSM, dest = DTM, cellsize = 1)
@@ -175,7 +176,7 @@ We got a DEM object that consists of two attributes (DTM and DSM).
 In fact, this is exactly one attribute related to elevation (same type of data).
 For example, another attribute can be a spectral reflection.
 Therefore, we should change the attribute to the dimension.
-Let's do that using `st_redimension`.
+Let's do that using `st_redimension()`.
 
 ```{r}
 DEM = st_redimension(DEM)
@@ -238,7 +239,7 @@ The product of this difference is called normalized DSM, because it takes the te
 ```{r TREES}
 calc = function(DEM) (DEM[2] - DEM[1])
 nDSM = st_apply(DEM, MARGIN = c("x", "y"), FUN = calc)
-plot(nDSM, main = "Trees height [m]")
+plot(nDSM, main = "Trees height [m]", col = brewer.pal(n = 9, name = "Greens"))
 ```
 
 ```{r include=FALSE}
