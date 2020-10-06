@@ -102,42 +102,43 @@ body {text-align: justify}
 <div id="definition" class="section level2">
 <h2 class="hasAnchor">
 <a href="#definition" class="anchor"></a>Definition</h2>
-<p><strong>Orthophotomap</strong> is a raster, orthogonal and cartometric representation of the terrain surface, which was created by digital processing of aerial or satellite images. During the orthorectification, geometric distortions resulting from the land relief are removed by using Digital Elevation Models. The main advantage of an orthophotomap is the ability to measure geographic coordinates (it is georeferenced).</p>
-<p>The properties of the orthophotomap:</p>
+<p><strong>Orthophotomap</strong> is a raster, orthogonal and cartometric representation of the terrain surface created by digital processing of aerial or satellite images. During the orthorectification, geometric distortions resulting from the land relief are removed by using Digital Elevation Models (DEM). An orthophotomap is georeferenced, and therefore, allows to determine geographic coordinates for each of its cells.</p>
+<p>Orthophotomaps’ properties:</p>
 <ol style="list-style-type: decimal">
-<li>Spatial resolution - is related to the size of the smallest object that can be detected by the sensor and is determined by the size of the image cell (pixel). The smaller the cell, the more detail it represents. Too large a pixel means that individual objects in the scene are no longer visible.</li>
-<li>Composition - analogue images will be in shades of gray, while digital images can be in natural colors (RGB) as standard or near infrared (NIR).</li>
+<li>
+<strong>Spatial resolution</strong> - is related to the size of the smallest object that can be detected by the sensor and is determined by the size of the image cell (pixel). The smaller the cell, the more detail it represents. Too large a pixel means that individual objects in the scene are no longer recognizable.</li>
+<li>
+<strong>Composition</strong> - analog images are in shades of gray, while digital images can be in natural colors (RGB) or near infrared (NIR).</li>
 </ol>
 </div>
 <div id="purpose" class="section level2">
 <h2 class="hasAnchor">
 <a href="#purpose" class="anchor"></a>Purpose</h2>
-<p>The purpose of this exercise is to assess the vegetation condition of the selected area. We will do this based on remote sensing data (multichannel orthophotomap) and simple vegetation index.</p>
-<p><strong>NDVI</strong> (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and near infrared channels. Main application is monitoring and forecasting of agricultural production. It is calculated from the following formula:</p>
-<center>
-<span class="math inline">\(NDVI = \frac {NIR - RED} {NIR + RED}\)</span>
-</center>
-<p>Its value ranges from -1 to 1. The higher the value, the higher the biomass level. Values close to 0 and below are related to objects such as water, soil or buildings.</p>
+<p>The purpose of this exercise is to assess the vegetation condition of the selected area. It can be done based on remote sensing data (multispectral orthophotomap) and a simple vegetation index.</p>
+<p><strong>NDVI</strong> (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and the near infrared bands. Its main application is monitoring and forecasting of agricultural production. It is calculated using the following formula:</p>
+<p><span class="math display">\[NDVI = \frac {NIR - RED} {NIR + RED}\]</span></p>
+<p>Its value ranges from -1 to 1. The higher the value, the higher the biomass level. Values close to 0 and below are related to water, bare soil surfaces or buildings.</p>
 </div>
 <div id="analysis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#analysis" class="anchor"></a>Analysis</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># read packages</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://r-spatial.github.io/sf">"sf"</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"stars"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st"><a href="https://kadyb.github.io/rgugik">"rgugik"</a></span>)
+<span class="co"># attach packages</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/sf">sf</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">stars</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://kadyb.github.io/rgugik">rgugik</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">RColorBrewer</span>)
 </pre></div>
-<p>Our analysis area will be the Krajkowo nature reserve located in the Greater Poland voivodeship. It was established in 1958 in order to protect the breeding places of birds, especially the <em>grey heron</em> and the <em>great black cormorant</em>, and to protect the landscape of the Warta oxbow.</p>
+<p>The analysis area is the Krajkowo nature reserve located in the Greater Poland voivodeship. It was established in 1958 in order to protect the breeding places of birds, especially the <em>grey heron</em> and the <em>great black cormorant</em>, and to protect the landscape of the Warta oxbow.</p>
 <div id="vector-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#vector-data" class="anchor"></a>Vector data</h3>
-<p>Data on nature reserves can be found in General Geographic Databases. We can get them using the function <code>geodb_download</code>. Let’s do that.</p>
+<p>Data on nature reserves can be found in General Geographic Databases. We can obtain them using the <code><a href="../reference/geodb_download.html">geodb_download()</a></code> function. Let’s do that.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># 17.6 MB</span>
 <span class="fu"><a href="../reference/geodb_download.html">geodb_download</a></span>(<span class="st">"wielkopolskie"</span>, outdir = <span class="st">"./data"</span>)
 </pre></div>
-<p>Our database consists of many files in GML (<em>Geography Markup Language</em>) format. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/geodb_description.html">here</a>. The table with the nature reserves can be found in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file. We will use the <strong>sf</strong> package and the <code>read_sf</code> function to load it.</p>
+<p>The downloaded database consists of many files in the GML (<em>Geography Markup Language</em>) format. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/geodb_description.html">here</a>. The table with the nature reserves is in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file. We can use the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function to load it.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">reserves</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.201.30/BDOO/PL.PZGIK.201.30__OT_TCRZ_A.xml"</span>)
 </pre></div>
@@ -148,19 +149,19 @@ body {text-align: justify}
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/ncell.html">nrow</a></span>(<span class="kw">reserves</span>)
 <span class="co">## [1] 110</span>
 </pre></div>
-<p>In simple terms, it is a spatial table consisting of 110 observations (rows) and 28 variables (columns). The names of the objects can be found in the <strong>nazwa</strong> column. We are interested in Krajkowo reserve, so let’s choose it.</p>
+<p>In simple terms, it is a spatial table consisting of 110 observations (rows) and 28 variables (columns). The names of the objects are located in the <strong>nazwa</strong> column, which allow us to select the Krajkowo reserve only.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="co"># selection by attribute</span>
 <span class="kw">krajkowo</span> <span class="op">=</span> <span class="kw">reserves</span>[<span class="kw">reserves</span><span class="op">$</span><span class="kw">nazwa</span> <span class="op">==</span> <span class="st">"Krajkowo"</span>, ]
 </pre></div>
-<p>We can display it in two ways:</p>
+<p>We can display it in two basic ways:</p>
 <ol style="list-style-type: decimal">
-<li>Using the <code>plot</code> function and directly specifying the column with the object geometry: <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot(krajkowo$geometry)</a></code>
+<li>Using the <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code> function and directly specifying the column with the object geometry: <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot(krajkowo$geometry)</a></code>
 </li>
-<li>Using the <code>plot</code> and <code>st_geometry</code> functions, which will obtain geometry from the vector layer. In the first case, we need to know the name of the column with geometry, while in the second case, the geometry will be selected automatically (it is the safer way).</li>
+<li>Using the <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code> and <code><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry()</a></code> functions that obtain geometry from the vector layer. In the first case, we need to know the name of the column with geometries (e.g. <code>geometry</code>, <code>geom</code>, etc.), while in the second case, the geometry is selected automatically (it is the safer and preferable way).</li>
 </ol>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">krajkowo</span>))
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">krajkowo</span>), axes = <span class="fl">TRUE</span>, main = <span class="st">"Krajkowo reserve"</span>)
 </pre></div>
 <p><img src="orto-GEOMETRY-1.png"></p>
 <p>We can also calculate the area of this polygon.</p>
@@ -169,16 +170,16 @@ body {text-align: justify}
 <span class="kw">units</span>::<span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="kw">krajkowo_area</span>, <span class="st">"ha"</span>) <span class="co"># convert to [ha]</span>
 </pre></div>
 <pre><code>## 165.2744 [ha]</code></pre>
-<p>The function <code>st_area</code> returned the area in m^2, after conversion we got the result 165 ha.</p>
+<p>The <code><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area()</a></code> function returned the area in m^2, and after the conversion we got the result of 165 ha.</p>
 </div>
 <div id="raster-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#raster-data" class="anchor"></a>Raster data</h3>
-<p>Now let’s move on to the stage of downloading the orthophotomap. We will use the <code><a href="../reference/orto_request.html">orto_request()</a></code> function, which will show us what images are available in the analyzed area. As an argument of this function we will give our Krajkowo polygon.</p>
+<p>Now let’s move on to the stage of downloading the orthophotomap. We use the <code><a href="../reference/orto_request.html">orto_request()</a></code> function that show us which images are available for the analyzed area. We need to provide our Krajkowo polygon as the argument of this function.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">req_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/orto_request.html">orto_request</a></span>(<span class="kw">krajkowo</span>)
 </pre></div>
-<p>We can display the result table using the code below.</p>
+<p>We can display the resulting table using the code below.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="co"># display the first 10 rows and the first 6 columns</span>
 <span class="kw">req_df</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>]
@@ -194,12 +195,12 @@ body {text-align: justify}
 ## 8  N-33-142-B-d-4-2 2016       0.25         RGB Digital PL-1992
 ## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
 ## 10 N-33-142-B-d-4-4 2016       0.25         RGB Digital PL-1992</code></pre>
-<p>To complete the project task we need near infrared data, so in the next step select those rows for which the <code>composition</code> column has the value “CIR”.</p>
+<p>To complete our task, we need to obtain a near infrared data. So in the next step, we select those rows for which the <code>composition</code> column has the value of “CIR”.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="co"># select IR images and overwrite the req_df object</span>
 <span class="kw">req_df</span> <span class="op">=</span> <span class="kw">req_df</span>[<span class="kw">req_df</span><span class="op">$</span><span class="kw">composition</span> <span class="op">==</span> <span class="st">"CIR"</span>, ]
 </pre></div>
-<p>Then let’s sort the table according to the year the photo was taken, where the most recent images will be at the beginning.</p>
+<p>Then let’s sort the table according to the year the photo was taken, with the most recent images at the top of the table.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="kw">req_df</span> <span class="op">=</span> <span class="kw">req_df</span>[<span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span>(<span class="op">-</span><span class="kw">req_df</span><span class="op">$</span><span class="kw">year</span>), ]
 </pre></div>
@@ -217,14 +218,14 @@ body {text-align: justify}
 <div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="kw">req_df</span> <span class="op">=</span> <span class="kw">req_df</span>[<span class="kw">req_df</span><span class="op">$</span><span class="kw">year</span> <span class="op">==</span> <span class="fl">2016</span>, ]
 </pre></div>
-<p>Note that the result is pairs of objects (images). This means that our Krajkowo reserve is depicted in two photos within one series. Therefore, the <code>seriesID</code> column is used to combine smaller images into larger mosaics.</p>
+<p>Note that the result has a pair of objects (images). This means that our Krajkowo reserve is depicted in two photos within one series. Therefore, the <code>seriesID</code> column is used to combine smaller images into a larger mosaic.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit">
 <span class="kw">req_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">9</span>)]
 </pre></div>
 <pre><code>##            sheetID year resolution composition  sensor seriesID
 ## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
 ## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837</code></pre>
-<p>The <code><a href="../reference/tile_download.html">tile_download()</a></code> function is used to download orthophotomaps, it takes our selected table as main argument.</p>
+<p>The <code><a href="../reference/tile_download.html">tile_download()</a></code> function is used to download orthophotomaps by taking our selected table as the main argument. We can also specify the output folder with the <code>outdir</code> argument.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="co"># 61.9 MB</span>
 <span class="fu"><a href="../reference/tile_download.html">tile_download</a></span>(<span class="kw">req_df</span>, outdir = <span class="st">"./data"</span>)
@@ -233,27 +234,27 @@ body {text-align: justify}
 <div id="processing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#processing" class="anchor"></a>Processing</h3>
-<p>Let’s load the downloaded orthophotomaps using the <code>read_stars()</code> function from the <strong>stars</strong> package, which allows to work on spatiotemporal arrays. In our case it is a raster consisting of three bands (NIR, R, G) for only one year. We don’t have to load the entire data array into memory (which is a very demanding task). We can read the file metadata and a certain amount of data by using the <code>proxy</code> argument and further process the data analogously.</p>
+<p>Let’s load the downloaded orthophotomaps using the <code>read_stars()</code> function from the <strong>stars</strong> package, which allows to work with spatiotemporal arrays. In our case, it is a raster consisting of three bands (NIR, R, G) for only one point in time. We don’t need to load the entire data array into memory - we can read the file’s metadata instead by using the <code>proxy</code> argument.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit">
 <span class="kw">img1</span> <span class="op">=</span> <span class="fu">read_stars</span>(<span class="st">"data/69837_329609_N-33-142-B-d-4-2.TIF"</span>, proxy = <span class="fl">TRUE</span>)
 <span class="kw">img2</span> <span class="op">=</span> <span class="fu">read_stars</span>(<span class="st">"data/69837_329613_N-33-142-B-d-4-4.TIF"</span>, proxy = <span class="fl">TRUE</span>)
 </pre></div>
-<p>Then we will perform two operations: rasters merging and cutting to the reserve area. The use of a <code>proxy</code> allows to get the result immediately, while processing the entire image would take several minutes. Images have their own specific Coordinate Reference Systems, let’s make sure it is correct (should be EPSG 2180) after merging.</p>
+<p>Now we can perform two operations: rasters merging and cropping to the reserve area. The use of a <code>proxy</code> allows to get the result almost immediately, while processing the entire image (<code>proxy = FALSE</code>) would take several minutes. Images have their own specific Coordinate Reference Systems, so let’s make sure it is the correct one after merging. It should be EPSG 2180 in this case.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit">
 <span class="kw">img</span> <span class="op">=</span> <span class="fu">st_mosaic</span>(<span class="kw">img1</span>, <span class="kw">img2</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crs.html">st_crs</a></span>(<span class="kw">img</span>) <span class="op">=</span> <span class="fl">2180</span> <span class="co"># overwrite CRS to be sure</span>
 <span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crop.html">st_crop</a></span>(<span class="kw">img</span>, <span class="kw">krajkowo</span>)
 </pre></div>
-<p>Let’s display the effect using the <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code> function. Defining the input bands in the <code>rgb</code> argument creates a composition consisting of three bands. We use NIR, R and G bands. The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the <code>rgb</code> argument.</p>
+<p>Let’s display the effect using the <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code> function, and define the input bands with the <code>rgb</code> argument. It creates a composition consisting of three bands: NIR, R and G in our case. The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the <code>rgb</code> argument name.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">img</span>, rgb = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), main = <span class="kw">NULL</span>, axes = <span class="fl">TRUE</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">img</span>, rgb = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), main = <span class="kw">NULL</span>)
 </pre></div>
 <p><img src="orto-CIR-1.png"></p>
-<p>In the last step, calculate the NDVI using the near infrared (1) and red (2) bands.</p>
+<p>In the last step, we calculate the NDVI using the near infrared (1) and red (2) bands.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit">
 <span class="kw">calc_ndvi</span> <span class="op">=</span> <span class="fu">function</span>(<span class="kw">img</span>) (<span class="kw">img</span>[<span class="fl">1</span>] <span class="op">-</span> <span class="kw">img</span>[<span class="fl">2</span>]) <span class="op">/</span> (<span class="kw">img</span>[<span class="fl">1</span>] <span class="op">+</span> <span class="kw">img</span>[<span class="fl">2</span>])
 <span class="kw">ndvi</span> <span class="op">=</span> <span class="fu">st_apply</span>(<span class="kw">img</span>, MARGIN = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>), FUN = <span class="kw">calc_ndvi</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">ndvi</span>, main = <span class="st">"NDVI"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">ndvi</span>, main = <span class="st">"NDVI"</span>, col = <span class="fu">brewer.pal</span>(n = <span class="fl">10</span>, name = <span class="st">"RdYlGn"</span>))
 </pre></div>
 <p><img src="orto-NDVI-1.png"></p>
 <p>A surprising observation is the relatively low NDVI values for the forest area. There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated. For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).</p>
