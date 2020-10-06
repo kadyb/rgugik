@@ -79,7 +79,7 @@ morasko_buffer = st_buffer(morasko, dist = 400)
 We have created a buffer with a radius of 400 meters.
 Then we can visualize it.
 
-```{r}
+```{r GEOMETRY}
 plot(morasko_buffer)
 plot(morasko, add = TRUE)
 ```
@@ -192,7 +192,7 @@ DEM = st_crop(DEM, morasko_buffer)
 
 Let's check what the visualization looks like.
 
-```{r}
+```{r PLOT}
 plot(DEM, col = terrain.colors(99, alpha = NULL))
 ```
 
@@ -203,30 +203,44 @@ The collection of found meteorites can be seen at the [Earth Museum](http://muze
 
 Let's calculate the crater width using the terrain transverse profile.
 We will use our centroid and the second example point towards 30 degrees N.
+Next, we will connect these points into a line (`st_linestring()`) and then sample this line every 1 m (`st_line_sample()`), because our DEM has this resolution.
+As a result, we will get one complicated geometry (*MULTIPOINT*), which we have to convert into simple geometry (*POINT*) consisting of many points.
+The function `st_cast()` is used for this.
+In the last step, we extract the elevation values for these points using `st_extract()`.
 
 ```{r}
 pts_matrix = matrix(c(357121.7, 515765.5,
                       357321.2, 516017.9),
                     ncol = 2, byrow = TRUE)
 line = st_sfc(st_linestring(pts_matrix), crs = 2180)
-```
-
-```{r}
-line_elev = ""
-```
-
-```{r}
-length(as.vector(DEM[, , , 1]$DTM.DSM)) # 641601
-length(as.vector(DEM[line][, , , 1]$DTM.DSM)) # 50600
-```
-
-```{r}
-DEM2 = DEM[line]
-length(c(DEM2$DTM.DSM)) # 101200
-```
-
-```{r}
 line = st_line_sample(line, density = 1)
-st_extract(DEM, line)
+line = st_cast(line, "POINT")
+# take attribute with DTM and DSM layers
+elev_line = st_extract(DEM, line)[[1]]
+colnames(elev_line) = c("DTM", "DSM")
 ```
 
+Now we can see what our transverse profile looks like.
+
+```{r PROFILE}
+plot(elev_line[, "DTM"], type = "l", main = "Digital Terrain Model",
+     ylab = "Elevation [m]", xlab = "Distance [m]")
+abline(v = c(126, 219), col = "blue")
+```
+
+The largest width of the impact crater is about 90 m.
+
+Okay, we checked the terrain.
+In the last step, let's examine the height of the objects on it.
+We will calculate the height of the trees by subtracting the DTM from the DSM.
+The product of this difference is called normalized DSM, because it takes the terrain elevation as a reference.
+
+```{r TREES}
+calc = function(DEM) (DEM[2] - DEM[1])
+nDSM = st_apply(DEM, MARGIN = c("x", "y"), FUN = calc)
+plot(nDSM, main = "Trees height [m]")
+```
+
+```{r include=FALSE}
+unlink("data", recursive = TRUE, force = TRUE)
+```
