@@ -17,21 +17,25 @@ body {text-align: justify}
 
 ## Definition
 
-**Digital Elevation Models** are models that describe the terrain surface.
-They are created as a result of the processing of aerial photos, laser scanning (LiDAR), geodetic surveying or radar interferometry (InSAR).
-DEMs are one of the key datasets in Geographic Information Systems (GIS) and constitute the basis for environmental spatial analyses.
-In addition, they are a source for derived products such as terrain slope and exposure.
+**Digital Elevation Models** are models describing the terrain surface.
+They are created as a result of the processing of aerial photos, laser scanning (LiDAR), geodetic surveying, or radar interferometry (InSAR).
+DEMs are one of the key datasets in Geographic Information Systems (GIS) and constitute the basis for many environmental spatial analyses.
+In addition, they are a source for derived products such as terrain slope and aspect.
 DEM is the general name for a group of models with different characteristics, including:
 
 1. **Digital Terrain Model** (DTM) - numerical representation of the terrain with its morphological forms.
 This model is devoid of any objects above the ground, such as buildings or trees.
 2. **Digital Surface Model** (DSM) - numerical representation of the terrain, including objects on its surface, such as buildings and trees.
 
-<center> ![DTM-DSM](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/DTM_DSM.svg/1024px-DTM_DSM.svg.png){ width=50% } </center>
+<center> ![DTM-DSM](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/DTM_DSM.svg/1024px-DTM_DSM.svg.png){ width=50% }
+<p style="font-size:8px;">Wikimedia Commons contributors, "File:DTM DSM.svg," Wikimedia Commons, the free media repository, https://commons.wikimedia.org/w/index.php?title=File:DTM_DSM.svg&oldid=475779479 (accessed October 7, 2020).
+</p>
+</center>
+<br>
 
 The properties of the DEMs:
 
-1. Format - we can distinguish three structures: **GRID** (point / cell), **TIN** (irregular topological triangle network) and **contour lines** (vector).
+1. Format - we can distinguish three main structures: **GRID** (point / cell), **TIN** (irregular topological triangle network) and **contour lines** (vector).
 Currently, the most used format is GRID.
 2. Accuracy - is related to the vertical measurement error.
 3. Spatial resolution - is related to the size of the smallest object that can be detected by the sensor and is determined by the size of the image cell (pixel).
@@ -40,7 +44,7 @@ The larger the cell, the more generalized form of the terrain it presents.
 ## Purpose
 
 The purpose of this exercise is to determine the elevation of the ground surface and objects in the selected area.
-The source of the data will be Airborne Laser Scanning already processed to GRID format.
+The source of the data will be Airborne Laser Scanning already processed to the GRID format.
 
 ## Analysis
 
@@ -49,17 +53,16 @@ The source of the data will be Airborne Laser Scanning already processed to GRID
 library(sf)
 library(stars)
 library(rgugik)
-library(RColorBrewer)
 ```
 
-Our analysis area will be the Morasko Meteorite nature reserve located in the Greater Poland voivodeship.
+Our analysis area is the Morasko Meteorite nature reserve located in the Greater Poland voivodeship.
 It was established in 1976 in order to protect the area of impact craters, which, according to researchers, were formed in the fall of the Morasko meteorite about 5,000 years ago.
-In addition, the oak-hornbeam forest with rare species of plants (*lilium martagon*, *ceratophyllum submersum*) and birds (*european nightjar*, *black woodpecker*) are protected.
+In addition, the oak-hornbeam forest with rare species of plants (*lilium martagon*, *ceratophyllum submersum*) and birds (*european nightjar*, *black woodpecker*) is protected.
 
 ### Vector data
 
-The centroid (geometric center) of the Morasko Meteorite nature reserve has X = 16.895 and Y = 52.487 coordinates in World Geodetic System 1984 (EPSG 4326).
-Let's create this point with the **sf** package.
+The centroid of the Morasko Meteorite nature reserve has X = 16.895 and Y = 52.487 coordinates in World Geodetic System 1984 (EPSG 4326).
+Let's start by creating this point with the **sf** package.
 
 ```{r}
 morasko = st_point(c(16.895, 52.489))
@@ -67,7 +70,7 @@ morasko = st_sfc(morasko, crs = 4326) # set coordinate system
 morasko
 ```
 
-Now we have our point which is embedded in space (has a spatial reference).
+Now our point is embedded in space (has a spatial reference).
 In the next step, let's create an approximate zone that will include the area of the reserve.
 The function `st_buffer()` will be used for this.
 Before this operation, we need to transform the coordinate system to a system with metric units, e.g. Poland CS92 (EPSG 2180), using `st_transform()` function.
@@ -78,21 +81,21 @@ morasko_buffer = st_buffer(morasko, dist = 400)
 ```
 
 We have created a buffer with a radius of 400 meters.
-Then we can visualize it.
+Let's visualize it.
 
 ```{r GEOMETRY}
 plot(morasko_buffer, axes = TRUE, main = "Morasko reserve buffer")
 plot(morasko, add = TRUE)
 ```
 
-Of course, the area shown is not exactly a reserve area.
-The exact area can be determined from the polygon layer as in [orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html) example using General Geographic Database.
+Of course, the area shown above is not exactly the reserve area.
+The exact area can be determined from the polygon layer as in [orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html) example using the General Geographic Database.
 
 ### Raster data
 
-Now we will search for available elevation data for this area using the `DEM_request()` function (it is analogous to the `orto_request()` function).
-The argument of the function is our buffer with reserve.
-Note, `DEM_request()` takes data frame as input, and currently the morasko_buffer object is a list, so we need to convert it.
+Now we can search for available elevation data for this area using the `DEM_request()` function (it is analogous to the `orto_request()` function).
+The only argument of the function is our reserve buffer.
+Note that `DEM_request()` takes data frame as input, and currently the `morasko_buffer` object is a list, so we need to convert it first.
 
 ```{r}
 morasko_buffer = st_sf(morasko_buffer) # set as data frame
@@ -106,9 +109,9 @@ Let's check the obtained results.
 req_df[1:10, 1:5]
 ```
 
-We have received many types of data with different formats, timeliness, resolution and accuracy.
-We need Digital Terrain Model and Digital Surface Model in "ARC/INFO ASCII GRID" format for our analysis.
-Let's make data selection by creating two tables and combining them at the end.
+We have received metadata with many types of data of different formats, timeliness, resolution, and accuracy.
+For our analysis, we need Digital Terrain Model (DTM) and Digital Surface Model (DSM) in the "ARC/INFO ASCII GRID" format.
+Let's make data selection by creating two tables and combining them together.
 
 ```{r}
 req_df_DTM = req_df[req_df$format == "ARC/INFO ASCII GRID" &
@@ -132,7 +135,7 @@ tile_download(req_df, outdir = "./data")
 
 ### Processing
 
-Let’s load the downloaded numerical models using the `read_stars()` function from the **stars** package, which allows to work on spatiotemporal arrays.
+Let’s load the downloaded numerical models using the `read_stars()` function from the **stars** package, which allows working on spatiotemporal arrays.
 We have two files, one represents DTM and second represents DSM.
 
 ```{r}
@@ -149,18 +152,18 @@ st_crs(DTM) = 2180
 st_crs(DSM) = 2180
 ```
 
-You probably noticed the fourfold difference in their size.
-It results from twice the cells resolution between these models.
-We need to reduce them to a common resolution to be able to combine them into one stack.
-It is much better to lower resolution than to increase it because we cannot get more information and the processing will be faster.
+You probably noticed the four-fold difference in their sizes.
+It is due to the difference between their cells resolutions.
+We need to unify them to a common resolution to be able to combine them into one stack.
+It is much better to use a lower resolution than to increase it, because we cannot get more information and the processing will be faster.
 Let's use the `st_warp()` function to do this.
 
 ```{r}
 DSM = st_warp(DSM, dest = DTM, cellsize = 1)
 ```
 
-We will now combine our models into one stack.
-The matrix cells will contain exactly the same objects.
+We now can combine our models into one stack.
+The matrix cells contain exactly the same areas.
 
 ```{r}
 DEM = c(DTM, DSM)
@@ -172,10 +175,9 @@ rm(DSM)
 rm(DTM)
 ```
 
-We got a DEM object that consists of two attributes (DTM and DSM).
-In fact, this is exactly one attribute related to elevation (same type of data).
-For example, another attribute can be a spectral reflection.
-Therefore, we should change the attribute to the dimension.
+Now we have a DEM object that consists of two attributes (DTM and DSM).
+In fact, both attributes contains same type of data as they are representing elevation.
+Therefore, we can collapse the attributes into a new dimension.
 Let's do that using `st_redimension()`.
 
 ```{r}
@@ -185,27 +187,27 @@ st_dimensions(DEM)
 ```
 
 After this operation, our elevation attribute consists of the DTM and DSM layers (dimensions).
-Then let's cut the rasters to our buffer.
+Then let's crop the rasters to our buffer.
 
 ```{r}
 DEM = st_crop(DEM, morasko_buffer)
 ```
 
-Let's check what the visualization looks like.
+Let's check what the result looks like.
 
 ```{r PLOT}
 plot(DEM, col = terrain.colors(99, alpha = NULL))
 ```
 
-In the first quadrant of the circle we can see 5 smaller circles.
+In the first quadrant of the circle, we can see five smaller circles.
 These are the craters formed after the impact of the Morasko meteorite.
-The largest found fragment weighs 272 kg and it is the largest meteorite found in Poland.
+The largest fragment found weighs 272 kg and it is the largest meteorite found in Poland.
 The collection of found meteorites can be seen at the [Earth Museum](http://muzeumziemi.amu.edu.pl/) in Poznań.
 
 Let's calculate the crater width using the terrain transverse profile.
-We will use our centroid and the second example point towards 30 degrees N.
-Next, we will connect these points into a line (`st_linestring()`) and then sample this line every 1 m (`st_line_sample()`), because our DEM has this resolution.
-As a result, we will get one complicated geometry (*MULTIPOINT*), which we have to convert into simple geometry (*POINT*) consisting of many points.
+We can use our centroid and add a second example point 30 degrees towards N.
+Next, we connect these points into a line (`st_linestring()`) and then sample this line every 1 m (`st_line_sample()`), because our DEM has this resolution.
+As a result, we get one complex geometry (*MULTIPOINT*), which we can convert into a simple geometry (*POINT*) consisting of many points.
 The function `st_cast()` is used for this.
 In the last step, we extract the elevation values for these points using `st_extract()`.
 
@@ -216,16 +218,25 @@ pts_matrix = matrix(c(357121.7, 515765.5,
 line = st_sfc(st_linestring(pts_matrix), crs = 2180)
 line = st_line_sample(line, density = 1)
 line = st_cast(line, "POINT")
+```
+
+```{r}
+# first layer only
+plot(DEM[, , , 1], reset = FALSE, col = terrain.colors(99, alpha = NULL))
+plot(line, add = TRUE, col = "red", lwd = 1, key.pos = NULL)
+```
+
+```{r}
 # take attribute with DTM and DSM layers
 elev_line = st_extract(DEM, line)[[1]]
 colnames(elev_line) = c("DTM", "DSM")
 ```
 
-Now we can see what our transverse profile looks like.
+Now we can see how our transverse profile looks like.
 
 ```{r PROFILE}
 plot(elev_line[, "DTM"], type = "l", main = "Digital Terrain Model",
-     ylab = "Elevation [m]", xlab = "Distance [m]")
+     ylab = "Elevation [m]", xlab = "Distance [m]", col = "red")
 abline(v = c(126, 219), col = "blue")
 ```
 
@@ -233,13 +244,13 @@ The largest width of the impact crater is about 90 m.
 
 Okay, we checked the terrain.
 In the last step, let's examine the height of the objects on it.
-We will calculate the height of the trees by subtracting the DTM from the DSM.
+For this purpose, we calculate the height of the trees by subtracting the DTM from the DSM.
 The product of this difference is called normalized DSM, because it takes the terrain elevation as a reference.
 
 ```{r TREES}
 calc = function(DEM) (DEM[2] - DEM[1])
 nDSM = st_apply(DEM, MARGIN = c("x", "y"), FUN = calc)
-plot(nDSM, main = "Trees height [m]", col = brewer.pal(n = 9, name = "Greens"))
+plot(nDSM, main = "Trees height [m]", col = hcl.colors(9, palette = "RdYlGn"))
 ```
 
 ```{r include=FALSE}
