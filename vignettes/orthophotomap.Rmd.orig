@@ -50,7 +50,6 @@ Values close to 0 and below are related to water, bare soil surfaces or building
 library(sf)
 library(stars)
 library(rgugik)
-library(RColorBrewer)
 ```
 
 The analysis area is the Krajkowo nature reserve located in the Greater Poland voivodeship.
@@ -211,7 +210,7 @@ In the last step, we calculate the NDVI using the near infrared (1) and red (2) 
 ```{r NDVI}
 calc_ndvi = function(img) (img[1] - img[2]) / (img[1] + img[2])
 ndvi = st_apply(img, MARGIN = c("x", "y"), FUN = calc_ndvi)
-plot(ndvi, main = "NDVI", col = brewer.pal(n = 10, name = "RdYlGn"))
+plot(ndvi, main = "NDVI", col = hcl.colors(10, palette = "RdYlGn"))
 ```
 
 A surprising observation is the relatively low NDVI values for the forest area.
