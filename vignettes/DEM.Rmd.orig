@@ -61,7 +61,7 @@ In addition, the oak-hornbeam forest with rare species of plants (*lilium martag
 
 ### Vector data
 
-The centroid of the Morasko Meteorite nature reserve has X = 16.895 and Y = 52.487 coordinates in World Geodetic System 1984 (EPSG 4326).
+The centroid (geometric center) of the Morasko Meteorite nature reserve has X = 16.895 and Y = 52.487 coordinates in World Geodetic System 1984 (EPSG 4326).
 Let's start by creating this point with the **sf** package.
 
 ```{r}
@@ -162,8 +162,8 @@ Let's use the `st_warp()` function to do this.
 DSM = st_warp(DSM, dest = DTM, cellsize = 1)
 ```
 
-We now can combine our models into one stack.
-The matrix cells contain exactly the same areas.
+Now, both models have the same dimensions (the number of rows and columns) and spatial resolution.
+Thus, we can combine them into one object (`DEM`).
 
 ```{r}
 DEM = c(DTM, DSM)
@@ -207,9 +207,8 @@ The collection of found meteorites can be seen at the [Earth Museum](http://muze
 Let's calculate the crater width using the terrain transverse profile.
 We can use our centroid and add a second example point 30 degrees towards N.
 Next, we connect these points into a line (`st_linestring()`) and then sample this line every 1 m (`st_line_sample()`), because our DEM has this resolution.
-As a result, we get one complex geometry (*MULTIPOINT*), which we can convert into a simple geometry (*POINT*) consisting of many points.
+As a result, we get one complex geometry (*MULTIPOINT*), which we have to convert into a simple geometry (*POINT*) consisting of many points.
 The function `st_cast()` is used for this.
-In the last step, we extract the elevation values for these points using `st_extract()`.
 
 ```{r}
 pts_matrix = matrix(c(357121.7, 515765.5,
@@ -220,11 +219,14 @@ line = st_line_sample(line, density = 1)
 line = st_cast(line, "POINT")
 ```
 
-```{r}
-# first layer only
-plot(DEM[, , , 1], reset = FALSE, col = terrain.colors(99, alpha = NULL))
-plot(line, add = TRUE, col = "red", lwd = 1, key.pos = NULL)
+```{r LINE}
+# plot DTM (first layer)
+plot(DEM[, , , 1], main = "DTM [m]", col = terrain.colors(99, alpha = NULL),
+     reset = FALSE)
+plot(line, col = "red", add = TRUE)
 ```
+
+In the last step, we extract the elevation values for these points using `st_extract()`.
 
 ```{r}
 # take attribute with DTM and DSM layers
@@ -250,7 +252,8 @@ The product of this difference is called normalized DSM, because it takes the te
 ```{r TREES}
 calc = function(DEM) (DEM[2] - DEM[1])
 nDSM = st_apply(DEM, MARGIN = c("x", "y"), FUN = calc)
-plot(nDSM, main = "Trees height [m]", col = hcl.colors(9, palette = "RdYlGn"))
+plot(nDSM, main = "Trees height [m]",
+     col = hcl.colors(9, palette = "Greens", rev = TRUE))
 ```
 
 ```{r include=FALSE}
