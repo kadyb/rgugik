@@ -49,7 +49,6 @@ Values close to 0 and below are related to water, bare soil surfaces or building
 library(sf)
 library(stars)
 library(rgugik)
-library(RColorBrewer)
 ```
 
 The analysis area is the Krajkowo nature reserve located in the Greater Poland voivodeship.
@@ -146,14 +145,14 @@ req_df[1:10, 1:6]
 
 ```
 ##             sheetID year resolution composition  sensor     CRS
-## 1  N-33-142-B-d-4-2 2004       0.50         B/W  Analog PL-1992
+## 1  N-33-142-B-d-4-4 2010       0.25         RGB Digital PL-1992
 ## 2  N-33-142-B-d-4-4 2004       0.50         B/W  Analog PL-1992
-## 3  N-33-142-B-d-4-4 2010       0.25         RGB Digital PL-1992
+## 3  N-33-142-B-d-4-2 2004       0.50         B/W  Analog PL-1992
 ## 4  N-33-142-B-d-4-2 2010       0.25         RGB Digital PL-1992
-## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992
-## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992
-## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
-## 8  N-33-142-B-d-4-2 2016       0.25         RGB Digital PL-1992
+## 5  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
+## 6  N-33-142-B-d-4-2 2016       0.25         RGB Digital PL-1992
+## 7  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992
+## 8  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992
 ## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
 ## 10 N-33-142-B-d-4-4 2016       0.25         RGB Digital PL-1992
 ```
@@ -183,12 +182,12 @@ req_df[, c(1:5, 9)]
 
 ```
 ##             sheetID year resolution composition  sensor seriesID
-## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
+## 5  N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
 ## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837
-## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital    69903
-## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital    69903
-## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital    69763
-## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital    69763
+## 23 N-33-142-B-d-4-4 2013       0.25         CIR Digital    69903
+## 24 N-33-142-B-d-4-2 2013       0.25         CIR Digital    69903
+## 7  N-33-142-B-d-4-2 2010       0.25         CIR Digital    69763
+## 8  N-33-142-B-d-4-4 2010       0.25         CIR Digital    69763
 ```
 
 
@@ -207,7 +206,7 @@ req_df[, c(1:5, 9)]
 
 ```
 ##            sheetID year resolution composition  sensor seriesID
-## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
+## 5 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
 ## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837
 ```
 
@@ -222,7 +221,7 @@ tile_download(req_df, outdir = "./data")
 
 ### Processing
 
-Let's load the downloaded orthophotomaps using the `read_stars()` function from the **stars** package, which allows to work with spatiotemporal arrays.
+Let's load the downloaded orthophotomaps using the `read_stars()` function from the **stars** package, which allows working with spatiotemporal arrays.
 In our case, it is a raster consisting of three bands (NIR, R, G) for only one point in time.
 We don't need to load the entire data array into memory - we can read the file's metadata instead by using the `proxy` argument.
 
@@ -263,7 +262,7 @@ In the last step, we calculate the NDVI using the near infrared (1) and red (2) 
 ```r
 calc_ndvi = function(img) (img[1] - img[2]) / (img[1] + img[2])
 ndvi = st_apply(img, MARGIN = c("x", "y"), FUN = calc_ndvi)
-plot(ndvi, main = "NDVI", col = brewer.pal(n = 10, name = "RdYlGn"))
+plot(ndvi, main = "NDVI", col = hcl.colors(10, palette = "RdYlGn"))
 ```
 
 ![](orto-NDVI-1.png)
