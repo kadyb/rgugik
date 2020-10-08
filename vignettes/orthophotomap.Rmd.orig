@@ -172,7 +172,7 @@ tile_download(req_df, outdir = "./data")
 
 ### Processing
 
-Let's load the downloaded orthophotomaps using the `read_stars()` function from the **stars** package, which allows to work with spatiotemporal arrays.
+Let's load the downloaded orthophotomaps using the `read_stars()` function from the **stars** package, which allows working with spatiotemporal arrays.
 In our case, it is a raster consisting of three bands (NIR, R, G) for only one point in time.
 We don't need to load the entire data array into memory - we can read the file's metadata instead by using the `proxy` argument.
 
