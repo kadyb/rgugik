@@ -137,7 +137,7 @@
     <p>returns a data frame with vector points and terrain elevation for a given polygon</p>
     </div>
 
-    <pre class="usage"><span class='fu'>pointDTM_get</span>(<span class='kw'>polygon</span>, distance = <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>pointDTM_get</span>(<span class='kw'>polygon</span>, distance = <span class='fl'>1</span>, print_iter = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -152,6 +152,11 @@ the input coordinate system must be EPSG:2180</p></td>
       <th>distance</th>
       <td><p>distance between points in meters
 (must be integer and greater than 1)</p></td>
+    </tr>
+    <tr>
+      <th>print_iter</th>
+      <td><p>print the current iteration of all
+(logical, TRUE default)</p></td>
     </tr>
     </table>
 

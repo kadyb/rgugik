@@ -142,7 +142,14 @@ the orto_request() and DEM_request() functions</h1>
 the orto_request() and DEM_request() functions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>tile_download</span>(<span class='kw'>df_req</span>, outdir = <span class='st'>"."</span>, unzip = <span class='fl'>TRUE</span>, check_SHA = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>tile_download</span>(
+  <span class='kw'>df_req</span>,
+  outdir = <span class='st'>"."</span>,
+  unzip = <span class='fl'>TRUE</span>,
+  check_SHA = <span class='fl'>FALSE</span>,
+  print_iter = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,7 +172,12 @@ be extracted and removed; only suitable for certain elevation data</p></td>
     <tr>
       <th>check_SHA</th>
       <td><p>check the integrity of downloaded files
-(logical parameter, default = FALSE)</p></td>
+(logical, FALSE default)</p></td>
+    </tr>
+    <tr>
+      <th>print_iter</th>
+      <td><p>print the current iteration of all
+(logical, TRUE default)</p></td>
     </tr>
     <tr>
       <th>...</th>
