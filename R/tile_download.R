@@ -8,7 +8,9 @@
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
 #' be extracted and removed; only suitable for certain elevation data
 #' @param check_SHA check the integrity of downloaded files
-#' (logical parameter, default = FALSE)
+#' (logical, FALSE default)
+#' @param print_iter print the current iteration of all
+#' (logical, TRUE default)
 #' @param ... additional argument for [`utils::download.file()`]
 #'
 #' @return georeferenced tiles with properties (resolution, year, etc.)
@@ -28,7 +30,8 @@
 #' req_df = DEM_request(polygon)
 #' tile_download(req_df[1, ]) # download the first DEM only
 #' }
-tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, ...) {
+tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
+                         print_iter = TRUE, ...) {
 
   if (!"URL" %in% names(df_req)) {
     stop("data frame should come from 'request_orto'")
@@ -53,6 +56,11 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, 
 
   # only download files
   for (i in seq_len(nrow(df_req))) {
+
+    if (print_iter) {
+      writeLines(paste0(i, "/", nrow(df_req)))
+    }
+
     filepath = paste0(outdir, "/",
                       unlist(strsplit(df_req[i, "URL"], "/"))[idx_name])
     utils::download.file(df_req[i, "URL"], filepath, mode = "wb", ...)

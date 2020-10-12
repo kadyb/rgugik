@@ -5,6 +5,8 @@
 #' the input coordinate system must be EPSG:2180
 #' @param distance distance between points in meters
 #' (must be integer and greater than 1)
+#' @param print_iter print the current iteration of all
+#' (logical, TRUE default)
 #'
 #' @return a data frame with vector points and terrain elevation
 #' (EPSG:2180, Vertical Reference System:PL-KRON86-NH)
@@ -18,7 +20,7 @@
 #' polygon = read_sf(polygon_path)
 #' DTM = pointDTM_get(polygon, distance = 2)
 #' }
-pointDTM_get = function(polygon, distance = 1) {
+pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
 
   if (nrow(polygon) != 1) {
     stop("polygon must contain one object")
@@ -83,7 +85,9 @@ pointDTM_get = function(polygon, distance = 1) {
       stop("server does not return values, try again later")
     }
 
-    writeLines(paste0(i, "/", iter))
+    if (print_iter) {
+      writeLines(paste0(i, "/", iter))
+    }
 
     if (i < iter) {
       sel_pts = pts[(i * 500 + 1):(i * 500 + 500), ]

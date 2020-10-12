@@ -5,7 +5,14 @@
 \title{downloads tiles based on the data frame obtained using
 the orto_request() and DEM_request() functions}
 \usage{
-tile_download(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE, ...)
+tile_download(
+  df_req,
+  outdir = ".",
+  unzip = TRUE,
+  check_SHA = FALSE,
+  print_iter = TRUE,
+  ...
+)
 }
 \arguments{
 \item{df_req}{a data frame obtained using the \code{\link[=orto_request]{orto_request()}} and
@@ -18,7 +25,10 @@ by default, files are saved in the working directory}
 be extracted and removed; only suitable for certain elevation data}
 
 \item{check_SHA}{check the integrity of downloaded files
-(logical parameter, default = FALSE)}
+(logical, FALSE default)}
+
+\item{print_iter}{print the current iteration of all
+(logical, TRUE default)}
 
 \item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
 }

@@ -4,7 +4,7 @@
 \alias{pointDTM_get}
 \title{returns a data frame with vector points and terrain elevation for a given polygon}
 \usage{
-pointDTM_get(polygon, distance = 1)
+pointDTM_get(polygon, distance = 1, print_iter = TRUE)
 }
 \arguments{
 \item{polygon}{the polygon layer with only one object
@@ -13,6 +13,9 @@ the input coordinate system must be EPSG:2180}
 
 \item{distance}{distance between points in meters
 (must be integer and greater than 1)}
+
+\item{print_iter}{print the current iteration of all
+(logical, TRUE default)}
 }
 \value{
 a data frame with vector points and terrain elevation
