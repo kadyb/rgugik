@@ -90,6 +90,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Orthophotomap</h1>
+                        <h4 class="author">Krzysztof Dyba, Jakub Nowosad</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/kadyb/rgugik/blob/master/vignettes/orthophotomap.Rmd"><code>vignettes/orthophotomap.Rmd</code></a></small>
@@ -187,14 +188,14 @@ body {text-align: justify}
 <span class="kw">req_df</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>]
 </pre></div>
 <pre><code>##             sheetID year resolution composition  sensor     CRS
-## 1  N-33-142-B-d-4-4 2010       0.25         RGB Digital PL-1992
+## 1  N-33-142-B-d-4-2 2004       0.50         B/W  Analog PL-1992
 ## 2  N-33-142-B-d-4-4 2004       0.50         B/W  Analog PL-1992
-## 3  N-33-142-B-d-4-2 2004       0.50         B/W  Analog PL-1992
+## 3  N-33-142-B-d-4-4 2010       0.25         RGB Digital PL-1992
 ## 4  N-33-142-B-d-4-2 2010       0.25         RGB Digital PL-1992
-## 5  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
-## 6  N-33-142-B-d-4-2 2016       0.25         RGB Digital PL-1992
-## 7  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992
-## 8  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992
+## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992
+## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992
+## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
+## 8  N-33-142-B-d-4-2 2016       0.25         RGB Digital PL-1992
 ## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
 ## 10 N-33-142-B-d-4-4 2016       0.25         RGB Digital PL-1992</code></pre>
 <p>To complete our task, we need to obtain a near infrared data. So in the next step, we select those rows for which the <code>composition</code> column has the value of “CIR”.</p>
@@ -211,12 +212,12 @@ body {text-align: justify}
 <span class="kw">req_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">9</span>)]
 </pre></div>
 <pre><code>##             sheetID year resolution composition  sensor seriesID
-## 5  N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
+## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
 ## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837
-## 23 N-33-142-B-d-4-4 2013       0.25         CIR Digital    69903
-## 24 N-33-142-B-d-4-2 2013       0.25         CIR Digital    69903
-## 7  N-33-142-B-d-4-2 2010       0.25         CIR Digital    69763
-## 8  N-33-142-B-d-4-4 2010       0.25         CIR Digital    69763</code></pre>
+## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital    69903
+## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital    69903
+## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital    69763
+## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital    69763</code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="kw">req_df</span> <span class="op">=</span> <span class="kw">req_df</span>[<span class="kw">req_df</span><span class="op">$</span><span class="kw">year</span> <span class="op">==</span> <span class="fl">2016</span>, ]
 </pre></div>
@@ -225,7 +226,7 @@ body {text-align: justify}
 <span class="kw">req_df</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">9</span>)]
 </pre></div>
 <pre><code>##            sheetID year resolution composition  sensor seriesID
-## 5 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
+## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
 ## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837</code></pre>
 <p>The <code><a href="../reference/tile_download.html">tile_download()</a></code> function is used to download orthophotomaps by taking our selected table as the main argument. We can also specify the output folder with the <code>outdir</code> argument.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit">

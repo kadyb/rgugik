@@ -90,6 +90,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Topographic Database</h1>
+                        <h4 class="author">Krzysztof Dyba, Jakub Nowosad</h4>
             
       
       <small class="dont-index">Source: <a href="https://github.com/kadyb/rgugik/blob/master/vignettes/topodb.Rmd"><code>vignettes/topodb.Rmd</code></a></small>
@@ -105,17 +106,17 @@ body {text-align: justify}
 <div id="definition" class="section level2">
 <h2 class="hasAnchor">
 <a href="#definition" class="anchor"></a>Definition</h2>
-<p><strong>Topographic Database</strong> (<em>Baza Danych Obiektów Topograficznych</em>) is a vector (object) database containing the spatial location of topographic objects with their characteristics. The content and detail of the database corresponds to the topographic map in the scale 1:10000. The thematic scope includes, among others, information on: water network, communication network, land cover, buildings, technical structures, land use, protected areas, territorial division units. The database is available in the Geography Markup Language (GML) format. The source of its data comes from:</p>
+<p><strong>Topographic Database</strong> (pl. <em>Baza Danych Obiektów Topograficznych</em>) is a vector (object) database containing the spatial location of topographic objects with their characteristics. The content and detail of the database correspond to the topographic map in the scale 1:10000. The thematic scope includes information on water network, communication network, land cover, buildings, technical structures, land use, protected areas, and territorial division units. The database is available in the Geography Markup Language (GML) format. The source of its data comes from:</p>
 <ul>
 <li>other spatial databases maintained by Polish Head Office of Geodesy and Cartography (e.g. <em>Register of Towns, Streets and Addresses</em>, <em>Register of Land and Buildings</em>, <em>State Register of Borders</em>),</li>
 <li>databases maintained by other ministries or institutions (e.g. Ministry of Infrastructure, State Water Management, General Directorate for Environmental Protection),</li>
-<li>fieldworks.</li>
+<li>fieldworks</li>
 </ul>
 </div>
 <div id="purpose" class="section level2">
 <h2 class="hasAnchor">
 <a href="#purpose" class="anchor"></a>Purpose</h2>
-<p>The purpose of this exercise is to perform spatial operations on vector data from the database. We will focus on four cases, taking into account point, line and polygon data and their attributes. In addition, we will show you how they can be visualized.</p>
+<p>The purpose of this vignette is to perform spatial operations on vector data from the Topographic Database. We focus on four cases, taking point, line, and polygon data and their attributes into account. In addition, we show how they can be visualized.</p>
 </div>
 <div id="analysis" class="section level2">
 <h2 class="hasAnchor">
@@ -125,21 +126,21 @@ body {text-align: justify}
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/sf">sf</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://kadyb.github.io/rgugik">rgugik</a></span>)
 </pre></div>
-<p>Our analysis area is <em>bieszczadzki</em> county located in the Subcarpathian (<em>podkarpackie</em>) voivodeship. It is the farthest area in the south of Poland and has the lowest population density (19 people on km<sup>2</sup>).</p>
+<p>Our analysis area is the <em>bieszczadzki</em> county located in the Subcarpathian (<em>podkarpackie</em>) voivodeship. It is the farthest area in the south of Poland and has the lowest population density (19 people on km<sup>2</sup>).</p>
 <div id="database" class="section level3">
 <h3 class="hasAnchor">
 <a href="#database" class="anchor"></a>Database</h3>
-<p>We will download the topographic database for our county using the <code><a href="../reference/topodb_download.html">topodb_download()</a></code> function.</p>
+<p>We start by downloading the topographic database for our county using the <code><a href="../reference/topodb_download.html">topodb_download()</a></code> function.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># 22.4 MB</span>
 <span class="fu"><a href="../reference/topodb_download.html">topodb_download</a></span>(<span class="st">"bieszczadzki"</span>, outdir = <span class="st">"./data"</span>)
 </pre></div>
-<p>The downloaded database consists of many files in the <em>Geography Markup Language</em> format. All the necessary data for analyzes can be found in <code>data/PL.PZGiK.332.1801/BDOT10K/</code> location. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/geodb_description.html">here</a>.</p>
+<p>The downloaded database consists of many files in the <em>Geography Markup Language</em> format. All the data necessary for analyzes can be found in <code>data/PL.PZGiK.332.1801/BDOT10K/</code> location. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/geodb_description.html">here</a>.</p>
 <p>First, let’s load the file with administrative units (*PL.PZGiK.332.1801__OT_ADJA_A.xml*), using the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">territory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10K/PL.PZGiK.332.1801__OT_ADJA_A.xml"</span>)
+<span class="kw">territory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_ADJA_A.xml"</span>)
 </pre></div>
-<p>The file contains administrative units at various levels, let’s choose the lowest level, i.e. communes. There are three types of communes: urban (<em>GM</em>), rural (<em>GW</em>) and urban-rural (<em>Gmw</em>). Their type is specified in <code>rodzaj</code> column. Let’s select them.</p>
+<p>The file contains administrative units at various levels, let’s choose the lowest level, i.e. communes. There are three types of communes in this dataset: urban (<em>GM</em>), rural (<em>GW</em>), and urban-rural (<em>Gmw</em>). Their type is specified in the <code>rodzaj</code> column. Let’s select them.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="kw">communes</span> <span class="op">=</span> <span class="kw">territory</span>[<span class="kw">territory</span><span class="op">$</span><span class="kw">rodzaj</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GM"</span>, <span class="st">"GW"</span>, <span class="st">"Gmw"</span>), <span class="st">"rodzaj"</span>]
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">communes</span><span class="op">$</span><span class="kw">rodzaj</span>)
@@ -147,96 +148,94 @@ body {text-align: justify}
 <pre><code>## 
 ## Gmw  GW 
 ##   1   2</code></pre>
-<p>We can see that <em>bieszczadzki</em> county consists of two rural communes and one urban-rural commune. Let’s visualize it.</p>
+<p>We can see that the <em>bieszczadzki</em> county consists of two rural communes and one urban-rural commune. Let’s visualize it.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">communes</span>, axes = <span class="fl">TRUE</span>, main = <span class="st">"Bieszczadzki county"</span>)
 </pre></div>
 <p><img src="topodb-communes-1.png"></p>
 </div>
-<div id="length-and-category-of-roads" class="section level3">
+<div id="lengths-and-categories-of-roads" class="section level3">
 <h3 class="hasAnchor">
-<a href="#length-and-category-of-roads" class="anchor"></a>Length and category of roads</h3>
-<p>In the first task, we will calculate the lengths of roads taking into account their categories. Road data can be found in the *PL.PZGiK.332.1801__OT_SKDR_L.xml* file.</p>
+<a href="#lengths-and-categories-of-roads" class="anchor"></a>Lengths and categories of roads</h3>
+<p>In the first task, we calculate the lengths of roads taking into account their categories. Road data can be found in the *PL.PZGiK.332.1801__OT_SKDR_L.xml* file.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">roads</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10K/PL.PZGiK.332.1801__OT_SKDR_L.xml"</span>)
+<span class="kw">roads</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SKDR_L.xml"</span>)
 </pre></div>
-<p>Let’s plot them.</p>
+<p>Let’s plot them. <!--JN: maybe it would be good to add a sentence or two of explanation of the following code --></p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">roads</span>[<span class="st">"katZarzadzania"</span>], main = <span class="st">"Road category"</span>, reset = <span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">territory</span>), add = <span class="fl">TRUE</span>)
 </pre></div>
 <p><img src="topodb-roads-1.png"></p>
-<p>We have 6 road categories related to the managing entity. Those are: national (K), voivodeship (W), county (P), communal (G), institutional (Z) and other (I).</p>
-<p>We’ll use the <code><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_length()</a></code> function to find the length of each object in the table. Next, we will create a data frame consisting of the road category and its length. Then we aggregate this data frame and calculate the sum of the lengths for each category.</p>
+<p>We have six road categories related to the managing entity, those are: national (K), voivodeship (W), county (P), communal (G), institutional (Z) and other (I).</p>
+<p>We use the <code><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_length()</a></code> function to find the length of each object in the table. Next, we create a data frame consisting of the road category and its length. Then we aggregate this data frame and calculate the sum of the lengths for each category.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">length_roads</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_length</a></span>(<span class="kw">roads</span>)
 <span class="kw">length_roads</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(length = <span class="kw">length_roads</span>,
                           class = <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html">as.factor</a></span>(<span class="kw">roads</span><span class="op">$</span><span class="kw">katZarzadzania</span>))
 <span class="kw">length_roads</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/aggregate.sf.html">aggregate</a></span>(<span class="kw">length</span> <span class="op">~</span> <span class="kw">class</span>, data = <span class="kw">length_roads</span>, FUN = <span class="kw">sum</span>)
 </pre></div>
-<p>The results are given in meters. Let’s convert them into kilometers.</p>
+<p>The results are given in meters - let’s convert them into kilometers.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
 <span class="co"># convert to [km]</span>
 <span class="kw">length_roads</span><span class="op">$</span><span class="kw">length</span> <span class="op">=</span> <span class="kw">units</span>::<span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="kw">length_roads</span><span class="op">$</span><span class="kw">length</span>, <span class="st">"km"</span>)
-<span class="kw">length_roads</span><span class="op">$</span><span class="kw">length</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">length_roads</span><span class="op">$</span><span class="kw">length</span>)
 </pre></div>
-<p>Let’s change the names of the categories.</p>
+<p>Let’s also change the names of the categories.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
 <span class="kw">road_class</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"communal"</span>, <span class="st">"other"</span>, <span class="st">"national"</span>, <span class="st">"county"</span>, <span class="st">"voivodeship"</span>,
                <span class="st">"institutional"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html">levels</a></span>(<span class="kw">length_roads</span><span class="op">$</span><span class="kw">class</span>) <span class="op">=</span> <span class="kw">road_class</span>
 </pre></div>
-<p>Now we can see the results.</p>
+<p>Now we can see the results. The <code>other</code> type of roads dominates that consists mainly of non-public roads.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
 <span class="kw">length_roads</span>
 </pre></div>
-<pre><code>##           class    length
-## 1      communal  186 [km]
-## 2         other 2820 [km]
-## 3      national   19 [km]
-## 4        county  187 [km]
-## 5   voivodeship  106 [km]
-## 6 institutional   10 [km]</code></pre>
-<p>Other type of roads dominates, which consists mainly of non-public roads.</p>
+<pre><code>##           class          length
+## 1      communal  186.17329 [km]
+## 2         other 2819.55806 [km]
+## 3      national   19.24996 [km]
+## 4        county  187.17870 [km]
+## 5   voivodeship  105.67567 [km]
+## 6 institutional   10.44893 [km]</code></pre>
+<p>We can also calculate the total length of the roads in this area.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">length_roads</span><span class="op">$</span><span class="kw">length</span>)
 </pre></div>
-<pre><code>## 3328 [km]</code></pre>
-<p>The total sum of the road lengths is 3328 km. We can also calculate the density of the road network.</p>
+<pre><code>## 3328.285 [km]</code></pre>
+<p>The result is about 3328.285 km. Another aspect of the data that we can investigate is the density of the road network. We need to calculate the total area first, and then divide the total road length by the total area.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit">
 <span class="kw">communes_area</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area</a></span>(<span class="kw">communes</span>))
 <span class="kw">communes_area</span> <span class="op">=</span> <span class="kw">units</span>::<span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="kw">communes_area</span>, <span class="st">"km2"</span>)
 <span class="kw">density</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">length_roads</span><span class="op">$</span><span class="kw">length</span>)<span class="op">/</span><span class="kw">communes_area</span>
 <span class="kw">density</span> <span class="op">=</span> <span class="kw">units</span>::<span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="kw">density</span>, <span class="st">"km/km2"</span>)
-<span class="kw">density</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">density</span>, <span class="fl">2</span>)
 <span class="kw">density</span>
 </pre></div>
-<pre><code>## 2.92 [km/km2]</code></pre>
-<p>The road density is 2.92 km/km<sup>2</sup>.</p>
+<pre><code>## 2.921031 [km/km2]</code></pre>
+<p>The road density is about 2.92 km/km<sup>2</sup>.</p>
 </div>
 <div id="roads-through-the-rivers" class="section level3">
 <h3 class="hasAnchor">
 <a href="#roads-through-the-rivers" class="anchor"></a>Roads through the rivers</h3>
-<p>Let’s also load the file with rivers (*PL.PZGiK.332.1801__OT_SWRS_L.xml*).</p>
+<p>Another dataset included in the Topographic Database contains rivers for this area (*PL.PZGiK.332.1801__OT_SWRS_L.xml*).</p>
 <div class="sourceCode" id="cb18"><pre class="downlit">
-<span class="kw">rivers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10K/PL.PZGiK.332.1801__OT_SWRS_L.xml"</span>)
+<span class="kw">rivers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SWRS_L.xml"</span>)
 <span class="kw">rivers</span> <span class="op">=</span> <span class="kw">rivers</span>[<span class="kw">rivers</span><span class="op">$</span><span class="kw">rodzaj</span> <span class="op">==</span> <span class="st">"Rz"</span>, ] <span class="co"># select only rivers</span>
 </pre></div>
-<p>Rivers are divided into smaller sections with different parameters (river width, data source). Let’s merge the same rivers into one object (geometry). We will use the attribute with ID (<code>idMPHP</code>) to merge. Then we will give them a new sequence number from 1 to n as the category.</p>
+<p>Rivers are divided into smaller sections with different parameters (such as, river width or data source). Let’s merge the same rivers into single feature (geometry) - we can use the attribute with ID (<code>idMPHP</code>) for that purpose. We can also give each river a category number by creating a sequence from 1 to n.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="kw">rivers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/aggregate.sf.html">aggregate</a></span>(<span class="kw">rivers</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"geometry"</span>, <span class="st">"idMPHP"</span>)],
                    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">rivers</span><span class="op">$</span><span class="kw">idMPHP</span>),
                    <span class="kw">sum</span>)
-<span class="kw">rivers</span><span class="op">$</span><span class="kw">idMPHP</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span>(<span class="kw">rivers</span><span class="op">$</span><span class="kw">idMPHP</span>)))
+<span class="kw">rivers</span><span class="op">$</span><span class="kw">idMPHP</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/raster/man/unique.html">unique</a></span>(<span class="kw">rivers</span><span class="op">$</span><span class="kw">idMPHP</span>)))
 <span class="kw">rivers</span><span class="op">$</span><span class="kw">idMPHP</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/raster/man/factor.html">as.factor</a></span>(<span class="kw">rivers</span><span class="op">$</span><span class="kw">idMPHP</span>)
 </pre></div>
-<p>Let’s visualize their course.</p>
+<p>Let’s visualize the rivers’ courses.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">rivers</span>[<span class="st">"idMPHP"</span>], main = <span class="st">"Rivers"</span>, reset = <span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">territory</span>), add = <span class="fl">TRUE</span>)
 </pre></div>
 <p><img src="topodb-rivers-1.png"></p>
-<p>With rivers and roads, we can designate points of intersection that will symbolize bridges and crossings. We will use the <code><a href="https://rdrr.io/pkg/sf/man/geos_binary_ops.html">st_intersection()</a></code> function for this.</p>
+<p>With rivers and roads, we can designate points of intersection that symbolize bridges and crossings. We can use the <code><a href="https://rdrr.io/pkg/sf/man/geos_binary_ops.html">st_intersection()</a></code> function for this.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit">
 <span class="kw">bridges</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_binary_ops.html">st_intersection</a></span>(<span class="kw">rivers</span>, <span class="kw">roads</span>))
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">bridges</span>)
@@ -246,53 +245,46 @@ body {text-align: justify}
 <div class="sourceCode" id="cb23"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">rivers</span>), main = <span class="st">"Bridges and crossings"</span>, col = <span class="st">"blue"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">territory</span>), add = <span class="fl">TRUE</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">bridges</span>, add = <span class="fl">TRUE</span>, pch = <span class="fl">20</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">bridges</span>, add = <span class="fl">TRUE</span>, pch = <span class="fl">21</span>, cex = <span class="fl">2</span>)
 </pre></div>
 <p><img src="topodb-bridges-1.png"></p>
 </div>
 <div id="land-cover" class="section level3">
 <h3 class="hasAnchor">
 <a href="#land-cover" class="anchor"></a>Land cover</h3>
-<p>Let’s check the land cover in our county. The land cover data is contained in files named PT. We will use the <code><a href="https://rdrr.io/r/base/list.files.html">list.files()</a></code> function to list them. The <code>pattern</code> argument is important because it determines what files should be selected. Our <code>pattern</code> should look like this: <code>PT+.+A\\.xml$</code>. Only files containing area (A) land cover (PT) will be listed.</p>
+<p>Let’s check the land cover in our county - it is stored in files with the <code>PT</code> prefix. We use the <code><a href="https://rdrr.io/r/base/list.files.html">list.files()</a></code> function to list them. The <code>pattern</code> argument is important here, because it determines what files should be selected. Our <code>pattern</code> should look like this: <code>PT+.+A\\.xml$</code> - only files containing area (A) land cover (PT) will be listed. <!--JN: what is "area land cover"??--></p>
 <div class="sourceCode" id="cb24"><pre class="downlit">
-<span class="kw">files</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10K"</span>,
+<span class="kw">files</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k"</span>,
                    pattern = <span class="st">"PT+.+A\\.xml$"</span>,
                    full.names = <span class="fl">TRUE</span>)
-<span class="kw">files_name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10K"</span>,
-                        pattern = <span class="st">"PT+.+A\\.xml$"</span>)
+<span class="kw">files_name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span>(<span class="kw">files</span>)
 <span class="kw">files_name</span>
 </pre></div>
-<pre><code>##  [1] "PL.PZGiK.332.1801__OT_PTGN_A.xml"
-##  [2] "PL.PZGiK.332.1801__OT_PTKM_A.xml"
-##  [3] "PL.PZGiK.332.1801__OT_PTLZ_A.xml"
-##  [4] "PL.PZGiK.332.1801__OT_PTNZ_A.xml"
-##  [5] "PL.PZGiK.332.1801__OT_PTPL_A.xml"
-##  [6] "PL.PZGiK.332.1801__OT_PTRK_A.xml"
-##  [7] "PL.PZGiK.332.1801__OT_PTSO_A.xml"
-##  [8] "PL.PZGiK.332.1801__OT_PTTR_A.xml"
-##  [9] "PL.PZGiK.332.1801__OT_PTUT_A.xml"
-## [10] "PL.PZGiK.332.1801__OT_PTWP_A.xml"
-## [11] "PL.PZGiK.332.1801__OT_PTWZ_A.xml"
-## [12] "PL.PZGiK.332.1801__OT_PTZB_A.xml"</code></pre>
-<p>Let’s exclude *PL.PZGiK.332.1801__OT_PTSO_A.xml* file from list, because there are no objects.</p>
+<pre><code>##  [1] "PL.PZGiK.332.1801__OT_PTGN_A.xml" "PL.PZGiK.332.1801__OT_PTKM_A.xml"
+##  [3] "PL.PZGiK.332.1801__OT_PTLZ_A.xml" "PL.PZGiK.332.1801__OT_PTNZ_A.xml"
+##  [5] "PL.PZGiK.332.1801__OT_PTPL_A.xml" "PL.PZGiK.332.1801__OT_PTRK_A.xml"
+##  [7] "PL.PZGiK.332.1801__OT_PTSO_A.xml" "PL.PZGiK.332.1801__OT_PTTR_A.xml"
+##  [9] "PL.PZGiK.332.1801__OT_PTUT_A.xml" "PL.PZGiK.332.1801__OT_PTWP_A.xml"
+## [11] "PL.PZGiK.332.1801__OT_PTWZ_A.xml" "PL.PZGiK.332.1801__OT_PTZB_A.xml"</code></pre>
+<p>Let’s exclude *PL.PZGiK.332.1801__OT_PTSO_A.xml* file from list, because there are no objects. <!--JN: what do you mean??--></p>
 <div class="sourceCode" id="cb26"><pre class="downlit">
 <span class="co"># drop "OT_PTSO_A.xml"</span>
 <span class="kw">files</span> <span class="op">=</span> <span class="kw">files</span>[<span class="op">-</span><span class="fl">7</span>]
 <span class="kw">files_name</span> <span class="op">=</span> <span class="kw">files_name</span>[<span class="op">-</span><span class="fl">7</span>]
 </pre></div>
-<p>Let’s prepare the names of the objects to which the data will be loaded.</p>
+<p>Let’s prepare the names of the objects to which the data will be loaded. <!--JN: I do not understand what do you mean here--> <!--JN: I understand the code, though.. Where did you get this names? Are they universal? This should be explained...--></p>
 <div class="sourceCode" id="cb27"><pre class="downlit">
 <span class="kw">layers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"fallowlands"</span>, <span class="st">"communication"</span>, <span class="st">"forest"</span>, <span class="st">"undeveloped"</span>,
            <span class="st">"squares"</span>, <span class="st">"shrublands"</span>, <span class="st">"crops"</span>, <span class="st">"grassland"</span>,
            <span class="st">"water"</span>, <span class="st">"heaps"</span>, <span class="st">"buildings"</span>)
 </pre></div>
-<p>Now iteratively we will load each GML file, naming it from the list above.</p>
+<p>Now iteratively we will load each GML file, naming it from the list above. <!--JN: I would suggest rewriting the code in this section. I have almost never seen the use of assign in the exploratory code...--></p>
 <div class="sourceCode" id="cb28"><pre class="downlit">
 <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">files</span>))) {
   <span class="fu"><a href="https://rdrr.io/r/base/assign.html">assign</a></span>(<span class="kw">layers</span>[<span class="kw">i</span>], <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="kw">files</span>[<span class="kw">i</span>]))
 }
 </pre></div>
-<p>Previously, we used <code><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_length()</a></code> to calculate the line length, there is corresponding <code><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area()</a></code> function to calculate the area. For each object (layer) we have to calculate its area separately, so we will do it in a loop.</p>
+<p>Previously, we used <code><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_length()</a></code> to calculate the line length, now we use corresponding <code><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area()</a></code> function to calculate the area. For each object (layer), we calculate its area separately in a loop.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit">
 <span class="co"># initialize empty vector</span>
 <span class="kw">area_landcover</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">integer</a></span>()
@@ -300,7 +292,7 @@ body {text-align: justify}
 <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="kw">layers</span>))) {
   <span class="kw">area_tmp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_area</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/name.html">as.name</a></span>(<span class="kw">layers</span>[<span class="kw">i</span>])))
   <span class="kw">area_tmp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_tmp</span>)
-  
+
   <span class="co"># add result from the current iteration to the vector</span>
   <span class="kw">area_landcover</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">area_landcover</span>, <span class="kw">area_tmp</span>)
 }
@@ -321,12 +313,12 @@ body {text-align: justify}
 ##    1.57266555  255.13528884    0.63447491    8.81181550    0.09220115 
 ##     buildings 
 ##   10.38781092</code></pre>
-<p>Let’s make sure that the total land cover is equal to the area of our county. There will be some precision geometry differences so we should set the difference tolerance. This is possible in the <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> function.</p>
+<p>Let’s make sure that the total land cover is equal to the area of our county. Some tiny precision differences are possible, so we should set the difference tolerance. This is possible using the <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> function.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/Logic.html">isTRUE</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_landcover</span>), <span class="kw">communes_area</span>, tolerance = <span class="fl">0.001</span>))
+<span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_landcover</span>), <span class="kw">communes_area</span>, tolerance = <span class="fl">0.001</span>)
 </pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p>Everything is correct. Let’s present the results as a percentage and sort them in descending order.</p>
+<p>Everything is correct. Let’s present the results as percentages of the area and sort them in the descending order.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit">
 <span class="kw">landcover_percentage</span> <span class="op">=</span> <span class="kw">area_landcover</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_landcover</span>)<span class="op">*</span><span class="fl">100</span>
 <span class="fu"><a href="https://rdrr.io/r/base/difftime.html">units</a></span>(<span class="kw">landcover_percentage</span>) <span class="op">=</span> <span class="kw">NULL</span> <span class="co"># drop units</span>
@@ -345,34 +337,34 @@ body {text-align: justify}
 <div id="buffer" class="section level3">
 <h3 class="hasAnchor">
 <a href="#buffer" class="anchor"></a>Buffer</h3>
-<p>The last type of analysis will be based on the spatial buffer. We will check how many buildings have access to bus stops within a given distance. Information about bus stops can be found in the *PL.PZGiK.332.1801__OT_OIKM_P.xml* file. Bus stops take the <em>OIKM04</em> value of the <code>x_kod</code> attribute.</p>
+<p>The last type of analysis in this vignette is uses spatial buffers. We want to check how many buildings have access to bus stops within a given distance. Information about bus stops can be found in the *PL.PZGiK.332.1801__OT_OIKM_P.xml* file, where they have the <em>OIKM04</em> value in the <code>x_kod</code> attribute.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit">
-<span class="kw">bus_stop</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10K/PL.PZGiK.332.1801__OT_OIKM_P.xml"</span>)
+<span class="kw">bus_stop</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_OIKM_P.xml"</span>)
 <span class="kw">bus_stop</span> <span class="op">=</span> <span class="kw">bus_stop</span>[<span class="kw">bus_stop</span><span class="op">$</span><span class="kw">x_kod</span> <span class="op">==</span> <span class="st">"OIKM04"</span>, ]
 </pre></div>
-<p>Let’s prepare a visualization in which the bus stops will be marked with blue dots and the buildings as red polygons.</p>
+<p>Let’s prepare a visualization in which the bus stops is marked with blue dots and the buildings are presented as red polygons.</p>
 <div class="sourceCode" id="cb37"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">communes</span>), main = <span class="st">"Bus stops"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">buildings</span>), add = <span class="fl">TRUE</span>, border = <span class="st">"red"</span>)
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">bus_stop</span>), add = <span class="fl">TRUE</span>, pch = <span class="fl">20</span>, cex = <span class="fl">0.7</span>, col = <span class="st">"blue"</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">bus_stop</span>), add = <span class="fl">TRUE</span>, pch = <span class="fl">21</span>, cex = <span class="fl">0.7</span>, col = <span class="st">"blue"</span>)
 </pre></div>
 <p><img src="topodb-busstops-1.png"></p>
-<p>Let’s create a buffer of bus stops with a range of 1 km using <code><a href="https://rdrr.io/pkg/sf/man/geos_unary.html">st_buffer()</a></code>.</p>
+<p>Let’s create a buffer for each bus stop with a range of 1 km using <code><a href="https://rdrr.io/pkg/sf/man/geos_unary.html">st_buffer()</a></code>.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit">
 <span class="kw">bus_buffer</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_unary.html">st_buffer</a></span>(<span class="kw">bus_stop</span>, <span class="fl">1000</span>)
 </pre></div>
-<p>Let’s plot it all.</p>
+<p>Now, we can plot it all.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">communes</span>), main = <span class="st">"Bus stops buffers"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">buildings</span>), add = <span class="fl">TRUE</span>, border = <span class="st">"red"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">bus_buffer</span>), add = <span class="fl">TRUE</span>)
 </pre></div>
 <p><img src="topodb-buffers-1.png"></p>
-<p>Now we perform a spatial operation that will return the buildings within the buffer range.</p>
+<p>To return the buildings within the buffer range, we can perform the <code><a href="https://rdrr.io/pkg/sf/man/geos_binary_pred.html">st_within()</a></code> operation.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit">
 <span class="kw">buildings_buffer</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_binary_pred.html">st_within</a></span>(<span class="kw">buildings</span>, <span class="kw">bus_buffer</span>)
 </pre></div>
-<p>The result is a nested list that consists of 2828 buildings and their associated buffers. Let’s count how many buildings are not in any buffer. Function <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> will be useful for operations on lists.</p>
+<p>The result is a nested list that consists of 2828 buildings and their associated buffers. Let’s count how many buildings are not in any buffer - function <code><a href="https://rdrr.io/r/base/lapply.html">sapply()</a></code> is useful for operations on lists.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit">
 <span class="kw">buildings_ex</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="kw">buildings_buffer</span>, <span class="kw">length</span>)
 <span class="kw">buildings_ex</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">buildings_ex</span> <span class="op">==</span> <span class="fl">0</span>)
@@ -380,7 +372,7 @@ body {text-align: justify}
 <span class="kw">buildings_ex</span>
 </pre></div>
 <pre><code>## [1] 14</code></pre>
-<p>14% of the buildings do not have access to a bus stop within 1 km.</p>
+<p>14% of the buildings in this county do not have access to a bus stop within 1 km radius.</p>
 </div>
 </div>
   </div>
