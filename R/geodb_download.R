@@ -27,15 +27,6 @@
 #' geodb_download(c("mazowieckie", "wielkopolskie"))
 #' geodb_download(c("Subcarpathian", "Silesian"))
 #' geodb_download(c("02", "16"))
-#'
-#' library("sf")
-#' # load roads and territory from "opolskie" (TERC 16)
-#' roads = read_sf("PL.PZGiK.201.16/BDOO/PL.PZGIK.201.16__OT_SKDR_L.xml")
-#' territory = read_sf("PL.PZGiK.201.16/BDOO/PL.PZGIK.201.16__OT_ADJA_A.xml")
-#'
-#' # plot them together
-#' plot(territory$geometry)
-#' plot(roads$geometry, add = TRUE, col = "red")
 #' }
 geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
 

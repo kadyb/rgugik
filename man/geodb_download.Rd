@@ -8,7 +8,7 @@ geodb_download(voivodeships, outdir = ".", unzip = TRUE, ...)
 }
 \arguments{
 \item{voivodeships}{selected voivodeships in Polish or English, or TERC
-(function \code{\link[=voivodeship_names]{voivodeship_names()}} can by helpful)}
+(object \code{\link{voivodeship_names}} can by helpful)}
 
 \item{outdir}{(optional) name of the output directory;
 by default, files are saved in the working directory}
@@ -31,15 +31,6 @@ downloads General Geographic Databases for entire voivodeships
 geodb_download(c("mazowieckie", "wielkopolskie"))
 geodb_download(c("Subcarpathian", "Silesian"))
 geodb_download(c("02", "16"))
-
-library("sf")
-# load roads and territory from "opolskie" (TERC 16)
-roads = read_sf("PL.PZGiK.201.16/BDOO/PL.PZGIK.201.16__OT_SKDR_L.xml")
-territory = read_sf("PL.PZGiK.201.16/BDOO/PL.PZGIK.201.16__OT_ADJA_A.xml")
-
-# plot them together
-plot(territory$geometry)
-plot(roads$geometry, add = TRUE, col = "red")
 }
 }
 \references{
