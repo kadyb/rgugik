@@ -1,5 +1,6 @@
 ---
 title: "Orthophotomap"
+author: "Krzysztof Dyba, Jakub Nowosad"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Orthophotomap}

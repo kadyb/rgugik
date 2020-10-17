@@ -2,6 +2,7 @@
 title: | 
     | General Geographic Database
     | Baza Danych Obiektów Ogólnogeograficznych
+author: "Krzysztof Dyba, Jakub Nowosad"
 date: "`r Sys.Date()`"
 output: github_document
 ---

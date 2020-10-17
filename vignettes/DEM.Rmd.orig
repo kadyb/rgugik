@@ -1,5 +1,6 @@
 ---
 title: "Digital Elevation Model"
+author: "Krzysztof Dyba, Jakub Nowosad"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Digital Elevation Model}
