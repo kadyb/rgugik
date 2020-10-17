@@ -10,6 +10,8 @@ navbar:
         - text: "Orthophotomap"
           href: articles/orthophotomap.html
         - text: "Digital Elevation Model"
-          href: articles/DEM.html        
+          href: articles/DEM.html
+        - text: "Topographic Database"
+          href: articles/topodb.html
         - text: "General Geographic Database"
           href: articles/articles/geodb_description.html
