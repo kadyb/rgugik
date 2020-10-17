@@ -20,7 +20,7 @@ body {text-align: justify}
 **Topographic Database** (*Baza Danych Obiektów Topograficznych*) is a vector (object) database containing the spatial location of topographic objects with their characteristics.
 The content and detail of the database corresponds to the topographic map in the scale 1:10000.
 The thematic scope includes, among others, information on: water network, communication network, land cover, buildings, technical structures, land use, protected areas, territorial division units.
-The database is available in the Geography Markup Language format (.GML) format.
+The database is available in the Geography Markup Language (GML) format.
 The source of its data comes from:
 
 - other spatial databases maintained by Polish Head Office of Geodesy and Cartography (e.g. *Register of Towns, Streets and Addresses*, *Register of Land and Buildings*, *State Register of Borders*), 
@@ -42,7 +42,7 @@ library(rgugik)
 ```
 
 Our analysis area is *bieszczadzki* county located in the Subcarpathian (*podkarpackie*) voivodeship.
-It is the farthest area in the south of Poland and has the lowest population density (19 people on km^2).
+It is the farthest area in the south of Poland and has the lowest population density (19 people on km^2^).
 
 ### Database
 
@@ -149,7 +149,7 @@ density = units::set_units(density, "km/km2")
 density = round(density, 2)
 density
 ```
-The road density is 2.92 km/km^2.
+The road density is 2.92 km/km^2^.
 
 ### Roads through the rivers
 
@@ -183,7 +183,7 @@ plot(st_geometry(territory), add = TRUE)
 With rivers and roads, we can designate points of intersection that will symbolize bridges and crossings.
 We will use the `st_intersection()` function for this.
 
-```{r message=FALSE}
+```{r warning=FALSE}
 bridges = st_geometry(st_intersection(rivers, roads))
 length(bridges)
 ```
