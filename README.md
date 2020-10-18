@@ -124,6 +124,7 @@ t(req_df[1, ])
 #> sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      
 #> filename    "41_3756_N-33-130-D-b-2-3"
 tile_download(req_df[1, ])
+#> 1/1
 
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
 plotRGB(img)
@@ -175,6 +176,9 @@ The main source of spatial data in Poland is the
 Contributions to this package are welcome. The preferred method of
 contribution is through a GitHub pull request. Feel also free to contact
 us by creating [an issue](https://github.com/kadyb/rgugik/issues).
+
+Maintainers and contributors must follow this repository’s [CODE OF
+CONDUCT](https://github.com/kadyb/rgugik/blob/master/CODE_OF_CONDUCT.md).
 
 ## Related projects
 
