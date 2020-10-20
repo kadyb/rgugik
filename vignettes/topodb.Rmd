@@ -23,8 +23,8 @@ The database is available in the Geography Markup Language (GML) format.
 The source of its data comes from:
 
 - other spatial databases maintained by Polish Head Office of Geodesy and Cartography (e.g. *Register of Towns, Streets and Addresses*, *Register of Land and Buildings*, *State Register of Borders*),
-- databases maintained by other ministries or institutions (e.g. Ministry of Infrastructure, State Water Management, General Directorate for Environmental Protection),
-- fieldworks
+- databases maintained by other ministries or institutions (e.g., Ministry of Infrastructure, State Water Management, General Directorate for Environmental Protection),
+- fieldworks.
 
 ## Purpose
 
@@ -54,11 +54,11 @@ We start by downloading the topographic database for our county using the `topod
 topodb_download("bieszczadzki", outdir = "./data")
 ```
 
-The downloaded database consists of many files in the *Geography Markup Language* format.
+The downloaded database consists of many files in the *GML* format.
 All the data necessary for analyzes can be found in `data/PL.PZGiK.332.1801/BDOT10K/` location.
 A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/geodb_description.html).
 
-First, let's load the file with administrative units (*PL.PZGiK.332.1801__OT_ADJA_A.xml*), using the **sf** package and its `read_sf()` function.
+First, let's load the file with administrative units ( *PL.PZGiK.332.1801__OT_ADJA_A.xml* ), using the **sf** package and its `read_sf()` function.
 
 
 ```r
@@ -194,7 +194,7 @@ The road density is about 2.92 km/km^2^.
 
 ### Roads through the rivers
 
-Another dataset included in the Topographic Database contains rivers for this area (*PL.PZGiK.332.1801__OT_SWRS_L.xml*).
+Another dataset included in the Topographic Database contains rivers for this area ( *PL.PZGiK.332.1801__OT_SWRS_L.xml* ).
 
 
 ```r
@@ -245,7 +245,7 @@ Let's plot them.
 ```r
 plot(st_geometry(rivers), main = "Bridges and crossings", col = "blue")
 plot(st_geometry(territory), add = TRUE)
-plot(bridges, add = TRUE, pch = 21, cex = 2)
+plot(bridges, add = TRUE, pch = 20)
 ```
 
 ![](topodb-bridges-1.png)
@@ -254,11 +254,10 @@ plot(bridges, add = TRUE, pch = 21, cex = 2)
 
 ### Land cover
 
-Let's check the land cover in our county - it is stored in files with the  `PT` prefix.
+Let's check the land cover data for our county - it is stored in files with the  `PT` prefix.
 We use the `list.files()` function to list them.
 The `pattern` argument is important here, because it determines what files should be selected.
-Our `pattern` should look like this: `PT+.+A\\.xml$` - only files containing area (A) land cover (PT) will be listed.
-<!--JN: what is "area land cover"??-->
+Our `pattern` should look like this: `PT+.+A\\.xml$` - only files containing areal data (A) of land cover (PT) will be listed.
 
 
 ```r
@@ -270,16 +269,21 @@ files_name
 ```
 
 ```
-##  [1] "PL.PZGiK.332.1801__OT_PTGN_A.xml" "PL.PZGiK.332.1801__OT_PTKM_A.xml"
-##  [3] "PL.PZGiK.332.1801__OT_PTLZ_A.xml" "PL.PZGiK.332.1801__OT_PTNZ_A.xml"
-##  [5] "PL.PZGiK.332.1801__OT_PTPL_A.xml" "PL.PZGiK.332.1801__OT_PTRK_A.xml"
-##  [7] "PL.PZGiK.332.1801__OT_PTSO_A.xml" "PL.PZGiK.332.1801__OT_PTTR_A.xml"
-##  [9] "PL.PZGiK.332.1801__OT_PTUT_A.xml" "PL.PZGiK.332.1801__OT_PTWP_A.xml"
-## [11] "PL.PZGiK.332.1801__OT_PTWZ_A.xml" "PL.PZGiK.332.1801__OT_PTZB_A.xml"
+##  [1] "PL.PZGiK.332.1801__OT_PTGN_A.xml"
+##  [2] "PL.PZGiK.332.1801__OT_PTKM_A.xml"
+##  [3] "PL.PZGiK.332.1801__OT_PTLZ_A.xml"
+##  [4] "PL.PZGiK.332.1801__OT_PTNZ_A.xml"
+##  [5] "PL.PZGiK.332.1801__OT_PTPL_A.xml"
+##  [6] "PL.PZGiK.332.1801__OT_PTRK_A.xml"
+##  [7] "PL.PZGiK.332.1801__OT_PTSO_A.xml"
+##  [8] "PL.PZGiK.332.1801__OT_PTTR_A.xml"
+##  [9] "PL.PZGiK.332.1801__OT_PTUT_A.xml"
+## [10] "PL.PZGiK.332.1801__OT_PTWP_A.xml"
+## [11] "PL.PZGiK.332.1801__OT_PTWZ_A.xml"
+## [12] "PL.PZGiK.332.1801__OT_PTZB_A.xml"
 ```
 
-Let's exclude *PL.PZGiK.332.1801__OT_PTSO_A.xml* file from list, because there are no objects.
-<!--JN: what do you mean??-->
+We also can exclude *PL.PZGiK.332.1801__OT_PTSO_A.xml* file from list, because this file contains zero features.
 
 
 ```r
@@ -294,7 +298,7 @@ Let's prepare the names of the objects to which the data will be loaded.
 
 
 ```r
-layers = c("fallowlands", "communication", "forest", "undeveloped",
+layer_names = c("fallowlands", "communication", "forest", "undeveloped",
            "squares", "shrublands", "crops", "grassland",
            "water", "heaps", "buildings")
 ```
@@ -304,9 +308,8 @@ Now iteratively we will load each GML file, naming it from the list above.
 
 
 ```r
-for (i in seq_len(length(files))) {
-  assign(layers[i], read_sf(files[i]))
-}
+layers = lapply(files, read_sf)
+names(layers) = layer_names
 ```
 
 Previously, we used `st_length()` to calculate the line length, now we use corresponding `st_area()` function to calculate the area.
@@ -314,21 +317,16 @@ For each object (layer), we calculate its area separately in a loop.
 
 
 ```r
-# initialize empty vector
-area_landcover = integer()
-
-for (i in seq_len(length(layers))) {
-  area_tmp = st_area(eval(as.name(layers[i])))
-  area_tmp = sum(area_tmp)
-
-  # add result from the current iteration to the vector
-  area_landcover = c(area_landcover, area_tmp)
-}
-
+# calculate areas in each layer
+area_landcover = lapply(layers, st_area)
+# sum areas for each layer
+area_landcover = lapply(area_landcover, sum)
+# convert from a list to a vector
+area_landcover = as.numeric(area_landcover)
 # convert units
 area_landcover = units::set_units(area_landcover, "m^2")
 area_landcover = units::set_units(area_landcover, "km^2")
-names(area_landcover) = layers
+names(area_landcover) = layer_names
 ```
 
 Let's see the results (in kilometers).
@@ -340,12 +338,14 @@ area_landcover
 
 ```
 ## Units: [km^2]
-##   fallowlands communication        forest   undeveloped       squares 
-##    0.07561383    1.97014481  860.17248134    0.27817715    0.29038385 
-##    shrublands         crops     grassland         water         heaps 
-##    1.57266555  255.13528884    0.63447491    8.81181550    0.09220115 
-##     buildings 
-##   10.38781092
+##   fallowlands communication        forest 
+##    0.07561383    1.97014481  860.17248134 
+##   undeveloped       squares    shrublands 
+##    0.27817715    0.29038385    1.57266555 
+##         crops     grassland         water 
+##  255.13528884    0.63447491    8.81181550 
+##         heaps     buildings 
+##    0.09220115   10.38781092
 ```
 
 Let's make sure that the total land cover is equal to the area of our county.
@@ -374,12 +374,14 @@ landcover_percentage
 ```
 
 ```
-##        forest         crops     buildings         water communication 
-##         75.49         22.39          0.91          0.77          0.17 
-##    shrublands     grassland       squares   undeveloped   fallowlands 
-##          0.14          0.06          0.03          0.02          0.01 
-##         heaps 
-##          0.01
+##        forest         crops     buildings 
+##         75.49         22.39          0.91 
+##         water communication    shrublands 
+##          0.77          0.17          0.14 
+##     grassland       squares   undeveloped 
+##          0.06          0.03          0.02 
+##   fallowlands         heaps 
+##          0.01          0.01
 ```
 
 Over 75% of the county's area is covered by forests and only less than 1% by buildings.
@@ -388,8 +390,8 @@ Over 75% of the county's area is covered by forests and only less than 1% by bui
 
 ### Buffer
 
-The last type of analysis in this vignette is uses spatial buffers.
-We want to check how many buildings have access to bus stops within a given distance.
+In the last type of analysis in this vignette, we want to check how many buildings have access to bus stops within a given distance.
+We can apply spatial buffers to solve this question.
 Information about bus stops can be found in the *PL.PZGiK.332.1801__OT_OIKM_P.xml* file, where they have the *OIKM04* value in the `x_kod` attribute.
 
 
@@ -402,9 +404,10 @@ Let's prepare a visualization in which the bus stops is marked with blue dots an
 
 
 ```r
+buildings = layers$buildings
 plot(st_geometry(communes), main = "Bus stops")
-plot(st_geometry(buildings), add = TRUE, border = "red")
-plot(st_geometry(bus_stop), add = TRUE, pch = 21, cex = 0.7, col = "blue")
+plot(st_geometry(layers$buildings), add = TRUE, border = "red")
+plot(st_geometry(bus_stop), add = TRUE, pch = 20, cex = 0.7, col = "blue")
 ```
 
 ![](topodb-busstops-1.png)
