@@ -32,7 +32,7 @@ The source of its data comes from:
 ## Purpose
 
 The purpose of this vignette is to perform spatial operations on vector data from the Topographic Database.
-We focus on four cases, taking point, line, and polygon data and their attributes into account.
+We focus on four cases, taking into account different types of geometry, i.e. point, line and polygon, and their attributes.
 In addition, we show how they can be visualized.
 
 ## Analysis
@@ -56,7 +56,7 @@ topodb_download("bieszczadzki", outdir = "./data")
 ```
 
 The downloaded database consists of many files in the *GML* format.
-All the data necessary for analyzes can be found in `data/PL.PZGiK.332.1801/BDOT10K/` location.
+All the data necessary for analyzes can be found in `data/PL.PZGiK.332.1801/BDOT10k/` location.
 A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/geodb_description.html).
 
 First, let's load the file with administrative units ( *PL.PZGiK.332.1801__OT_ADJA_A.xml* ), using the **sf** package and its `read_sf()` function.
@@ -216,16 +216,16 @@ Our `pattern` should look like this: `PT+.+A\\.xml$` - only files containing are
 files = list.files("data/PL.PZGiK.332.1801/BDOT10k",
                    pattern = "PT+.+A\\.xml$",
                    full.names = TRUE)
-files_name = basename(files)
-files_name
+
+# print filenames
+basename(files)
 ```
 
-We also can exclude *PL.PZGiK.332.1801__OT_PTSO_A.xml* file from list, because this file contains zero features.
+We also can exclude *PL.PZGiK.332.1801__OT_PTSO_A.xml* file from list, because this file contains zero objects (features).
 
 ```{r}
 # drop "OT_PTSO_A.xml"
 files = files[-7]
-files_name = files_name[-7]
 ```
 
 Let's prepare the names of the objects to which the data will be loaded.
@@ -234,8 +234,8 @@ Let's prepare the names of the objects to which the data will be loaded.
 
 ```{r}
 layer_names = c("fallowlands", "communication", "forest", "undeveloped",
-           "squares", "shrublands", "crops", "grassland",
-           "water", "heaps", "buildings")
+                "squares", "shrublands", "crops", "grassland",
+                "water", "heaps", "buildings")
 ```
 
 Now iteratively we will load each GML file, naming it from the list above.
@@ -253,9 +253,7 @@ For each object (layer), we calculate its area separately in a loop.
 # calculate areas in each layer
 area_landcover = lapply(layers, st_area)
 # sum areas for each layer
-area_landcover = lapply(area_landcover, sum)
-# convert from a list to a vector
-area_landcover = as.numeric(area_landcover)
+area_landcover = sapply(area_landcover, sum)
 # convert units
 area_landcover = units::set_units(area_landcover, "m^2")
 area_landcover = units::set_units(area_landcover, "km^2")
