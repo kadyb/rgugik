@@ -175,7 +175,10 @@ The main source of spatial data in Poland is the
 
 Contributions to this package are welcome. The preferred method of
 contribution is through a GitHub pull request. Feel also free to contact
-us by creating [an issue](https://github.com/kadyb/rgugik/issues).
+us by creating [an issue](https://github.com/kadyb/rgugik/issues). More
+detailed information can be found in the
+[CONTRIBUTING](https://github.com/kadyb/rgugik/blob/master/CONTRIBUTING.md)
+document.
 
 Maintainers and contributors must follow this repository’s [CODE OF
 CONDUCT](https://github.com/kadyb/rgugik/blob/master/CODE_OF_CONDUCT.md).
