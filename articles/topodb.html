@@ -107,7 +107,7 @@ body {text-align: justify}
 <div id="definition" class="section level2">
 <h2 class="hasAnchor">
 <a href="#definition" class="anchor"></a>Definition</h2>
-<p><strong>Topographic Database</strong> (pl. <em>Baza Danych Obiektów Topograficznych</em>) is a vector (object) database containing the spatial location of topographic objects with their characteristics. The content and detail of the database correspond to the topographic map in the scale 1:10000. The thematic scope includes information on water network, communication network, land cover, buildings, technical structures, land use, protected areas, and territorial division units. The database is available in the Geography Markup Language (GML) format. The source of its data comes from:</p>
+<p><strong>Topographic Database</strong> (pl. <em>Baza Danych Obiektów Topograficznych</em>) is a vector (object) database containing the spatial location of topographic objects with their characteristics. The content and detail of the database correspond to the topographic map in the scale 1:10000. The thematic scope includes information on water network, communication network, land cover, buildings and technical structures, utility infrastructure, land use, protected areas, territorial division units, and other objects. The database is available in the Geography Markup Language (GML) format. The source of its data comes from:</p>
 <ul>
 <li>other spatial databases maintained by Polish Head Office of Geodesy and Cartography (e.g. <em>Register of Towns, Streets and Addresses</em>, <em>Register of Land and Buildings</em>, <em>State Register of Borders</em>),</li>
 <li>databases maintained by other ministries or institutions (e.g., Ministry of Infrastructure, State Water Management, General Directorate for Environmental Protection),</li>
@@ -253,7 +253,7 @@ body {text-align: justify}
 <div id="land-cover" class="section level3">
 <h3 class="hasAnchor">
 <a href="#land-cover" class="anchor"></a>Land cover</h3>
-<p>Let’s check the land cover data for our county - it is stored in files with the <code>PT</code> prefix. We use the <code><a href="https://rdrr.io/r/base/list.files.html">list.files()</a></code> function to list them. The <code>pattern</code> argument is important here, because it determines what files should be selected. Our <code>pattern</code> should look like this: <code>PT+.+A\\.xml$</code> - only files containing areal data (A) of land cover (PT) will be listed.</p>
+<p>Land cover is the physical material at the surface of the earth like grass, trees, bare ground, water, etc. Let’s check the land cover data for our county - it is stored in files with the <code>PT</code> prefix. We use the <code><a href="https://rdrr.io/r/base/list.files.html">list.files()</a></code> function to list them. The <code>pattern</code> argument is important here, because it determines what files should be selected. Our <code>pattern</code> should look like this: <code>PT+.+A\\.xml$</code> - only files containing areal data (A) of land cover (PT) will be listed.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit">
 <span class="kw">files</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k"</span>,
                    pattern = <span class="st">"PT+.+A\\.xml$"</span>,
