@@ -20,7 +20,7 @@
 #' \url{http://www.gugik.gov.pl/__data/assets/pdf_file/0005/208661/rozp_BDOT10k_BDOO.pdf}
 #'
 #' brief description of categories and layer names (in English and Polish):
-#' \url{https://kadyb.github.io/rgugik/articles/articles/geodb_description.html}
+#' \url{https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html}
 #'
 #' @examples
 #' \dontrun{
