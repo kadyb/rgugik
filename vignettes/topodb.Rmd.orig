@@ -21,7 +21,7 @@ body {text-align: justify}
 
 **Topographic Database** (pl. *Baza Danych Obiektów Topograficznych*) is a vector (object) database containing the spatial location of topographic objects with their characteristics.
 The content and detail of the database correspond to the topographic map in the scale 1:10000.
-The thematic scope includes information on water network, communication network, land cover, buildings, technical structures, land use, protected areas, and territorial division units.
+The thematic scope includes information on water network, communication network, land cover, buildings and technical structures, utility infrastructure, land use, protected areas, territorial division units, and other objects.
 The database is available in the Geography Markup Language (GML) format.
 The source of its data comes from:
 
@@ -207,6 +207,7 @@ rm(bridges)
 
 ### Land cover
 
+Land cover is the physical material at the surface of the earth like grass, trees, bare ground, water, etc.
 Let's check the land cover data for our county - it is stored in files with the  `PT` prefix.
 We use the `list.files()` function to list them.
 The `pattern` argument is important here, because it determines what files should be selected.
