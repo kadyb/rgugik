@@ -136,7 +136,7 @@ body {text-align: justify}
 <span class="co"># 22.4 MB</span>
 <span class="fu"><a href="../reference/topodb_download.html">topodb_download</a></span>(<span class="st">"bieszczadzki"</span>, outdir = <span class="st">"./data"</span>)
 </pre></div>
-<p>The downloaded database consists of many files in the <em>GML</em> format. All the data necessary for analyzes can be found in <code>data/PL.PZGiK.332.1801/BDOT10k/</code> location. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/geodb_description.html">here</a>.</p>
+<p>The downloaded database consists of many files in the <em>GML</em> format. All the data necessary for analyzes can be found in <code>data/PL.PZGiK.332.1801/BDOT10k/</code> location. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html">here</a>.</p>
 <p>First, let’s load the file with administrative units ( *PL.PZGiK.332.1801__OT_ADJA_A.xml* ), using the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">territory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_ADJA_A.xml"</span>)

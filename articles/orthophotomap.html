@@ -142,7 +142,7 @@ body {text-align: justify}
 <span class="co"># 17.6 MB</span>
 <span class="fu"><a href="../reference/geodb_download.html">geodb_download</a></span>(<span class="st">"wielkopolskie"</span>, outdir = <span class="st">"./data"</span>)
 </pre></div>
-<p>The downloaded database consists of many files in the GML (<em>Geography Markup Language</em>) format. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/geodb_description.html">here</a>. The table with the nature reserves is in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file. We can use the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function to load it.</p>
+<p>The downloaded database consists of many files in the GML (<em>Geography Markup Language</em>) format. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html">here</a>. The table with the nature reserves is in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file. We can use the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function to load it.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">reserves</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.201.30/BDOO/PL.PZGIK.201.30__OT_TCRZ_A.xml"</span>)
 </pre></div>
@@ -234,28 +234,30 @@ body {text-align: justify}
 <span class="co"># 61.9 MB</span>
 <span class="fu"><a href="../reference/tile_download.html">tile_download</a></span>(<span class="kw">req_df</span>, outdir = <span class="st">"./data"</span>)
 </pre></div>
+<pre><code>## 1/2
+## 2/2</code></pre>
 </div>
 <div id="processing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#processing" class="anchor"></a>Processing</h3>
 <p>Let’s load the downloaded orthophotomaps using the <code><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars()</a></code> function from the <strong>stars</strong> package, which allows working with spatiotemporal arrays. In our case, it is a raster consisting of three bands (NIR, R, G) for only one point in time. We don’t need to load the entire data array into memory - we can read the file’s metadata instead by using the <code>proxy</code> argument.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit">
+<div class="sourceCode" id="cb21"><pre class="downlit">
 <span class="kw">img1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars</a></span>(<span class="st">"data/69837_329609_N-33-142-B-d-4-2.TIF"</span>, proxy = <span class="fl">TRUE</span>)
 <span class="kw">img2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/read_stars.html">read_stars</a></span>(<span class="st">"data/69837_329613_N-33-142-B-d-4-4.TIF"</span>, proxy = <span class="fl">TRUE</span>)
 </pre></div>
 <p>Now we can perform two operations: rasters merging and cropping to the reserve area. The use of a <code>proxy</code> allows to get the result almost immediately, while processing the entire image (<code>proxy = FALSE</code>) would take several minutes. Images have their own specific Coordinate Reference Systems, so let’s make sure it is the correct one after merging. It should be EPSG 2180 in this case.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit">
+<div class="sourceCode" id="cb22"><pre class="downlit">
 <span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_mosaic.html">st_mosaic</a></span>(<span class="kw">img1</span>, <span class="kw">img2</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crs.html">st_crs</a></span>(<span class="kw">img</span>) <span class="op">=</span> <span class="fl">2180</span> <span class="co"># overwrite CRS to be sure</span>
 <span class="kw">img</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_crop.html">st_crop</a></span>(<span class="kw">img</span>, <span class="kw">krajkowo</span>)
 </pre></div>
 <p>Let’s display the effect using the <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code> function, and define the input bands with the <code>rgb</code> argument. It creates a composition consisting of three bands: NIR, R and G in our case. The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the <code>rgb</code> argument name.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit">
+<div class="sourceCode" id="cb23"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">img</span>, rgb = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>), main = <span class="kw">NULL</span>)
 </pre></div>
 <p><img src="orto-CIR-1.png"></p>
 <p>In the last step, we calculate the NDVI using the near infrared (1) and red (2) bands.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit">
+<div class="sourceCode" id="cb24"><pre class="downlit">
 <span class="kw">calc_ndvi</span> <span class="op">=</span> <span class="fu">function</span>(<span class="kw">img</span>) (<span class="kw">img</span>[<span class="fl">1</span>] <span class="op">-</span> <span class="kw">img</span>[<span class="fl">2</span>]) <span class="op">/</span> (<span class="kw">img</span>[<span class="fl">1</span>] <span class="op">+</span> <span class="kw">img</span>[<span class="fl">2</span>])
 <span class="kw">ndvi</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/stars/man/st_apply.html">st_apply</a></span>(<span class="kw">img</span>, MARGIN = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>), FUN = <span class="kw">calc_ndvi</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">ndvi</span>, main = <span class="st">"NDVI"</span>, col = <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">hcl.colors</a></span>(<span class="fl">10</span>, palette = <span class="st">"RdYlGn"</span>))
