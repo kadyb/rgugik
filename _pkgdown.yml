@@ -13,5 +13,5 @@ navbar:
           href: articles/DEM.html
         - text: "Topographic Database"
           href: articles/topodb.html
-        - text: "General Geographic Database"
-          href: articles/articles/geodb_description.html
+        - text: "Spatial Databases"
+          href: articles/articles/spatialdb_description.html
