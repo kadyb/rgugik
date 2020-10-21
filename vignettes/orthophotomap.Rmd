@@ -68,7 +68,7 @@ geodb_download("wielkopolskie", outdir = "./data")
 ```
 
 The downloaded database consists of many files in the GML (*Geography Markup Language*) format.
-A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/geodb_description.html).
+A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html).
 The table with the nature reserves is in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file.
 We can use the **sf** package and its `read_sf()` function to load it.
 
@@ -218,6 +218,11 @@ We can also specify the output folder with the `outdir` argument.
 ```r
 # 61.9 MB
 tile_download(req_df, outdir = "./data")
+```
+
+```
+## 1/2
+## 2/2
 ```
 
 ### Processing

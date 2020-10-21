@@ -56,7 +56,7 @@ topodb_download("bieszczadzki", outdir = "./data")
 
 The downloaded database consists of many files in the *GML* format.
 All the data necessary for analyzes can be found in `data/PL.PZGiK.332.1801/BDOT10k/` location.
-A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/geodb_description.html).
+A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html).
 
 First, let's load the file with administrative units ( *PL.PZGiK.332.1801__OT_ADJA_A.xml* ), using the **sf** package and its `read_sf()` function.
 
