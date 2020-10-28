@@ -23,8 +23,8 @@ orto_request = function(polygon) {
     stop("no geometries")
   }
 
-  selected_cols = c("godlo", "akt_rok", "akt_data", "piksel", "kolor", "zrDanych", "ukladXY",
-                    "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1",
+  selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zrDanych", "ukladXY",
+                    "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1", "akt_data", 
                     "nazwa_pliku")
   selected_cols = paste(selected_cols, collapse = ",")
 
