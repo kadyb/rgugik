@@ -24,7 +24,7 @@ orto_request = function(polygon) {
   }
 
   selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zrDanych", "ukladXY",
-                    "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1",
+                    "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1", "akt_data", 
                     "nazwa_pliku")
   selected_cols = paste(selected_cols, collapse = ",")
 
@@ -54,7 +54,7 @@ orto_request = function(polygon) {
                         url_do_pobrania = character(),
                         idSerie = integer(),
                         sha1 = character(),
-                        #akt_data = numeric(),
+                        akt_data = numeric(),
                         #idorto = integer(),
                         nazwa_pliku = character()
                         #ESRI_OID = integer()
@@ -88,8 +88,9 @@ orto_request = function(polygon) {
   # postprocessing
   colnames(empty_df) = c("sheetID", "year", "resolution", "composition",
                          "sensor", "CRS", "isFilled", "URL", "seriesID",
-                         "sha1", "filename")
+                         "sha1", "date", "filename")
   empty_df$composition = as.factor(empty_df$composition)
+  empty_df$date = as.Date(as.POSIXct(empty_df$date / 1000, origin = "1970-01-01", tz = "CET"))
   empty_df$CRS = as.factor(empty_df$CRS)
   empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
   empty_df$sensor = factor(empty_df$sensor,
