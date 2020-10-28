@@ -23,7 +23,7 @@ orto_request = function(polygon) {
     stop("no geometries")
   }
 
-  selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zrDanych", "ukladXY",
+  selected_cols = c("godlo", "akt_rok", "akt_data", "piksel", "kolor", "zrDanych", "ukladXY",
                     "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1",
                     "nazwa_pliku")
   selected_cols = paste(selected_cols, collapse = ",")
@@ -41,6 +41,7 @@ orto_request = function(polygon) {
   # initial empty df (columns must be identical as in 'selected_cols')
   empty_df = data.frame(godlo = character(),
                         akt_rok = integer(),
+                        akt_data = numeric(), 
                         piksel = numeric(),
                         kolor = character(),
                         zrDanych = character(),
@@ -86,10 +87,11 @@ orto_request = function(polygon) {
   empty_df = empty_df[!duplicated(empty_df$nazwa_pliku), ]
 
   # postprocessing
-  colnames(empty_df) = c("sheetID", "year", "resolution", "composition",
+  colnames(empty_df) = c("sheetID", "year", "date", "resolution", "composition",
                          "sensor", "CRS", "isFilled", "URL", "seriesID",
                          "sha1", "filename")
   empty_df$composition = as.factor(empty_df$composition)
+  empty_df$date = as.Date(as.POSIXct(empty_df$date / 1000, origin = "1970-01-01", tz = "CET"))
   empty_df$CRS = as.factor(empty_df$CRS)
   empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
   empty_df$sensor = factor(empty_df$sensor,
