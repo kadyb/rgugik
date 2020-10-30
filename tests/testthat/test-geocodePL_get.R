@@ -5,7 +5,7 @@ t4 = geocodePL_get(rail_crossing = "001 018 478")
 t5 = geocodePL_get(geoname = "Las Mierzei") # physiographic object
 
 
-test_that("check if ouput is data.frame", {
+test_that("check if ouput is sf/data.frame", {
   expect_s3_class(t1, c("sf", "data.frame"))
   expect_s3_class(t2, c("sf", "data.frame"))
   expect_s3_class(t3, c("sf", "data.frame"))
