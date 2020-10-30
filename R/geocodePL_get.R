@@ -1,4 +1,4 @@
-#' returns a data.frame with metadata and coordinates for a given type of input
+#' returns a sf data.frame with metadata and coordinates for a given type of input
 #' (geocoding addresses and objects)
 #'
 #' @param address place with or without street and house number
@@ -38,7 +38,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
       ## replace NULLs with NAs
       if (length(output) == 1) {
-        output[[1]][sapply(output[[1]], is.null)] <- NA
+        output[[1]][sapply(output[[1]], is.null)] = NA
       }
 
       df_output = do.call(rbind.data.frame, output)
@@ -57,8 +57,8 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     output = jsonlite::fromJSON(prepared_URL)[["results"]]
 
     if (!is.null(output)) {
-    df_output = do.call(rbind.data.frame, output)
-    df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
+      df_output = do.call(rbind.data.frame, output)
+      df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
       return(df_output)
     }
   }
@@ -73,7 +73,6 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       base_URL = "https://services.gugik.gov.pl/uug/?request=GetLevelCrossing&location="
       prepared_URL = utils::URLencode(paste0(base_URL, rail_crossing))
       output = jsonlite::fromJSON(prepared_URL)[["results"]]
-
 
       if (!is.null(output)) {
         df_output = do.call(rbind.data.frame, output)
@@ -94,9 +93,9 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     output = jsonlite::fromJSON(prepared_URL)[["results"]]
 
     if (!is.null(output)) {
-    df_output = do.call(rbind.data.frame, output)
-    df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
-    return(df_output)
+      df_output = do.call(rbind.data.frame, output)
+      df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
+      return(df_output)
     }
   }
 
