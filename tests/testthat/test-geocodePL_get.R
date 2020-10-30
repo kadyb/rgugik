@@ -6,11 +6,11 @@ t5 = geocodePL_get(geoname = "Las Mierzei") # physiographic object
 
 
 test_that("check if ouput is data.frame", {
-  expect_s3_class(t1, "data.frame")
-  expect_s3_class(t2, "data.frame")
-  expect_s3_class(t3, "data.frame")
-  expect_s3_class(t4, "data.frame")
-  expect_s3_class(t5, "data.frame")
+  expect_s3_class(t1, c("sf", "data.frame"))
+  expect_s3_class(t2, c("sf", "data.frame"))
+  expect_s3_class(t3, c("sf", "data.frame"))
+  expect_s3_class(t4, c("sf", "data.frame"))
+  expect_s3_class(t5, c("sf", "data.frame"))
 })
 
 test_that("check number of columns", {
