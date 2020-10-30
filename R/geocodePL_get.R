@@ -1,4 +1,4 @@
-#' returns a list with metadata and coordinates for a given type of input
+#' returns a data.frame with metadata and coordinates for a given type of input
 #' (geocoding addresses and objects)
 #'
 #' @param address place with or without street and house number
@@ -8,7 +8,7 @@
 #' @param geoname name of the geographical object from State Register
 #' of Geographical Names (function [`geonames_download()`])
 #'
-#' @return a list(s) with metadata and coordinates (EPSG: 2180)
+#' @return a sf data.frame with metadata and coordinates (EPSG: 2180)
 #'
 #' @export
 #'
@@ -34,11 +34,15 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     prepared_URL = gsub(" ", "%20", prepared_URL)
     output = jsonlite::fromJSON(prepared_URL)[["results"]]
 
+    ## replace NULLs with NAs
     if (length(output) == 1) {
-      output = output[[1]]
+      output[[1]][sapply(output[[1]], is.null)] <- NA
     }
 
-    return(output)
+    df_output = do.call(rbind.data.frame, output)
+    df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
+
+    return(df_output)
   }
 
   # geocode road
@@ -47,12 +51,10 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     base_URL = "https://services.gugik.gov.pl/uug?request=GetRoadMarker&location="
     prepared_URL = utils::URLencode(paste0(base_URL, road))
     output = jsonlite::fromJSON(prepared_URL)[["results"]]
+    df_output = do.call(rbind.data.frame, output)
+    df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
 
-    # remove unnecessary attributes
-    sel = c("road", "marker", "number", "x", "y")
-    output = output[[1]][sel]
-
-    return(output)
+    return(df_output)
   }
 
   # geocode rail crossing
@@ -66,13 +68,12 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       prepared_URL = utils::URLencode(paste0(base_URL, rail_crossing))
       output = jsonlite::fromJSON(prepared_URL)[["results"]]
 
-      # remove unnecessary attributes
-      sel = c("operator", "category", "phone", "mobile phone", "x", "y")
-      output = output[[1]][sel]
+      df_output = do.call(rbind.data.frame, output)
+      df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
 
       }
 
-    return(output)
+    return(df_output)
   }
 
   # geocode geographical name
@@ -82,12 +83,10 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     prepared_URL = paste0(base_URL, geoname)
     prepared_URL = gsub(" ", "%20", prepared_URL)
     output = jsonlite::fromJSON(prepared_URL)[["results"]]
+    df_output = do.call(rbind.data.frame, output)
+    df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
 
-    if (length(output) == 1) {
-      output = output[[1]]
-    }
-
-    return(output)
+    return(df_output)
   }
 
   # user did not enter any argument
