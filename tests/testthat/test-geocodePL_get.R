@@ -3,6 +3,7 @@ t2 = geocodePL_get(address = "Królewskie Brzeziny 13") # place and house number
 t3 = geocodePL_get(road = "632") # road number
 t4 = geocodePL_get(rail_crossing = "001 018 478")
 t5 = geocodePL_get(geoname = "Las Mierzei") # physiographic object
+t6 = geocodePL_get(address = "Poznań Aleja Niepodległosci") # wrong address
 
 
 test_that("check if ouput is sf/data.frame", {
@@ -21,6 +22,9 @@ test_that("check number of columns", {
   expect_true(ncol(t5) == 12)
 })
 
+test_that("Address was not found", {
+  expect_null(t6)
+})
 
 # test stops
 test_that("check stops", {

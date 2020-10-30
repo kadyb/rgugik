@@ -8,7 +8,7 @@
 #' @param geoname name of the geographical object from State Register
 #' of Geographical Names (function [`geonames_download()`])
 #'
-#' @return a sf data.frame with metadata and coordinates (EPSG: 2180)
+#' @return a sf data.frame with metadata and coordinates (EPSG: 2180) or NULL if address/road/rail_crossing/geoname was not found.
 #'
 #' @export
 #'
@@ -97,6 +97,10 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
       return(df_output)
     }
+  }
+
+  if (is.null(output)) {
+    return(NULL)
   }
 
   # user did not enter any argument
