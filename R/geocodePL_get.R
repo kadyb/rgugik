@@ -90,6 +90,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     prepared_URL = gsub(" ", "%20", prepared_URL)
     output = jsonlite::fromJSON(prepared_URL)[["results"]]
 
+    output = lapply(output, function(x) {
+      x["notes"] = NULL
+      x
+    })
+
     if (!is.null(output)) {
       df_output = do.call(rbind.data.frame, output)
       df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
