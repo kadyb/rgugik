@@ -1,4 +1,4 @@
-#' returns a sf data.frame with metadata and coordinates for a given type of input
+#' returns a sf data.frame with metadata for a given type of input
 #' (geocoding addresses and objects)
 #'
 #' @param address place with or without street and house number
@@ -8,7 +8,7 @@
 #' @param geoname name of the geographical object from State Register
 #' of Geographical Names (function [`geonames_download()`])
 #'
-#' @return a sf data.frame with metadata and coordinates (EPSG: 2180) or NULL if address/road/rail_crossing/geoname was not found.
+#' @return a sf data.frame (EPSG: 2180) with metadata
 #'
 #' @export
 #'
@@ -36,7 +36,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
     if (!is.null(output)) {
 
-      ## replace NULLs with NAs
+      # replace NULLs with NAs
       if (length(output) == 1) {
         output[[1]][sapply(output[[1]], is.null)] = NA
       }
@@ -45,14 +45,14 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
       return(df_output)
     }
-
   }
 
   # geocode road
   if (!is.null(road)) {
 
     base_URL = "https://services.gugik.gov.pl/uug?request=GetRoadMarker&location="
-    prepared_URL = utils::URLencode(paste0(base_URL, road))
+    prepared_URL = paste0(base_URL, road)
+    prepared_URL = gsub(" ", "%20", prepared_URL)
     output = jsonlite::fromJSON(prepared_URL)[["results"]]
 
     if (!is.null(output)) {
@@ -70,7 +70,8 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     } else {
 
       base_URL = "https://services.gugik.gov.pl/uug/?request=GetLevelCrossing&location="
-      prepared_URL = utils::URLencode(paste0(base_URL, rail_crossing))
+      prepared_URL = paste0(base_URL, rail_crossing)
+      prepared_URL = gsub(" ", "%20", prepared_URL)
       output = jsonlite::fromJSON(prepared_URL)[["results"]]
 
       if (!is.null(output)) {
@@ -79,7 +80,6 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
         return(df_output)
       }
     }
-
   }
 
   # geocode geographical name
@@ -90,12 +90,14 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     prepared_URL = gsub(" ", "%20", prepared_URL)
     output = jsonlite::fromJSON(prepared_URL)[["results"]]
 
-    output = lapply(output, function(x) {
-      x["notes"] = NULL
-      x
-    })
-
     if (!is.null(output)) {
+
+      # drop "notes" attribute
+      output = lapply(output, function(x) {
+        x["notes"] = NULL
+        return(x)
+      })
+
       df_output = do.call(rbind.data.frame, output)
       df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
       return(df_output)
