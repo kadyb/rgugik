@@ -23,7 +23,7 @@ test_that("check number of columns", {
 })
 
 test_that("check if object was not found", {
-  expect_output(t6, "object not found")
+  expect_equal(t6, "object not found")
 })
 
 # test stops
