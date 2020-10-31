@@ -39,10 +39,10 @@ emuia_download = function(commune = NULL, TERYT = NULL, outdir = ".",
   }
 
   if (!is.null(commune)) {
-    sel_vector = df_names[, "NAME"] %in% commune
+    sel_vector = df_names[["NAME"]] %in% commune
     df_names = df_names[sel_vector, ]
   } else {
-    sel_vector = df_names[, "TERYT"] %in% TERYT
+    sel_vector = df_names[["TERYT"]] %in% TERYT
     df_names = df_names[sel_vector, ]
   }
 
