@@ -43,7 +43,6 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
       df_output = do.call(rbind.data.frame, output)
       df_output = sf::st_as_sf(df_output, wkt = "geometry_wkt", crs = 2180)
-
       return(df_output)
     }
 
@@ -81,7 +80,6 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       }
     }
 
-
   }
 
   # geocode geographical name
@@ -100,7 +98,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
   }
 
   if (is.null(output)) {
-    return(NULL)
+    return("object not found")
   }
 
   # user did not enter any argument
