@@ -42,7 +42,7 @@ The larger the cell, the more generalized form of the terrain it presents.
 
 ## Purpose
 
-The purpose of this exercise is to determine the elevation of the ground surface and objects in the selected area.
+The purpose of this vignette is to determine the elevation of the ground surface and objects in the selected area.
 The source of the data will be Airborne Laser Scanning already processed to the GRID format.
 
 ## Analysis
@@ -174,6 +174,11 @@ Now we can download the data using the `tile_download()` function with our filte
 tile_download(req_df, outdir = "./data")
 ```
 
+```
+## 1/2
+## 2/2
+```
+
 ### Processing
 
 Let’s load the downloaded numerical models using the `read_stars()` function from the **stars** package, which allows working on spatiotemporal arrays.
@@ -233,9 +238,9 @@ st_dimensions(DEM)
 ```
 
 ```
-##      from   to offset delta               refsys point   values x/y
-## x       1 2188 355732     1 ETRS89 / Poland CS92  TRUE     NULL [x]
-## y       1 2379 517028    -1 ETRS89 / Poland CS92  TRUE     NULL [y]
+##      from   to offset delta               refsys point   values    
+## x       1 2188 355733     1 ETRS89 / Poland CS92  TRUE     NULL [x]
+## y       1 2379 517029    -1 ETRS89 / Poland CS92  TRUE     NULL [y]
 ## elev    1    2     NA    NA                   NA    NA DTM, DSM
 ```
 

@@ -31,7 +31,7 @@ Too large a pixel means that individual objects in the scene are no longer recog
 
 ## Purpose
 
-The purpose of this exercise is to assess the vegetation condition of the selected area.
+The purpose of this vignette is to assess the vegetation condition of the selected area.
 It can be done based on remote sensing data (multispectral orthophotomap) and a simple vegetation index.
 
 **NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and the near infrared bands.
@@ -47,7 +47,7 @@ Values close to 0 and below are related to water, bare soil surfaces or building
 ## Analysis
 
 ```{r message=FALSE}
-# attach packages
+# load packages
 library(sf)
 library(stars)
 library(rgugik)
@@ -215,7 +215,7 @@ plot(ndvi, main = "NDVI", col = hcl.colors(10, palette = "RdYlGn"))
 ```
 
 A surprising observation is the relatively low NDVI values for the forest area.
-There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated.
+There are two reasons for this, i.e. the photos are taken in mid-March (before the start of the growing season) and probably have not been calibrated.
 For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).
 
 ```{r include=FALSE}
