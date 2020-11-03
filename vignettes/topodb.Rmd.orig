@@ -97,7 +97,9 @@ roads = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SKDR_L.xml
 ```
 
 Let's plot them.
-<!--JN: maybe it would be good to add a sentence or two of explanation of the following code -->
+We use the `plot()` function again, but this time we combine the two layers into one image.
+The first layer (in the background) contains roads and to add another layer, we have to set the argument `reset` to "FALSE".
+Then we can add a second layer with the territory by setting the `add` argument to "TRUE".
 
 ```{r roads}
 plot(roads["katZarzadzania"], main = "Road category", reset = FALSE)
@@ -235,8 +237,7 @@ files = files[-7]
 ```
 
 Let's prepare the names of the objects to which the data will be loaded.
-<!--JN: I do not understand what do you mean here-->
-<!--JN: I understand the code, though.. Where did you get this names? Are they universal? This should be explained...-->
+The following names are an extension of the abbreviations contained in the filenames.
 
 ```{r}
 layer_names = c("fallowlands", "communication", "forest", "undeveloped",
@@ -244,8 +245,9 @@ layer_names = c("fallowlands", "communication", "forest", "undeveloped",
                 "water", "heaps", "buildings")
 ```
 
-Now iteratively we will load each GML file, naming it from the list above.
-<!--JN: I would suggest rewriting the code in this section. I have almost never seen the use of assign in the exploratory code...-->
+Now we load each GML file, naming it from the list above.
+Instead of using a loop, we can use the `lapply()` function, which performs a specific action for each element of the vector.
+The action in our case is to load the GML files using `read_sf()`.
 
 ```{r}
 layers = lapply(files, read_sf)
@@ -253,7 +255,8 @@ names(layers) = layer_names
 ```
 
 Previously, we used `st_length()` to calculate the line length, now we use corresponding `st_area()` function to calculate the area.
-For each object (layer), we calculate its area separately in a loop.
+Here we use the `lapply()` function analogously, which will work for each item on the list.
+A similar function is `sapply()`, which returns a vector instead of a list.
 
 ```{r}
 # calculate areas in each layer
@@ -339,7 +342,7 @@ buildings_buffer = st_within(buildings, bus_buffer)
 ```
 
 The result is a nested list that consists of 2828 buildings and their associated buffers.
-Let's count how many buildings are not in any buffer - function `sapply()` is useful for operations on lists.
+Let's count how many buildings are not in any buffer by using `sapply()` as in the previous examples.
 
 ```{r}
 buildings_ex = sapply(buildings_buffer, length)
