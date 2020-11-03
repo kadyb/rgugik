@@ -17,13 +17,15 @@ test_that("check number of columns", {
   expect_true(ncol(minmax) == 2)
 })
 
-# test EPSG 4326
+
+# test EPSG:4326
 polygon_4326 = st_transform(polygon, 4326)
 
-test_that("check if the warning is returned for 4326", {
-  expect_warning({minmax_4326 = minmaxDTM_get(polygon_4326)})
+test_that("check if the warning is returned for EPSG:4326", {
+  expect_warning(minmaxDTM_get(polygon_4326))
 })
 
+# suppress the warning because it is already tested above
 test_that("check if results are equal", {
-  expect_equal(minmax, minmaxDTM_get(polygon_4326))
+  expect_equal(minmax, suppressWarnings(minmaxDTM_get(polygon_4326)))
 })
