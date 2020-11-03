@@ -29,7 +29,7 @@ Too large a pixel means that individual objects in the scene are no longer recog
 
 ## Purpose
 
-The purpose of this exercise is to assess the vegetation condition of the selected area.
+The purpose of this vignette is to assess the vegetation condition of the selected area.
 It can be done based on remote sensing data (multispectral orthophotomap) and a simple vegetation index.
 
 **NDVI** (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and the near infrared bands.
@@ -69,7 +69,7 @@ geodb_download("wielkopolskie", outdir = "./data")
 
 The downloaded database consists of many files in the GML (*Geography Markup Language*) format.
 A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html).
-The table with the nature reserves is in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file.
+The table with the nature reserves is in the "PL.PZGIK.201.30__OT_TCRZ_A.xml" file.
 We can use the **sf** package and its `read_sf()` function to load it.
 
 
@@ -274,7 +274,7 @@ plot(ndvi, main = "NDVI", col = hcl.colors(10, palette = "RdYlGn"))
 ![](orto-NDVI-1.png)
 
 A surprising observation is the relatively low NDVI values for the forest area.
-There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated.
+There are two reasons for this, i.e. the photos are taken in mid-March (before the start of the growing season) and probably have not been calibrated.
 For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).
 
 

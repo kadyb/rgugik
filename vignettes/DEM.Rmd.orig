@@ -44,13 +44,13 @@ The larger the cell, the more generalized form of the terrain it presents.
 
 ## Purpose
 
-The purpose of this exercise is to determine the elevation of the ground surface and objects in the selected area.
+The purpose of this vignette is to determine the elevation of the ground surface and objects in the selected area.
 The source of the data will be Airborne Laser Scanning already processed to the GRID format.
 
 ## Analysis
 
 ```{r message=FALSE}
-# load packages
+# attach packages
 library(sf)
 library(stars)
 library(rgugik)

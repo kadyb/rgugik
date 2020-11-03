@@ -38,7 +38,7 @@ In addition, we show how they can be visualized.
 ## Analysis
 
 ```{r message=FALSE}
-# load packages
+# attach packages
 library(sf)
 library(rgugik)
 ```
@@ -59,7 +59,7 @@ The downloaded database consists of many files in the *GML* format.
 All the data necessary for analyzes can be found in `data/PL.PZGiK.332.1801/BDOT10k/` location.
 A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html).
 
-First, let's load the file with administrative units ( *PL.PZGiK.332.1801__OT_ADJA_A.xml* ), using the **sf** package and its `read_sf()` function.
+First, let's load the file with administrative units ("PL.PZGiK.332.1801__OT_ADJA_A.xml"), using the **sf** package and its `read_sf()` function.
 
 ```{r}
 territory = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_ADJA_A.xml")
@@ -78,21 +78,28 @@ table(communes$rodzaj)
 We can see that the *bieszczadzki* county consists of two rural communes and one urban-rural commune.
 Let's visualize it.
 
-```{r communes}
+```{r eval=FALSE, include=TRUE}
 plot(communes, axes = TRUE, main = "Bieszczadzki county")
+```
+
+```{r communes, echo=FALSE}
+plot(communes, axes = TRUE, main = "Bieszczadzki county",
+     key.width = lcm(2.5))
 ```
 
 ### Lengths and categories of roads
 
 In the first task, we calculate the lengths of roads taking into account their categories.
-Road data can be found in the *PL.PZGiK.332.1801__OT_SKDR_L.xml* file.
+Road data can be found in the "PL.PZGiK.332.1801__OT_SKDR_L.xml" file.
 
 ```{r}
 roads = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SKDR_L.xml")
 ```
 
 Let's plot them.
-<!--JN: maybe it would be good to add a sentence or two of explanation of the following code -->
+We use the `plot()` function again, but this time we combine the two layers into one image.
+The first layer (in the background) contains roads and to add another layer, we have to set the argument `reset` to "FALSE".
+Then we can add a second layer with the territory by setting the `add` argument to "TRUE".
 
 ```{r roads}
 plot(roads["katZarzadzania"], main = "Road category", reset = FALSE)
@@ -156,7 +163,7 @@ The road density is about `r round(density, 2)` km/km^2^.
 
 ### Roads through the rivers
 
-Another dataset included in the Topographic Database contains rivers for this area ( *PL.PZGiK.332.1801__OT_SWRS_L.xml* ).
+Another dataset included in the Topographic Database contains rivers for this area ("PL.PZGiK.332.1801__OT_SWRS_L.xml").
 
 ```{r}
 rivers = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SWRS_L.xml")
@@ -222,7 +229,7 @@ files = list.files("data/PL.PZGiK.332.1801/BDOT10k",
 basename(files)
 ```
 
-We also can exclude *PL.PZGiK.332.1801__OT_PTSO_A.xml* file from list, because this file contains zero objects (features).
+We also can exclude "PL.PZGiK.332.1801__OT_PTSO_A.xml" file from list, because this file contains zero objects (features).
 
 ```{r}
 # drop "OT_PTSO_A.xml"
@@ -230,8 +237,7 @@ files = files[-7]
 ```
 
 Let's prepare the names of the objects to which the data will be loaded.
-<!--JN: I do not understand what do you mean here-->
-<!--JN: I understand the code, though.. Where did you get this names? Are they universal? This should be explained...-->
+The following names are an extension of the abbreviations contained in the filenames.
 
 ```{r}
 layer_names = c("fallowlands", "communication", "forest", "undeveloped",
@@ -239,8 +245,9 @@ layer_names = c("fallowlands", "communication", "forest", "undeveloped",
                 "water", "heaps", "buildings")
 ```
 
-Now iteratively we will load each GML file, naming it from the list above.
-<!--JN: I would suggest rewriting the code in this section. I have almost never seen the use of assign in the exploratory code...-->
+Now we load each GML file, naming it from the list above.
+Instead of using a loop, we can use the `lapply()` function, which performs a specific action for each element of the vector.
+The action in our case is to load the GML files using `read_sf()`.
 
 ```{r}
 layers = lapply(files, read_sf)
@@ -248,7 +255,8 @@ names(layers) = layer_names
 ```
 
 Previously, we used `st_length()` to calculate the line length, now we use corresponding `st_area()` function to calculate the area.
-For each object (layer), we calculate its area separately in a loop.
+Here we use the `lapply()` function analogously, which will work for each item on the list.
+A similar function is `sapply()`, which returns a vector instead of a list.
 
 ```{r}
 # calculate areas in each layer
@@ -297,7 +305,7 @@ rm(list = layer_names)
 
 In the last type of analysis in this vignette, we want to check how many buildings have access to bus stops within a given distance.
 We can apply spatial buffers to solve this question.
-Information about bus stops can be found in the *PL.PZGiK.332.1801__OT_OIKM_P.xml* file, where they have the *OIKM04* value in the `x_kod` attribute.
+Information about bus stops can be found in the "PL.PZGiK.332.1801__OT_OIKM_P.xml" file, where they have the *OIKM04* value in the `x_kod` attribute.
 
 ```{r}
 bus_stop = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_OIKM_P.xml")
@@ -334,7 +342,7 @@ buildings_buffer = st_within(buildings, bus_buffer)
 ```
 
 The result is a nested list that consists of 2828 buildings and their associated buffers.
-Let's count how many buildings are not in any buffer - function `sapply()` is useful for operations on lists.
+Let's count how many buildings are not in any buffer by using `sapply()` as in the previous examples.
 
 ```{r}
 buildings_ex = sapply(buildings_buffer, length)
