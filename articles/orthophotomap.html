@@ -119,7 +119,7 @@ body {text-align: justify}
 <div id="purpose" class="section level2">
 <h2 class="hasAnchor">
 <a href="#purpose" class="anchor"></a>Purpose</h2>
-<p>The purpose of this exercise is to assess the vegetation condition of the selected area. It can be done based on remote sensing data (multispectral orthophotomap) and a simple vegetation index.</p>
+<p>The purpose of this vignette is to assess the vegetation condition of the selected area. It can be done based on remote sensing data (multispectral orthophotomap) and a simple vegetation index.</p>
 <p><strong>NDVI</strong> (Normalized Difference Vegetation Index) is a simple indicator of vegetation that uses the red and the near infrared bands. Its main application is monitoring and forecasting of agricultural production. It is calculated using the following formula:</p>
 <p><span class="math display">\[NDVI = \frac {NIR - RED} {NIR + RED}\]</span></p>
 <p>Its value ranges from -1 to 1. The higher the value, the higher the biomass level. Values close to 0 and below are related to water, bare soil surfaces or buildings.</p>
@@ -142,7 +142,7 @@ body {text-align: justify}
 <span class="co"># 17.6 MB</span>
 <span class="fu"><a href="../reference/geodb_download.html">geodb_download</a></span>(<span class="st">"wielkopolskie"</span>, outdir = <span class="st">"./data"</span>)
 </pre></div>
-<p>The downloaded database consists of many files in the GML (<em>Geography Markup Language</em>) format. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html">here</a>. The table with the nature reserves is in the *PL.PZGIK.201.30__OT_TCRZ_A.xml* file. We can use the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function to load it.</p>
+<p>The downloaded database consists of many files in the GML (<em>Geography Markup Language</em>) format. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html">here</a>. The table with the nature reserves is in the "PL.PZGIK.201.30__OT_TCRZ_A.xml" file. We can use the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function to load it.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">reserves</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.201.30/BDOO/PL.PZGIK.201.30__OT_TCRZ_A.xml"</span>)
 </pre></div>
@@ -263,7 +263,7 @@ body {text-align: justify}
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">ndvi</span>, main = <span class="st">"NDVI"</span>, col = <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html">hcl.colors</a></span>(<span class="fl">10</span>, palette = <span class="st">"RdYlGn"</span>))
 </pre></div>
 <p><img src="orto-NDVI-1.png"></p>
-<p>A surprising observation is the relatively low NDVI values for the forest area. There are two reasons for this, i.e. the photos are taken in the autumn and probably have not been calibrated. For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).</p>
+<p>A surprising observation is the relatively low NDVI values for the forest area. There are two reasons for this, i.e. the photos are taken in mid-March (before the start of the growing season) and probably have not been calibrated. For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).</p>
 </div>
 </div>
   </div>
