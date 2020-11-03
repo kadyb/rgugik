@@ -58,7 +58,7 @@ The downloaded database consists of many files in the *GML* format.
 All the data necessary for analyzes can be found in `data/PL.PZGiK.332.1801/BDOT10k/` location.
 A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html).
 
-First, let's load the file with administrative units ( *PL.PZGiK.332.1801__OT_ADJA_A.xml* ), using the **sf** package and its `read_sf()` function.
+First, let's load the file with administrative units ("PL.PZGiK.332.1801__OT_ADJA_A.xml"), using the **sf** package and its `read_sf()` function.
 
 
 ```r
@@ -95,7 +95,7 @@ plot(communes, axes = TRUE, main = "Bieszczadzki county")
 ### Lengths and categories of roads
 
 In the first task, we calculate the lengths of roads taking into account their categories.
-Road data can be found in the *PL.PZGiK.332.1801__OT_SKDR_L.xml* file.
+Road data can be found in the "PL.PZGiK.332.1801__OT_SKDR_L.xml" file.
 
 
 ```r
@@ -194,7 +194,7 @@ The road density is about 2.92 km/km^2^.
 
 ### Roads through the rivers
 
-Another dataset included in the Topographic Database contains rivers for this area ( *PL.PZGiK.332.1801__OT_SWRS_L.xml* ).
+Another dataset included in the Topographic Database contains rivers for this area ("PL.PZGiK.332.1801__OT_SWRS_L.xml").
 
 
 ```r
@@ -285,7 +285,7 @@ basename(files)
 ## [12] "PL.PZGiK.332.1801__OT_PTZB_A.xml"
 ```
 
-We also can exclude *PL.PZGiK.332.1801__OT_PTSO_A.xml* file from list, because this file contains zero objects (features).
+We also can exclude "PL.PZGiK.332.1801__OT_PTSO_A.xml" file from list, because this file contains zero objects (features).
 
 
 ```r
@@ -387,7 +387,7 @@ Over 75% of the county's area is covered by forests and only less than 1% by bui
 
 In the last type of analysis in this vignette, we want to check how many buildings have access to bus stops within a given distance.
 We can apply spatial buffers to solve this question.
-Information about bus stops can be found in the *PL.PZGiK.332.1801__OT_OIKM_P.xml* file, where they have the *OIKM04* value in the `x_kod` attribute.
+Information about bus stops can be found in the "PL.PZGiK.332.1801__OT_OIKM_P.xml" file, where they have the *OIKM04* value in the `x_kod` attribute.
 
 
 ```r
