@@ -47,7 +47,7 @@ Values close to 0 and below are related to water, bare soil surfaces or building
 ## Analysis
 
 ```{r message=FALSE}
-# load packages
+# attach packages
 library(sf)
 library(stars)
 library(rgugik)

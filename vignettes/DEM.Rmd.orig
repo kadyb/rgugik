@@ -50,7 +50,7 @@ The source of the data will be Airborne Laser Scanning already processed to the 
 ## Analysis
 
 ```{r message=FALSE}
-# load packages
+# attach packages
 library(sf)
 library(stars)
 library(rgugik)
