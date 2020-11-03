@@ -38,7 +38,7 @@ In addition, we show how they can be visualized.
 ## Analysis
 
 ```{r message=FALSE}
-# load packages
+# attach packages
 library(sf)
 library(rgugik)
 ```
@@ -78,8 +78,13 @@ table(communes$rodzaj)
 We can see that the *bieszczadzki* county consists of two rural communes and one urban-rural commune.
 Let's visualize it.
 
-```{r communes}
+```{r eval=FALSE, include=TRUE}
 plot(communes, axes = TRUE, main = "Bieszczadzki county")
+```
+
+```{r communes, echo=FALSE}
+plot(communes, axes = TRUE, main = "Bieszczadzki county",
+     key.width = lcm(2.5))
 ```
 
 ### Lengths and categories of roads

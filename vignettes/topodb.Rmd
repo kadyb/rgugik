@@ -36,7 +36,7 @@ In addition, we show how they can be visualized.
 
 
 ```r
-# load packages
+# attach packages
 library(sf)
 library(rgugik)
 ```
