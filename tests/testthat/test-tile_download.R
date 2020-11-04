@@ -49,6 +49,14 @@ test_that("check checkSHA warning", {
 
 # test stops
 df = data.frame("URL" = integer(), "filename" = integer(), "sha1" = integer())
+
 test_that("check stops", {
-  expect_error(tile_download(df), "empty df")
+  expect_error(tile_download(df),
+               "empty df")
+  expect_error(tile_download(df[, -1]),
+               "data frame should come from 'request_orto'")
+  expect_error(tile_download(df[, -2]),
+               "data frame should come from 'request_orto'")
+  expect_error(tile_download(df[, -3], check_SHA = TRUE),
+               "'sha1' column not found")
 })

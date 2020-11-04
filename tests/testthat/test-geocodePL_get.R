@@ -28,6 +28,8 @@ test_that("check if object was not found", {
 
 # test stops
 test_that("check stops", {
+  expect_error(geocodePL_get(),
+               "all inputs are empty")
   expect_error(geocodePL_get(rail_crossing = "0"),
                "rail crossing ID must be 11 characters long")
 })

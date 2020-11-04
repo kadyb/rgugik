@@ -29,3 +29,11 @@ test_that("check if the warning is returned for EPSG:4326", {
 test_that("check if results are equal", {
   expect_equal(minmax, suppressWarnings(minmaxDTM_get(polygon_4326)))
 })
+
+
+# test stops
+polygon = rbind(polygon, polygon)
+
+test_that("check stops", {
+  expect_error(minmaxDTM_get(polygon), "polygon must contain one object")
+})

@@ -23,9 +23,13 @@ test_that("check elevation sd", {
 
 
 # test stops
+polygon2 = rbind(polygon, polygon)
+
 test_that("check stops", {
   expect_error(pointDTM_get(polygon, distance = 0),
                "distance between the points cannot be less than 1 m")
   expect_error(pointDTM_get(polygon, distance = 1.5),
                "'distance' must contain an integer")
+  expect_error(pointDTM_get(polygon2),
+               "polygon must contain one object")
 })

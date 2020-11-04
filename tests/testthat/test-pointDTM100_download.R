@@ -17,4 +17,5 @@ test_that("check file ext", {
 # test stops
 test_that("check stops", {
   expect_error(pointDTM100_download(voivodeships = NULL), "enter names or TERC")
+  expect_error(pointDTM100_download(voivodeships = "0"), "invalid names or TERC")
 })
