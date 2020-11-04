@@ -104,7 +104,8 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     }
   }
 
-  if (is.null(output)) {
+  # "output" must exist in env
+  if (exists("output", inherits = FALSE) && is.null(output)) {
     return("object not found")
   }
 
