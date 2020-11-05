@@ -320,6 +320,7 @@ area_landcover = lapply(layers, st_area)
 # sum areas for each layer
 area_landcover = sapply(area_landcover, sum)
 # convert units
+area_landcover = units::set_units(area_landcover, "m^2")
 area_landcover = units::set_units(area_landcover, "km^2")
 names(area_landcover) = layer_names
 ```
@@ -333,10 +334,12 @@ area_landcover
 
 ```
 ## Units: [km^2]
-##   fallowlands communication        forest   undeveloped       squares    shrublands 
-##      75613.83    1970144.81  860172481.34     278177.15     290383.85    1572665.55 
-##         crops     grassland         water         heaps     buildings 
-##  255135288.84     634474.91    8811815.50      92201.15   10387810.92
+##   fallowlands communication        forest   undeveloped       squares 
+##    0.07561383    1.97014481  860.17248134    0.27817715    0.29038385 
+##    shrublands         crops     grassland         water         heaps 
+##    1.57266555  255.13528884    0.63447491    8.81181550    0.09220115 
+##     buildings 
+##   10.38781092
 ```
 
 Let's make sure that the total land cover is equal to the area of our county.
@@ -349,7 +352,7 @@ all.equal(sum(area_landcover), communes_area, tolerance = 0.001)
 ```
 
 ```
-## [1] "Mean relative difference: 0.999999"
+## [1] TRUE
 ```
 
 Everything is correct.
@@ -365,10 +368,12 @@ landcover_percentage
 ```
 
 ```
-##        forest         crops     buildings         water communication    shrublands 
-##         75.49         22.39          0.91          0.77          0.17          0.14 
-##     grassland       squares   undeveloped         heaps   fallowlands 
-##          0.06          0.03          0.02          0.01          0.01
+##        forest         crops     buildings         water communication 
+##         75.49         22.39          0.91          0.77          0.17 
+##    shrublands     grassland       squares   undeveloped         heaps 
+##          0.14          0.06          0.03          0.02          0.01 
+##   fallowlands 
+##          0.01
 ```
 
 Over 75% of the county's area is covered by forests and only less than 1% by buildings.

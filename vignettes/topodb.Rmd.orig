@@ -264,6 +264,7 @@ area_landcover = lapply(layers, st_area)
 # sum areas for each layer
 area_landcover = sapply(area_landcover, sum)
 # convert units
+area_landcover = units::set_units(area_landcover, "m^2")
 area_landcover = units::set_units(area_landcover, "km^2")
 names(area_landcover) = layer_names
 ```
