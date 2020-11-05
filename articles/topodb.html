@@ -291,6 +291,7 @@ body {text-align: justify}
 <span class="co"># sum areas for each layer</span>
 <span class="kw">area_landcover</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="kw">area_landcover</span>, <span class="kw">sum</span>)
 <span class="co"># convert units</span>
+<span class="kw">area_landcover</span> <span class="op">=</span> <span class="kw">units</span>::<span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="kw">area_landcover</span>, <span class="st">"m^2"</span>)
 <span class="kw">area_landcover</span> <span class="op">=</span> <span class="kw">units</span>::<span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="kw">area_landcover</span>, <span class="st">"km^2"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="kw">area_landcover</span>) <span class="op">=</span> <span class="kw">layer_names</span>
 </pre></div>
@@ -299,15 +300,17 @@ body {text-align: justify}
 <span class="kw">area_landcover</span>
 </pre></div>
 <pre><code>## Units: [km^2]
-##   fallowlands communication        forest   undeveloped       squares    shrublands 
-##      75613.83    1970144.81  860172481.34     278177.15     290383.85    1572665.55 
-##         crops     grassland         water         heaps     buildings 
-##  255135288.84     634474.91    8811815.50      92201.15   10387810.92</code></pre>
+##   fallowlands communication        forest   undeveloped       squares 
+##    0.07561383    1.97014481  860.17248134    0.27817715    0.29038385 
+##    shrublands         crops     grassland         water         heaps 
+##    1.57266555  255.13528884    0.63447491    8.81181550    0.09220115 
+##     buildings 
+##   10.38781092</code></pre>
 <p>Let’s make sure that the total land cover is equal to the area of our county. Some tiny precision differences are possible, so we should set the difference tolerance. This is possible using the <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> function.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_landcover</span>), <span class="kw">communes_area</span>, tolerance = <span class="fl">0.001</span>)
 </pre></div>
-<pre><code>## [1] "Mean relative difference: 0.999999"</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <p>Everything is correct. Let’s present the results as percentages of the area and sort them in descending order.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit">
 <span class="kw">landcover_percentage</span> <span class="op">=</span> <span class="kw">area_landcover</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_landcover</span>) <span class="op">*</span> <span class="fl">100</span>
@@ -316,10 +319,12 @@ body {text-align: justify}
 <span class="kw">landcover_percentage</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">landcover_percentage</span>, <span class="fl">2</span>)
 <span class="kw">landcover_percentage</span>
 </pre></div>
-<pre><code>##        forest         crops     buildings         water communication    shrublands 
-##         75.49         22.39          0.91          0.77          0.17          0.14 
-##     grassland       squares   undeveloped         heaps   fallowlands 
-##          0.06          0.03          0.02          0.01          0.01</code></pre>
+<pre><code>##        forest         crops     buildings         water communication 
+##         75.49         22.39          0.91          0.77          0.17 
+##    shrublands     grassland       squares   undeveloped         heaps 
+##          0.14          0.06          0.03          0.02          0.01 
+##   fallowlands 
+##          0.01</code></pre>
 <p>Over 75% of the county’s area is covered by forests and only less than 1% by buildings.</p>
 </div>
 <div id="buffer" class="section level3">
