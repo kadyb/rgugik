@@ -19,7 +19,7 @@ body {text-align: justify}
 
 ## Definition
 
-**Topographic Database** (pl. *Baza Danych Obiektów Topograficznych*) is a vector (object) database containing the spatial location of topographic objects with their characteristics.
+**Topographic Database** (pl. *Baza Danych Obiektów Topograficznych*) is a vector (object) database containing the spatial location of topographic objects with their characteristics for Poland.
 The content and detail of the database correspond to the topographic map in the scale 1:10000.
 The thematic scope includes information on water network, communication network, land cover, buildings and technical structures, utility infrastructure, land use, protected areas, territorial division units, and other objects.
 The database is available in the Geography Markup Language (GML) format.
@@ -32,8 +32,8 @@ The source of its data comes from:
 ## Purpose
 
 The purpose of this vignette is to perform spatial operations on vector data from the Topographic Database.
-We focus on four cases, taking into account different types of geometry, i.e. point, line and polygon, and their attributes.
-In addition, we show how they can be visualized.
+We focus on four cases, taking into account different types of geometry, i.e. point, line, and polygon, and their attributes.
+Also, we show how they can be visualized.
 
 ## Analysis
 
@@ -44,7 +44,7 @@ library(rgugik)
 ```
 
 Our analysis area is the *bieszczadzki* county located in the Subcarpathian (*podkarpackie*) voivodeship.
-It is the farthest area in the south of Poland and has the lowest population density (19 people on km^2^).
+It is the farthest south area in Poland that also has the lowest population density (19 people on km^2^).
 
 ### Database
 
@@ -56,18 +56,17 @@ topodb_download("bieszczadzki", outdir = "./data")
 ```
 
 The downloaded database consists of many files in the *GML* format.
-All the data necessary for analyzes can be found in `data/PL.PZGiK.332.1801/BDOT10k/` location.
+All the data necessary for analyzes can be found in the `data/PL.PZGiK.332.1801/BDOT10k/` location.
 A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html).
 
-First, let's load the file with administrative units ("PL.PZGiK.332.1801__OT_ADJA_A.xml"), using the **sf** package and its `read_sf()` function.
+First, let's load the file with administrative units ("PL.PZGiK.332.1801__OT_ADJA_A.xml") using the **sf** package and its `read_sf()` function.
 
 ```{r}
 territory = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_ADJA_A.xml")
 ```
 
 The file contains administrative units at various levels, let's choose the lowest level, i.e. communes.
-There are three types of communes in this dataset: urban (*GM*), rural (*GW*), and urban-rural (*Gmw*).
-Their type is specified in the `rodzaj` column.
+There are three types of communes in this dataset, specified in the `rodzaj` column: urban (*GM*), rural (*GW*), and urban-rural (*Gmw*).
 Let's select them.
 
 ```{r}
@@ -89,7 +88,7 @@ plot(communes, axes = TRUE, main = "Bieszczadzki county",
 
 ### Lengths and categories of roads
 
-In the first task, we calculate the lengths of roads taking into account their categories.
+In the first task, we calculate the lengths of roads, taking into account their categories.
 Road data can be found in the "PL.PZGiK.332.1801__OT_SKDR_L.xml" file.
 
 ```{r}
@@ -98,15 +97,16 @@ roads = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SKDR_L.xml
 
 Let's plot them.
 We use the `plot()` function again, but this time we combine the two layers into one image.
-The first layer (in the background) contains roads and to add another layer, we have to set the argument `reset` to "FALSE".
-Then we can add a second layer with the territory by setting the `add` argument to "TRUE".
+The first layer (in the background) contains roads and to add another layer, we have to set the argument `reset` to `"FALSE"`.
+Then we can add a second layer with the territory borders by setting the `add` argument to `"TRUE"`.
 
 ```{r roads}
 plot(roads["katZarzadzania"], main = "Road category", reset = FALSE)
 plot(st_geometry(territory), add = TRUE)
 ```
 
-We have six road categories related to the managing entity, those are: national (K), voivodeship (W), county (P), communal (G), institutional (Z) and other (I).
+We have six road categories related to the managing entity.
+Those are: national (K), voivodeship (W), county (P), communal (G), institutional (Z), and other (I) roads.
 
 We use the `st_length()` function to find the length of each object in the table.
 Next, we create a data frame consisting of the road category and its length.
@@ -170,9 +170,9 @@ rivers = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SWRS_L.xm
 rivers = rivers[rivers$rodzaj == "Rz", ] # select only rivers
 ```
 
-Rivers are divided into smaller sections with different parameters (such as, river width or data source).
-Let's merge the same rivers into single feature (geometry) - we can use the attribute with ID (`idMPHP`) for that purpose.
-We can also give each river a category number by creating a sequence from 1 to n.
+Rivers are divided into smaller sections with different parameters, such as river width or data source.
+Let's merge sections from the same rivers into a single feature (geometry) - we can use the attribute with an ID (`idMPHP`) for that purpose.
+We can also give each river a category number by creating a sequence from 1 to n using the `seq_len` function.
 
 ```{r}
 rivers = aggregate(rivers[, c("geometry", "idMPHP")],
@@ -217,7 +217,7 @@ rm(bridges)
 Land cover is the physical material at the surface of the earth like grass, trees, bare ground, water, etc.
 Let's check the land cover data for our county - it is stored in files with the  `PT` prefix.
 We use the `list.files()` function to list them.
-The `pattern` argument is important here, because it determines what files should be selected.
+The `pattern` argument is important here because it determines what files should be selected.
 Our `pattern` should look like this: `PT+.+A\\.xml$` - only files containing areal data (A) of land cover (PT) will be listed.
 
 ```{r}
@@ -229,7 +229,7 @@ files = list.files("data/PL.PZGiK.332.1801/BDOT10k",
 basename(files)
 ```
 
-We also can exclude "PL.PZGiK.332.1801__OT_PTSO_A.xml" file from list, because this file contains zero objects (features).
+We also can exclude "PL.PZGiK.332.1801__OT_PTSO_A.xml" file from the list, because this file contains zero objects (features).
 
 ```{r}
 # drop "OT_PTSO_A.xml"
@@ -237,7 +237,7 @@ files = files[-7]
 ```
 
 Let's prepare the names of the objects to which the data will be loaded.
-The following names are an extension of the abbreviations contained in the filenames.
+The following names are the extended names of the abbreviations stored in the filenames.
 
 ```{r}
 layer_names = c("fallowlands", "communication", "forest", "undeveloped",
@@ -264,7 +264,6 @@ area_landcover = lapply(layers, st_area)
 # sum areas for each layer
 area_landcover = sapply(area_landcover, sum)
 # convert units
-area_landcover = units::set_units(area_landcover, "m^2")
 area_landcover = units::set_units(area_landcover, "km^2")
 names(area_landcover) = layer_names
 ```
@@ -284,13 +283,13 @@ all.equal(sum(area_landcover), communes_area, tolerance = 0.001)
 ```
 
 Everything is correct.
-Let's present the results as percentages of the area and sort them in the descending order.
+Let's present the results as percentages of the area and sort them in descending order.
 
 ```{r}
-landcover_percentage = area_landcover/sum(area_landcover)*100
+landcover_percentage = area_landcover / sum(area_landcover) * 100
 units(landcover_percentage) = NULL # drop units
-landcover_percentage = round(landcover_percentage, 2)
 landcover_percentage = sort(landcover_percentage, decreasing = TRUE)
+landcover_percentage = round(landcover_percentage, 2)
 landcover_percentage
 ```
 
@@ -303,16 +302,16 @@ rm(list = layer_names)
 
 ### Buffer
 
-In the last type of analysis in this vignette, we want to check how many buildings have access to bus stops within a given distance.
+In the last analysis in this vignette, we want to check how many buildings have bus stops within a given distance.
 We can apply spatial buffers to solve this question.
-Information about bus stops can be found in the "PL.PZGiK.332.1801__OT_OIKM_P.xml" file, where they have the *OIKM04* value in the `x_kod` attribute.
+Information about bus stops is in the "PL.PZGiK.332.1801__OT_OIKM_P.xml" file, where they are represented by the *OIKM04* value of the `x_kod` attribute.
 
 ```{r}
 bus_stop = read_sf("data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_OIKM_P.xml")
 bus_stop = bus_stop[bus_stop$x_kod == "OIKM04", ]
 ```
 
-Let's prepare a visualization in which the bus stops is marked with blue dots and the buildings are presented as red polygons.
+Let's prepare a visualization in which the bus stops are marked with blue dots and the buildings are presented as red polygons.
 
 ```{r busstops}
 buildings = layers$buildings
@@ -351,7 +350,7 @@ buildings_ex = round(buildings_ex / nrow(buildings) * 100)
 buildings_ex
 ```
 
-14% of the buildings in this county do not have access to a bus stop within 1 km radius.
+Answer to our last question: 14% of the buildings in this county do not have access to a bus stop within a 1 km radius.
 
 ```{r include=FALSE}
 unlink("data", recursive = TRUE, force = TRUE)
