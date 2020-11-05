@@ -107,7 +107,7 @@ body {text-align: justify}
 <div id="definition" class="section level2">
 <h2 class="hasAnchor">
 <a href="#definition" class="anchor"></a>Definition</h2>
-<p><strong>Topographic Database</strong> (pl. <em>Baza Danych Obiektów Topograficznych</em>) is a vector (object) database containing the spatial location of topographic objects with their characteristics. The content and detail of the database correspond to the topographic map in the scale 1:10000. The thematic scope includes information on water network, communication network, land cover, buildings and technical structures, utility infrastructure, land use, protected areas, territorial division units, and other objects. The database is available in the Geography Markup Language (GML) format. The source of its data comes from:</p>
+<p><strong>Topographic Database</strong> (pl. <em>Baza Danych Obiektów Topograficznych</em>) is a vector (object) database containing the spatial location of topographic objects with their characteristics for Poland. The content and detail of the database correspond to the topographic map in the scale 1:10000. The thematic scope includes information on water network, communication network, land cover, buildings and technical structures, utility infrastructure, land use, protected areas, territorial division units, and other objects. The database is available in the Geography Markup Language (GML) format. The source of its data comes from:</p>
 <ul>
 <li>other spatial databases maintained by Polish Head Office of Geodesy and Cartography (e.g. <em>Register of Towns, Streets and Addresses</em>, <em>Register of Land and Buildings</em>, <em>State Register of Borders</em>),</li>
 <li>databases maintained by other ministries or institutions (e.g., Ministry of Infrastructure, State Water Management, General Directorate for Environmental Protection),</li>
@@ -117,7 +117,7 @@ body {text-align: justify}
 <div id="purpose" class="section level2">
 <h2 class="hasAnchor">
 <a href="#purpose" class="anchor"></a>Purpose</h2>
-<p>The purpose of this vignette is to perform spatial operations on vector data from the Topographic Database. We focus on four cases, taking into account different types of geometry, i.e. point, line and polygon, and their attributes. In addition, we show how they can be visualized.</p>
+<p>The purpose of this vignette is to perform spatial operations on vector data from the Topographic Database. We focus on four cases, taking into account different types of geometry, i.e. point, line, and polygon, and their attributes. Also, we show how they can be visualized.</p>
 </div>
 <div id="analysis" class="section level2">
 <h2 class="hasAnchor">
@@ -127,7 +127,7 @@ body {text-align: justify}
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/sf">sf</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://kadyb.github.io/rgugik">rgugik</a></span>)
 </pre></div>
-<p>Our analysis area is the <em>bieszczadzki</em> county located in the Subcarpathian (<em>podkarpackie</em>) voivodeship. It is the farthest area in the south of Poland and has the lowest population density (19 people on km<sup>2</sup>).</p>
+<p>Our analysis area is the <em>bieszczadzki</em> county located in the Subcarpathian (<em>podkarpackie</em>) voivodeship. It is the farthest south area in Poland that also has the lowest population density (19 people on km<sup>2</sup>).</p>
 <div id="database" class="section level3">
 <h3 class="hasAnchor">
 <a href="#database" class="anchor"></a>Database</h3>
@@ -136,12 +136,12 @@ body {text-align: justify}
 <span class="co"># 22.4 MB</span>
 <span class="fu"><a href="../reference/topodb_download.html">topodb_download</a></span>(<span class="st">"bieszczadzki"</span>, outdir = <span class="st">"./data"</span>)
 </pre></div>
-<p>The downloaded database consists of many files in the <em>GML</em> format. All the data necessary for analyzes can be found in <code>data/PL.PZGiK.332.1801/BDOT10k/</code> location. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html">here</a>.</p>
-<p>First, let’s load the file with administrative units ("PL.PZGiK.332.1801__OT_ADJA_A.xml"), using the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function.</p>
+<p>The downloaded database consists of many files in the <em>GML</em> format. All the data necessary for analyzes can be found in the <code>data/PL.PZGiK.332.1801/BDOT10k/</code> location. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html">here</a>.</p>
+<p>First, let’s load the file with administrative units ("PL.PZGiK.332.1801__OT_ADJA_A.xml") using the <strong>sf</strong> package and its <code><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf()</a></code> function.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">territory</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_ADJA_A.xml"</span>)
 </pre></div>
-<p>The file contains administrative units at various levels, let’s choose the lowest level, i.e. communes. There are three types of communes in this dataset: urban (<em>GM</em>), rural (<em>GW</em>), and urban-rural (<em>Gmw</em>). Their type is specified in the <code>rodzaj</code> column. Let’s select them.</p>
+<p>The file contains administrative units at various levels, let’s choose the lowest level, i.e. communes. There are three types of communes in this dataset, specified in the <code>rodzaj</code> column: urban (<em>GM</em>), rural (<em>GW</em>), and urban-rural (<em>Gmw</em>). Let’s select them.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="kw">communes</span> <span class="op">=</span> <span class="kw">territory</span>[<span class="kw">territory</span><span class="op">$</span><span class="kw">rodzaj</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"GM"</span>, <span class="st">"GW"</span>, <span class="st">"Gmw"</span>), <span class="st">"rodzaj"</span>]
 <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span>(<span class="kw">communes</span><span class="op">$</span><span class="kw">rodzaj</span>)
@@ -158,17 +158,17 @@ body {text-align: justify}
 <div id="lengths-and-categories-of-roads" class="section level3">
 <h3 class="hasAnchor">
 <a href="#lengths-and-categories-of-roads" class="anchor"></a>Lengths and categories of roads</h3>
-<p>In the first task, we calculate the lengths of roads taking into account their categories. Road data can be found in the "PL.PZGiK.332.1801__OT_SKDR_L.xml" file.</p>
+<p>In the first task, we calculate the lengths of roads, taking into account their categories. Road data can be found in the "PL.PZGiK.332.1801__OT_SKDR_L.xml" file.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="kw">roads</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SKDR_L.xml"</span>)
 </pre></div>
-<p>Let’s plot them. We use the <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code> function again, but this time we combine the two layers into one image. The first layer (in the background) contains roads and to add another layer, we have to set the argument <code>reset</code> to “FALSE”. Then we can add a second layer with the territory by setting the <code>add</code> argument to “TRUE”.</p>
+<p>Let’s plot them. We use the <code><a href="https://rdrr.io/pkg/sf/man/plot.html">plot()</a></code> function again, but this time we combine the two layers into one image. The first layer (in the background) contains roads and to add another layer, we have to set the argument <code>reset</code> to <code>"FALSE"</code>. Then we can add a second layer with the territory borders by setting the <code>add</code> argument to <code>"TRUE"</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">roads</span>[<span class="st">"katZarzadzania"</span>], main = <span class="st">"Road category"</span>, reset = <span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">territory</span>), add = <span class="fl">TRUE</span>)
 </pre></div>
 <p><img src="topodb-roads-1.png"></p>
-<p>We have six road categories related to the managing entity, those are: national (K), voivodeship (W), county (P), communal (G), institutional (Z) and other (I).</p>
+<p>We have six road categories related to the managing entity. Those are: national (K), voivodeship (W), county (P), communal (G), institutional (Z), and other (I) roads.</p>
 <p>We use the <code><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_length()</a></code> function to find the length of each object in the table. Next, we create a data frame consisting of the road category and its length. Then we aggregate this data frame and calculate the sum of the lengths for each category.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">length_roads</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/geos_measures.html">st_length</a></span>(<span class="kw">roads</span>)
@@ -222,7 +222,7 @@ body {text-align: justify}
 <span class="kw">rivers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_SWRS_L.xml"</span>)
 <span class="kw">rivers</span> <span class="op">=</span> <span class="kw">rivers</span>[<span class="kw">rivers</span><span class="op">$</span><span class="kw">rodzaj</span> <span class="op">==</span> <span class="st">"Rz"</span>, ] <span class="co"># select only rivers</span>
 </pre></div>
-<p>Rivers are divided into smaller sections with different parameters (such as, river width or data source). Let’s merge the same rivers into single feature (geometry) - we can use the attribute with ID (<code>idMPHP</code>) for that purpose. We can also give each river a category number by creating a sequence from 1 to n.</p>
+<p>Rivers are divided into smaller sections with different parameters, such as river width or data source. Let’s merge sections from the same rivers into a single feature (geometry) - we can use the attribute with an ID (<code>idMPHP</code>) for that purpose. We can also give each river a category number by creating a sequence from 1 to n using the <code>seq_len</code> function.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit">
 <span class="kw">rivers</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/aggregate.sf.html">aggregate</a></span>(<span class="kw">rivers</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"geometry"</span>, <span class="st">"idMPHP"</span>)],
                    <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">rivers</span><span class="op">$</span><span class="kw">idMPHP</span>),
@@ -253,7 +253,7 @@ body {text-align: justify}
 <div id="land-cover" class="section level3">
 <h3 class="hasAnchor">
 <a href="#land-cover" class="anchor"></a>Land cover</h3>
-<p>Land cover is the physical material at the surface of the earth like grass, trees, bare ground, water, etc. Let’s check the land cover data for our county - it is stored in files with the <code>PT</code> prefix. We use the <code><a href="https://rdrr.io/r/base/list.files.html">list.files()</a></code> function to list them. The <code>pattern</code> argument is important here, because it determines what files should be selected. Our <code>pattern</code> should look like this: <code>PT+.+A\\.xml$</code> - only files containing areal data (A) of land cover (PT) will be listed.</p>
+<p>Land cover is the physical material at the surface of the earth like grass, trees, bare ground, water, etc. Let’s check the land cover data for our county - it is stored in files with the <code>PT</code> prefix. We use the <code><a href="https://rdrr.io/r/base/list.files.html">list.files()</a></code> function to list them. The <code>pattern</code> argument is important here because it determines what files should be selected. Our <code>pattern</code> should look like this: <code>PT+.+A\\.xml$</code> - only files containing areal data (A) of land cover (PT) will be listed.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit">
 <span class="kw">files</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k"</span>,
                    pattern = <span class="st">"PT+.+A\\.xml$"</span>,
@@ -262,24 +262,18 @@ body {text-align: justify}
 <span class="co"># print filenames</span>
 <span class="fu"><a href="https://rdrr.io/r/base/basename.html">basename</a></span>(<span class="kw">files</span>)
 </pre></div>
-<pre><code>##  [1] "PL.PZGiK.332.1801__OT_PTGN_A.xml"
-##  [2] "PL.PZGiK.332.1801__OT_PTKM_A.xml"
-##  [3] "PL.PZGiK.332.1801__OT_PTLZ_A.xml"
-##  [4] "PL.PZGiK.332.1801__OT_PTNZ_A.xml"
-##  [5] "PL.PZGiK.332.1801__OT_PTPL_A.xml"
-##  [6] "PL.PZGiK.332.1801__OT_PTRK_A.xml"
-##  [7] "PL.PZGiK.332.1801__OT_PTSO_A.xml"
-##  [8] "PL.PZGiK.332.1801__OT_PTTR_A.xml"
-##  [9] "PL.PZGiK.332.1801__OT_PTUT_A.xml"
-## [10] "PL.PZGiK.332.1801__OT_PTWP_A.xml"
-## [11] "PL.PZGiK.332.1801__OT_PTWZ_A.xml"
-## [12] "PL.PZGiK.332.1801__OT_PTZB_A.xml"</code></pre>
-<p>We also can exclude "PL.PZGiK.332.1801__OT_PTSO_A.xml" file from list, because this file contains zero objects (features).</p>
+<pre><code>##  [1] "PL.PZGiK.332.1801__OT_PTGN_A.xml" "PL.PZGiK.332.1801__OT_PTKM_A.xml"
+##  [3] "PL.PZGiK.332.1801__OT_PTLZ_A.xml" "PL.PZGiK.332.1801__OT_PTNZ_A.xml"
+##  [5] "PL.PZGiK.332.1801__OT_PTPL_A.xml" "PL.PZGiK.332.1801__OT_PTRK_A.xml"
+##  [7] "PL.PZGiK.332.1801__OT_PTSO_A.xml" "PL.PZGiK.332.1801__OT_PTTR_A.xml"
+##  [9] "PL.PZGiK.332.1801__OT_PTUT_A.xml" "PL.PZGiK.332.1801__OT_PTWP_A.xml"
+## [11] "PL.PZGiK.332.1801__OT_PTWZ_A.xml" "PL.PZGiK.332.1801__OT_PTZB_A.xml"</code></pre>
+<p>We also can exclude "PL.PZGiK.332.1801__OT_PTSO_A.xml" file from the list, because this file contains zero objects (features).</p>
 <div class="sourceCode" id="cb26"><pre class="downlit">
 <span class="co"># drop "OT_PTSO_A.xml"</span>
 <span class="kw">files</span> <span class="op">=</span> <span class="kw">files</span>[<span class="op">-</span><span class="fl">7</span>]
 </pre></div>
-<p>Let’s prepare the names of the objects to which the data will be loaded. The following names are an extension of the abbreviations contained in the filenames.</p>
+<p>Let’s prepare the names of the objects to which the data will be loaded. The following names are the extended names of the abbreviations stored in the filenames.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit">
 <span class="kw">layer_names</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"fallowlands"</span>, <span class="st">"communication"</span>, <span class="st">"forest"</span>, <span class="st">"undeveloped"</span>,
                 <span class="st">"squares"</span>, <span class="st">"shrublands"</span>, <span class="st">"crops"</span>, <span class="st">"grassland"</span>,
@@ -297,7 +291,6 @@ body {text-align: justify}
 <span class="co"># sum areas for each layer</span>
 <span class="kw">area_landcover</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span>(<span class="kw">area_landcover</span>, <span class="kw">sum</span>)
 <span class="co"># convert units</span>
-<span class="kw">area_landcover</span> <span class="op">=</span> <span class="kw">units</span>::<span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="kw">area_landcover</span>, <span class="st">"m^2"</span>)
 <span class="kw">area_landcover</span> <span class="op">=</span> <span class="kw">units</span>::<span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span>(<span class="kw">area_landcover</span>, <span class="st">"km^2"</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/names.html">names</a></span>(<span class="kw">area_landcover</span>) <span class="op">=</span> <span class="kw">layer_names</span>
 </pre></div>
@@ -306,42 +299,38 @@ body {text-align: justify}
 <span class="kw">area_landcover</span>
 </pre></div>
 <pre><code>## Units: [km^2]
-##   fallowlands communication        forest   undeveloped       squares 
-##    0.07561383    1.97014481  860.17248134    0.27817715    0.29038385 
-##    shrublands         crops     grassland         water         heaps 
-##    1.57266555  255.13528884    0.63447491    8.81181550    0.09220115 
-##     buildings 
-##   10.38781092</code></pre>
+##   fallowlands communication        forest   undeveloped       squares    shrublands 
+##      75613.83    1970144.81  860172481.34     278177.15     290383.85    1572665.55 
+##         crops     grassland         water         heaps     buildings 
+##  255135288.84     634474.91    8811815.50      92201.15   10387810.92</code></pre>
 <p>Let’s make sure that the total land cover is equal to the area of our county. Some tiny precision differences are possible, so we should set the difference tolerance. This is possible using the <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> function.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_landcover</span>), <span class="kw">communes_area</span>, tolerance = <span class="fl">0.001</span>)
 </pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<p>Everything is correct. Let’s present the results as percentages of the area and sort them in the descending order.</p>
+<pre><code>## [1] "Mean relative difference: 0.999999"</code></pre>
+<p>Everything is correct. Let’s present the results as percentages of the area and sort them in descending order.</p>
 <div class="sourceCode" id="cb34"><pre class="downlit">
-<span class="kw">landcover_percentage</span> <span class="op">=</span> <span class="kw">area_landcover</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_landcover</span>)<span class="op">*</span><span class="fl">100</span>
+<span class="kw">landcover_percentage</span> <span class="op">=</span> <span class="kw">area_landcover</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="kw">area_landcover</span>) <span class="op">*</span> <span class="fl">100</span>
 <span class="fu"><a href="https://rdrr.io/r/base/difftime.html">units</a></span>(<span class="kw">landcover_percentage</span>) <span class="op">=</span> <span class="kw">NULL</span> <span class="co"># drop units</span>
-<span class="kw">landcover_percentage</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">landcover_percentage</span>, <span class="fl">2</span>)
 <span class="kw">landcover_percentage</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span>(<span class="kw">landcover_percentage</span>, decreasing = <span class="fl">TRUE</span>)
+<span class="kw">landcover_percentage</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span>(<span class="kw">landcover_percentage</span>, <span class="fl">2</span>)
 <span class="kw">landcover_percentage</span>
 </pre></div>
-<pre><code>##        forest         crops     buildings         water communication 
-##         75.49         22.39          0.91          0.77          0.17 
-##    shrublands     grassland       squares   undeveloped   fallowlands 
-##          0.14          0.06          0.03          0.02          0.01 
-##         heaps 
-##          0.01</code></pre>
+<pre><code>##        forest         crops     buildings         water communication    shrublands 
+##         75.49         22.39          0.91          0.77          0.17          0.14 
+##     grassland       squares   undeveloped         heaps   fallowlands 
+##          0.06          0.03          0.02          0.01          0.01</code></pre>
 <p>Over 75% of the county’s area is covered by forests and only less than 1% by buildings.</p>
 </div>
 <div id="buffer" class="section level3">
 <h3 class="hasAnchor">
 <a href="#buffer" class="anchor"></a>Buffer</h3>
-<p>In the last type of analysis in this vignette, we want to check how many buildings have access to bus stops within a given distance. We can apply spatial buffers to solve this question. Information about bus stops can be found in the "PL.PZGiK.332.1801__OT_OIKM_P.xml" file, where they have the <em>OIKM04</em> value in the <code>x_kod</code> attribute.</p>
+<p>In the last analysis in this vignette, we want to check how many buildings have bus stops within a given distance. We can apply spatial buffers to solve this question. Information about bus stops is in the "PL.PZGiK.332.1801__OT_OIKM_P.xml" file, where they are represented by the <em>OIKM04</em> value of the <code>x_kod</code> attribute.</p>
 <div class="sourceCode" id="cb36"><pre class="downlit">
 <span class="kw">bus_stop</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="st">"data/PL.PZGiK.332.1801/BDOT10k/PL.PZGiK.332.1801__OT_OIKM_P.xml"</span>)
 <span class="kw">bus_stop</span> <span class="op">=</span> <span class="kw">bus_stop</span>[<span class="kw">bus_stop</span><span class="op">$</span><span class="kw">x_kod</span> <span class="op">==</span> <span class="st">"OIKM04"</span>, ]
 </pre></div>
-<p>Let’s prepare a visualization in which the bus stops is marked with blue dots and the buildings are presented as red polygons.</p>
+<p>Let’s prepare a visualization in which the bus stops are marked with blue dots and the buildings are presented as red polygons.</p>
 <div class="sourceCode" id="cb37"><pre class="downlit">
 <span class="kw">buildings</span> <span class="op">=</span> <span class="kw">layers</span><span class="op">$</span><span class="kw">buildings</span>
 <span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">communes</span>), main = <span class="st">"Bus stops"</span>)
@@ -372,7 +361,7 @@ body {text-align: justify}
 <span class="kw">buildings_ex</span>
 </pre></div>
 <pre><code>## [1] 14</code></pre>
-<p>14% of the buildings in this county do not have access to a bus stop within 1 km radius.</p>
+<p>Answer to our last question: 14% of the buildings in this county do not have access to a bus stop within a 1 km radius.</p>
 </div>
 </div>
   </div>
