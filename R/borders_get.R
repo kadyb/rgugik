@@ -51,19 +51,19 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
 
   if (!is.null(TERYT)) {
 
-    if (!nchar(TERYT) %in% c(2, 4, 7)) {
+    if (!all(nchar(TERYT) %in% c(2, 4, 7))) {
       stop("'TERYT' length should be 2, 4 or 7")
     }
 
-    if (nchar(TERYT) == 2) {
+    if (all(nchar(TERYT) == 2)) {
       request = "GetVoivodeshipById"
     }
 
-    if (nchar(TERYT) == 4) {
+    if (all(nchar(TERYT) == 4)) {
       request = "GetCountyById"
     }
 
-    if (nchar(TERYT) == 7) {
+    if (all(nchar(TERYT) == 7)) {
       # process commune TERYT to specific form (XXXXXX_X)
       ID = paste0(substr(TERYT, 1, 6), "_", substr(TERYT, 7, 7))
       request = "GetCommuneById"
@@ -72,7 +72,7 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
   }
 
   result = "geom_wkb"
-  geometry = st_sfc(st_polygon(), crs = 2180)
+  geometry = sf::st_sfc(st_polygon(), crs = 2180)
 
   for (i in seq_len(length(ID))) {
 
@@ -90,6 +90,7 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
 
   df_geom = sf::st_sf(geometry)
   df_geom = df_geom[-1, ] # drop empty geometry
+  df_geom = cbind(df_geom, TERYT = ID)
 
   # geometry is returned in EPSG: 2180
   return(df_geom)
