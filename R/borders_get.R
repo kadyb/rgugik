@@ -49,6 +49,7 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
 
   }
 
+  # TERYT and ID are the same but inside fun must be as different objects
   if (!is.null(TERYT)) {
 
     if (!all(nchar(TERYT) %in% c(2, 4, 7))) {
@@ -57,10 +58,12 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
 
     if (all(nchar(TERYT) == 2)) {
       request = "GetVoivodeshipById"
+      ID = TERYT
     }
 
     if (all(nchar(TERYT) == 4)) {
       request = "GetCountyById"
+      ID = TERYT
     }
 
     if (all(nchar(TERYT) == 7)) {
