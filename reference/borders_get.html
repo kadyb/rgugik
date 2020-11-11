@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • rgugik</title>
+<title>returns a sf data.frame for given an administrative unit or TERYT (ID) — borders_get • rgugik</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="returns a sf data.frame for given an administrative unit or TERYT (ID) — borders_get" />
+<meta property="og:description" content="returns a sf data.frame for given an administrative unit or TERYT (ID)" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -66,7 +67,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -128,147 +129,56 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>returns a sf data.frame for given an administrative unit or TERYT (ID)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kadyb/rgugik/blob/master/R/borders_get.R'><code>R/borders_get.R</code></a></small>
+    <div class="hidden name"><code>borders_get.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>returns a sf data.frame for given an administrative unit or TERYT (ID)</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>borders_get</span>(voivodeship = <span class='kw'>NULL</span>, county = <span class='kw'>NULL</span>, commune = <span class='kw'>NULL</span>, TERYT = <span class='kw'>NULL</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="DEM_request.html">DEM_request()</a></code> </p>
-        </td>
-        <td><p>returns a data frame with metadata and links to the Digital Elevation Models
-in a given polygon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="borders_download.html">borders_download()</a></code> </p>
-        </td>
-        <td><p>downloads State Register of Borders</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="borders_get.html">borders_get()</a></code> </p>
-        </td>
-        <td><p>returns a sf data.frame for given an administrative unit or TERYT (ID)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="commune_names.html">commune_names</a></code> </p>
-        </td>
-        <td><p>Communes in Poland</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="county_names.html">county_names</a></code> </p>
-        </td>
-        <td><p>Counties in Poland</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="emuia_download.html">emuia_download()</a></code> </p>
-        </td>
-        <td><p>downloads Register of Towns, Streets and Addresses for communes</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geocodePL_get.html">geocodePL_get()</a></code> </p>
-        </td>
-        <td><p>returns a sf data.frame with metadata for a given type of input
-(geocoding addresses and objects)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geodb_download.html">geodb_download()</a></code> </p>
-        </td>
-        <td><p>downloads General Geographic Databases for entire voivodeships</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="geonames_download.html">geonames_download()</a></code> </p>
-        </td>
-        <td><p>downloads State Register of Geographical Names</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="minmaxDTM_get.html">minmaxDTM_get()</a></code> </p>
-        </td>
-        <td><p>returns a data frame with minimum and maximum elevation for a given polygon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="models3D_download.html">models3D_download()</a></code> </p>
-        </td>
-        <td><p>downloads 3D models of buildings for counties</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="orto_request.html">orto_request()</a></code> </p>
-        </td>
-        <td><p>returns a data frame with metadata and links to the orthoimages in a given polygon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parcel_get.html">parcel_get()</a></code> </p>
-        </td>
-        <td><p>returns a simple feature geometry for a given TERYT (ID) or coordinates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pointDTM100_download.html">pointDTM100_download()</a></code> </p>
-        </td>
-        <td><p>downloads Digital Terrain Models with 100 m resolution for entire voivodeships</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pointDTM_get.html">pointDTM_get()</a></code> </p>
-        </td>
-        <td><p>returns a data frame with vector points and terrain elevation for a given polygon</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="tile_download.html">tile_download()</a></code> </p>
-        </td>
-        <td><p>downloads tiles based on the data frame obtained using
-the orto_request() and DEM_request() functions</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="topodb_download.html">topodb_download()</a></code> </p>
-        </td>
-        <td><p>downloads Topographic Databases for counties</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="voivodeship_names.html">voivodeship_names</a></code> </p>
-        </td>
-        <td><p>Voivodeships in Poland</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>voivodeship</th>
+      <td><p>selected voivodeships in Polish.
+Check <code><a href='voivodeship_names.html'>voivodeship_names()</a></code> function</p></td>
+    </tr>
+    <tr>
+      <th>county</th>
+      <td><p>county names in Polish.
+Check <code><a href='county_names.html'>county_names()</a></code> function</p></td>
+    </tr>
+    <tr>
+      <th>commune</th>
+      <td><p>commune names in Polish.
+Check <code><a href='commune_names.html'>commune_names()</a></code> function</p></td>
+    </tr>
+    <tr>
+      <th>TERYT</th>
+      <td><p>voivodeships, counties or communes (2, 4 or 7 characters)</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a sf data.frame (EPSG: 2180)</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>voivodeship_geom</span> <span class='op'>=</span> <span class='fu'>borders_get</span>(voivodeship = <span class='st'>"lubuskie"</span>)
+<span class='kw'>county_geom</span> <span class='op'>=</span> <span class='fu'>borders_get</span>(county = <span class='st'>"Sopot"</span>)
+<span class='kw'>commune_geom</span> <span class='op'>=</span> <span class='fu'>borders_get</span>(commune = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Hel"</span>, <span class='st'>"Krynica Morska"</span>))
+<span class='kw'>commune_geom</span> <span class='op'>=</span> <span class='fu'>borders_get</span>(TERYT = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"2211011"</span>, <span class='st'>"2210011"</span>))
+}
+</pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
