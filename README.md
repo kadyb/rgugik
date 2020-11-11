@@ -43,17 +43,17 @@ It is also possible to geocode addresses or objects using the
 
 **Corresponding functions**
 
-| Function                            | Input                  | Dastaset EN                              | Dataset PL                                |
-| :---------------------------------- | :--------------------- | :--------------------------------------- | :---------------------------------------- |
-| `orto_request()`, `tile_download()` | polygon                | Orthophotomap                            | Ortofotomapa                              |
-| `geodb_download()`                  | voivodeship            | General Geographic Database              | Baza Danych Obiektów Ogólnogeograficznych |
-| `topodb_download()`                 | county                 | Topographic Database                     | Baza Danych Obiektów Topograficznych      |
-| `emuia_download()`                  | commune                | Register of Towns, Streets and Addresses | Ewidencja Miejscowości, Ulic i Adresów    |
-| `geonames_download()`               | type                   | State Register of Geographical Names     | Państwowy Rejestr Nazw Geograficznych     |
-| `borders_download()`                | type                   | State Register of Borders                | Państwowy Rejestr Granic                  |
-| `parcel_get()`                      | parcel ID, coordinates | Location of cadastral parcels            | Lokalizacja działek katastralnych         |
-| `models3D_download()`               | county                 | 3D models of buildings                   | Modele 3D budynków                        |
-| `DEM_request()`, `tile_download()`  | polygon                | Digital Elevation Models                 | Cyfrowe Modele Wysokościowe               |
+| Function                              | Input                  | Dastaset EN                              | Dataset PL                                |
+| :------------------------------------ | :--------------------- | :--------------------------------------- | :---------------------------------------- |
+| `orto_request()`, `tile_download()`   | polygon                | Orthophotomap                            | Ortofotomapa                              |
+| `geodb_download()`                    | voivodeship            | General Geographic Database              | Baza Danych Obiektów Ogólnogeograficznych |
+| `topodb_download()`                   | county                 | Topographic Database                     | Baza Danych Obiektów Topograficznych      |
+| `emuia_download()`                    | commune                | Register of Towns, Streets and Addresses | Ewidencja Miejscowości, Ulic i Adresów    |
+| `geonames_download()`                 | type                   | State Register of Geographical Names     | Państwowy Rejestr Nazw Geograficznych     |
+| `borders_get()`, `borders_download()` | type                   | State Register of Borders                | Państwowy Rejestr Granic                  |
+| `parcel_get()`                        | parcel ID, coordinates | Location of cadastral parcels            | Lokalizacja działek katastralnych         |
+| `models3D_download()`                 | county                 | 3D models of buildings                   | Modele 3D budynków                        |
+| `DEM_request()`, `tile_download()`    | polygon                | Digital Elevation Models                 | Cyfrowe Modele Wysokościowe               |
 
 There are the additional functions for obtaining Digital Terrain Model:
 
@@ -109,7 +109,7 @@ polygon = read_sf(polygon_path)
 
 req_df = orto_request(polygon)
 
-# show metadata and download the first image only
+# print metadata of the first image
 t(req_df[1, ])
 #>             1                                                                               
 #> sheetID     "N-33-130-D-b-2-3"                                                              
@@ -122,7 +122,10 @@ t(req_df[1, ])
 #> URL         "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif"
 #> seriesID    "41"                                                                            
 #> sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      
+#> date        "2001-01-01"                                                                    
 #> filename    "41_3756_N-33-130-D-b-2-3"
+
+# download first image
 tile_download(req_df[1, ])
 #> 1/1
 
@@ -132,29 +135,17 @@ plotRGB(img)
 
 <img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
 
-### DTM (as XYZ)
+### Administrative boundaries
 
 ``` r
 library(rgugik)
 library(sf)
 
-polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
-polygon = read_sf(polygon_path)
-
-DTM = pointDTM_get(polygon)
-#> 0/10
-#> 1/10
-#> 2/10
-#> 3/10
-#> 4/10
-#> 5/10
-#> 6/10
-#> 7/10
-#> 8/10
-#> 9/10
-#> 10/10
-
-plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
+# get counties from opolskie voivodeship (TERYT 16)
+counties = county_names
+counties = counties[substr(counties$TERYT, 1, 2) == "16", "TERYT"]
+counties_geom = borders_get(TERYT = counties)
+plot(st_geometry(counties_geom), main = "Opolskie")
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
