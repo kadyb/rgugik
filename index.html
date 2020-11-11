@@ -124,7 +124,7 @@
 <p><strong>Corresponding functions</strong></p>
 <table class="table">
 <colgroup>
-<col width="25%">
+<col width="26%">
 <col width="15%">
 <col width="28%">
 <col width="29%">
@@ -169,7 +169,9 @@
 <td align="left">Państwowy Rejestr Nazw Geograficznych</td>
 </tr>
 <tr class="even">
-<td align="left"><code><a href="reference/borders_download.html">borders_download()</a></code></td>
+<td align="left">
+<code><a href="reference/borders_get.html">borders_get()</a></code>, <code><a href="reference/borders_download.html">borders_download()</a></code>
+</td>
 <td align="left">type</td>
 <td align="left">State Register of Borders</td>
 <td align="left">Państwowy Rejestr Granic</td>
@@ -249,7 +251,7 @@
 
 <span class="kw">req_df</span> <span class="op">=</span> <span class="fu"><a href="reference/orto_request.html">orto_request</a></span>(<span class="kw">polygon</span>)
 
-<span class="co"># show metadata and download the first image only</span>
+<span class="co"># print metadata of the first image</span>
 <span class="fu"><a href="https://rdrr.io/pkg/raster/man/transpose.html">t</a></span>(<span class="kw">req_df</span>[<span class="fl">1</span>, ])
 <span class="co">#&gt;             1                                                                               </span>
 <span class="co">#&gt; sheetID     "N-33-130-D-b-2-3"                                                              </span>
@@ -262,7 +264,10 @@
 <span class="co">#&gt; URL         "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif"</span>
 <span class="co">#&gt; seriesID    "41"                                                                            </span>
 <span class="co">#&gt; sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      </span>
+<span class="co">#&gt; date        "2001-01-01"                                                                    </span>
 <span class="co">#&gt; filename    "41_3756_N-33-130-D-b-2-3"</span>
+
+<span class="co"># download first image</span>
 <span class="fu"><a href="reference/tile_download.html">tile_download</a></span>(<span class="kw">req_df</span>[<span class="fl">1</span>, ])
 <span class="co">#&gt; 1/1</span>
 
@@ -271,30 +276,18 @@
 </pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 </div>
-<div id="dtm-as-xyz" class="section level3">
+<div id="administrative-boundaries" class="section level3">
 <h3 class="hasAnchor">
-<a href="#dtm-as-xyz" class="anchor"></a>DTM (as XYZ)</h3>
+<a href="#administrative-boundaries" class="anchor"></a>Administrative boundaries</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://kadyb.github.io/rgugik">rgugik</a></span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://r-spatial.github.io/sf">sf</a></span>)
 
-<span class="kw">polygon_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"datasets/search_area.gpkg"</span>, package = <span class="st">"rgugik"</span>)
-<span class="kw">polygon</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_read.html">read_sf</a></span>(<span class="kw">polygon_path</span>)
-
-<span class="kw">DTM</span> <span class="op">=</span> <span class="fu"><a href="reference/pointDTM_get.html">pointDTM_get</a></span>(<span class="kw">polygon</span>)
-<span class="co">#&gt; 0/10</span>
-<span class="co">#&gt; 1/10</span>
-<span class="co">#&gt; 2/10</span>
-<span class="co">#&gt; 3/10</span>
-<span class="co">#&gt; 4/10</span>
-<span class="co">#&gt; 5/10</span>
-<span class="co">#&gt; 6/10</span>
-<span class="co">#&gt; 7/10</span>
-<span class="co">#&gt; 8/10</span>
-<span class="co">#&gt; 9/10</span>
-<span class="co">#&gt; 10/10</span>
-
-<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="kw">DTM</span>, pal = <span class="kw">terrain.colors</span>, pch = <span class="fl">20</span>, main = <span class="st">"Elevation [m]"</span>)
+<span class="co"># get counties from opolskie voivodeship (TERYT 16)</span>
+<span class="kw">counties</span> <span class="op">=</span> <span class="kw">county_names</span>
+<span class="kw">counties</span> <span class="op">=</span> <span class="kw">counties</span>[<span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span>(<span class="kw">counties</span><span class="op">$</span><span class="kw">TERYT</span>, <span class="fl">1</span>, <span class="fl">2</span>) <span class="op">==</span> <span class="st">"16"</span>, <span class="st">"TERYT"</span>]
+<span class="kw">counties_geom</span> <span class="op">=</span> <span class="fu"><a href="reference/borders_get.html">borders_get</a></span>(TERYT = <span class="kw">counties</span>)
+<span class="fu"><a href="https://rdrr.io/pkg/sf/man/plot.html">plot</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/sf/man/st_geometry.html">st_geometry</a></span>(<span class="kw">counties_geom</span>), main = <span class="st">"Opolskie"</span>)
 </pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
 </div>
