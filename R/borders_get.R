@@ -72,7 +72,7 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
   }
 
   result = "geom_wkb"
-  geometry = sf::st_sfc(st_polygon(), crs = 2180)
+  geometry = sf::st_sfc(sf::st_polygon(), crs = 2180)
 
   for (i in seq_len(length(ID))) {
 
