@@ -66,7 +66,7 @@ fun = c("`orto_request()`, `tile_download()`",
         "`topodb_download()`",
         "`emuia_download()`",
         "`geonames_download()`",
-        "`borders_download()`",
+        "`borders_get()`, `borders_download()`",
         "`parcel_get()`",
         "`models3D_download()`",
         "`DEM_request()`, `tile_download()`")
@@ -131,8 +131,10 @@ polygon = read_sf(polygon_path)
 
 req_df = orto_request(polygon)
 
-# show metadata and download the first image only
+# print metadata of the first image
 t(req_df[1, ])
+
+# download first image
 tile_download(req_df[1, ])
 
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
@@ -143,18 +145,17 @@ plotRGB(img)
 invisible(file.remove("41_3756_N-33-130-D-b-2-3.tif"))
 ```
 
-### DTM (as XYZ)
+### Administrative boundaries
 
 ```{r}
 library(rgugik)
 library(sf)
 
-polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
-polygon = read_sf(polygon_path)
-
-DTM = pointDTM_get(polygon)
-
-plot(DTM, pal = terrain.colors, pch = 20, main = "Elevation [m]")
+# get counties from opolskie voivodeship (TERYT 16)
+counties = county_names
+counties = counties[substr(counties$TERYT, 1, 2) == "16", "TERYT"]
+counties_geom = borders_get(TERYT = counties)
+plot(st_geometry(counties_geom), main = "Opolskie")
 ```
 
 ## Acknowledgment
