@@ -230,7 +230,7 @@ plot(line, col = "red", add = TRUE)
 In the last step, we extract the elevation values for these points using `st_extract()`.
 
 ```{r}
-# take attribute with DTM and DSM layers
+# take elevation from DTM and DSM layers
 elev_line = st_extract(DEM, line)[[1]]
 colnames(elev_line) = c("DTM", "DSM")
 ```
