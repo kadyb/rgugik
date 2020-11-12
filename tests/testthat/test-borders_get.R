@@ -1,7 +1,7 @@
-voivodeship_geom = borders_get(voivodeship = "lubuskie")
-county_geom = borders_get(county = "Sopot")
-commune_geom1 = borders_get(commune = c("Hel", "Krynica Morska"))
-commune_geom2 = borders_get(TERYT = c("2211011", "2210011"))
+voivodeship_geom = borders_get(voivodeship = "lubuskie") # 494 KB
+county_geom = borders_get(county = "Sopot") # 18 KB
+commune_geom1 = borders_get(commune = c("Hel", "Krynica Morska")) # 11 KB
+commune_geom2 = borders_get(TERYT = c("2211011", "2210011")) # 11 KB
 
 
 test_that("check if ouput is sf", {
