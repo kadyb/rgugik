@@ -47,7 +47,11 @@ minmaxDTM_get = function(polygon) {
   file = "&json"
   prepared_URL = paste0(base_URL, geom, file)
 
-  output = jsonlite::fromJSON(prepared_URL)
+  output = tryGet(jsonlite::fromJSON(prepared_URL))
+
+  if (output %in% c("error", "warning")) {
+    return("connection error")
+  }
 
   if (length(output) == 1) {
     stop("incorrect geometry")

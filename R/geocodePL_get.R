@@ -32,7 +32,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     base_URL = "https://services.gugik.gov.pl/uug/?request=GetAddress&address="
     prepared_URL = paste0(base_URL, address)
     prepared_URL = gsub(" ", "%20", prepared_URL)
-    output = jsonlite::fromJSON(prepared_URL)[["results"]]
+    output = tryGet(jsonlite::fromJSON(prepared_URL)[["results"]])
+
+    if (output %in% c("error", "warning")) {
+      return("connection error")
+    }
 
     if (!is.null(output)) {
 
@@ -53,7 +57,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     base_URL = "https://services.gugik.gov.pl/uug?request=GetRoadMarker&location="
     prepared_URL = paste0(base_URL, road)
     prepared_URL = gsub(" ", "%20", prepared_URL)
-    output = jsonlite::fromJSON(prepared_URL)[["results"]]
+    output = tryGet(jsonlite::fromJSON(prepared_URL)[["results"]])
+
+    if (output %in% c("error", "warning")) {
+      return("connection error")
+    }
 
     if (!is.null(output)) {
       df_output = do.call(rbind.data.frame, output)
@@ -72,7 +80,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       base_URL = "https://services.gugik.gov.pl/uug/?request=GetLevelCrossing&location="
       prepared_URL = paste0(base_URL, rail_crossing)
       prepared_URL = gsub(" ", "%20", prepared_URL)
-      output = jsonlite::fromJSON(prepared_URL)[["results"]]
+      output = tryGet(jsonlite::fromJSON(prepared_URL)[["results"]])
+
+      if (output %in% c("error", "warning")) {
+        return("connection error")
+      }
 
       if (!is.null(output)) {
         df_output = do.call(rbind.data.frame, output)
@@ -88,7 +100,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     base_URL = "https://services.gugik.gov.pl/uug/?request=GetLocation&location="
     prepared_URL = paste0(base_URL, geoname)
     prepared_URL = gsub(" ", "%20", prepared_URL)
-    output = jsonlite::fromJSON(prepared_URL)[["results"]]
+    output = tryGet(jsonlite::fromJSON(prepared_URL)[["results"]])
+
+    if (output %in% c("error", "warning")) {
+      return("connection error")
+    }
 
     if (!is.null(output)) {
 

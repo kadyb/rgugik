@@ -24,7 +24,7 @@ orto_request = function(polygon) {
   }
 
   selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zrDanych", "ukladXY",
-                    "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1", "akt_data", 
+                    "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1", "akt_data",
                     "nazwa_pliku")
   selected_cols = paste(selected_cols, collapse = ",")
 
@@ -71,7 +71,12 @@ orto_request = function(polygon) {
     prepared_URL = paste0(base_URL, geometry, geometryType, spatialRel, outFields,
                           returnGeometry, file)
 
-    output = jsonlite::fromJSON(prepared_URL)
+    output = tryGet(jsonlite::fromJSON(prepared_URL))
+
+    if (output %in% c("error", "warning")) {
+      return("connection error")
+    }
+
     output = output$features[[1]]
 
     # MaxRecordCount: 1000

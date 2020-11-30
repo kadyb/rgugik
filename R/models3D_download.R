@@ -79,7 +79,12 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1",
     if (unzip) {
       # remove ".zip" from filename and use it as exdir
       exdir_name = substr(filename, 1, nchar(filename) - 4)
-      utils::unzip(filename, exdir = exdir_name, junkpaths = TRUE)
+      status = tryGet(utils::unzip(filename, exdir = exdir_name, junkpaths = TRUE))
+
+      if (status %in% c("error", "warning")) {
+        return("connection error")
+      }
+
       file.remove(filename)
     }
   }
