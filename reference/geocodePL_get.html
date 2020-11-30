@@ -145,12 +145,12 @@
 (geocoding addresses and objects)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>geocodePL_get</span>(
-  address = <span class='kw'>NULL</span>,
-  road = <span class='kw'>NULL</span>,
-  rail_crossing = <span class='kw'>NULL</span>,
-  geoname = <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>geocodePL_get</span><span class='op'>(</span>
+  address <span class='op'>=</span> <span class='cn'>NULL</span>,
+  road <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rail_crossing <span class='op'>=</span> <span class='cn'>NULL</span>,
+  geoname <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,17 +180,17 @@ of Geographical Names (function <code><a href='geonames_download.html'>geonames_
     <p>a sf data.frame (EPSG: 2180) with metadata</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='fu'>geocodePL_get</span>(address = <span class='st'>"Marki"</span>) <span class='co'># place</span>
-<span class='fu'>geocodePL_get</span>(address = <span class='st'>"Marki, Andersa"</span>) <span class='co'># place and street</span>
-<span class='fu'>geocodePL_get</span>(address = <span class='st'>"Marki, Andersa 1"</span>) <span class='co'># place, street and house number</span>
-<span class='fu'>geocodePL_get</span>(address = <span class='st'>"Królewskie Brzeziny 13"</span>) <span class='co'># place and house number</span>
+    <pre class="examples"><span class='fu'>geocodePL_get</span><span class='op'>(</span>address <span class='op'>=</span> <span class='st'>"Marki"</span><span class='op'>)</span> <span class='co'># place</span>
+<span class='fu'>geocodePL_get</span><span class='op'>(</span>address <span class='op'>=</span> <span class='st'>"Marki, Andersa"</span><span class='op'>)</span> <span class='co'># place and street</span>
+<span class='fu'>geocodePL_get</span><span class='op'>(</span>address <span class='op'>=</span> <span class='st'>"Marki, Andersa 1"</span><span class='op'>)</span> <span class='co'># place, street and house number</span>
+<span class='fu'>geocodePL_get</span><span class='op'>(</span>address <span class='op'>=</span> <span class='st'>"Królewskie Brzeziny 13"</span><span class='op'>)</span> <span class='co'># place and house number</span>
 
-<span class='fu'>geocodePL_get</span>(road = <span class='st'>"632"</span>) <span class='co'># road number</span>
-<span class='fu'>geocodePL_get</span>(road = <span class='st'>"632 55"</span>) <span class='co'># road number and mileage</span>
+<span class='fu'>geocodePL_get</span><span class='op'>(</span>road <span class='op'>=</span> <span class='st'>"632"</span><span class='op'>)</span> <span class='co'># road number</span>
+<span class='fu'>geocodePL_get</span><span class='op'>(</span>road <span class='op'>=</span> <span class='st'>"632 55"</span><span class='op'>)</span> <span class='co'># road number and mileage</span>
 
-<span class='fu'>geocodePL_get</span>(rail_crossing = <span class='st'>"001 018 478"</span>)
+<span class='fu'>geocodePL_get</span><span class='op'>(</span>rail_crossing <span class='op'>=</span> <span class='st'>"001 018 478"</span><span class='op'>)</span>
 
-<span class='fu'>geocodePL_get</span>(geoname = <span class='st'>"Las Mierzei"</span>) <span class='co'># physiographic object</span>
+<span class='fu'>geocodePL_get</span><span class='op'>(</span>geoname <span class='op'>=</span> <span class='st'>"Las Mierzei"</span><span class='op'>)</span> <span class='co'># physiographic object</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
