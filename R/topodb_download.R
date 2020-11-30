@@ -48,7 +48,7 @@ topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
     stop("incorrect TERYT")
   }
 
-  base_URL = "https://integracja.gugik.gov.pl/PRG/pobierz.php?bdot10k&teryt="
+  base_URL = "https://opendata.geoportal.gov.pl/bdot10k/"
 
   if (!is.null(county)) {
     sel_vector = df_names[, "NAME"] %in% county
@@ -61,9 +61,14 @@ topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
   if (!dir.exists(outdir)) dir.create(outdir)
 
   for (i in seq_len(nrow(df_names))) {
-    prepared_URL = paste0(base_URL, df_names[i, "TERYT"])
+
+    TERYT_voivodeship = substr(df_names[i, "TERYT"], 1, 2)
+
+    prepared_URL = paste0(base_URL, TERYT_voivodeship, "/",
+                          df_names[i, "TERYT"], "_GML.zip")
     filename = paste0(outdir, "/", df_names[i, "TERYT"], ".zip")
     utils::download.file(prepared_URL, filename, mode = "wb", ...)
+
     if (unzip) {
       utils::unzip(filename, exdir = outdir)
       file.remove(filename)
