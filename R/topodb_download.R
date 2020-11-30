@@ -69,7 +69,7 @@ topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
     filename = paste0(outdir, "/", df_names[i, "TERYT"], ".zip")
     status = tryGet(utils::download.file(prepared_URL, filename, mode = "wb", ...))
 
-    if (status %in% c("error", "warning")) {
+    if (any(status %in% c("error", "warning"))) {
       return("connection error")
     }
 

@@ -60,7 +60,7 @@ emuia_download = function(commune = NULL, TERYT = NULL, outdir = ".",
     filename = paste0(outdir, "/", df_names[i, "TERYT"], ".zip")
     status = tryGet(utils::download.file(df_names[i, "URL"], filename, mode = "wb", ...))
 
-    if (status %in% c("error", "warning")) {
+    if (any(status %in% c("error", "warning"))) {
       return("connection error")
     }
 

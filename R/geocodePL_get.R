@@ -34,7 +34,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     prepared_URL = gsub(" ", "%20", prepared_URL)
     output = tryGet(jsonlite::fromJSON(prepared_URL)[["results"]])
 
-    if (output %in% c("error", "warning")) {
+    if (any(output %in% c("error", "warning"))) {
       return("connection error")
     }
 
@@ -59,7 +59,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     prepared_URL = gsub(" ", "%20", prepared_URL)
     output = tryGet(jsonlite::fromJSON(prepared_URL)[["results"]])
 
-    if (output %in% c("error", "warning")) {
+    if (any(output %in% c("error", "warning"))) {
       return("connection error")
     }
 
@@ -82,7 +82,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
       prepared_URL = gsub(" ", "%20", prepared_URL)
       output = tryGet(jsonlite::fromJSON(prepared_URL)[["results"]])
 
-      if (output %in% c("error", "warning")) {
+      if (any(output %in% c("error", "warning"))) {
         return("connection error")
       }
 
@@ -102,7 +102,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     prepared_URL = gsub(" ", "%20", prepared_URL)
     output = tryGet(jsonlite::fromJSON(prepared_URL)[["results"]])
 
-    if (output %in% c("error", "warning")) {
+    if (any(output %in% c("error", "warning"))) {
       return("connection error")
     }
 

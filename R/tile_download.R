@@ -65,7 +65,7 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
                       unlist(strsplit(df_req[i, "URL"], "/"))[idx_name])
     status = tryGet(utils::download.file(df_req[i, "URL"], filepath, mode = "wb", ...))
 
-    if (status %in% c("error", "warning")) {
+    if (any(status %in% c("error", "warning"))) {
       return("connection error")
     }
 

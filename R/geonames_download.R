@@ -54,7 +54,7 @@ geonames_download = function(type, outdir = ".", unzip = TRUE, format = "SHP", .
                       df[i, "format"], ".zip")
     status = tryGet(utils::download.file(df[i, "URL"], filename, mode = "wb", ...))
 
-    if (status %in% c("error", "warning")) {
+    if (any(status %in% c("error", "warning"))) {
       return("connection error")
     }
 

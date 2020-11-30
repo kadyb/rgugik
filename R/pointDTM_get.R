@@ -66,7 +66,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
     prepared_URL = gsub(" ", "%20", prepared_URL)
     str_output = tryGet(readLines(prepared_URL, warn = FALSE))
 
-    if (str_output %in% c("error", "warning")) {
+    if (any(str_output %in% c("error", "warning"))) {
       return("connection error")
     }
 

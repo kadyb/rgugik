@@ -24,7 +24,7 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
 
     output = tryGet(readLines(prepared_URL, warn = FALSE))
 
-    if (output %in% c("error", "warning")) {
+    if (any(output %in% c("error", "warning"))) {
       return("connection error")
     }
 
@@ -47,7 +47,7 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
 
     output = tryGet(readLines(prepared_URL, warn = FALSE))
 
-    if (output %in% c("error", "warning")) {
+    if (any(output %in% c("error", "warning"))) {
       return("connection error")
     }
 

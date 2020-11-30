@@ -73,7 +73,7 @@ orto_request = function(polygon) {
 
     output = tryGet(jsonlite::fromJSON(prepared_URL))
 
-    if (output %in% c("error", "warning")) {
+    if (any(output %in% c("error", "warning"))) {
       return("connection error")
     }
 
