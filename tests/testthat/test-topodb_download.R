@@ -1,5 +1,11 @@
 tmp = tempfile()
-topodb_download(county = "Świętochłowice", outdir = tmp, unzip = FALSE) # 1.9 MB
+status = topodb_download(county = "Świętochłowice", outdir = tmp, unzip = FALSE) # 1.9 MB
+
+# status should be NULL (successfully downloaded), otherwise return NULL
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE)
 file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
@@ -16,7 +22,12 @@ test_that("check file ext", {
 
 # unzip
 tmp = tempfile()
-topodb_download(TERYT = 2476, outdir = tmp, unzip = TRUE) # 1.9 MB
+status = topodb_download(TERYT = 2476, outdir = tmp, unzip = TRUE) # 1.9 MB
+
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE, recursive = TRUE)
 file_number = length(file_path)
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))

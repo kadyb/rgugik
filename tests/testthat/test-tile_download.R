@@ -10,7 +10,13 @@ DEM = data.frame(URL = sample_DEM, filename = "sample_DEM",
 
 # ORTO
 tmp = tempfile()
-tile_download(orto, outdir = tmp)
+status = tile_download(orto, outdir = tmp)
+
+# status should be NULL (successfully downloaded), otherwise return NULL
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE)
 file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
@@ -26,7 +32,12 @@ test_that("check file ext", {
 
 # DEM
 tmp = tempfile()
-tile_download(DEM, outdir = tmp)
+sttus = tile_download(DEM, outdir = tmp)
+
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE)
 file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
