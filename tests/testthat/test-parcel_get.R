@@ -1,9 +1,9 @@
 parcel_byID = parcel_get(TERYT = "141201_1.0001.6509")
 parcel_byCOORDS = parcel_get(X = 313380.5, Y = 460166.4)
 
-# if output is "connection error", check class and return NULL
-if (class(parcel_byID) == "character" ||
-    class(parcel_byCOORDS) == "character") {
+# if output is "connection error", check type and return NULL
+if (typeof(parcel_byID) == "character" ||
+    typeof(parcel_byCOORDS) == "character") {
   return(NULL)
 }
 
