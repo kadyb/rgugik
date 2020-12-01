@@ -5,13 +5,13 @@ t4 = geocodePL_get(rail_crossing = "001 018 478")
 t5 = geocodePL_get(geoname = "Las Mierzei") # physiographic object
 t6 = geocodePL_get(address = "Poznań Aleja Niepodległosci")
 
-# if output is "connection error", check class and return NULL
-if (class(t1) == "character" ||
-    class(t2) == "character" ||
-    class(t3) == "character" ||
-    class(t4) == "character" ||
-    class(t5) == "character" ||
-    class(t6) == "character") {
+# if output is "connection error", check type and return NULL
+if (typeof(t1) == "character" ||
+    typeof(t2) == "character" ||
+    typeof(t3) == "character" ||
+    typeof(t4) == "character" ||
+    typeof(t5) == "character" ||
+    typeof(t6) == "character") {
   return(NULL)
 }
 

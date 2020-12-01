@@ -3,11 +3,11 @@ county_geom = borders_get(county = "Sopot") # 18 KB
 commune_geom1 = borders_get(commune = c("Hel", "Krynica Morska")) # 11 KB
 commune_geom2 = borders_get(TERYT = c("2211011", "2210011")) # 11 KB
 
-# if output is "connection error", check class and return NULL
-if (class(voivodeship_geom) == "character" ||
-    class(county_geom) == "character" ||
-    class(commune_geom1) == "character" ||
-    class(commune_geom2) == "character") {
+# if output is "connection error", check type and return NULL
+if (typeof(voivodeship_geom) == "character" ||
+    typeof(county_geom) == "character" ||
+    typeof(commune_geom1) == "character" ||
+    typeof(commune_geom2) == "character") {
   return(NULL)
 }
 
