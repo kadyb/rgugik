@@ -83,7 +83,12 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
                           "&id=", ID[i],
                           "&result=", result)
 
-    output = readLines(prepared_URL, warn = FALSE)
+    output = tryGet(readLines(prepared_URL, warn = FALSE))
+
+    if (any(output %in% c("error", "warning"))) {
+      return("connection error")
+    }
+
     output = output[2]
     wkb = structure(list(output), class = "WKB")
     single_geom = sf::st_as_sfc(wkb, EWKB = TRUE, crs = 2180)

@@ -1,6 +1,12 @@
 parcel_byID = parcel_get(TERYT = "141201_1.0001.6509")
 parcel_byCOORDS = parcel_get(X = 313380.5, Y = 460166.4)
 
+# if output is "connection error", check type and return NULL
+if (typeof(parcel_byID) == "character" ||
+    typeof(parcel_byCOORDS) == "character") {
+  return(NULL)
+}
+
 
 test_that("check if ouput is sf/sfc", {
   expect_s3_class(parcel_byID, "sfc")

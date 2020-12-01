@@ -1,5 +1,11 @@
 tmp = tempfile()
-pointDTM100_download("opolskie", outdir = tmp, unzip = FALSE) # 3.7 MB
+status = pointDTM100_download("opolskie", outdir = tmp, unzip = FALSE) # 3.7 MB
+
+# status should be NULL (successfully downloaded), otherwise return NULL
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE)
 file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))

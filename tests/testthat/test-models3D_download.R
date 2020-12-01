@@ -1,6 +1,12 @@
 tmp = tempfile()
-models3D_download(county = "Świętochłowice", LOD = "LOD1",
-                  outdir = tmp, unzip = FALSE) # 1.2 MB
+status = models3D_download(county = "Świętochłowice", LOD = "LOD1",
+                           outdir = tmp, unzip = FALSE) # 1.2 MB
+
+# status should be NULL (successfully downloaded), otherwise return NULL
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE)
 file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
@@ -17,8 +23,13 @@ test_that("check file ext", {
 
 # unzip
 tmp = tempfile()
-models3D_download(TERYT = 2476, LOD = "LOD1",
-                  outdir = tmp, unzip = TRUE) # 1.2 MB
+status = models3D_download(TERYT = 2476, LOD = "LOD1",
+                           outdir = tmp, unzip = TRUE) # 1.2 MB
+
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE)
 file_number = length(file_path)
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))

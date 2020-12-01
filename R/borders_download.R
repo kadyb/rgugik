@@ -41,7 +41,11 @@ borders_download = function(type, outdir = ".", unzip = TRUE, ...) {
   if (!dir.exists(outdir)) dir.create(outdir)
 
   filename = paste0(outdir, "/", type, ".zip")
-  utils::download.file(URL, filename, mode = "wb", ...)
+  status = tryGet(utils::download.file(URL, filename, mode = "wb", ...))
+
+  if (any(status %in% c("error", "warning"))) {
+    return("connection error")
+  }
 
   if (unzip) {
     utils::unzip(filename, exdir = outdir)

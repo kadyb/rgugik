@@ -67,7 +67,11 @@ topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
     prepared_URL = paste0(base_URL, TERYT_voivodeship, "/",
                           df_names[i, "TERYT"], "_GML.zip")
     filename = paste0(outdir, "/", df_names[i, "TERYT"], ".zip")
-    utils::download.file(prepared_URL, filename, mode = "wb", ...)
+    status = tryGet(utils::download.file(prepared_URL, filename, mode = "wb", ...))
+
+    if (any(status %in% c("error", "warning"))) {
+      return("connection error")
+    }
 
     if (unzip) {
       utils::unzip(filename, exdir = outdir)

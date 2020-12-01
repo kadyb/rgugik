@@ -64,7 +64,12 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
     str_pts = paste(str_pts, collapse = ",")
     prepared_URL = paste0(base_URL, str_pts)
     prepared_URL = gsub(" ", "%20", prepared_URL)
-    str_output = readLines(prepared_URL, warn = FALSE)
+    str_output = tryGet(readLines(prepared_URL, warn = FALSE))
+
+    if (any(str_output %in% c("error", "warning"))) {
+      return(NULL)
+    }
+
     str_output = unlist(strsplit(str_output, ","))
     str_output = unlist(strsplit(str_output, " "))
     elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
@@ -92,6 +97,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
     if (i < iter) {
       sel_pts = pts[(i * 500 + 1):(i * 500 + 500), ]
       elev = get_elev(sel_pts, base_URL)
+      if (is.null(elev)) return("connection error")
       i = i + 1
 
       if (all(elev %in% "0.0")) {
@@ -108,6 +114,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
     } else {
       sel_pts = pts[(i * 500 + 1):(i * 500 + n_last), ]
       elev = get_elev(sel_pts, base_URL)
+      if (is.null(elev)) return("connection error")
       empty_output = c(empty_output, elev)
       i = i + 1
     }

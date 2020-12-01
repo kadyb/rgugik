@@ -1,5 +1,11 @@
 tmp = tempfile()
-emuia_download(commune = "Jejkowice", outdir = tmp, unzip = FALSE) # 37.1 KB
+status = emuia_download(commune = "Jejkowice", outdir = tmp, unzip = FALSE) # 37.1 KB
+
+# status should be NULL (successfully downloaded), otherwise return NULL
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE)
 file_size = file.info(file_path)$size / 2^10
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
@@ -14,7 +20,12 @@ test_that("check file ext", {
 
 # unzip
 tmp = tempfile()
-emuia_download(TERYT = 2412032, outdir = tmp, unzip = TRUE) # 37.1 KB
+status = emuia_download(TERYT = 2412032, outdir = tmp, unzip = TRUE) # 37.1 KB
+
+if (!is.null(status)) {
+  return(NULL)
+}
+
 file_path = list.files(tmp, full.names = TRUE)
 file_number = length(file_path)
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))

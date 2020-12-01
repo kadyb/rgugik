@@ -4,6 +4,11 @@ polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
 minmax = minmaxDTM_get(polygon)
 
+# output's length should be 2 (sf/data.frame)
+if (!length(minmax) == 2) {
+  return(NULL)
+}
+
 
 test_that("check if ouput is sf/data.frame", {
   expect_s3_class(minmax, c("sf", "data.frame"))

@@ -5,6 +5,16 @@ t4 = geocodePL_get(rail_crossing = "001 018 478")
 t5 = geocodePL_get(geoname = "Las Mierzei") # physiographic object
 t6 = geocodePL_get(address = "Poznań Aleja Niepodległosci")
 
+# if output is "connection error", check type and return NULL
+if (typeof(t1) == "character" ||
+    typeof(t2) == "character" ||
+    typeof(t3) == "character" ||
+    typeof(t4) == "character" ||
+    typeof(t5) == "character" ||
+    typeof(t6) == "character") {
+  return(NULL)
+}
+
 
 test_that("check if ouput is sf/data.frame", {
   expect_s3_class(t1, c("sf", "data.frame"))
