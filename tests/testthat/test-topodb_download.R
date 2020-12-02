@@ -1,5 +1,5 @@
 tmp = tempfile()
-status = topodb_download(county = "Świętochłowice", outdir = tmp, unzip = FALSE) # 1.9 MB
+status = topodb_download(county = "Sopot", outdir = tmp, unzip = FALSE) # 2.4 MB
 
 # status should be NULL (successfully downloaded), otherwise return NULL
 if (!is.null(status)) {
@@ -22,7 +22,7 @@ test_that("check file ext", {
 
 # unzip
 tmp = tempfile()
-status = topodb_download(TERYT = 2476, outdir = tmp, unzip = TRUE) # 1.9 MB
+status = topodb_download(TERYT = 2264, outdir = tmp, unzip = TRUE) # 2.4 MB
 
 if (!is.null(status)) {
   return(NULL)
