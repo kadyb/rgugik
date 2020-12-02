@@ -11,7 +11,7 @@ if (typeof(t1) == "character" ||
     typeof(t3) == "character" ||
     typeof(t4) == "character" ||
     typeof(t5) == "character" ||
-    typeof(t6) == "character") {
+    t6 == "connection error") {
   return(NULL)
 }
 
