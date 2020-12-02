@@ -14,9 +14,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' pointDTM100_download(c("mazowieckie", "wielkopolskie"))
-#' pointDTM100_download(c("Subcarpathian", "Silesian"))
-#' pointDTM100_download(c("02", "16"))
+#' pointDTM100_download(c("opolskie", "świętokrzyskie")) # 8.5 MB
+#' pointDTM100_download(c("Opole", "Swietokrzyskie")) # 8.5 MB
+#' pointDTM100_download(c("16", "26")) # 8.5 MB
 #' }
 pointDTM100_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
 

@@ -26,9 +26,8 @@ returns a sf data.frame for given an administrative unit or TERYT (ID)
 }
 \examples{
 \dontrun{
-voivodeship_geom = borders_get(voivodeship = "lubuskie")
-county_geom = borders_get(county = "Sopot")
-commune_geom = borders_get(commune = c("Hel", "Krynica Morska"))
-commune_geom = borders_get(TERYT = c("2211011", "2210011"))
+voivodeship_geom = borders_get(voivodeship = "lubuskie") # 494 KB
+county_geom = borders_get(county = "Sopot") # 18 KB
+commune_geom = borders_get(commune = c("Hel", "Krynica Morska")) # 11 KB
 }
 }

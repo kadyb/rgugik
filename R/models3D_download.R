@@ -18,8 +18,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' models3D_download(county = "Toruń")
-#' models3D_download(TERYT = c("2462", "0401"), LOD = "LOD2")
+#' models3D_download(TERYT = c("2476", "2264")) # 3.6 MB
+#' models3D_download(county = "sejneński", LOD = "LOD2") # 7.0 MB
 #' }
 models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1",
                              outdir = ".", unzip = TRUE, ...) {

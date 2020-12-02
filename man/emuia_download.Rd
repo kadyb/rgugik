@@ -27,7 +27,7 @@ downloads Register of Towns, Streets and Addresses for communes
 }
 \examples{
 \dontrun{
-emuia_download(commune = "Kotla")
-emuia_download(TERYT = c("0612023", "1009082"))
+emuia_download(commune = "Kotla") # 38 KB
+emuia_download(TERYT = c("0203042", "2412032")) # 75 KB
 }
 }

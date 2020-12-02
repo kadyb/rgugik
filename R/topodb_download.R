@@ -24,8 +24,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' topodb_download(county = "Toruń")
-#' topodb_download(TERYT = c("2462", "0401"))
+#' topodb_download(county = "Świętochłowice") # 2.4 MB
+#' topodb_download(TERYT = c("2476", "2264")) # 4.8 MB
 #' }
 topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
                            unzip = TRUE, ...) {

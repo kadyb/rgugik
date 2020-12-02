@@ -28,9 +28,9 @@ downloads General Geographic Databases for entire voivodeships
 }
 \examples{
 \dontrun{
-geodb_download(c("mazowieckie", "wielkopolskie"))
-geodb_download(c("Subcarpathian", "Silesian"))
-geodb_download(c("02", "16"))
+geodb_download(c("opolskie", "lubuskie")) # 12.7 MB
+geodb_download(c("Opole", "Lubusz")) # 12.7 MB
+geodb_download(c("16", "08")) # 12.7 MB
 }
 }
 \references{

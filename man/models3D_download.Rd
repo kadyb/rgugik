@@ -39,7 +39,7 @@ downloads 3D models of buildings for counties
 }
 \examples{
 \dontrun{
-models3D_download(county = "Toruń")
-models3D_download(TERYT = c("2462", "0401"), LOD = "LOD2")
+models3D_download(TERYT = c("2476", "2264")) # 3.6 MB
+models3D_download(county = "sejneĹ„ski", LOD = "LOD2") # 7.0 MB
 }
 }

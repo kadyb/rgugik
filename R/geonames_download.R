@@ -1,11 +1,11 @@
 #' downloads State Register of Geographical Names
 #'
 #' @param type names of places ("place") and/or physiographic objects ("object")
+#' @param format data format ("GML", "SHP" (default) and/or "XLSX")
 #' @param outdir (optional) name of the output directory;
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
 #' be extracted and removed
-#' @param format data format ("GML", "SHP" (default) and/or "XLSX")
 #' @param ... additional argument for [`utils::download.file()`]
 #'
 #' @return a selected data type in the specified format
@@ -17,10 +17,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' geonames_download(type = c("place", "object"), format = "SHP")
-#' geonames_download(type = "object", format = c("GML", "XLSX"))
+#' geonames_download(type = "place", format = "SHP") # 18.2 MB
 #' }
-geonames_download = function(type, outdir = ".", unzip = TRUE, format = "SHP", ...) {
+geonames_download = function(type, format = "SHP", outdir = ".", unzip = TRUE, ...) {
 
   if (!all(type %in% c("place", "object"))) {
     stop("incorrect type, should be 'place' or 'object'")
