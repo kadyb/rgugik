@@ -33,7 +33,7 @@ Until July 31, 2020, spatial data acquisition was time-consuming and required fi
 However, the recent amendment of the Geodetic and Cartographic Law in Poland in mid-2020 made all of the current and future spatial datasets publicly available.
 
 Poland's spatial data is released on a dedicated website, [Geoportal](https://mapy.geoportal.gov.pl), which allows for its browsing and downloading.
-It is one of Poland's most popular government websites, currently ranked 3rd with 5.02 million unique visits in 2020^[https://widok.gov.pl/statistics/].
+It is one of the most popular government websites in the country, currently ranked 3rd with 5.02 million unique visits in 2020^[https://widok.gov.pl/statistics/].
 Although the data is related to Poland's area only, visits from other countries can also be noted (e.g., Germany with 51,000, Great Britain with 39,000, and United States with 15,000 unique visits this year)^[https://widok.gov.pl/statistics/geoportal-krajowy/].
 In the first month after the change of law, as much as 69 TB^[http://www.gugik.gov.pl/aktualnosci/2021/03.09.2020-sierpniowe-statystyki-pobierania-uwolnionych-danych-przestrzennych] of data was downloaded, and by the end of October, this value grew to over 240 TB^[http://www.gugik.gov.pl/aktualnosci/03.11.2020-statystyka-pobierania-danych-w-pazdzierniku].
 
