@@ -28,8 +28,11 @@ DEM is the general name for a group of models with different characteristics, in
 This model is devoid of any objects above the ground, such as buildings or trees.
 2. **Digital Surface Model** (DSM) - numerical representation of the terrain, including objects on its surface, such as buildings and trees.
 
-<center> ![DTM-DSM](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/DTM_DSM.svg/1024px-DTM_DSM.svg.png){ width=50% }
-<p style="font-size:8px;">Wikimedia Commons contributors, "File:DTM DSM.svg," Wikimedia Commons, the free media repository, https://commons.wikimedia.org/w/index.php?title=File:DTM_DSM.svg&oldid=475779479 (accessed October 7, 2020).
+<center>
+![DTM-DSM](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/DTM_DSM.svg/1024px-DTM_DSM.svg.png){ width=50% }
+<p style="font-size:8px;">
+Wikimedia Commons, the free media repository, https://commons.wikimedia.org/w/index.php?title=File:DTM_DSM.svg&oldid=475779479
+(accessed October 7, 2020).
 </p>
 </center>
 <br>
