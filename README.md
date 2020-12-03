@@ -177,5 +177,5 @@ CONDUCT](https://github.com/kadyb/rgugik/blob/master/CODE_OF_CONDUCT.md).
 ## Related projects
 
 If you don’t feel familiar with R, there is a similar
-[QGIS](https://www.qgis.org) tool in the
+[QGIS](https://www.qgis.org/en/site/) tool in the
 [EnviroSolutions](https://github.com/envirosolutionspl) repository.
