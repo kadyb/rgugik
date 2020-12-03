@@ -31,6 +31,7 @@ returns a sf data.frame with metadata for a given type of input
 (geocoding addresses and objects)
 }
 \examples{
+\dontrun{
 geocodePL_get(address = "Marki") # place
 geocodePL_get(address = "Marki, Andersa") # place and street
 geocodePL_get(address = "Marki, Andersa 1") # place, street and house number
@@ -42,4 +43,5 @@ geocodePL_get(road = "632 55") # road number and mileage
 geocodePL_get(rail_crossing = "001 018 478")
 
 geocodePL_get(geoname = "Las Mierzei") # physiographic object
+}
 }
