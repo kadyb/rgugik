@@ -13,6 +13,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' geocodePL_get(address = "Marki") # place
 #' geocodePL_get(address = "Marki, Andersa") # place and street
 #' geocodePL_get(address = "Marki, Andersa 1") # place, street and house number
@@ -24,6 +25,7 @@
 #' geocodePL_get(rail_crossing = "001 018 478")
 #'
 #' geocodePL_get(geoname = "Las Mierzei") # physiographic object
+#' }
 geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geoname = NULL) {
 
   # geocode address
