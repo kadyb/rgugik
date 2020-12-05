@@ -37,6 +37,8 @@ It is one of the most popular government websites in the country, currently rank
 Although the data is related to Poland's area only, visits from other countries can also be noted (e.g., Germany with 51,000, Great Britain with 39,000, and United States with 15,000 unique visits this year)^[https://widok.gov.pl/statistics/geoportal-krajowy/].
 In the first month after the change of law, as much as 69 TB^[http://www.gugik.gov.pl/aktualnosci/2021/03.09.2020-sierpniowe-statystyki-pobierania-uwolnionych-danych-przestrzennych] of data was downloaded, and by the end of October, this value grew to over 240 TB^[http://www.gugik.gov.pl/aktualnosci/03.11.2020-statystyka-pobierania-danych-w-pazdzierniku].
 
+# Statement of need
+
 While the Geoportal gives access to some of the *GUGiK* data resources, it has a number of practical disadvantages.
 Datasets can only be downloaded individually and manually, limiting the practical use of the available data for large areas or many points in time, and is problematic for the reproducible research process.
 Additionally, some *GUGiK* data is located on other related websites or in the form of dedicated services, which makes finding and downloading some datasets more difficult.
