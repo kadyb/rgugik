@@ -1,6 +1,6 @@
 Package: rgugik
 Type: Package
-Title: Search and Retrieve Spatial Data from GUGiK
+Title: Search and Retrieve Spatial Data from 'GUGiK'
 Version: 0.2.0
 Authors@R: c(person(given = "Krzysztof",
                     family = "Dyba",
@@ -21,7 +21,7 @@ Authors@R: c(person(given = "Krzysztof",
                     role = "ctb",
                     comment = "source of the data"))
 Description: Automatic open data acquisition from resources of Polish Head Office
-    of Geodesy and Cartography ("Główny Urząd Geodezji i Kartografii")
+    of Geodesy and Cartography ('Główny Urząd Geodezji i Kartografii')
     (<www.gugik.gov.pl>).
     Available datasets include various types of numeric, raster and vector data,
     such as orthophotomaps, Digital Elevation Models (DTM, DSM, Point Cloud),
