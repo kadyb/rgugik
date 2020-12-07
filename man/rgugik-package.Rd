@@ -4,18 +4,18 @@
 \name{rgugik-package}
 \alias{rgugik}
 \alias{rgugik-package}
-\title{rgugik: Search and Retrieve Spatial Data from GUGiK}
+\title{rgugik: Search and Retrieve Spatial Data from 'GUGiK'}
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 Automatic open data acquisition from resources of Polish Head Office
-    of Geodesy and Cartography ("Główny Urząd Geodezji i Kartografii")
+    of Geodesy and Cartography ('Główny Urząd Geodezji i Kartografii')
     (<www.gugik.gov.pl>).
     Available datasets include various types of numeric, raster and vector data,
-    such as orthophotomaps, Digital Elevation Models (DTM, DSM, Point Cloud),
-    State Register of Borders, spatial databases, geometries of cadastral parcels,
-    3D models of buildings in LOD1 and LOD2 standards, and more.
-    It is also possible to geocode addresses or objects using the "geocodePL_get"
+    such as orthophotomaps, digital elevation models (digital terrain models,
+    digital surface model, point clouds), state register of borders, spatial
+    databases, geometries of cadastral parcels, 3D models of buildings, and more.
+    It is also possible to geocode addresses or objects using the geocodePL_get()
     function.
 }
 \seealso{
