@@ -77,7 +77,7 @@ In addition, the package includes objects containing names of the administrative
 Table: A list of datasets from *GUGiK* supported by the **rgugik** package. \label{table:1}
 
 **rgugik** uses `jsonlite` [@jsonlite-lib] for parsing JSON to R objects and `sf` [@sf-lib] for processing of spatial data in a user-friendly way using the simple features standard.
-The package is released under the [MIT open-source license](https://github.com/kadyb/rgugik/blob/master/LICENSE.md) and can be installed from GitHub using the `remotes` [@remotes-lib] package.
+The package is released under the [MIT open-source license](https://github.com/kadyb/rgugik/blob/master/LICENSE.md) and can be installed from [CRAN](https://cran.r-project.org/web/packages/rgugik/index.html) or GitHub (using the `remotes` [@remotes-lib] package).
 This package's source code is thoroughly tested, with about 87% lines of the code executed using the automated tests.
 The package also has an associated website at [https://kadyb.github.io/rgugik](https://kadyb.github.io/rgugik/), which contains installation instructions and three articles presenting different use cases of downloading and processing of orthophotomaps, Digital Elevation Models, and topographic databases.
 
