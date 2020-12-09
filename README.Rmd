@@ -122,7 +122,7 @@ remotes::install_github("kadyb/rgugik")
 - `orto_request()` - returns a data frame with metadata and links to the orthoimages in a given polygon
 - `tile_download()` - downloads orthoimages based on the data frame obtained using the `orto_request()` function
   
-```{r message=FALSE, warning=FALSE}
+```{r f1, message=FALSE, warning=FALSE}
 library(rgugik)
 library(sf)
 library(raster)
@@ -148,7 +148,7 @@ invisible(file.remove("41_3756_N-33-130-D-b-2-3.tif"))
 
 ### Administrative boundaries
 
-```{r}
+```{r f2}
 library(rgugik)
 library(sf)
 

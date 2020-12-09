@@ -17,26 +17,26 @@ MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/
 [Polish Head Office of Geodesy and Cartography](http://www.gugik.gov.pl)
 including:
 
-  - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
-  - [General Geographic
+-   [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
+-   [General Geographic
     Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
-  - [Topographic
+-   [Topographic
     Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k)
-  - [Register of Towns, Streets and
+-   [Register of Towns, Streets and
     Addresses](https://emuia.gugik.gov.pl)
-  - [State Register of Geographical
+-   [State Register of Geographical
     Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
-  - [State Register of
+-   [State Register of
     Borders](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju)
-  - Location (geometry) of cadastral parcels using TERYT (parcel ID) or
+-   Location (geometry) of cadastral parcels using TERYT (parcel ID) or
     coordinates
-  - 3D models of buildings (LOD1, LOD2)
-  - Various Digital Elevation Models as:
-      - [Digital Terrain
+-   3D models of buildings (LOD1, LOD2)
+-   Various Digital Elevation Models as:
+    -   [Digital Terrain
         Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
-      - [Digital Surface
+    -   [Digital Surface
         Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
-      - [Point
+    -   [Point
         Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
 
 It is also possible to geocode addresses or objects using the
@@ -45,7 +45,7 @@ It is also possible to geocode addresses or objects using the
 **Corresponding functions**
 
 | Function                              | Input                  | Dastaset EN                              | Dataset PL                                |
-| :------------------------------------ | :--------------------- | :--------------------------------------- | :---------------------------------------- |
+|:--------------------------------------|:-----------------------|:-----------------------------------------|:------------------------------------------|
 | `orto_request()`, `tile_download()`   | polygon                | Orthophotomap                            | Ortofotomapa                              |
 | `geodb_download()`                    | voivodeship            | General Geographic Database              | Baza Danych Obiektów Ogólnogeograficznych |
 | `topodb_download()`                   | county                 | Topographic Database                     | Baza Danych Obiektów Topograficznych      |
@@ -58,18 +58,18 @@ It is also possible to geocode addresses or objects using the
 
 There are the additional functions for obtaining Digital Terrain Model:
 
-  - `pointDTM_get()` for small areas (high resolution grid)
-  - `pointDTM100_download()` for voivodeships areas (low resolution
+-   `pointDTM_get()` for small areas (high resolution grid)
+-   `pointDTM100_download()` for voivodeships areas (low resolution
     grid)
-  - `minmaxDTM_get()` to find the minimum and maximum elevation (small
+-   `minmaxDTM_get()` to find the minimum and maximum elevation (small
     areas)
 
 The names of administrative units and their IDs can be obtained using
 these functions:
 
-  - `voivodeship_names()` (16)
-  - `county_names()` (380)
-  - `commune_names()` (2477)
+-   `voivodeship_names()` (16)
+-   `county_names()` (380)
+-   `commune_names()` (2477)
 
 ## Installation
 
@@ -92,12 +92,10 @@ remotes::install_github("kadyb/rgugik")
 
 ### Ortophotomap
 
-  - `orto_request()` - returns a data frame with metadata and links to
+-   `orto_request()` - returns a data frame with metadata and links to
     the orthoimages in a given polygon
-  - `tile_download()` - downloads orthoimages based on the data frame
+-   `tile_download()` - downloads orthoimages based on the data frame
     obtained using the `orto_request()` function
-
-<!-- end list -->
 
 ``` r
 library(rgugik)
@@ -133,7 +131,7 @@ img = brick("41_3756_N-33-130-D-b-2-3.tif")
 plotRGB(img)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
+<img src="man/figures/README-f1-1.png" width="100%" />
 
 ### Administrative boundaries
 
@@ -148,14 +146,14 @@ counties_geom = borders_get(TERYT = counties)
 plot(st_geometry(counties_geom), main = "Opolskie")
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-f2-1.png" width="100%" />
 
 ## Acknowledgment
 
 [Head Office of Geodesy and Cartography in
 Poland](http://www.gugik.gov.pl/) is the main source of the provided
-data. The data is made available in accordance with the [Act of
-May 17, 1989 Geodetic and Cartographic
+data. The data is made available in accordance with the [Act of May 17,
+1989 Geodetic and Cartographic
 Law](http://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19890300163)
 (amended on 16 April 2020).
 
