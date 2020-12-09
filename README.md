@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![CRAN](http://www.r-pkg.org/badges/version/rgugik)](https://cran.r-project.org/package=rgugik)
 [![R build
 status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://github.com/kadyb/rgugik/actions)
 [![codecov](https://codecov.io/gh/kadyb/rgugik/branch/master/graph/badge.svg)](https://codecov.io/gh/kadyb/rgugik)
@@ -72,13 +73,12 @@ these functions:
 
 ## Installation
 
-<!-- You can install the released version of rgugik from [CRAN](https://CRAN.R-project.org) with: -->
+You can install the released version from
+[CRAN](https://cran.r-project.org/) with:
 
-<!-- ``` r -->
-
-<!-- install.packages("rgugik") -->
-
-<!-- ``` -->
+``` r
+install.packages("rgugik")
+```
 
 You can install the development version from
 [GitHub](https://github.com) with:
@@ -133,7 +133,7 @@ img = brick("41_3756_N-33-130-D-b-2-3.tif")
 plotRGB(img)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 ### Administrative boundaries
 
@@ -148,7 +148,7 @@ counties_geom = borders_get(TERYT = counties)
 plot(st_geometry(counties_geom), main = "Opolskie")
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 ## Acknowledgment
 

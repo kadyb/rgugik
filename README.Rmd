@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # rgugik <img src="man/figures/logo.png" align="right" width="150"/>
 
 <!-- badges: start -->
+[![CRAN](http://www.r-pkg.org/badges/version/rgugik)](https://cran.r-project.org/package=rgugik)
 [![R build status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://github.com/kadyb/rgugik/actions)
 [![codecov](https://codecov.io/gh/kadyb/rgugik/branch/master/graph/badge.svg)](https://codecov.io/gh/kadyb/rgugik)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -101,11 +102,11 @@ The names of administrative units and their IDs can be obtained using these func
 
 ## Installation
 
-<!-- You can install the released version of rgugik from [CRAN](https://CRAN.R-project.org) with: -->
+You can install the released version from [CRAN](https://cran.r-project.org/) with:
 
-<!-- ``` r -->
-<!-- install.packages("rgugik") -->
-<!-- ``` -->
+```{r eval=FALSE}
+install.packages("rgugik")
+```
 
 You can install the development version from [GitHub](https://github.com) with:
 
