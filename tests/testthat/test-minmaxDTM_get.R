@@ -31,9 +31,9 @@ test_that("check if the warning is returned for EPSG:4326", {
 })
 
 # suppress the warning because it is already tested above
-test_that("check if results are equal", {
-  expect_equal(minmax, suppressWarnings(minmaxDTM_get(polygon_4326)))
-})
+# test_that("check if results are equal", {
+#   expect_equal(minmax, suppressWarnings(minmaxDTM_get(polygon_4326)))
+# })
 
 
 # test stops
