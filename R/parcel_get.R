@@ -28,6 +28,11 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
       return("connection error")
     }
 
+    # "0" means no server side errors
+    if (output[1] != "0") {
+      return("connection error")
+    }
+
     wkb = structure(list(output[2]), class = "WKB")
     geom = sf::st_as_sfc(wkb, EWKB = TRUE, crs = 2180)
 
@@ -48,6 +53,11 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
     output = tryGet(readLines(prepared_URL, warn = FALSE))
 
     if (any(output %in% c("error", "warning"))) {
+      return("connection error")
+    }
+
+    # "0" means no server side errors
+    if (output[1] != "0") {
       return("connection error")
     }
 

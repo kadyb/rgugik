@@ -87,7 +87,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
   while (i < iter + 1) {
 
     if (attempt == n_attempts) {
-      stop("server does not return values, try again later")
+      return("connection error")
     }
 
     if (print_iter) {
@@ -101,7 +101,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
       i = i + 1
 
       if (all(elev %in% "0.0")) {
-        warning("empty return, next attempt", immediate. = TRUE)
+        # warning("empty return, next attempt", immediate. = TRUE)
         i = i - 1
         attempt = attempt + 1
         Sys.sleep(2) # wait 2 sec
