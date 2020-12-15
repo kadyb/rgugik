@@ -45,8 +45,11 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
     if (!is.null(output)) {
 
       # replace NULLs with NAs
-      if (length(output) == 1) {
-        output[[1]][sapply(output[[1]], is.null)] = NA
+      for (i in seq_len(length(output))) {
+
+        null_vec = sapply(output[[i]], is.null)
+        output[[i]][null_vec] = NA
+
       }
 
       df_output = do.call(rbind.data.frame, output)
