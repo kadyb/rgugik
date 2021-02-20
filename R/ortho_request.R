@@ -11,13 +11,13 @@
 #' library(sf)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 #' polygon = read_sf(polygon_path)
-#' req_df = orto_request(polygon)
+#' req_df = ortho_request(polygon)
 #'
 #' # simple filtering by attributes
 #' req_df = req_df[req_df$composition == "CIR", ]
 #' req_df = req_df[req_df$resolution <= 0.25 & req_df$year >= 2016, ]
 #' }
-orto_request = function(polygon) {
+ortho_request = function(polygon) {
 
   if (nrow(polygon) == 0) {
     stop("no geometries")
@@ -104,3 +104,7 @@ orto_request = function(polygon) {
 
   return(empty_df)
 }
+
+#' @rdname ortho_request
+#' @export
+orto_request = ortho_request

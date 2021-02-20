@@ -1,7 +1,7 @@
 base_URL = "https://opendata.geoportal.gov.pl/"
 
-sample_orto = paste0(base_URL, "ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif")
-orto = data.frame(URL = sample_orto, filename = "sample_orto",
+sample_ortho = paste0(base_URL, "ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif")
+ortho = data.frame(URL = sample_ortho, filename = "sample_ortho",
                   sha1 = "312c81963a31e268fc20c442733c48e1aa33838f",
                   stringsAsFactors = FALSE)
 
@@ -10,9 +10,9 @@ DEM = data.frame(URL = sample_DEM, filename = "sample_DEM",
                  sha1 = "392a0edf763e38fa1b7b6067ac1b080c47374dd2",
                  stringsAsFactors = FALSE)
 
-# ORTO
+# ORTHO
 tmp = tempfile()
-status = tile_download(orto, outdir = tmp)
+status = tile_download(ortho, outdir = tmp)
 
 # status should be NULL (successfully downloaded), otherwise return NULL
 if (!is.null(status)) {
@@ -67,9 +67,9 @@ test_that("check stops", {
   expect_error(tile_download(df),
                "empty df")
   expect_error(tile_download(df[, -1]),
-               "data frame should come from 'request_orto'")
+               "data frame should come from 'request_ortho'")
   expect_error(tile_download(df[, -2]),
-               "data frame should come from 'request_orto'")
+               "data frame should come from 'request_ortho'")
   expect_error(tile_download(df[, -3], check_SHA = TRUE),
                "'sha1' column not found")
 })

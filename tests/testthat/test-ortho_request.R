@@ -5,7 +5,7 @@ if (!"GITHUB_ACTION" %in% names(Sys.getenv())) {
 
   polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
   polygon = read_sf(polygon_path)
-  req_df = orto_request(polygon)
+  req_df = ortho_request(polygon)
 
   # if output is "connection error", check class and return NULL
   if (class(req_df) == "character") {

@@ -46,7 +46,7 @@ It is also possible to geocode addresses or objects using the
 
 | Function                              | Input                  | Dastaset EN                              | Dataset PL                                |
 |:--------------------------------------|:-----------------------|:-----------------------------------------|:------------------------------------------|
-| `orto_request()`, `tile_download()`   | polygon                | Orthophotomap                            | Ortofotomapa                              |
+| `ortho_request()`, `tile_download()`  | polygon                | Orthophotomap                            | Ortofotomapa                              |
 | `geodb_download()`                    | voivodeship            | General Geographic Database              | Baza Danych Obiektów Ogólnogeograficznych |
 | `topodb_download()`                   | county                 | Topographic Database                     | Baza Danych Obiektów Topograficznych      |
 | `emuia_download()`                    | commune                | Register of Towns, Streets and Addresses | Ewidencja Miejscowości, Ulic i Adresów    |
@@ -90,12 +90,12 @@ remotes::install_github("kadyb/rgugik")
 
 ## Usage
 
-### Ortophotomap
+### Orthophotomap
 
--   `orto_request()` - returns a data frame with metadata and links to
+-   `ortho_request()` - returns a data frame with metadata and links to
     the orthoimages in a given polygon
 -   `tile_download()` - downloads orthoimages based on the data frame
-    obtained using the `orto_request()` function
+    obtained using the `ortho_request()` function
 
 ``` r
 library(rgugik)
@@ -105,7 +105,7 @@ library(raster)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
 
-req_df = orto_request(polygon)
+req_df = ortho_request(polygon)
 
 # print metadata of the first image
 t(req_df[1, ])
