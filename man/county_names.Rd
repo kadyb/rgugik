@@ -13,7 +13,7 @@ county_names
 \description{
 The data frame contains the names of counties,
 their identifiers (TERYT, 4 characters) and the availability of
-building models in the LOD2 standard (boolean value).
+building models in the LOD2 standard (logical value).
 }
 \examples{
 county_names
