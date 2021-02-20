@@ -49,8 +49,8 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
     stop("empty df")
   }
 
-  # get name index from URL
-  idx_name = length(unlist(strsplit(df_req[1, "URL"], "/")))
+  # create output names from URLs
+  basenames = basename(df_req$URL)
 
   if (!dir.exists(outdir)) dir.create(outdir)
 
@@ -61,8 +61,7 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
       writeLines(paste0(i, "/", nrow(df_req)))
     }
 
-    filepath = paste0(outdir, "/",
-                      unlist(strsplit(df_req[i, "URL"], "/"))[idx_name])
+    filepath = paste0(outdir, "/", basenames[i])
     status = tryGet(utils::download.file(df_req[i, "URL"], filepath, mode = "wb", ...))
 
     if (any(status %in% c("error", "warning"))) {
