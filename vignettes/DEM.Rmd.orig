@@ -97,7 +97,7 @@ The exact area can be determined from the polygon layer as in [orthophotomap](ht
 
 ### Raster data
 
-Now we can search for available elevation data for this area using the `DEM_request()` function (it is analogous to the `orto_request()` function).
+Now we can search for available elevation data for this area using the `DEM_request()` function (it is analogous to the `ortho_request()` function).
 The only argument of the function is our reserve buffer.
 Note that `DEM_request()` takes data frame as input, and currently the `morasko_buffer` object is a list, so we need to convert it first.
 

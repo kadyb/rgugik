@@ -117,11 +117,11 @@ The `st_area()` function returned the area in m^2, and after the conversion we g
 ### Raster data
 
 Now let's move on to the stage of downloading the orthophotomap.
-We use the `orto_request()` function that show us which images are available for the analyzed area.
+We use the `ortho_request()` function that show us which images are available for the analyzed area.
 We need to provide our Krajkowo polygon as the argument of this function.
 
 ```{r}
-req_df = orto_request(krajkowo)
+req_df = ortho_request(krajkowo)
 ```
 
 We can display the resulting table using the code below.
