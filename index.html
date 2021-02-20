@@ -138,7 +138,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">
-<code><a href="reference/orto_request.html">orto_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
+<code><a href="reference/ortho_request.html">ortho_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
 </td>
 <td align="left">polygon</td>
 <td align="left">Orthophotomap</td>
@@ -230,14 +230,14 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<div id="ortophotomap" class="section level3">
+<div id="orthophotomap" class="section level3">
 <h3 class="hasAnchor">
-<a href="#ortophotomap" class="anchor"></a>Ortophotomap</h3>
+<a href="#orthophotomap" class="anchor"></a>Orthophotomap</h3>
 <ul>
 <li>
-<code><a href="reference/orto_request.html">orto_request()</a></code> - returns a data frame with metadata and links to the orthoimages in a given polygon</li>
+<code><a href="reference/ortho_request.html">ortho_request()</a></code> - returns a data frame with metadata and links to the orthoimages in a given polygon</li>
 <li>
-<code><a href="reference/tile_download.html">tile_download()</a></code> - downloads orthoimages based on the data frame obtained using the <code><a href="reference/orto_request.html">orto_request()</a></code> function</li>
+<code><a href="reference/tile_download.html">tile_download()</a></code> - downloads orthoimages based on the data frame obtained using the <code><a href="reference/ortho_request.html">ortho_request()</a></code> function</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span>
@@ -247,7 +247,7 @@
 <span class="va">polygon_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"datasets/search_area.gpkg"</span>, package <span class="op">=</span> <span class="st">"rgugik"</span><span class="op">)</span>
 <span class="va">polygon</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html">read_sf</a></span><span class="op">(</span><span class="va">polygon_path</span><span class="op">)</span>
 
-<span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="reference/orto_request.html">orto_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span>
+<span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="reference/ortho_request.html">ortho_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span>
 
 <span class="co"># print metadata of the first image</span>
 <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span>
