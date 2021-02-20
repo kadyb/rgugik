@@ -46,6 +46,6 @@ jobs:
       - name: Test coverage
         run: |
           skip_fun = c("geonames_download", "geodb_download", "borders_download",
-                       "DEM_request", "ortho_request")
+                       "DEM_request", "ortho_request", "orto_request")
           covr::codecov(function_exclusions = skip_fun)
         shell: Rscript {0}
