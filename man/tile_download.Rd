@@ -3,7 +3,7 @@
 \name{tile_download}
 \alias{tile_download}
 \title{downloads tiles based on the data frame obtained using
-the orto_request() and DEM_request() functions}
+the ortho_request() and DEM_request() functions}
 \usage{
 tile_download(
   df_req,
@@ -15,7 +15,7 @@ tile_download(
 )
 }
 \arguments{
-\item{df_req}{a data frame obtained using the \code{\link[=orto_request]{orto_request()}} and
+\item{df_req}{a data frame obtained using the \code{\link[=ortho_request]{ortho_request()}} and
 \code{\link[=DEM_request]{DEM_request()}} functions}
 
 \item{outdir}{(optional) name of the output directory;
@@ -38,7 +38,7 @@ as specified in the input data frame
 }
 \description{
 downloads tiles based on the data frame obtained using
-the orto_request() and DEM_request() functions
+the ortho_request() and DEM_request() functions
 }
 \examples{
 \dontrun{
