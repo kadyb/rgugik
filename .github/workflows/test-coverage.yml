@@ -2,7 +2,7 @@
 
 # test coverage is skipped for these functions:
 # geonames_download, geodb_download, borders_download (too large file size)
-# DEM_request, orto_request (requests from GitHub are blocked)
+# DEM_request, ortho_request (requests from GitHub are blocked)
 
 name: test-coverage
 
@@ -46,6 +46,6 @@ jobs:
       - name: Test coverage
         run: |
           skip_fun = c("geonames_download", "geodb_download", "borders_download",
-                       "DEM_request", "orto_request")
+                       "DEM_request", "ortho_request")
           covr::codecov(function_exclusions = skip_fun)
         shell: Rscript {0}
