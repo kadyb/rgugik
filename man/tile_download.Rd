@@ -2,8 +2,7 @@
 % Please edit documentation in R/tile_download.R
 \name{tile_download}
 \alias{tile_download}
-\title{downloads tiles based on the data frame obtained using
-the ortho_request() and DEM_request() functions}
+\title{Download requested tiles}
 \usage{
 tile_download(
   df_req,
@@ -37,8 +36,7 @@ georeferenced tiles with properties (resolution, year, etc.)
 as specified in the input data frame
 }
 \description{
-downloads tiles based on the data frame obtained using
-the ortho_request() and DEM_request() functions
+Download requested tiles
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/geodb_download.R
 \name{geodb_download}
 \alias{geodb_download}
-\title{downloads General Geographic Databases for entire voivodeships}
+\title{Download General Geographic Databases for entire voivodeships}
 \usage{
 geodb_download(voivodeships, outdir = ".", unzip = TRUE, ...)
 }
@@ -24,7 +24,7 @@ the content and detail level corresponds to the general
 geographic map in the scale of 1:250000
 }
 \description{
-downloads General Geographic Databases for entire voivodeships
+Download General Geographic Databases for entire voivodeships
 }
 \examples{
 \dontrun{

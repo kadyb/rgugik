@@ -2,7 +2,7 @@
 % Please edit documentation in R/borders_get.R
 \name{borders_get}
 \alias{borders_get}
-\title{returns a sf data.frame for given an administrative unit or TERYT (ID)}
+\title{Get the boundaries of administrative units}
 \usage{
 borders_get(voivodeship = NULL, county = NULL, commune = NULL, TERYT = NULL)
 }
@@ -22,7 +22,7 @@ Check \code{\link[=commune_names]{commune_names()}} function}
 a sf data.frame (EPSG: 2180)
 }
 \description{
-returns a sf data.frame for given an administrative unit or TERYT (ID)
+Get the boundaries of administrative units
 }
 \examples{
 \dontrun{

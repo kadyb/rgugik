@@ -2,7 +2,7 @@
 % Please edit documentation in R/topodb_download.R
 \name{topodb_download}
 \alias{topodb_download}
-\title{downloads Topographic Databases for counties}
+\title{Download Topographic Databases for counties}
 \usage{
 topodb_download(county = NULL, TERYT = NULL, outdir = ".", unzip = TRUE, ...)
 }
@@ -25,11 +25,11 @@ the content and detail level corresponds to the topographic map
 in the scale of 1:10000
 }
 \description{
-downloads Topographic Databases for counties
+Download Topographic Databases for counties
 }
 \examples{
 \dontrun{
-topodb_download(county = "Świętochłowice") # 2.4 MB
+topodb_download(county = "ĹšwiÄ™tochĹ‚owice") # 2.4 MB
 topodb_download(TERYT = c("2476", "2264")) # 4.8 MB
 }
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/geonames_download.R
 \name{geonames_download}
 \alias{geonames_download}
-\title{downloads State Register of Geographical Names}
+\title{Download State Register of Geographical Names}
 \usage{
 geonames_download(type, format = "SHP", outdir = ".", unzip = TRUE, ...)
 }
@@ -23,7 +23,7 @@ be extracted and removed}
 a selected data type in the specified format
 }
 \description{
-downloads State Register of Geographical Names
+Download State Register of Geographical Names
 }
 \examples{
 \dontrun{

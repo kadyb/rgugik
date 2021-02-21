@@ -1,5 +1,4 @@
-#' returns a sf data.frame with metadata for a given type of input
-#' (geocoding addresses and objects)
+#' @title Convert addresses and objects to geographic coordinates
 #'
 #' @param address place with or without street and house number
 #' @param road road number with or without mileage

@@ -3,7 +3,7 @@
 \name{ortho_request}
 \alias{ortho_request}
 \alias{orto_request}
-\title{returns a data frame with metadata and links to the orthoimages in a given polygon}
+\title{Get metadata and links to available orthoimages}
 \usage{
 ortho_request(polygon)
 
@@ -16,7 +16,7 @@ orto_request(polygon)
 a data frame with metadata and links to the orthoimages
 }
 \description{
-returns a data frame with metadata and links to the orthoimages in a given polygon
+Get metadata and links to available orthoimages
 }
 \examples{
 \dontrun{

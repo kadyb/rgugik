@@ -2,7 +2,7 @@
 % Please edit documentation in R/minmaxDTM_get.R
 \name{minmaxDTM_get}
 \alias{minmaxDTM_get}
-\title{returns a data frame with minimum and maximum elevation for a given polygon}
+\title{Get minimum and maximum elevation for a given polygon}
 \usage{
 minmaxDTM_get(polygon)
 }
@@ -16,7 +16,7 @@ a data frame with vector points and min/max terrain elevation
 (EPSG:2180)
 }
 \description{
-returns a data frame with minimum and maximum elevation for a given polygon
+Get minimum and maximum elevation for a given polygon
 }
 \examples{
 \dontrun{

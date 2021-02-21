@@ -1,4 +1,4 @@
-#' returns a data frame with metadata and links to the orthoimages in a given polygon
+#' @title Get metadata and links to available orthoimages
 #'
 #' @param polygon the polygon layer (may consist of n objects)
 #'

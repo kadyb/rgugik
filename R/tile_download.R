@@ -1,5 +1,4 @@
-#' downloads tiles based on the data frame obtained using
-#' the ortho_request() and DEM_request() functions
+#' @title Download requested tiles
 #'
 #' @param df_req a data frame obtained using the [`ortho_request()`] and
 #' [`DEM_request()`] functions

@@ -1,4 +1,4 @@
-#' downloads Digital Terrain Models with 100 m resolution for entire voivodeships
+#' @title Download Digital Terrain Models for voivodeships (100 m resolution)
 #'
 #' @param voivodeships selected voivodeships in Polish or English, or TERC
 #' (function [`voivodeship_names()`] can by helpful)

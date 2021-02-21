@@ -2,7 +2,7 @@
 % Please edit documentation in R/parcel_get.R
 \name{parcel_get}
 \alias{parcel_get}
-\title{returns a simple feature geometry for a given TERYT (ID) or coordinates}
+\title{Get the geometry of cadastral parcels}
 \usage{
 parcel_get(TERYT = NULL, X = NULL, Y = NULL)
 }
@@ -18,7 +18,7 @@ a simple feature geometry (in case of TERYT) or data frame with simple
 feature geometry and TERYT (in case of coordinates)
 }
 \description{
-returns a simple feature geometry for a given TERYT (ID) or coordinates
+Get the geometry of cadastral parcels
 }
 \examples{
 \dontrun{

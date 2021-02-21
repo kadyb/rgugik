@@ -2,7 +2,7 @@
 % Please edit documentation in R/pointDTM_get.R
 \name{pointDTM_get}
 \alias{pointDTM_get}
-\title{returns a data frame with vector points and terrain elevation for a given polygon}
+\title{Get terrain elevation for a given polygon}
 \usage{
 pointDTM_get(polygon, distance = 1, print_iter = TRUE)
 }
@@ -22,7 +22,7 @@ a data frame with vector points and terrain elevation
 (EPSG:2180, Vertical Reference System:PL-KRON86-NH)
 }
 \description{
-returns a data frame with vector points and terrain elevation for a given polygon
+Get terrain elevation for a given polygon
 }
 \examples{
 \dontrun{

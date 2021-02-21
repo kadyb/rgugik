@@ -1,4 +1,4 @@
-#' downloads Topographic Databases for counties
+#' @title Download Topographic Databases for counties
 #'
 #' @param county county name in Polish. Check [`county_names()`] function.
 #' @param TERYT county ID (4 characters)

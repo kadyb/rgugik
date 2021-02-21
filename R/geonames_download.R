@@ -1,4 +1,4 @@
-#' downloads State Register of Geographical Names
+#' @title Download State Register of Geographical Names
 #'
 #' @param type names of places ("place") and/or physiographic objects ("object")
 #' @param format data format ("GML", "SHP" (default) and/or "XLSX")
