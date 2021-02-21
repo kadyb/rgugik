@@ -1,4 +1,4 @@
-#' downloads Register of Towns, Streets and Addresses for communes
+#' @title Download Register of Towns, Streets and Addresses for communes
 #'
 #' @param commune commune name in Polish. Check [`commune_names()`] function.
 #' @param TERYT county ID (7 characters)

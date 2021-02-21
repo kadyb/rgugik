@@ -1,4 +1,4 @@
-#' returns a data frame with vector points and terrain elevation for a given polygon
+#' @title Get terrain elevation for a given polygon
 #'
 #' @param polygon the polygon layer with only one object
 #' (its area is limited to the 20 ha * distance parameter),

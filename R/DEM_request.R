@@ -1,5 +1,4 @@
-#' returns a data frame with metadata and links to the Digital Elevation Models
-#' in a given polygon
+#' @title Get metadata and links to available Digital Elevation Models
 #'
 #' @param polygon the polygon layer (may consist of n objects)
 #'

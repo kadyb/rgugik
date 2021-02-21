@@ -2,7 +2,7 @@
 % Please edit documentation in R/emuia_download.R
 \name{emuia_download}
 \alias{emuia_download}
-\title{downloads Register of Towns, Streets and Addresses for communes}
+\title{Download Register of Towns, Streets and Addresses for communes}
 \usage{
 emuia_download(commune = NULL, TERYT = NULL, outdir = ".", unzip = TRUE, ...)
 }
@@ -23,7 +23,7 @@ be extracted and removed}
 a register in SHP format
 }
 \description{
-downloads Register of Towns, Streets and Addresses for communes
+Download Register of Towns, Streets and Addresses for communes
 }
 \examples{
 \dontrun{

@@ -1,4 +1,4 @@
-#' returns a simple feature geometry for a given TERYT (ID) or coordinates
+#' @title Get the geometry of cadastral parcels
 #'
 #' @param TERYT parcel ID (18 characters, e.g. "141201_1.0001.6509")
 #' @param X longitude (EPSG: 2180)

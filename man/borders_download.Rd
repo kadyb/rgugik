@@ -2,7 +2,7 @@
 % Please edit documentation in R/borders_download.R
 \name{borders_download}
 \alias{borders_download}
-\title{downloads State Register of Borders}
+\title{Download State Register of Borders}
 \usage{
 borders_download(type, outdir = ".", unzip = TRUE, ...)
 }
@@ -21,7 +21,7 @@ be extracted and removed}
 a selected data type in SHP format
 }
 \description{
-downloads State Register of Borders
+Download State Register of Borders
 }
 \examples{
 \dontrun{

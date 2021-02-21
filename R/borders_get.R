@@ -1,4 +1,4 @@
-#' returns a sf data.frame for given an administrative unit or TERYT (ID)
+#' @title Get the boundaries of administrative units
 #'
 #' @param voivodeship selected voivodeships in Polish.
 #' Check [`voivodeship_names()`] function

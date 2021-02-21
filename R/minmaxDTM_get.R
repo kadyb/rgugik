@@ -1,4 +1,4 @@
-#' returns a data frame with minimum and maximum elevation for a given polygon
+#' @title Get minimum and maximum elevation for a given polygon
 #'
 #' @param polygon the polygon layer with only one object (area less than 10 ha),
 #' the larger the polygon area, the lower DTM resolution,

@@ -1,4 +1,4 @@
-#' downloads General Geographic Databases for entire voivodeships
+#' @title Download General Geographic Databases for entire voivodeships
 #'
 #' @param voivodeships selected voivodeships in Polish or English, or TERC
 #' (object [`voivodeship_names`] can by helpful)

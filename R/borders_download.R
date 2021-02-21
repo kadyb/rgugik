@@ -1,4 +1,4 @@
-#' downloads State Register of Borders
+#' @title Download State Register of Borders
 #'
 #' @param type "administrative units", "special units" or "addresses"
 #' @param outdir (optional) name of the output directory;

@@ -2,8 +2,7 @@
 % Please edit documentation in R/DEM_request.R
 \name{DEM_request}
 \alias{DEM_request}
-\title{returns a data frame with metadata and links to the Digital Elevation Models
-in a given polygon}
+\title{Get metadata and links to available Digital Elevation Models}
 \usage{
 DEM_request(polygon)
 }
@@ -16,8 +15,7 @@ a data frame with metadata and links to the Digital Elevation Models
 point clouds)
 }
 \description{
-returns a data frame with metadata and links to the Digital Elevation Models
-in a given polygon
+Get metadata and links to available Digital Elevation Models
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/models3D_download.R
 \name{models3D_download}
 \alias{models3D_download}
-\title{downloads 3D models of buildings for counties}
+\title{Download 3D models of buildings for counties}
 \usage{
 models3D_download(
   county = NULL,
@@ -35,11 +35,11 @@ be extracted and removed}
 models of buildings in Geography Markup Language format (.GML)
 }
 \description{
-downloads 3D models of buildings for counties
+Download 3D models of buildings for counties
 }
 \examples{
 \dontrun{
 models3D_download(TERYT = c("2476", "2264")) # 3.6 MB
-models3D_download(county = "sejneński", LOD = "LOD2") # 7.0 MB
+models3D_download(county = "sejneĹ„ski", LOD = "LOD2") # 7.0 MB
 }
 }

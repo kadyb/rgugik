@@ -2,7 +2,7 @@
 % Please edit documentation in R/pointDTM100_download.R
 \name{pointDTM100_download}
 \alias{pointDTM100_download}
-\title{downloads Digital Terrain Models with 100 m resolution for entire voivodeships}
+\title{Download Digital Terrain Models for voivodeships (100 m resolution)}
 \usage{
 pointDTM100_download(voivodeships, outdir = ".", unzip = TRUE, ...)
 }
@@ -22,11 +22,11 @@ be extracted and removed}
 text files with X, Y, Z columns (EPSG:2180)
 }
 \description{
-downloads Digital Terrain Models with 100 m resolution for entire voivodeships
+Download Digital Terrain Models for voivodeships (100 m resolution)
 }
 \examples{
 \dontrun{
-pointDTM100_download(c("opolskie", "świętokrzyskie")) # 8.5 MB
+pointDTM100_download(c("opolskie", "Ĺ›wiÄ™tokrzyskie")) # 8.5 MB
 pointDTM100_download(c("Opole", "Swietokrzyskie")) # 8.5 MB
 pointDTM100_download(c("16", "26")) # 8.5 MB
 }

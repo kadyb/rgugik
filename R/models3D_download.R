@@ -1,4 +1,4 @@
-#' downloads 3D models of buildings for counties
+#' @title Download 3D models of buildings for counties
 #'
 #' @param county county name in Polish. Check [`county_names()`] function.
 #' @param TERYT county ID (4 characters)
