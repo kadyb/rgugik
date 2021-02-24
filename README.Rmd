@@ -159,6 +159,14 @@ counties_geom = borders_get(TERYT = counties)
 plot(st_geometry(counties_geom), main = "Opolskie")
 ```
 
+### Vignettes
+
+More advanced examples of the practical (step by step) use of this package can be found in the vignettes:
+
+- [Orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html)
+- [Digital Elevation Model](https://kadyb.github.io/rgugik/articles/DEM.html)
+- [Topographic Database](https://kadyb.github.io/rgugik/articles/topodb.html)
+
 ## Acknowledgment
 
 [Head Office of Geodesy and Cartography in Poland](http://www.gugik.gov.pl/) is the main source of the provided data. The data is made available in accordance with the [Act of May 17, 1989 Geodetic and Cartographic Law](http://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19890300163) (amended on 16 April 2020).

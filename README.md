@@ -148,6 +148,17 @@ plot(st_geometry(counties_geom), main = "Opolskie")
 
 <img src="man/figures/README-f2-1.png" width="100%" />
 
+### Vignettes
+
+More advanced examples of the practical (step by step) use of this
+package can be found in the vignettes:
+
+-   [Orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html)
+-   [Digital Elevation
+    Model](https://kadyb.github.io/rgugik/articles/DEM.html)
+-   [Topographic
+    Database](https://kadyb.github.io/rgugik/articles/topodb.html)
+
 ## Acknowledgment
 
 [Head Office of Geodesy and Cartography in
