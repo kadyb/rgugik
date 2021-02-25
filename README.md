@@ -31,13 +31,13 @@ including:
 -   Location (geometry) of cadastral parcels using TERYT (parcel ID) or
     coordinates
 -   3D models of buildings (LOD1, LOD2)
--   Various Digital Elevation Models as:
-    -   [Digital Terrain
-        Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
-    -   [Digital Surface
-        Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
+-   Various digital elevation models as:
+    -   [Digital terrain
+        model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
+    -   [Digital surface
+        model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
     -   [Point
-        Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
+        cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
 
 It is also possible to geocode addresses or objects using the
 `geocodePL_get()` function.
@@ -54,9 +54,9 @@ It is also possible to geocode addresses or objects using the
 | `borders_get()`, `borders_download()` | type                   | State Register of Borders                | Państwowy Rejestr Granic                  |
 | `parcel_get()`                        | parcel ID, coordinates | Location of cadastral parcels            | Lokalizacja działek katastralnych         |
 | `models3D_download()`                 | county                 | 3D models of buildings                   | Modele 3D budynków                        |
-| `DEM_request()`, `tile_download()`    | polygon                | Digital Elevation Models                 | Cyfrowe Modele Wysokościowe               |
+| `DEM_request()`, `tile_download()`    | polygon                | Digital elevation models                 | Cyfrowe Modele Wysokościowe               |
 
-There are the additional functions for obtaining Digital Terrain Model:
+There are the additional functions for obtaining digital terrain model:
 
 -   `pointDTM_get()` for small areas (high resolution grid)
 -   `pointDTM100_download()` for voivodeships areas (low resolution
@@ -154,8 +154,8 @@ More advanced examples of the practical (step by step) use of this
 package can be found in the vignettes:
 
 -   [Orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html)
--   [Digital Elevation
-    Model](https://kadyb.github.io/rgugik/articles/DEM.html)
+-   [Digital elevation
+    model](https://kadyb.github.io/rgugik/articles/DEM.html)
 -   [Topographic
     Database](https://kadyb.github.io/rgugik/articles/topodb.html)
 

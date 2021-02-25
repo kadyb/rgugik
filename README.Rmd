@@ -32,10 +32,10 @@ knitr::opts_chunk$set(
   - [State Register of Borders](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)
-  - Various Digital Elevation Models as:
-    - [Digital Terrain Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
-    - [Digital Surface Model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
-    - [Point Cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
+  - Various digital elevation models as:
+    - [Digital terrain model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
+    - [Digital surface model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
+    - [Point cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
 
 It is also possible to geocode addresses or objects using the `geocodePL_get()` function.
 
@@ -60,7 +60,7 @@ ds_en = c("Orthophotomap",
           "State Register of Borders",
           "Location of cadastral parcels",
           "3D models of buildings",
-          "Digital Elevation Models")
+          "Digital elevation models")
 
 fun = c("`ortho_request()`, `tile_download()`",
         "`geodb_download()`",
@@ -88,7 +88,7 @@ colnames(df) = c("Function", "Input", "Dastaset EN", "Dataset PL")
 knitr::kable(df)
 ```
 
-There are the additional functions for obtaining Digital Terrain Model:
+There are the additional functions for obtaining digital terrain model:
 
   - `pointDTM_get()` for small areas (high resolution grid)
   - `pointDTM100_download()` for voivodeships areas (low resolution grid)
@@ -164,7 +164,7 @@ plot(st_geometry(counties_geom), main = "Opolskie")
 More advanced examples of the practical (step by step) use of this package can be found in the vignettes:
 
 - [Orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html)
-- [Digital Elevation Model](https://kadyb.github.io/rgugik/articles/DEM.html)
+- [Digital elevation model](https://kadyb.github.io/rgugik/articles/DEM.html)
 - [Topographic Database](https://kadyb.github.io/rgugik/articles/topodb.html)
 
 ## Acknowledgment
