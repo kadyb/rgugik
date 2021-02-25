@@ -10,7 +10,7 @@
 #' (logical, FALSE default)
 #' @param print_iter print the current iteration of all
 #' (logical, TRUE default)
-#' @param ... additional argument for [`utils::download.file()`]
+#' @param ... additional argument for [`curl::curl_download()`]
 #'
 #' @return georeferenced tiles with properties (resolution, year, etc.)
 #' as specified in the input data frame
@@ -61,7 +61,7 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
     }
 
     filepath = paste0(outdir, "/", basenames[i])
-    status = tryGet(utils::download.file(df_req[i, "URL"], filepath, mode = "wb", ...))
+    status = tryGet(curl::curl_download(df_req[i, "URL"], filepath, mode = "wb", ...))
 
     if (any(status %in% c("error", "warning"))) {
       return("connection error")

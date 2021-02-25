@@ -16,7 +16,7 @@ by default, files are saved in the working directory}
 \item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will
 be extracted and removed}
 
-\item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
+\item{...}{additional argument for \code{\link[curl:curl_download]{curl::curl_download()}}}
 }
 \value{
 text files with X, Y, Z columns (EPSG:2180)
@@ -26,7 +26,7 @@ Download Digital Terrain Models for voivodeships (100 m resolution)
 }
 \examples{
 \dontrun{
-pointDTM100_download(c("opolskie", "Ĺ›wiÄ™tokrzyskie")) # 8.5 MB
+pointDTM100_download(c("opolskie", "świętokrzyskie")) # 8.5 MB
 pointDTM100_download(c("Opole", "Swietokrzyskie")) # 8.5 MB
 pointDTM100_download(c("16", "26")) # 8.5 MB
 }

@@ -17,7 +17,7 @@ by default, files are saved in the working directory}
 \item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will
 be extracted and removed}
 
-\item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
+\item{...}{additional argument for \code{\link[curl:curl_download]{curl::curl_download()}}}
 }
 \value{
 a database in Geography Markup Language format (.GML),
@@ -29,7 +29,7 @@ Download Topographic Databases for counties
 }
 \examples{
 \dontrun{
-topodb_download(county = "ĹšwiÄ™tochĹ‚owice") # 2.4 MB
+topodb_download(county = "Świętochłowice") # 2.4 MB
 topodb_download(TERYT = c("2476", "2264")) # 4.8 MB
 }
 }

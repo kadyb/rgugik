@@ -29,7 +29,7 @@ by default, files are saved in the working directory}
 \item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will
 be extracted and removed}
 
-\item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
+\item{...}{additional argument for \code{\link[curl:curl_download]{curl::curl_download()}}}
 }
 \value{
 models of buildings in Geography Markup Language format (.GML)
@@ -40,6 +40,6 @@ Download 3D models of buildings for counties
 \examples{
 \dontrun{
 models3D_download(TERYT = c("2476", "2264")) # 3.6 MB
-models3D_download(county = "sejneĹ„ski", LOD = "LOD2") # 7.0 MB
+models3D_download(county = "sejneński", LOD = "LOD2") # 7.0 MB
 }
 }

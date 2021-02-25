@@ -6,7 +6,7 @@
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
 #' be extracted and removed
-#' @param ... additional argument for [`utils::download.file()`]
+#' @param ... additional argument for [`curl::curl_download()`]
 #'
 #' @return a register in SHP format
 #'
@@ -58,7 +58,7 @@ emuia_download = function(commune = NULL, TERYT = NULL, outdir = ".",
 
   for (i in seq_len(nrow(df_names))) {
     filename = paste0(outdir, "/", df_names[i, "TERYT"], ".zip")
-    status = tryGet(utils::download.file(df_names[i, "URL"], filename, mode = "wb", ...))
+    status = tryGet(curl::curl_download(df_names[i, "URL"], filename, mode = "wb", ...))
 
     if (any(status %in% c("error", "warning"))) {
       return("connection error")
