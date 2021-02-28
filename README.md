@@ -54,7 +54,7 @@ It is also possible to geocode addresses or objects using the
 | `borders_get()`, `borders_download()` | type                   | State Register of Borders                | Państwowy Rejestr Granic                  |
 | `parcel_get()`                        | parcel ID, coordinates | Location of cadastral parcels            | Lokalizacja działek katastralnych         |
 | `models3D_download()`                 | county                 | 3D models of buildings                   | Modele 3D budynków                        |
-| `DEM_request()`, `tile_download()`    | polygon                | Digital elevation models                 | Cyfrowe Modele Wysokościowe               |
+| `DEM_request()`, `tile_download()`    | polygon                | Digital elevation models                 | Cyfrowe modele wysokościowe               |
 
 There are the additional functions for obtaining digital terrain model:
 

@@ -50,7 +50,7 @@ ds_pl = c("Ortofotomapa",
           "Państwowy Rejestr Granic",
           "Lokalizacja działek katastralnych",
           "Modele 3D budynków",
-          "Cyfrowe Modele Wysokościowe")
+          "Cyfrowe modele wysokościowe")
 
 ds_en = c("Orthophotomap",
           "General Geographic Database",
