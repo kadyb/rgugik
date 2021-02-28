@@ -170,7 +170,7 @@ body {text-align: justify}
 <p>The results are given in meters - let’s convert them into kilometers.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># convert to [km]</span>
-<span class="va">length_roads</span><span class="op">$</span><span class="va">length</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span><span class="op">(</span><span class="va">length_roads</span><span class="op">$</span><span class="va">length</span>, <span class="st">"km"</span><span class="op">)</span></code></pre></div>
+<span class="va">length_roads</span><span class="op">$</span><span class="va">length</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="va">length_roads</span><span class="op">$</span><span class="va">length</span>, <span class="st">"km"</span><span class="op">)</span></code></pre></div>
 <p>Let’s also change the names of the categories.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">road_class</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"communal"</span>, <span class="st">"other"</span>, <span class="st">"national"</span>, <span class="st">"county"</span>, <span class="st">"voivodeship"</span>,
@@ -193,9 +193,9 @@ body {text-align: justify}
 <p>The result is about 3328.285 km. Another aspect of the data that we can investigate is the density of the road network. We need to calculate the total area first, and then divide the total road length by the total area.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">communes_area</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html">st_area</a></span><span class="op">(</span><span class="va">communes</span><span class="op">)</span><span class="op">)</span>
-<span class="va">communes_area</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span><span class="op">(</span><span class="va">communes_area</span>, <span class="st">"km2"</span><span class="op">)</span>
+<span class="va">communes_area</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="va">communes_area</span>, <span class="st">"km2"</span><span class="op">)</span>
 <span class="va">density</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">length_roads</span><span class="op">$</span><span class="va">length</span><span class="op">)</span><span class="op">/</span><span class="va">communes_area</span>
-<span class="va">density</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span><span class="op">(</span><span class="va">density</span>, <span class="st">"km/km2"</span><span class="op">)</span>
+<span class="va">density</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="va">density</span>, <span class="st">"km/km2"</span><span class="op">)</span>
 <span class="va">density</span></code></pre></div>
 <pre><code>## 2.921031 [km/km2]</code></pre>
 <p>The road density is about 2.92 km/km<sup>2</sup>.</p>
@@ -268,8 +268,8 @@ body {text-align: justify}
 <span class="co"># sum areas for each layer</span>
 <span class="va">area_landcover</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">area_landcover</span>, <span class="va">sum</span><span class="op">)</span>
 <span class="co"># convert units</span>
-<span class="va">area_landcover</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span><span class="op">(</span><span class="va">area_landcover</span>, <span class="st">"m^2"</span><span class="op">)</span>
-<span class="va">area_landcover</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/set_units.html">set_units</a></span><span class="op">(</span><span class="va">area_landcover</span>, <span class="st">"km^2"</span><span class="op">)</span>
+<span class="va">area_landcover</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="va">area_landcover</span>, <span class="st">"m^2"</span><span class="op">)</span>
+<span class="va">area_landcover</span> <span class="op">=</span> <span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html">set_units</a></span><span class="op">(</span><span class="va">area_landcover</span>, <span class="st">"km^2"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">area_landcover</span><span class="op">)</span> <span class="op">=</span> <span class="va">layer_names</span></code></pre></div>
 <p>Let’s see the results (in kilometers).</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
