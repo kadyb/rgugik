@@ -1,9 +1,9 @@
-#' @title Get metadata and links to available Digital Elevation Models
+#' @title Get metadata and links to available digital elevation models
 #'
 #' @param polygon the polygon layer (may consist of n objects)
 #'
-#' @return a data frame with metadata and links to the Digital Elevation Models
-#' (different formats of Digital Terrain Model, Digital Surface Model and
+#' @return a data frame with metadata and links to the digital elevation models
+#' (different formats of digital terrain model, digital surface model and
 #' point clouds)
 #'
 #' @export

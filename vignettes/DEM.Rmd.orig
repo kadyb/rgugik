@@ -1,9 +1,9 @@
 ---
-title: "Digital Elevation Model"
+title: "Digital elevation model"
 author: "Krzysztof Dyba, Jakub Nowosad"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Digital Elevation Model}
+  %\VignetteIndexEntry{Digital elevation model}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -18,15 +18,15 @@ body {text-align: justify}
 
 ## Definition
 
-**Digital Elevation Models** are models describing the terrain surface.
+**Digital elevation models** are models describing the terrain surface.
 They are created as a result of the processing of aerial photos, laser scanning (LiDAR), geodetic surveying, or radar interferometry (InSAR).
 DEMs are one of the key datasets in Geographic Information Systems (GIS) and constitute the basis for many environmental spatial analyses.
 In addition, they are a source for derived products such as terrain slope and aspect.
 DEM is the general name for a group of models with different characteristics, including:
 
-1. **Digital Terrain Model** (DTM) - numerical representation of the terrain with its morphological forms.
+1. **Digital terrain model** (DTM) - numerical representation of the terrain with its morphological forms.
 This model is devoid of any objects above the ground, such as buildings or trees.
-2. **Digital Surface Model** (DSM) - numerical representation of the terrain, including objects on its surface, such as buildings and trees.
+2. **Digital surface model** (DSM) - numerical representation of the terrain, including objects on its surface, such as buildings and trees.
 
 <center>
 ![DTM-DSM](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/DTM_DSM.svg/1024px-DTM_DSM.svg.png){ width=50% }
@@ -114,7 +114,7 @@ req_df[1:10, 1:5]
 ```
 
 We have received metadata with many types of data of different formats, timeliness, resolution, and accuracy.
-For our analysis, we need Digital Terrain Model (DTM) and Digital Surface Model (DSM) in the "ARC/INFO ASCII GRID" format.
+For our analysis, we need digital terrain model (DTM) and digital surface model (DSM) in the "ARC/INFO ASCII GRID" format.
 Let's make data selection by creating two tables and combining them together.
 
 ```{r}
@@ -241,7 +241,7 @@ colnames(elev_line) = c("DTM", "DSM")
 Now we can see how our transverse profile looks like.
 
 ```{r PROFILE}
-plot(elev_line[, "DTM"], type = "l", main = "Digital Terrain Model",
+plot(elev_line[, "DTM"], type = "l", main = "Digital terrain model",
      ylab = "Elevation [m]", xlab = "Distance [m]", col = "red")
 abline(v = c(126, 219), col = "blue")
 ```

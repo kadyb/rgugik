@@ -19,7 +19,7 @@ body {text-align: justify}
 ## Definition
 
 **Orthophotomap** is a raster, orthogonal and cartometric representation of the terrain surface created by digital processing of aerial or satellite images.
-During the orthorectification, geometric distortions resulting from the land relief are removed by using Digital Elevation Models (DEM).
+During the orthorectification, geometric distortions resulting from the land relief are removed by using digital elevation models (DEM).
 An orthophotomap is georeferenced, and therefore, allows to determine geographic coordinates for each of its cells.
 
 Orthophotomaps' properties:
