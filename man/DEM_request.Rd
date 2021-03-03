@@ -2,7 +2,7 @@
 % Please edit documentation in R/DEM_request.R
 \name{DEM_request}
 \alias{DEM_request}
-\title{Get metadata and links to available Digital Elevation Models}
+\title{Get metadata and links to available digital elevation models}
 \usage{
 DEM_request(polygon)
 }
@@ -10,12 +10,12 @@ DEM_request(polygon)
 \item{polygon}{the polygon layer (may consist of n objects)}
 }
 \value{
-a data frame with metadata and links to the Digital Elevation Models
-(different formats of Digital Terrain Model, Digital Surface Model and
+a data frame with metadata and links to the digital elevation models
+(different formats of digital terrain model, digital surface model and
 point clouds)
 }
 \description{
-Get metadata and links to available Digital Elevation Models
+Get metadata and links to available digital elevation models
 }
 \examples{
 \dontrun{
