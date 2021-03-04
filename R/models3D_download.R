@@ -78,7 +78,7 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1",
     status = tryGet(utils::download.file(prepared_URL, filename, mode = "wb", ...))
 
     if (any(status %in% c("error", "warning"))) {
-      return("connection error")
+      return(err_print())
     }
 
     if (unzip) {
