@@ -64,7 +64,7 @@ pointDTM100_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
     status = tryGet(utils::download.file(df_names[i, "URL"], filename, mode = "wb", ...))
 
     if (any(status %in% c("error", "warning"))) {
-      return("connection error")
+      return(err_print())
     }
 
     if (unzip) {
