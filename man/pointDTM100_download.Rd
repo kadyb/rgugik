@@ -26,7 +26,7 @@ Download digital terrain models for voivodeships (100 m resolution)
 }
 \examples{
 \dontrun{
-pointDTM100_download(c("opolskie", "Ĺ›wiÄ™tokrzyskie")) # 8.5 MB
+pointDTM100_download(c("opolskie", "świętokrzyskie")) # 8.5 MB
 pointDTM100_download(c("Opole", "Swietokrzyskie")) # 8.5 MB
 pointDTM100_download(c("16", "26")) # 8.5 MB
 }
