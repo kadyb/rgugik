@@ -17,7 +17,7 @@ authors:
 affiliations:
  - name: Institute of Geoecology and Geoinformation, Adam Mickiewicz University in Poznań
    index: 1
-date: 2 December 2020
+date: 4 March 2021
 bibliography: paper.bib
 ---
 
