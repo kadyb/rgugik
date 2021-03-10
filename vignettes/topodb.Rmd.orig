@@ -55,6 +55,12 @@ We start by downloading the topographic database for our county using the `topod
 topodb_download("bieszczadzki", outdir = "./data")
 ```
 
+If you run into any problem with the download, remember that you can pass another download method from `download.file()` as a function argument.
+
+```{r eval=FALSE}
+topodb_download(req_df, outdir = "./data", method = "wget")
+```
+
 The downloaded database consists of many files in the *GML* format.
 All the data necessary for analyzes can be found in the `data/PL.PZGiK.332.1801/BDOT10k/` location.
 A brief description of the structure of this database can be found [here](https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html).

@@ -137,6 +137,12 @@ Now we can download the data using the `tile_download()` function with our filte
 tile_download(req_df, outdir = "./data")
 ```
 
+If you run into any problem with the download, remember that you can pass another download method from `download.file()` as a function argument.
+
+```{r eval=FALSE}
+tile_download(req_df, outdir = "./data", method = "wget")
+```
+
 ### Processing
 
 Let’s load the downloaded numerical models using the `read_stars()` function from the **stars** package, which allows working on spatiotemporal arrays.
