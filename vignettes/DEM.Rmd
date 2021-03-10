@@ -58,10 +58,6 @@ library(stars)
 library(rgugik)
 ```
 
-```
-## Warning: package 'rgugik' was built under R version 4.0.4
-```
-
 Our analysis area is the Morasko Meteorite nature reserve located in the Greater Poland voivodeship.
 It was established in 1976 in order to protect the area of impact craters, which, according to researchers, were formed in the fall of the Morasko meteorite about 5,000 years ago.
 In addition, the oak-hornbeam forest with rare species of plants (*lilium martagon*, *ceratophyllum submersum*) and birds (*european nightjar*, *black woodpecker*) is protected.
