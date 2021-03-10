@@ -308,6 +308,7 @@ Now we can see how our transverse profile looks like.
 
 
 ```r
+# use 'dev.off()' to reset previous plot
 plot(elev_line[, "DTM"], type = "l", main = "Digital terrain model",
      ylab = "Elevation [m]", xlab = "Distance [m]", col = "red")
 abline(v = c(126, 219), col = "blue")

@@ -201,6 +201,7 @@ We get 81 such points.
 Let's plot them.
 
 ```{r bridges}
+# use 'dev.off()' to reset previous plot
 plot(st_geometry(rivers), main = "Bridges and crossings", col = "blue")
 plot(st_geometry(territory), add = TRUE)
 plot(bridges, add = TRUE, pch = 20)

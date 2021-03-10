@@ -245,6 +245,7 @@ Let's plot them.
 
 
 ```r
+# use 'dev.off()' to reset previous plot
 plot(st_geometry(rivers), main = "Bridges and crossings", col = "blue")
 plot(st_geometry(territory), add = TRUE)
 plot(bridges, add = TRUE, pch = 20)
@@ -273,12 +274,18 @@ basename(files)
 ```
 
 ```
-##  [1] "PL.PZGiK.332.1801__OT_PTGN_A.xml" "PL.PZGiK.332.1801__OT_PTKM_A.xml"
-##  [3] "PL.PZGiK.332.1801__OT_PTLZ_A.xml" "PL.PZGiK.332.1801__OT_PTNZ_A.xml"
-##  [5] "PL.PZGiK.332.1801__OT_PTPL_A.xml" "PL.PZGiK.332.1801__OT_PTRK_A.xml"
-##  [7] "PL.PZGiK.332.1801__OT_PTSO_A.xml" "PL.PZGiK.332.1801__OT_PTTR_A.xml"
-##  [9] "PL.PZGiK.332.1801__OT_PTUT_A.xml" "PL.PZGiK.332.1801__OT_PTWP_A.xml"
-## [11] "PL.PZGiK.332.1801__OT_PTWZ_A.xml" "PL.PZGiK.332.1801__OT_PTZB_A.xml"
+##  [1] "PL.PZGiK.332.1801__OT_PTGN_A.xml"
+##  [2] "PL.PZGiK.332.1801__OT_PTKM_A.xml"
+##  [3] "PL.PZGiK.332.1801__OT_PTLZ_A.xml"
+##  [4] "PL.PZGiK.332.1801__OT_PTNZ_A.xml"
+##  [5] "PL.PZGiK.332.1801__OT_PTPL_A.xml"
+##  [6] "PL.PZGiK.332.1801__OT_PTRK_A.xml"
+##  [7] "PL.PZGiK.332.1801__OT_PTSO_A.xml"
+##  [8] "PL.PZGiK.332.1801__OT_PTTR_A.xml"
+##  [9] "PL.PZGiK.332.1801__OT_PTUT_A.xml"
+## [10] "PL.PZGiK.332.1801__OT_PTWP_A.xml"
+## [11] "PL.PZGiK.332.1801__OT_PTWZ_A.xml"
+## [12] "PL.PZGiK.332.1801__OT_PTZB_A.xml"
 ```
 
 We also can exclude "PL.PZGiK.332.1801__OT_PTSO_A.xml" file from the list, because this file contains zero objects (features).
