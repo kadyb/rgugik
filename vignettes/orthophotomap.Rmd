@@ -143,10 +143,6 @@ We need to provide our Krajkowo polygon as the argument of this function.
 req_df = ortho_request(krajkowo)
 ```
 
-```
-## Error in ortho_request(krajkowo): could not find function "ortho_request"
-```
-
 We can display the resulting table using the code below.
 
 
@@ -156,7 +152,17 @@ req_df[1:10, 1:6]
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'req_df' not found
+##             sheetID year resolution composition  sensor     CRS
+## 1  N-33-142-B-d-4-2 2004       0.50         B/W  Analog PL-1992
+## 2  N-33-142-B-d-4-4 2004       0.50         B/W  Analog PL-1992
+## 3  N-33-142-B-d-4-4 2010       0.25         RGB Digital PL-1992
+## 4  N-33-142-B-d-4-2 2010       0.25         RGB Digital PL-1992
+## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992
+## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992
+## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992
+## 8  N-33-142-B-d-4-2 2016       0.25         RGB Digital PL-1992
+## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992
+## 10 N-33-142-B-d-4-4 2016       0.25         RGB Digital PL-1992
 ```
 
 To complete our task, we need to obtain a near infrared data.
@@ -168,19 +174,11 @@ So in the next step, we select those rows for which the `composition` column has
 req_df = req_df[req_df$composition == "CIR", ]
 ```
 
-```
-## Error in eval(expr, envir, enclos): object 'req_df' not found
-```
-
 Then let's sort the table according to the year the photo was taken, with the most recent images at the top of the table.
 
 
 ```r
 req_df = req_df[order(-req_df$year), ]
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'req_df' not found
 ```
 
 Let's display the table again and select the newest compositions.
@@ -191,16 +189,18 @@ req_df[, c(1:5, 9)]
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'req_df' not found
+##             sheetID year resolution composition  sensor seriesID
+## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
+## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837
+## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital    69903
+## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital    69903
+## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital    69763
+## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital    69763
 ```
 
 
 ```r
 req_df = req_df[req_df$year == 2016, ]
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'req_df' not found
 ```
 
 Note that the result has a pair of objects (images).
@@ -213,7 +213,9 @@ req_df[, c(1:5, 9)]
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'req_df' not found
+##            sheetID year resolution composition  sensor seriesID
+## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837
+## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837
 ```
 
 The `tile_download()` function is used to download orthophotomaps by taking our selected table as the main argument.
@@ -226,7 +228,8 @@ tile_download(req_df, outdir = "./data")
 ```
 
 ```
-## Error in "URL" %in% names(df_req): object 'req_df' not found
+## 1/2
+## 2/2
 ```
 
 ### Processing
@@ -238,26 +241,7 @@ We don't need to load the entire data array into memory - we can read the file's
 
 ```r
 img1 = read_stars("data/69837_329609_N-33-142-B-d-4-2.TIF", proxy = TRUE)
-```
-
-```
-## trying to read file: C:\Users\Krzysztof\Desktop\rgugik-master\vignettes\data\69837_329609_N-33-142-B-d-4-2.TIF
-```
-
-```
-## Error in CPL_read_gdal(as.character(x), as.character(options), as.character(driver), : file not found
-```
-
-```r
 img2 = read_stars("data/69837_329613_N-33-142-B-d-4-4.TIF", proxy = TRUE)
-```
-
-```
-## trying to read file: C:\Users\Krzysztof\Desktop\rgugik-master\vignettes\data\69837_329613_N-33-142-B-d-4-4.TIF
-```
-
-```
-## Error in CPL_read_gdal(as.character(x), as.character(options), as.character(driver), : file not found
 ```
 
 Now we can perform two operations: rasters merging and cropping to the reserve area.
@@ -268,26 +252,8 @@ It should be EPSG 2180 in this case.
 
 ```r
 img = st_mosaic(img1, img2)
-```
-
-```
-## Error in st_mosaic(img1, img2): object 'img1' not found
-```
-
-```r
 st_crs(img) = 2180 # overwrite CRS to be sure
-```
-
-```
-## Error in st_crs(img) = 2180: object 'img' not found
-```
-
-```r
 img = st_crop(img, krajkowo)
-```
-
-```
-## Error in st_crop(img, krajkowo): object 'img' not found
 ```
 
 
@@ -301,9 +267,7 @@ The composition below is shown in infrared, not in natural colors, which may be 
 plot(img, rgb = c(1, 2, 3), main = NULL)
 ```
 
-```
-## Error in plot(img, rgb = c(1, 2, 3), main = NULL): object 'img' not found
-```
+![](orto-CIR-1.png)
 
 In the last step, we calculate the NDVI using the near infrared (1) and red (2) bands.
 
@@ -311,19 +275,10 @@ In the last step, we calculate the NDVI using the near infrared (1) and red (2) 
 ```r
 calc_ndvi = function(img) (img[1] - img[2]) / (img[1] + img[2])
 ndvi = st_apply(img, MARGIN = c("x", "y"), FUN = calc_ndvi)
-```
-
-```
-## Error in st_apply(img, MARGIN = c("x", "y"), FUN = calc_ndvi): object 'img' not found
-```
-
-```r
 plot(ndvi, main = "NDVI", col = hcl.colors(10, palette = "RdYlGn"))
 ```
 
-```
-## Error in plot(ndvi, main = "NDVI", col = hcl.colors(10, palette = "RdYlGn")): object 'ndvi' not found
-```
+![](orto-NDVI-1.png)
 
 A surprising observation is the relatively low NDVI values for the forest area.
 There are two reasons for this, i.e. the photos are taken in mid-March (before the start of the growing season) and probably have not been calibrated.
