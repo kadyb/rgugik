@@ -24,7 +24,7 @@ bibliography: paper.bib
 # Introduction
 
 Currently, the open data market size is estimated at about 185 billion Euros in the European Union and is expected to grow in the coming years [@huyer2020economic].
-It includes spatial data that can cause cost savings and create new, innovative products and services for the benefit of the society, environment, and economy.
+It includes spatial data that can result in cost savings and create new, innovative products and services for the benefit of the society, environment, and economy.
 The public sector is one of the primary providers of vast amounts of valuable spatial data resources.
 
 [The Head Office of Geodesy and Cartography](http://www.gugik.gov.pl/) (*Główny Urząd Geodezji i Kartografii*, *GUGiK*) is the central government agency responsible for collecting spatial data in Poland.
@@ -32,7 +32,7 @@ Their resources include various datasets, such as orthophotomaps, register of bo
 Until July 31, 2020, spatial data acquisition was time-consuming, required filling-in forms, and paying a fee.
 However, the recent amendment of the Geodetic and Cartographic Law in Poland in mid-2020 made all of the current and future spatial datasets publicly available.
 
-Poland's spatial data is released on a dedicated website, [Geoportal](https://mapy.geoportal.gov.pl), which allows to browse and download it.
+Poland's spatial data is released on a dedicated website, [Geoportal](https://mapy.geoportal.gov.pl), which allows it to be browsed and download it.
 The Geoportal is one of the most popular government websites in the country, currently ranked 3rd with 5.5 million unique visits in 2020^[https://widok.gov.pl/statistics/].
 Although the data is related to Poland's area only, visits from other countries can also be noted (e.g., Germany with 52,000, Great Britain with 40,000, and United States with 15,000 unique visits this year)^[https://widok.gov.pl/statistics/geoportal-krajowy/].
 In the first month after the change of law, 69 TB of data was downloaded^[http://www.gugik.gov.pl/aktualnosci/2021/03.09.2020-sierpniowe-statystyki-pobierania-uwolnionych-danych-przestrzennych], and by the end of October, this value grew to over 240 TB^[http://www.gugik.gov.pl/aktualnosci/03.11.2020-statystyka-pobierania-danych-w-pazdzierniku].
@@ -79,12 +79,12 @@ Table: A list of datasets from *GUGiK* supported by the **rgugik** package. \lab
 
 **rgugik** uses `jsonlite` [@jsonlite-lib] for parsing JSON to R objects and `sf` [@sf-lib] for processing spatial data in a user-friendly way.
 The package is released under the [MIT open-source license](https://github.com/kadyb/rgugik/blob/master/LICENSE.md) and can be directly installed from [CRAN](https://cran.r-project.org/web/packages/rgugik/index.html), or from GitHub using the `remotes` [@remotes-lib] package.
-This package's source code is thoroughly tested, with about 87% lines of the code executed using automated tests.
+This package's source code is thoroughly tested, with about 89% lines of the code executed using automated tests.
 The package also has an associated website at [https://kadyb.github.io/rgugik](https://kadyb.github.io/rgugik/), which contains installation instructions and three articles presenting different use cases of downloading and processing of orthophotomaps, digital elevation models, and topographic databases.
 
 Three other products aimed at downloading data from *GUGiK* were recently developed — QGIS plugins by the [EnviroSolutions](https://github.com/envirosolutionspl?tab=repositories) and by [GIS Support](https://github.com/gis-support/gis-support-plugin) companies, and a commercial, general data acquisition purpose product made by [Globema](https://fme.globema.com/).
 However, all of them have certain limitations and offer a smaller subset of the *GUGiK* datasets compared to **rgugik**.
-They use graphical user interfaces, which, while can be user-friendly, also make it more laborious to download many files and use the data in reproducible workflows. 
+They use graphical user interfaces, which, while they can be user-friendly, they also make it more laborious to download many files and use the data in reproducible workflows. 
 Moreover, the QGIS plugins are in Polish, restricting potential users to Polish speakers only. 
 
 # Example usage
