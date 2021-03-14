@@ -79,7 +79,7 @@ Table: A list of datasets from *GUGiK* supported by the **rgugik** package. \lab
 
 **rgugik** uses `jsonlite` [@jsonlite-lib] for parsing JSON to R objects and `sf` [@sf-lib] for processing spatial data in a user-friendly way.
 The package is released under the [MIT open-source license](https://github.com/kadyb/rgugik/blob/master/LICENSE.md) and can be directly installed from [CRAN](https://cran.r-project.org/web/packages/rgugik/index.html), or from GitHub using the `remotes` [@remotes-lib] package.
-This package's source code is thoroughly tested, with about 89% lines of the code executed using automated tests.
+This package's source code is thoroughly tested, with about 87% lines of the code executed using automated tests.
 The package also has an associated website at [https://kadyb.github.io/rgugik](https://kadyb.github.io/rgugik/), which contains installation instructions and three articles presenting different use cases of downloading and processing of orthophotomaps, digital elevation models, and topographic databases.
 
 Three other products aimed at downloading data from *GUGiK* were recently developed — QGIS plugins by the [EnviroSolutions](https://github.com/envirosolutionspl?tab=repositories) and by [GIS Support](https://github.com/gis-support/gis-support-plugin) companies, and a commercial, general data acquisition purpose product made by [Globema](https://fme.globema.com/).
