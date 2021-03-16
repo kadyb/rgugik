@@ -32,10 +32,10 @@ Their resources include various datasets, such as orthophotomaps, register of bo
 Until July 31, 2020, spatial data acquisition was time-consuming, required filling-in forms, and paying a fee.
 However, the recent amendment of the Geodetic and Cartographic Law in Poland in mid-2020 made all of the current and future spatial datasets publicly available.
 
-Poland's spatial data is released on a dedicated website, [Geoportal](https://mapy.geoportal.gov.pl), which allows it to be browsed and download it.
-The Geoportal is one of the most popular government websites in the country, currently ranked 3rd with 5.5 million unique visits in 2020^[https://widok.gov.pl/statistics/].
-Although the data is related to Poland's area only, visits from other countries can also be noted (e.g., Germany with 52,000, Great Britain with 40,000, and United States with 15,000 unique visits this year)^[https://widok.gov.pl/statistics/geoportal-krajowy/].
-In the first month after the change of law, 69 TB of data was downloaded^[http://www.gugik.gov.pl/aktualnosci/2021/03.09.2020-sierpniowe-statystyki-pobierania-uwolnionych-danych-przestrzennych], and by the end of October, this value grew to over 240 TB^[http://www.gugik.gov.pl/aktualnosci/03.11.2020-statystyka-pobierania-danych-w-pazdzierniku].
+Poland's spatial data is released on a dedicated website, [Geoportal](https://mapy.geoportal.gov.pl), which allows it to be browsed and downloaded.
+The Geoportal is one of the most popular government websites in the country, currently ranked 3rd with [5.5 million unique visits in 2020](https://widok.gov.pl/statistics/).
+Although the data is related to Poland's area only, it is a [popular resource for many other countries](https://widok.gov.pl/statistics/geoportal-krajowy/) (e.g., Germany with 52,000, Great Britain with 40,000, and United States with 15,000 unique visits this year).
+In the first month after the change of law, [69 TB of data was downloaded](http://www.gugik.gov.pl/aktualnosci/2021/03.09.2020-sierpniowe-statystyki-pobierania-uwolnionych-danych-przestrzennych), and by the end of October, this value [grew to over 240 TB](http://www.gugik.gov.pl/aktualnosci/03.11.2020-statystyka-pobierania-danych-w-pazdzierniku).
 
 # Statement of need
 
@@ -43,19 +43,20 @@ While the Geoportal gives access to some of the *GUGiK* data resources, it has s
 Datasets can only be downloaded individually and manually, limiting their practical use for studies over large areas or for many points in time.
 It is also problematic for the reproducible research process.
 Additionally, some *GUGiK* data is located on other associated websites or in the form of dedicated services, which makes finding and downloading certain datasets more difficult.
-Therefore, there is a need to make all  *GUGiK* data sources available in one place and to automate the data downloading and preprocessing.
+
+Therefore, there is a need to make all *GUGiK* data sources available in one place and to automate the data downloading and preprocessing.
 
 # Summary
 
 **rgugik** is an R package [@r-soft] that attempts to tackle all of the shortcomings listed above by providing consistent tools for searching and retrieving of spatial data from *GUGiK*.
 It integrates multiple data sources (i.e., HTML websites, FTP servers, API services), allows for data search and download, and gives the ability to create reproducible scripts.
-In total, it provided access to ten datasets of various types, such as numeric, vector, and raster [\autoref{table:1}].
+In total, it provided access to ten datasets of various formats, including numeric, vector, and raster [\autoref{table:1}].
 
 The package contains 15 functions, including three functions dedicated exclusively to digital terrain models.
 The functions can be divided into three main groups indicated by their suffixes: 
 
 - `_request()` to obtain metadata and links to the data based on the provided location. 
-It allows to understand what sort of data is available, select only some of the metadata, and use the result as an input in the `_download()` functions.
+Allows users to understand what sort of data is available, select only some of the metadata, and use the result as an input to the `_download()` functions.
 - `_download()` to download the data files to a hard drive and unzip it.
 - `_get()` to retrieve selected spatial datasets as R object of classes, such as *sf*/*data.frame*.
 
@@ -99,7 +100,7 @@ polygon = read_sf("search_area.gpkg")
 The first example shows a search for available digital elevation models based on the input polygon and downloading a selected digital terrain model [\autoref{figure:1}].
 The `DEM_request()` function uses a dedicated API. 
 As a result, a *data.frame* with available data and their metadata is returned.
-The output *data.frame* can be easily filtered and used to download the desired data from FTP.
+The output *data.frame* can be easily filtered and used to download the desired data via FTP.
 
 ```r
 # downloading a metadata of available digital elevation models
