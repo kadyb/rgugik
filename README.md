@@ -11,6 +11,7 @@ status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://
 [![codecov](https://codecov.io/gh/kadyb/rgugik/branch/master/graph/badge.svg)](https://codecov.io/gh/kadyb/rgugik)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.02948/status.svg)](https://doi.org/10.21105/joss.02948)
 <!-- badges: end -->
 
 **rgugik** is an R package for downloading open data from resources of
@@ -182,6 +183,15 @@ document.
 
 Maintainers and contributors must follow this repository’s [CODE OF
 CONDUCT](https://github.com/kadyb/rgugik/blob/master/CODE_OF_CONDUCT.md).
+
+## Citation
+
+To cite **rgugik** in publications, please use the following
+[article](https://doi.org/10.21105/joss.02948):
+
+    Dyba, K. and Nowosad, J. (2021). rgugik: Search and Retrieve Spatial Data from the Polish Head Office of Geodesy and Cartography in R. Journal of Open Source Software, 6(59), 2948, https://doi.org/10.21105/joss.02948
+
+BibTeX version can be obtained with `citation("rgugik")`.
 
 ## Related projects
 
