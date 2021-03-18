@@ -15,6 +15,6 @@ citEntry(
   doi      = "10.21105/joss.02948",
   url      = "https://doi.org/10.21105/joss.02948",
   textVersion = paste(
-    Dyba, K. and Nowosad, J. (2021). rgugik: Search and Retrieve Spatial Data from the Polish Head Office of Geodesy and Cartography in R. Journal of Open Source Software, 6(59), 2948, https://doi.org/10.21105/joss.02948
+    "Dyba, K. and Nowosad, J. (2021). rgugik: Search and Retrieve Spatial Data from the Polish Head Office of Geodesy and Cartography in R. Journal of Open Source Software, 6(59), 2948, https://doi.org/10.21105/joss.02948"
   )
 )
