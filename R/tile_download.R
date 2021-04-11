@@ -64,7 +64,8 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
     status = tryGet(utils::download.file(df_req[i, "URL"], filepath, mode = "wb", ...))
 
     if (any(status %in% c("error", "warning"))) {
-      return(err_print())
+      err_print()
+      return("connection error")
     }
 
     # compare checksums (reference is SHA-1)
