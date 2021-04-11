@@ -4,10 +4,11 @@
 \alias{DEM_request}
 \title{Get metadata and links to available digital elevation models}
 \usage{
-DEM_request(polygon)
+DEM_request(x)
 }
 \arguments{
-\item{polygon}{the polygon layer (may consist of n objects)}
+\item{x}{an sf/sfc object with one or more features (requests are based
+on the bounding boxes of the provided features)}
 }
 \value{
 a data frame with metadata and links to the digital elevation models

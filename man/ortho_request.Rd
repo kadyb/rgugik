@@ -5,12 +5,13 @@
 \alias{orto_request}
 \title{Get metadata and links to available orthoimages}
 \usage{
-ortho_request(polygon)
+ortho_request(x)
 
-orto_request(polygon)
+orto_request(x)
 }
 \arguments{
-\item{polygon}{the polygon layer (may consist of n objects)}
+\item{x}{an sf/sfc object with one or more features (requests are based
+on the bounding boxes of the provided features)}
 }
 \value{
 a data frame with metadata and links to the orthoimages
