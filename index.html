@@ -140,7 +140,7 @@
 <td align="left">
 <code><a href="reference/ortho_request.html">ortho_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
 </td>
-<td align="left">polygon</td>
+<td align="left">geometry</td>
 <td align="left">Orthophotomap</td>
 <td align="left">Ortofotomapa</td>
 </tr>
@@ -192,7 +192,7 @@
 <td align="left">
 <code><a href="reference/DEM_request.html">DEM_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
 </td>
-<td align="left">polygon</td>
+<td align="left">geometry</td>
 <td align="left">Digital elevation models</td>
 <td align="left">Cyfrowe modele wysokościowe</td>
 </tr>
@@ -235,7 +235,7 @@
 <a href="#orthophotomap" class="anchor"></a>Orthophotomap</h3>
 <ul>
 <li>
-<code><a href="reference/ortho_request.html">ortho_request()</a></code> - returns a data frame with metadata and links to the orthoimages in a given polygon</li>
+<code><a href="reference/ortho_request.html">ortho_request()</a></code> - returns a data frame with metadata and links to the orthoimages for a given geometry (point, line or polygon)</li>
 <li>
 <code><a href="reference/tile_download.html">tile_download()</a></code> - downloads orthoimages based on the data frame obtained using the <code><a href="reference/ortho_request.html">ortho_request()</a></code> function</li>
 </ul>
@@ -249,9 +249,12 @@
 
 <span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="reference/ortho_request.html">ortho_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span>
 
-<span class="co"># print metadata of the first image</span>
-<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt;             1                                                                               </span>
+<span class="co"># select the oldest image</span>
+<span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2001</span>, <span class="op">]</span>
+
+<span class="co"># print metadata</span>
+<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">)</span>
+<span class="co">#&gt;             3                                                                               </span>
 <span class="co">#&gt; sheetID     "N-33-130-D-b-2-3"                                                              </span>
 <span class="co">#&gt; year        "2001"                                                                          </span>
 <span class="co">#&gt; resolution  "1"                                                                             </span>
@@ -265,8 +268,8 @@
 <span class="co">#&gt; date        "2001-01-01"                                                                    </span>
 <span class="co">#&gt; filename    "41_3756_N-33-130-D-b-2-3"</span>
 
-<span class="co"># download first image</span>
-<span class="fu"><a href="reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span>
+<span class="co"># download image</span>
+<span class="fu"><a href="reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">)</span>
 <span class="co">#&gt; 1/1</span>
 
 <span class="va">img</span> <span class="op">=</span> <span class="fu">brick</span><span class="op">(</span><span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span><span class="op">)</span>
