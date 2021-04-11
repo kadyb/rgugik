@@ -1,6 +1,7 @@
 #' @title Get metadata and links to available digital elevation models
 #'
-#' @param polygon the polygon layer (may consist of n objects)
+#' @param x an sf/sfc object with one or more features (requests are based
+#' on the bounding boxes of the provided features)
 #'
 #' @return a data frame with metadata and links to the digital elevation models
 #' (different formats of digital terrain model, digital surface model and
@@ -19,9 +20,9 @@
 #' req_df = req_df[req_df$year > 2018, ]
 #' req_df = req_df[req_df$product == "PointCloud" & req_df$format == "LAS", ]
 #' }
-DEM_request = function(polygon) {
+DEM_request = function(x) {
 
-  if (length(sf::st_geometry(polygon)) == 0) {
+  if (length(sf::st_geometry(x)) == 0) {
     stop("no geometries")
   }
 
@@ -30,7 +31,7 @@ DEM_request = function(polygon) {
                     "nazwa_pliku", "idSerie", "sha1", "asortyment")
   selected_cols = paste(selected_cols, collapse = ",")
 
-  epsg = sf::st_crs(polygon)$epsg
+  epsg = sf::st_crs(x)$epsg
 
   # hard coded URL and parameters
   base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/1/query?"
@@ -61,8 +62,8 @@ DEM_request = function(polygon) {
                         asortyment = character()
   )
 
-  for (i in seq_along(sf::st_geometry(polygon))) {
-    bbox = sf::st_bbox(sf::st_geometry(polygon)[[i]])
+  for (i in seq_along(sf::st_geometry(x))) {
+    bbox = sf::st_bbox(sf::st_geometry(x)[[i]])
 
     # user input
     geometry = paste0("geometry={'xmin':", bbox[1], ", 'ymin':", bbox[2], ", ",
