@@ -21,7 +21,7 @@
 #' }
 DEM_request = function(polygon) {
 
-  if (nrow(polygon) == 0) {
+  if (length(sf::st_geometry(polygon)) == 0) {
     stop("no geometries")
   }
 
@@ -61,7 +61,7 @@ DEM_request = function(polygon) {
                         asortyment = character()
   )
 
-  for (i in seq_len(nrow(polygon))) {
+  for (i in seq_along(sf::st_geometry(polygon))) {
     bbox = sf::st_bbox(sf::st_geometry(polygon)[[i]])
 
     # user input
