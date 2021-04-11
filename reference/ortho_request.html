@@ -140,16 +140,17 @@
     <p>Get metadata and links to available orthoimages</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ortho_request</span><span class='op'>(</span><span class='va'>polygon</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>ortho_request</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
-<span class='fu'>orto_request</span><span class='op'>(</span><span class='va'>polygon</span><span class='op'>)</span></pre>
+<span class='fu'>orto_request</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>polygon</th>
-      <td><p>the polygon layer (may consist of n objects)</p></td>
+      <th>x</th>
+      <td><p>an sf/sfc object with one or more features (requests are based
+on the bounding boxes of the provided features)</p></td>
     </tr>
     </table>
 
