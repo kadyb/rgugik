@@ -149,10 +149,10 @@ Wikimedia Commons, the free media repository, <a href="https://commons.wikimedia
 <span class="va">morasko</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html">st_sfc</a></span><span class="op">(</span><span class="va">morasko</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span> <span class="co"># set coordinate system</span>
 <span class="va">morasko</span></code></pre></div>
 <pre><code>## Geometry set for 1 feature 
-## geometry type:  POINT
-## dimension:      XY
-## bbox:           xmin: 16.895 ymin: 52.489 xmax: 16.895 ymax: 52.489
-## geographic CRS: WGS 84</code></pre>
+## Geometry type: POINT
+## Dimension:     XY
+## Bounding box:  xmin: 16.895 ymin: 52.489 xmax: 16.895 ymax: 52.489
+## Geodetic CRS:  WGS 84</code></pre>
 <pre><code>## POINT (16.895 52.489)</code></pre>
 <p>Now our point is embedded in space (has a spatial reference). In the next step, let’s create an approximate zone that will include the area of the reserve. The function <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_buffer()</a></code> will be used for this. Before this operation, we need to transform the coordinate system to a system with metric units, e.g. Poland CS92 (EPSG 2180), using <code><a href="https://r-spatial.github.io/sf/reference/st_transform.html">st_transform()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -168,25 +168,24 @@ Wikimedia Commons, the free media repository, <a href="https://commons.wikimedia
 <div id="raster-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#raster-data" class="anchor"></a>Raster data</h3>
-<p>Now we can search for available elevation data for this area using the <code><a href="../reference/DEM_request.html">DEM_request()</a></code> function (it is analogous to the <code><a href="../reference/ortho_request.html">ortho_request()</a></code> function). The only argument of the function is our reserve buffer. Note that <code><a href="../reference/DEM_request.html">DEM_request()</a></code> takes data frame as input, and currently the <code>morasko_buffer</code> object is a list, so we need to convert it first.</p>
+<p>Now we can search for available elevation data for this area using the <code><a href="../reference/DEM_request.html">DEM_request()</a></code> function (it is analogous to the <code><a href="../reference/ortho_request.html">ortho_request()</a></code> function). The only argument of the function is our reserve buffer.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">morasko_buffer</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">morasko_buffer</span><span class="op">)</span> <span class="co"># set as data frame</span>
-<span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/DEM_request.html">DEM_request</a></span><span class="op">(</span><span class="va">morasko_buffer</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/DEM_request.html">DEM_request</a></span><span class="op">(</span><span class="va">morasko_buffer</span><span class="op">)</span></code></pre></div>
 <p>Let’s check the obtained results.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># display the first 10 rows and the first 5 columns</span>
 <span class="va">req_df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
-<pre><code>##                 sheetID year              format resolution avgElevErr
-## 1        N-33-130-D-b-1 2011           ASCII TBD     25.0 m        0.9
-## 2      N-33-130-D-b-1-1 2012      ASCII XYZ GRID      0.5 m        0.1
-## 3      N-33-130-D-b-1-1 2012 ARC/INFO ASCII GRID      0.5 m        0.1
-## 4      N-33-130-D-b-1-1 2012      ASCII XYZ GRID      1.0 m        0.1
-## 5      N-33-130-D-b-1-1 2012 ARC/INFO ASCII GRID      1.0 m        0.1
-## 6  N-33-130-D-b-1-1-1-4 2012                 LAS    12 p/m2        0.1
-## 7  N-33-130-D-b-1-1-2-3 2012                 LAS    12 p/m2        0.1
-## 8  N-33-130-D-b-1-1-2-4 2012                 LAS    12 p/m2        0.1
-## 9  N-33-130-D-b-1-1-3-2 2012                 LAS    12 p/m2        0.1
-## 10 N-33-130-D-b-1-1-4-1 2012                 LAS    12 p/m2        0.1</code></pre>
+<pre><code>##             sheetID year              format resolution avgElevErr
+## 1    N-33-130-D-b-1 2007      Intergraph TTN       &lt;NA&gt;        1.5
+## 2  N-33-130-D-b-1-1 2020 ARC/INFO ASCII GRID      5.0 m        0.5
+## 3  N-33-130-D-b-1-1 2017      ASCII XYZ GRID      1.0 m        0.9
+## 4  N-33-130-D-b-1-1 2012 ARC/INFO ASCII GRID      0.5 m        0.1
+## 5     6.179.11.13.4 2018           ASCII TBD      1.0 m        0.1
+## 6     6.179.11.14.1 2018           ASCII TBD      1.0 m        0.1
+## 7     6.179.11.08.4 2018           ASCII TBD      1.0 m        0.1
+## 8     6.179.11.14.3 2018           ASCII TBD      1.0 m        0.1
+## 9     6.179.11.09.3 2018           ASCII TBD      1.0 m        0.1
+## 10    6.179.11.13.2 2018           ASCII TBD      1.0 m        0.1</code></pre>
 <p>We have received metadata with many types of data of different formats, timeliness, resolution, and accuracy. For our analysis, we need digital terrain model (DTM) and digital surface model (DSM) in the “ARC/INFO ASCII GRID” format. Let’s make data selection by creating two tables and combining them together.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">req_df_DTM</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">format</span> <span class="op">==</span> <span class="st">"ARC/INFO ASCII GRID"</span> <span class="op">&amp;</span>
@@ -200,8 +199,8 @@ Wikimedia Commons, the free media repository, <a href="https://commons.wikimedia
 <span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">req_df_DTM</span>, <span class="va">req_df_DSM</span><span class="op">)</span>
 <span class="va">req_df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
 <pre><code>##             sheetID year              format resolution avgElevErr
-## 30 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      1.0 m        0.1
-## 29 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      0.5 m        0.1</code></pre>
+## 39 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      1.0 m        0.1
+## 11 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      0.5 m        0.1</code></pre>
 <p>Now we can download the data using the <code><a href="../reference/tile_download.html">tile_download()</a></code> function with our filtered data frame as input.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># 168.7 MB</span>
