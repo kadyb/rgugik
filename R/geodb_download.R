@@ -62,7 +62,7 @@ geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
   URLs = paste0("http://opendata.geoportal.gov.pl/bdoo/PL.PZGiK.201.",
                 df_names$TERC, ".zip")
 
-  df_names = cbind(df_names, URL = URLs)
+  df_names = cbind(df_names, URL = URLs, stringsAsFactors = FALSE)
 
   df_names = df_names[sel_vector, ]
 

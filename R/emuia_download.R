@@ -52,7 +52,7 @@ emuia_download = function(commune = NULL, TERYT = NULL, outdir = ".",
   URLs = paste0("https://integracja.gugik.gov.pl/PRG/pobierz.php?teryt=",
                 df_names$TERYT, "&adresy")
 
-  df_names = cbind(df_names, URL = URLs)
+  df_names = cbind(df_names, URL = URLs, stringsAsFactors = FALSE)
 
   if (!dir.exists(outdir)) dir.create(outdir)
 

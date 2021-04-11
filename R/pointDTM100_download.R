@@ -53,7 +53,7 @@ pointDTM100_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
   df_names$NAME_PL = iconv(df_names$NAME_PL, "WINDOWS-1250", "ASCII//TRANSLIT")
   URLs = paste0("ftp://91.223.135.109/nmt/", df_names$NAME_PL, "_grid100.zip")
 
-  df_names = cbind(df_names, URL = URLs)
+  df_names = cbind(df_names, URL = URLs, stringsAsFactors = FALSE)
 
   df_names = df_names[sel_vector, ]
 
