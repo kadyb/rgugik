@@ -73,7 +73,7 @@ fun = c("`ortho_request()`, `tile_download()`",
         "`models3D_download()`",
         "`DEM_request()`, `tile_download()`")
 
-input = c("polygon",
+input = c("geometry",
           "voivodeship",
           "county",
           "commune",
@@ -81,7 +81,7 @@ input = c("polygon",
           "type",
           "parcel ID, coordinates",
           "county",
-          "polygon")
+          "geometry")
 
 df = data.frame(fun, input, ds_en, ds_pl)
 colnames(df) = c("Function", "Input", "Dastaset EN", "Dataset PL")
@@ -120,7 +120,7 @@ remotes::install_github("kadyb/rgugik")
 
 ### Orthophotomap
   
-- `ortho_request()` - returns a data frame with metadata and links to the orthoimages in a given polygon
+- `ortho_request()` - returns a data frame with metadata and links to the orthoimages for a given geometry (point, line or polygon)
 - `tile_download()` - downloads orthoimages based on the data frame obtained using the `ortho_request()` function
   
 ```{r f1, message=FALSE, warning=FALSE}
@@ -133,11 +133,14 @@ polygon = read_sf(polygon_path)
 
 req_df = ortho_request(polygon)
 
-# print metadata of the first image
-t(req_df[1, ])
+# select the oldest image
+req_df = req_df[req_df$year == 2001, ]
 
-# download first image
-tile_download(req_df[1, ])
+# print metadata
+t(req_df)
+
+# download image
+tile_download(req_df)
 
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
 plotRGB(img)

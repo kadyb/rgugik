@@ -47,7 +47,7 @@ It is also possible to geocode addresses or objects using the
 
 | Function                              | Input                  | Dastaset EN                              | Dataset PL                                |
 |:--------------------------------------|:-----------------------|:-----------------------------------------|:------------------------------------------|
-| `ortho_request()`, `tile_download()`  | polygon                | Orthophotomap                            | Ortofotomapa                              |
+| `ortho_request()`, `tile_download()`  | geometry               | Orthophotomap                            | Ortofotomapa                              |
 | `geodb_download()`                    | voivodeship            | General Geographic Database              | Baza Danych Obiektów Ogólnogeograficznych |
 | `topodb_download()`                   | county                 | Topographic Database                     | Baza Danych Obiektów Topograficznych      |
 | `emuia_download()`                    | commune                | Register of Towns, Streets and Addresses | Ewidencja Miejscowości, Ulic i Adresów    |
@@ -55,7 +55,7 @@ It is also possible to geocode addresses or objects using the
 | `borders_get()`, `borders_download()` | type                   | State Register of Borders                | Państwowy Rejestr Granic                  |
 | `parcel_get()`                        | parcel ID, coordinates | Location of cadastral parcels            | Lokalizacja działek katastralnych         |
 | `models3D_download()`                 | county                 | 3D models of buildings                   | Modele 3D budynków                        |
-| `DEM_request()`, `tile_download()`    | polygon                | Digital elevation models                 | Cyfrowe modele wysokościowe               |
+| `DEM_request()`, `tile_download()`    | geometry               | Digital elevation models                 | Cyfrowe modele wysokościowe               |
 
 There are the additional functions for obtaining digital terrain model:
 
@@ -94,7 +94,7 @@ remotes::install_github("kadyb/rgugik")
 ### Orthophotomap
 
 -   `ortho_request()` - returns a data frame with metadata and links to
-    the orthoimages in a given polygon
+    the orthoimages for a given geometry (point, line or polygon)
 -   `tile_download()` - downloads orthoimages based on the data frame
     obtained using the `ortho_request()` function
 
@@ -108,9 +108,12 @@ polygon = read_sf(polygon_path)
 
 req_df = ortho_request(polygon)
 
-# print metadata of the first image
-t(req_df[1, ])
-#>             1                                                                               
+# select the oldest image
+req_df = req_df[req_df$year == 2001, ]
+
+# print metadata
+t(req_df)
+#>             3                                                                               
 #> sheetID     "N-33-130-D-b-2-3"                                                              
 #> year        "2001"                                                                          
 #> resolution  "1"                                                                             
@@ -124,8 +127,8 @@ t(req_df[1, ])
 #> date        "2001-01-01"                                                                    
 #> filename    "41_3756_N-33-130-D-b-2-3"
 
-# download first image
-tile_download(req_df[1, ])
+# download image
+tile_download(req_df)
 #> 1/1
 
 img = brick("41_3756_N-33-130-D-b-2-3.tif")
