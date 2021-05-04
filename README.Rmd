@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
   - [General Geographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
   - [Topographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k)
   - [Register of Towns, Streets and Addresses](https://emuia.gugik.gov.pl)
-  - [State Register of Geographical Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
+  - [State Register of Geographical Names](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-nazw-geograficznych)
   - [State Register of Borders](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)

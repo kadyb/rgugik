@@ -26,7 +26,7 @@ including:
 -   [Register of Towns, Streets and
     Addresses](https://emuia.gugik.gov.pl)
 -   [State Register of Geographical
-    Names](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-nazw-geograficznych)
+    Names](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-nazw-geograficznych)
 -   [State Register of
     Borders](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju)
 -   Location (geometry) of cadastral parcels using TERYT (parcel ID) or
@@ -113,7 +113,7 @@ req_df = req_df[req_df$year == 2001, ]
 
 # print metadata
 t(req_df)
-#>             3                                                                               
+#>             17                                                                              
 #> sheetID     "N-33-130-D-b-2-3"                                                              
 #> year        "2001"                                                                          
 #> resolution  "1"                                                                             
