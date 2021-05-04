@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 voivodeship_geom = borders_get(voivodeship = "lubuskie") # 494 KB
 county_geom = borders_get(county = "Sopot") # 18 KB
 commune_geom1 = borders_get(commune = c("Hel", "Krynica Morska")) # 11 KB

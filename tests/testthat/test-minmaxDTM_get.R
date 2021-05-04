@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 library(sf)
 
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")

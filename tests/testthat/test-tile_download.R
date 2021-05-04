@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 base_URL = "https://opendata.geoportal.gov.pl/"
 
 sample_ortho = paste0(base_URL, "ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif")
@@ -20,12 +23,7 @@ if (!is.null(status)) {
 }
 
 file_path = list.files(tmp, full.names = TRUE)
-file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
-
-test_that("check file size", {
-  expect_true(file_size > 2)
-})
 
 test_that("check file ext", {
   expect_true(file_ext == "tif")
@@ -41,12 +39,7 @@ if (!is.null(status)) {
 }
 
 file_path = list.files(tmp, full.names = TRUE)
-file_size = file.info(file_path)$size / 2^20
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
-
-test_that("check file size", {
-  expect_true(file_size > 1)
-})
 
 test_that("check file ext", {
   expect_true(file_ext == "asc")

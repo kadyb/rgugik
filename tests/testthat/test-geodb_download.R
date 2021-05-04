@@ -1,34 +1,25 @@
 # skip test on GitHub and CRAN
-cond = "GITHUB_ACTION" %in% names(Sys.getenv()) ||
-       "CRAN" %in% names(Sys.getenv())
-
-if (!cond) {
-
-  tmp = tempfile()
-  status = geodb_download("opolskie", outdir = tmp, unzip = FALSE) # 5.8 MB
-
-  # status should be NULL (successfully downloaded), otherwise return NULL
-  if (!is.null(status)) {
-    return(NULL)
-  }
-
-  file_path = list.files(tmp, full.names = TRUE)
-  file_size = file.info(file_path)$size / 2^20
-  file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
+skip_on_ci()
+skip_on_cran()
 
 
-  test_that("check file size", {
-    expect_true(file_size > 5.8)
-  })
+tmp = tempfile()
+status = geodb_download("opolskie", outdir = tmp, unzip = FALSE) # 5.8 MB
 
-  test_that("check file ext", {
-    expect_true(file_ext == "zip")
-  })
-
-
-  # test stops
-  test_that("check stops", {
-    expect_error(geodb_download(voivodeships = NULL), "enter names or TERC")
-  })
-
+# status should be NULL (successfully downloaded), otherwise return NULL
+if (!is.null(status)) {
+  return(NULL)
 }
+
+file_path = list.files(tmp, full.names = TRUE)
+file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
+
+test_that("check file ext", {
+  expect_true(file_ext == "zip")
+})
+
+
+# test stops
+test_that("check stops", {
+  expect_error(geodb_download(voivodeships = NULL), "enter names or TERC")
+})
