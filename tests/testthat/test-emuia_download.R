@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 tmp = tempfile()
 status = emuia_download(commune = "Jejkowice", outdir = tmp, unzip = FALSE) # 37.1 KB
 
@@ -14,9 +17,6 @@ test_that("check file ext", {
 })
 
 # unzip
-skip_on_cran()
-
-
 tmp = tempfile()
 status = emuia_download(TERYT = 2412032, outdir = tmp, unzip = TRUE) # 37.1 KB
 
