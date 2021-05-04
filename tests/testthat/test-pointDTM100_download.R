@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 tmp = tempfile()
 status = pointDTM100_download("opolskie", outdir = tmp, unzip = FALSE) # 3.7 MB
 

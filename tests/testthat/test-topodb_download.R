@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 tmp = tempfile()
 status = topodb_download(county = "Sopot", outdir = tmp, unzip = FALSE) # 2.4 MB
 

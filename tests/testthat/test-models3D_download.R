@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 tmp = tempfile()
 status = models3D_download(county = "Sopot", LOD = "LOD1",
                            outdir = tmp, unzip = FALSE) # 2.4 MB

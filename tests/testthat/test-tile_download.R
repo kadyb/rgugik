@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 base_URL = "https://opendata.geoportal.gov.pl/"
 
 sample_ortho = paste0(base_URL, "ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif")

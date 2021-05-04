@@ -1,3 +1,6 @@
+skip_on_cran()
+
+
 t1 = geocodePL_get(address = "Marki") # place
 t2 = geocodePL_get(address = "Królewskie Brzeziny 13") # place and house number
 t3 = geocodePL_get(road = "632") # road number
