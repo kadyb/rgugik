@@ -29,7 +29,7 @@ be extracted and removed; only suitable for certain elevation data}
 \item{print_iter}{print the current iteration of all
 (logical, TRUE default)}
 
-\item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
+\item{...}{additional argument for \code{\link[curl:curl_download]{curl::curl_download()}}}
 }
 \value{
 georeferenced tiles with properties (resolution, year, etc.)

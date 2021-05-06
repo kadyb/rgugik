@@ -5,7 +5,7 @@
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
 #' be extracted and removed
-#' @param ... additional argument for [`utils::download.file()`]
+#' @param ... additional argument for [`curl::curl_download()`]
 #'
 #' @return a selected data type in SHP format
 #'
@@ -41,7 +41,7 @@ borders_download = function(type, outdir = ".", unzip = TRUE, ...) {
   if (!dir.exists(outdir)) dir.create(outdir)
 
   filename = paste0(outdir, "/", type, ".zip")
-  status = tryGet(utils::download.file(URL, filename, mode = "wb", ...))
+  status = tryGet(curl::curl_download(URL, filename, mode = "wb", ...))
 
   if (any(status %in% c("error", "warning"))) {
     err_print()

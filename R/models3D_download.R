@@ -10,7 +10,7 @@
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
 #' be extracted and removed
-#' @param ... additional argument for [`utils::download.file()`]
+#' @param ... additional argument for [`curl::curl_download()`]
 #'
 #' @return models of buildings in Geography Markup Language format (.GML)
 #'
@@ -75,7 +75,7 @@ models3D_download = function(county = NULL, TERYT = NULL, LOD = "LOD1",
   for (i in seq_len(nrow(df_names))) {
     prepared_URL = paste0(base_URL, df_names[i, "TERYT"], "_gml.zip")
     filename = paste0(outdir, "/", df_names[i, "TERYT"], "_gml.zip")
-    status = tryGet(utils::download.file(prepared_URL, filename, mode = "wb", ...))
+    status = tryGet(curl::curl_download(prepared_URL, filename, mode = "wb", ...))
 
     if (any(status %in% c("error", "warning"))) {
       err_print()
