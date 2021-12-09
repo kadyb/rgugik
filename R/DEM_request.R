@@ -66,8 +66,8 @@ DEM_request = function(x) {
     bbox = sf::st_bbox(sf::st_geometry(x)[[i]])
 
     # user input
-    geometry = paste0("geometry={'xmin':", bbox[1], ", 'ymin':", bbox[2], ", ",
-                      "'xmax':", bbox[3], ", 'ymax':", bbox[4], ", ",
+    geometry = paste0("geometry={'xmin':", bbox[1], ",", "'ymin':", bbox[2], ",",
+                      "'xmax':", bbox[3], ",", "'ymax':", bbox[4], ",",
                       "'spatialReference':{'wkid':", epsg, "}}")
 
     prepared_URL = paste0(base_URL, geometry, geometryType, spatialRel, outFields,
