@@ -8,14 +8,14 @@
 [![CRAN](http://www.r-pkg.org/badges/version/rgugik)](https://cran.r-project.org/package=rgugik)
 [![R build
 status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://github.com/kadyb/rgugik/actions)
-[![codecov](https://codecov.io/gh/kadyb/rgugik/branch/master/graph/badge.svg)](https://codecov.io/gh/kadyb/rgugik)
+[![codecov](https://app.codecov.io/gh/kadyb/rgugik/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kadyb/rgugik)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.02948/status.svg)](https://doi.org/10.21105/joss.02948)
 <!-- badges: end -->
 
 **rgugik** is an R package for downloading open data from resources of
-[Polish Head Office of Geodesy and Cartography](http://www.gugik.gov.pl)
+[Polish Head Office of Geodesy and Cartography](https://www.gov.pl/web/gugik)
 including:
 
 -   [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
@@ -166,7 +166,7 @@ package can be found in the vignettes:
 ## Acknowledgment
 
 [Head Office of Geodesy and Cartography in
-Poland](http://www.gugik.gov.pl/) is the main source of the provided
+Poland](https://www.gov.pl/web/gugik) is the main source of the provided
 data. The data is made available in accordance with the [Act of May 17,
 1989 Geodetic and Cartographic
 Law](http://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19890300163)
