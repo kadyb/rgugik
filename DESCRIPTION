@@ -35,9 +35,9 @@ Depends:
 Imports: 
     sf,
     jsonlite,
-    openssl
+    openssl,
+    curl
 Suggests:
-    curl,
     knitr,
     rmarkdown,
     testthat,

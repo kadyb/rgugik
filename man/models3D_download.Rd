@@ -29,7 +29,7 @@ by default, files are saved in the working directory}
 \item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will
 be extracted and removed}
 
-\item{...}{additional argument for \code{\link[utils:download.file]{utils::download.file()}}}
+\item{...}{additional argument for \code{\link[curl:curl_download]{curl::curl_download()}}}
 }
 \value{
 models of buildings in Geography Markup Language format (.GML)

@@ -6,7 +6,7 @@
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
 #' be extracted and removed
-#' @param ... additional argument for [`utils::download.file()`]
+#' @param ... additional argument for [`curl::curl_download()`]
 #'
 #' @return a database in Geography Markup Language format (.GML),
 #' the content and detail level corresponds to the topographic map
@@ -67,7 +67,7 @@ topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
     prepared_URL = paste0(base_URL, TERYT_voivodeship, "/",
                           df_names[i, "TERYT"], "_GML.zip")
     filename = paste0(outdir, "/", df_names[i, "TERYT"], ".zip")
-    status = tryGet(utils::download.file(prepared_URL, filename, mode = "wb", ...))
+    status = tryGet(curl::curl_download(prepared_URL, filename, mode = "wb", ...))
 
     if (any(status %in% c("error", "warning"))) {
       err_print()
