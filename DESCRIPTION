@@ -40,7 +40,6 @@ Suggests:
     curl,
     knitr,
     rmarkdown,
-    tibble,
     testthat,
     stars
 Encoding: UTF-8
