@@ -22,7 +22,7 @@ Authors@R: c(person(given = "Krzysztof",
                     comment = "source of the data"))
 Description: Automatic open data acquisition from resources of Polish Head Office
     of Geodesy and Cartography ('Główny Urząd Geodezji i Kartografii')
-    (<www.gugik.gov.pl>).
+    (<https://www.gov.pl/web/gugik>).
     Available datasets include various types of numeric, raster and vector data,
     such as orthophotomaps, digital elevation models (digital terrain models,
     digital surface model, point clouds), state register of borders, spatial
