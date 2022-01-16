@@ -1,7 +1,13 @@
 tryGet = function(code) {
   tryCatch(code,
-           error = function(c) "error",
-           warning = function(c) "warning"
+           error = function(c) {
+             message(c)
+             return("error")
+           },
+           warning = function(c) {
+             message(c)
+             return("warning")
+           }
   )
 }
 

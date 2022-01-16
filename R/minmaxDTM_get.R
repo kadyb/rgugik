@@ -50,7 +50,7 @@ minmaxDTM_get = function(polygon) {
   output = tryGet(jsonlite::fromJSON(prepared_URL))
 
   if (any(output %in% c("error", "warning"))) {
-    return("connection error")
+    return(invisible("connection error"))
   }
 
   if (length(output) == 1) {

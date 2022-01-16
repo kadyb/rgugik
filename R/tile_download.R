@@ -65,7 +65,7 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
 
     if (any(status %in% c("error", "warning"))) {
       err_print()
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     # compare checksums (reference is SHA-1)

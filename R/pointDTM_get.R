@@ -87,7 +87,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
   while (i < iter + 1) {
 
     if (attempt == n_attempts) {
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     if (print_iter) {
@@ -97,7 +97,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
     if (i < iter) {
       sel_pts = pts[(i * 500 + 1):(i * 500 + 500), ]
       elev = get_elev(sel_pts, base_URL)
-      if (is.null(elev)) return("connection error")
+      if (is.null(elev)) return(invisible("connection error"))
       i = i + 1
 
       if (all(elev %in% "0.0")) {
@@ -114,7 +114,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
     } else {
       sel_pts = pts[(i * 500 + 1):(i * 500 + n_last), ]
       elev = get_elev(sel_pts, base_URL)
-      if (is.null(elev)) return("connection error")
+      if (is.null(elev)) return(invisible("connection error"))
       empty_output = c(empty_output, elev)
       i = i + 1
     }

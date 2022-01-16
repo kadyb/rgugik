@@ -85,7 +85,7 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
     output = tryGet(readLines(prepared_URL, warn = FALSE))
 
     if (any(output %in% c("error", "warning"))) {
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     output = output[2]

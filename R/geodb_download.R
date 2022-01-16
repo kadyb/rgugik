@@ -74,7 +74,7 @@ geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
 
     if (any(status %in% c("error", "warning"))) {
       err_print()
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     if (unzip) {

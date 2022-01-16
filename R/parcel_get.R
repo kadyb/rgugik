@@ -25,12 +25,12 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
     output = tryGet(readLines(prepared_URL, warn = FALSE))
 
     if (any(output %in% c("error", "warning"))) {
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     # "0" means no server side errors
     if (output[1] != "0") {
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     wkb = structure(list(output[2]), class = "WKB")
@@ -53,12 +53,12 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
     output = tryGet(readLines(prepared_URL, warn = FALSE))
 
     if (any(output %in% c("error", "warning"))) {
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     # "0" means no server side errors
     if (output[1] != "0") {
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     output = output[2]

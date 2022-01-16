@@ -75,7 +75,7 @@ ortho_request = function(x) {
     output = tryGet(jsonlite::fromJSON(prepared_URL))
 
     if (any(output %in% c("error", "warning"))) {
-      return("connection error")
+      return(invisible("connection error"))
     }
 
     output = output$features[[1]]
