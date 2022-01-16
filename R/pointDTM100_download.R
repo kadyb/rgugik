@@ -51,7 +51,8 @@ pointDTM100_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
   # generate URLs using voivodeship NAME_PL
   # first convert polish characters to ASCII
   df_names$NAME_PL = iconv(df_names$NAME_PL, "WINDOWS-1250", "ASCII//TRANSLIT")
-  URLs = paste0("ftp://91.223.135.109/nmt/", df_names$NAME_PL, "_grid100.zip")
+  URLs = paste0("https://opendata.geoportal.gov.pl/NumDaneWys/NMT_100/ASCII_XYZ/",
+                df_names$NAME_PL, "_grid100.zip")
 
   df_names = cbind(df_names, URL = URLs, stringsAsFactors = FALSE)
 
