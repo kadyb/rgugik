@@ -7,8 +7,8 @@
 DEM_request(x)
 }
 \arguments{
-\item{x}{an sf/sfc object with one or more features (requests are based
-on the bounding boxes of the provided features)}
+\item{x}{an \code{sf}, \code{sfc} or \code{SpatVector} object with one or more features
+(requests are based on the bounding boxes of the provided features)}
 }
 \value{
 a data frame with metadata and links to the digital elevation models

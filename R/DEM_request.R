@@ -1,7 +1,7 @@
 #' @title Get metadata and links to available digital elevation models
 #'
-#' @param x an sf/sfc object with one or more features (requests are based
-#' on the bounding boxes of the provided features)
+#' @param x an `sf`, `sfc` or `SpatVector` object with one or more features
+#' (requests are based on the bounding boxes of the provided features)
 #'
 #' @return a data frame with metadata and links to the digital elevation models
 #' (different formats of digital terrain model, digital surface model and
@@ -22,16 +22,19 @@
 #' }
 DEM_request = function(x) {
 
-  if (length(sf::st_geometry(x)) == 0) {
-    stop("no geometries")
+  if (inherits(x, "sf")) x = sf::st_geometry(x)
+  if (length(x) == 0) stop("no geometries")
+
+  if (inherits(x, "SpatVector")) {
+    epsg = terra::crs(v, describe = TRUE)$epsg
+  } else {
+    epsg = sf::st_crs(x)$epsg
   }
 
   selected_cols = c("godlo", "akt_rok", "format", "charPrzest", "bladSrWys",
                     "ukladXY", "ukladH", "czy_ark_wypelniony", "url_do_pobrania",
                     "nazwa_pliku", "idSerie", "sha1", "asortyment")
   selected_cols = paste(selected_cols, collapse = ",")
-
-  epsg = sf::st_crs(x)$epsg
 
   # hard coded URL and parameters
   base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/1/query?"
@@ -62,13 +65,19 @@ DEM_request = function(x) {
                         asortyment = character()
   )
 
-  for (i in seq_along(sf::st_geometry(x))) {
-    bbox = sf::st_bbox(sf::st_geometry(x)[[i]])
+  for (i in seq_along(x)) {
+
+    if (inherits(x, "SpatVector")) {
+      bbox = as.vector(terra::ext(x[i]))
+    } else {
+      # sfc class
+      bbox = sf::st_bbox(x[i])
+    }
 
     # user input
-    geometry = paste0("geometry={'xmin':", bbox[1], ",", "'ymin':", bbox[2], ",",
-                      "'xmax':", bbox[3], ",", "'ymax':", bbox[4], ",",
-                      "'spatialReference':{'wkid':", epsg, "}}")
+    geometry = paste0("geometry={'xmin':", bbox["xmin"], ",", "'ymin':",
+                      bbox["ymin"], ",", "'xmax':", bbox["xmax"], ",", "'ymax':",
+                      bbox["ymax"], ",", "'spatialReference':{'wkid':", epsg, "}}")
 
     prepared_URL = paste0(base_URL, geometry, geometryType, spatialRel, outFields,
                           returnGeometry, file)
