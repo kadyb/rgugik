@@ -29,5 +29,6 @@ Get the boundaries of administrative units
 voivodeship_geom = borders_get(voivodeship = "lubuskie") # 494 KB
 county_geom = borders_get(county = "Sopot") # 18 KB
 commune_geom = borders_get(commune = c("Hel", "Krynica Morska")) # 11 KB
+poland_geom = borders_get() # 1124.3 KB
 }
 }
