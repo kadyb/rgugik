@@ -10,6 +10,9 @@
 #'
 #' @return a sf data.frame (EPSG: 2180)
 #'
+#' @details If all arguments are NULL (default),
+#' the boundary of Poland will be returned.
+#'
 #' @export
 #'
 #' @examples

@@ -24,6 +24,10 @@ a sf data.frame (EPSG: 2180)
 \description{
 Get the boundaries of administrative units
 }
+\details{
+If all arguments are NULL (default),
+the boundary of Poland will be returned.
+}
 \examples{
 \dontrun{
 voivodeship_geom = borders_get(voivodeship = "lubuskie") # 494 KB
