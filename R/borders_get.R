@@ -28,7 +28,8 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
   if (all(is.null(c(voivodeship, county, commune, TERYT)))) {
 
     poland = borders_get(voivodeship = rgugik::voivodeship_names[, 1])
-    return(sf::st_union(poland, is_coverage = TRUE))
+    poland = sf::st_union(poland, is_coverage = TRUE)
+    return(st_sf(geom = poland))
 
   } else {
 
@@ -105,7 +106,8 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
 
     }
 
-    df_geom = sf::st_sf(geometry)
+    df_geom = do.call(c, geometry)
+    df_geom = sf::st_sf(geom = df_geom)
     df_geom = cbind(df_geom, TERYT = ID)
 
     # geometry is returned in EPSG: 2180
