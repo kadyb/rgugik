@@ -26,8 +26,11 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
                        TERYT = NULL) {
 
   if (all(is.null(c(voivodeship, county, commune, TERYT)))) {
+
     poland = borders_get(voivodeship = rgugik::voivodeship_names[, 1])
-    return(sf::st_union(poland, is_coverage = TRUE))
+    poland = sf::st_union(poland, is_coverage = TRUE)
+    return(st_sf(geom = poland))
+
   } else {
 
     if (!is.null(voivodeship)) {
@@ -83,7 +86,7 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
     }
 
     result = "geom_wkb"
-    geometry = sf::st_sfc(sf::st_polygon(), crs = 2180)
+    geometry = vector("list", length(ID))
 
     for (i in seq_len(length(ID))) {
 
@@ -99,13 +102,12 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
 
       output = output[2]
       wkb = structure(list(output), class = "WKB")
-      single_geom = sf::st_as_sfc(wkb, EWKB = TRUE, crs = 2180)
-      geometry = c(geometry, single_geom)
+      geometry[[i]] = sf::st_as_sfc(wkb, EWKB = TRUE, crs = 2180)
 
     }
 
-    df_geom = sf::st_sf(geometry)
-    df_geom = df_geom[-1, ] # drop empty geometry
+    df_geom = do.call(c, geometry)
+    df_geom = sf::st_sf(geom = df_geom)
     df_geom = cbind(df_geom, TERYT = ID)
 
     # geometry is returned in EPSG: 2180
