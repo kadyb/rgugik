@@ -29,7 +29,7 @@ borders_get = function(voivodeship = NULL, county = NULL, commune = NULL,
 
     poland = borders_get(voivodeship = rgugik::voivodeship_names[, 1])
     poland = sf::st_union(poland, is_coverage = TRUE)
-    return(st_sf(geom = poland))
+    return(sf::st_sf(geom = poland))
 
   } else {
 
