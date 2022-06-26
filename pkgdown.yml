@@ -1,12 +1,12 @@
 pandoc: 2.7.3
-pkgdown: 2.0.3
+pkgdown: 2.0.5
 pkgdown_sha: ~
 articles:
   DEM: DEM.html
   spatialdb_description: spatialdb_description.html
   orthophotomap: orthophotomap.html
   topodb: topodb.html
-last_built: 2022-06-01T16:14Z
+last_built: 2022-06-26T12:59Z
 urls:
   reference: https://kadyb.github.io/rgugik/reference
   article: https://kadyb.github.io/rgugik/articles
