@@ -1,1 +1,23 @@
-linters: with_defaults(object_usage_linter, absolute_path_linter, nonportable_path_linter, closed_curly_linter, commas_linter, cyclocomp_linter, equals_na_linter, function_left_parentheses_linter, infix_spaces_linter, line_length_linter(100), open_curly_linter, paren_brace_linter, semicolon_terminator_linter, seq_linter, spaces_inside_linter, spaces_left_parentheses_linter, T_and_F_symbol_linter, undesirable_function_linter, undesirable_operator_linter, unneeded_concatenation_linter, default = NULL)
+linters: linters_with_defaults(
+    absolute_path_linter(),
+    brace_linter(),
+    commas_linter(),
+    equals_na_linter(),
+    function_left_parentheses_linter(),
+    infix_spaces_linter(),
+    line_length_linter(100),
+    nonportable_path_linter(),
+    object_usage_linter(),
+    semicolon_linter(),
+    seq_linter(),
+    spaces_inside_linter(),
+    spaces_left_parentheses_linter(),
+    T_and_F_symbol_linter(),
+    undesirable_function_linter(),
+    unneeded_concatenation_linter(),
+    assignment_linter = NULL,
+    commented_code_linter = NULL,
+    cyclocomp_linter = NULL,
+    object_name_linter = NULL
+  )
+encoding: "UTF-8"
