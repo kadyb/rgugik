@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rgugik <img src="man/figures/logo.png" align="right" width="150"/>
+# rgugik <img src="man/figures/logo.png" style="float:right; width:150px"/>
 
 <!-- badges: start -->
 
@@ -101,7 +101,7 @@ remotes::install_github("kadyb/rgugik")
 ``` r
 library(rgugik)
 library(sf)
-library(raster)
+library(stars)
 
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
@@ -113,7 +113,7 @@ req_df = req_df[req_df$year == 2001, ]
 
 # print metadata
 t(req_df)
-#>             5                                                                               
+#>             12                                                                              
 #> sheetID     "N-33-130-D-b-2-3"                                                              
 #> year        "2001"                                                                          
 #> resolution  "1"                                                                             
@@ -131,8 +131,8 @@ t(req_df)
 tile_download(req_df)
 #> 1/1
 
-img = brick("41_3756_N-33-130-D-b-2-3.tif")
-plotRGB(img)
+img = read_stars("41_3756_N-33-130-D-b-2-3.tif")
+plot(st_rgb(img), main = NULL)
 ```
 
 <img src="man/figures/README-f1-1.png" width="100%" />
