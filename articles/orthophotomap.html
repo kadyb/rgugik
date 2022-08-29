@@ -129,48 +129,48 @@ body {text-align: justify}
 <h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># attach packages</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/" class="external-link">stars</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># attach packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/" class="external-link">stars</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span></span></code></pre></div>
 <p>The analysis area is the Krajkowo nature reserve located in the Greater Poland voivodeship. It was established in 1958 in order to protect the breeding places of birds, especially the <em>grey heron</em> and the <em>great black cormorant</em>, and to protect the landscape of the Warta oxbow.</p>
 <div class="section level3">
 <h3 id="vector-data">Vector data<a class="anchor" aria-label="anchor" href="#vector-data"></a>
 </h3>
 <p>Data on nature reserves can be found in General Geographic Databases. We can obtain them using the <code><a href="../reference/geodb_download.html">geodb_download()</a></code> function. Let’s do that.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 17.6 MB</span>
-<span class="fu"><a href="../reference/geodb_download.html">geodb_download</a></span><span class="op">(</span><span class="st">"wielkopolskie"</span>, outdir <span class="op">=</span> <span class="st">"./data"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># 17.6 MB</span></span>
+<span><span class="fu"><a href="../reference/geodb_download.html">geodb_download</a></span><span class="op">(</span><span class="st">"wielkopolskie"</span>, outdir <span class="op">=</span> <span class="st">"./data"</span><span class="op">)</span></span></code></pre></div>
 <p>If you run into any problem with the download, remember that you can pass another download method from <code><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file()</a></code> as a function argument.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/geodb_download.html">geodb_download</a></span><span class="op">(</span><span class="va">req_df</span>, outdir <span class="op">=</span> <span class="st">"./data"</span>, method <span class="op">=</span> <span class="st">"wget"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/geodb_download.html">geodb_download</a></span><span class="op">(</span><span class="va">req_df</span>, outdir <span class="op">=</span> <span class="st">"./data"</span>, method <span class="op">=</span> <span class="st">"wget"</span><span class="op">)</span></span></code></pre></div>
 <p>The downloaded database consists of many files in the GML (<em>Geography Markup Language</em>) format. A brief description of the structure of this database can be found <a href="https://kadyb.github.io/rgugik/articles/articles/spatialdb_description.html">here</a>. The table with the nature reserves is in the "PL.PZGIK.201.30__OT_TCRZ_A.xml" file. We can use the <strong>sf</strong> package and its <code><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf()</a></code> function to load it.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">reserves</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="st">"data/PL.PZGiK.201.30/BDOO/PL.PZGIK.201.30__OT_TCRZ_A.xml"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">reserves</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="st">"data/PL.PZGiK.201.30/BDOO/PL.PZGIK.201.30__OT_TCRZ_A.xml"</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s check the structure of our data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">reserves</span><span class="op">)</span>
-<span class="co">## [1] 28</span>
-<span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">reserves</span><span class="op">)</span>
-<span class="co">## [1] 110</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">reserves</span><span class="op">)</span></span>
+<span><span class="co">## [1] 28</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">reserves</span><span class="op">)</span></span>
+<span><span class="co">## [1] 110</span></span></code></pre></div>
 <p>In simple terms, it is a spatial table consisting of 110 observations (rows) and 28 variables (columns). The names of the objects are located in the <strong>nazwa</strong> column, which allow us to select the Krajkowo reserve only.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># selection by attribute</span>
-<span class="va">krajkowo</span> <span class="op">=</span> <span class="va">reserves</span><span class="op">[</span><span class="va">reserves</span><span class="op">$</span><span class="va">nazwa</span> <span class="op">==</span> <span class="st">"Krajkowo"</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># selection by attribute</span></span>
+<span><span class="va">krajkowo</span> <span class="op">=</span> <span class="va">reserves</span><span class="op">[</span><span class="va">reserves</span><span class="op">$</span><span class="va">nazwa</span> <span class="op">==</span> <span class="st">"Krajkowo"</span>, <span class="op">]</span></span></code></pre></div>
 <p>We can display it in two basic ways:</p>
 <ol style="list-style-type: decimal">
-<li>Using the <code><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot()</a></code> function and directly specifying the column with the object geometry: <code>plot(krajkowo$geometry)</code>
+<li>Using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function and directly specifying the column with the object geometry: <code>plot(krajkowo$geometry)</code>
 </li>
-<li>Using the <code><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot()</a></code> and <code><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry()</a></code> functions that obtain geometry from the vector layer. In the first case, we need to know the name of the column with geometries (e.g. <code>geometry</code>, <code>geom</code>, etc.), while in the second case, the geometry is selected automatically (it is the safer and preferable way).</li>
+<li>Using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> and <code><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry()</a></code> functions that obtain geometry from the vector layer. In the first case, we need to know the name of the column with geometries (e.g. <code>geometry</code>, <code>geom</code>, etc.), while in the second case, the geometry is selected automatically (it is the safer and preferable way).</li>
 </ol>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">krajkowo</span><span class="op">)</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, main <span class="op">=</span> <span class="st">"Krajkowo reserve"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">krajkowo</span><span class="op">)</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, main <span class="op">=</span> <span class="st">"Krajkowo reserve"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="orto-GEOMETRY-1.png"></p>
 <p>We can also calculate the area of this polygon.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">krajkowo_area</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html" class="external-link">st_area</a></span><span class="op">(</span><span class="va">krajkowo</span><span class="op">)</span> <span class="co"># [m^2]</span>
-<span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">krajkowo_area</span>, <span class="st">"ha"</span><span class="op">)</span> <span class="co"># convert to [ha]</span></code></pre></div>
-<pre><code><span class="co">## 165.2744 [ha]</span></code></pre>
+<code class="sourceCode R"><span><span class="va">krajkowo_area</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html" class="external-link">st_area</a></span><span class="op">(</span><span class="va">krajkowo</span><span class="op">)</span> <span class="co"># [m^2]</span></span>
+<span><span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">krajkowo_area</span>, <span class="st">"ha"</span><span class="op">)</span> <span class="co"># convert to [ha]</span></span></code></pre></div>
+<pre><code><span><span class="co">## 165.2744 [ha]</span></span></code></pre>
 <p>The <code><a href="https://r-spatial.github.io/sf/reference/geos_measures.html" class="external-link">st_area()</a></code> function returned the area in m^2, and after the conversion we got the result of 165 ha.</p>
 </div>
 <div class="section level3">
@@ -178,75 +178,75 @@ body {text-align: justify}
 </h3>
 <p>Now let’s move on to the stage of downloading the orthophotomap. We use the <code><a href="../reference/ortho_request.html">ortho_request()</a></code> function that show us which images are available for the analyzed area. We need to provide our Krajkowo polygon as the argument of this function.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/ortho_request.html">ortho_request</a></span><span class="op">(</span><span class="va">krajkowo</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/ortho_request.html">ortho_request</a></span><span class="op">(</span><span class="va">krajkowo</span><span class="op">)</span></span></code></pre></div>
 <p>We can display the resulting table using the code below.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># display the first 10 rows and the first 6 columns</span>
-<span class="va">req_df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">##             sheetID year resolution composition  sensor     CRS</span>
-<span class="co">## 1  N-33-142-B-d-4-2 2004       0.50         B/W  Analog PL-1992</span>
-<span class="co">## 2  N-33-142-B-d-4-4 2004       0.50         B/W  Analog PL-1992</span>
-<span class="co">## 3  N-33-142-B-d-4-4 2010       0.25         RGB Digital PL-1992</span>
-<span class="co">## 4  N-33-142-B-d-4-2 2010       0.25         RGB Digital PL-1992</span>
-<span class="co">## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992</span>
-<span class="co">## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992</span>
-<span class="co">## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992</span>
-<span class="co">## 8  N-33-142-B-d-4-2 2016       0.25         RGB Digital PL-1992</span>
-<span class="co">## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992</span>
-<span class="co">## 10 N-33-142-B-d-4-4 2016       0.25         RGB Digital PL-1992</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># display the first 10 rows and the first 6 columns</span></span>
+<span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">##             sheetID year resolution composition  sensor     CRS</span></span>
+<span><span class="co">## 1  N-33-142-B-d-4-2 2004       0.50         B/W  Analog PL-1992</span></span>
+<span><span class="co">## 2  N-33-142-B-d-4-4 2004       0.50         B/W  Analog PL-1992</span></span>
+<span><span class="co">## 3  N-33-142-B-d-4-4 2010       0.25         RGB Digital PL-1992</span></span>
+<span><span class="co">## 4  N-33-142-B-d-4-2 2010       0.25         RGB Digital PL-1992</span></span>
+<span><span class="co">## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital PL-1992</span></span>
+<span><span class="co">## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital PL-1992</span></span>
+<span><span class="co">## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital PL-1992</span></span>
+<span><span class="co">## 8  N-33-142-B-d-4-2 2016       0.25         RGB Digital PL-1992</span></span>
+<span><span class="co">## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital PL-1992</span></span>
+<span><span class="co">## 10 N-33-142-B-d-4-4 2016       0.25         RGB Digital PL-1992</span></span></code></pre>
 <p>To complete our task, we need to obtain a near infrared data. So in the next step, we select those rows for which the <code>composition</code> column has the value of “CIR”.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># select IR images and overwrite the req_df object</span>
-<span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">composition</span> <span class="op">==</span> <span class="st">"CIR"</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># select IR images and overwrite the req_df object</span></span>
+<span><span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">composition</span> <span class="op">==</span> <span class="st">"CIR"</span>, <span class="op">]</span></span></code></pre></div>
 <p>Then let’s sort the table according to the year the photo was taken, with the most recent images at the top of the table.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">req_df</span><span class="op">$</span><span class="va">year</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html" class="external-link">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">req_df</span><span class="op">$</span><span class="va">year</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 <p>Let’s display the table again and select the newest compositions.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">req_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">9</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">##             sheetID year resolution composition  sensor seriesID</span>
-<span class="co">## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837</span>
-<span class="co">## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837</span>
-<span class="co">## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital    69903</span>
-<span class="co">## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital    69903</span>
-<span class="co">## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital    69763</span>
-<span class="co">## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital    69763</span></code></pre>
+<code class="sourceCode R"><span><span class="va">req_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">9</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">##             sheetID year resolution composition  sensor seriesID</span></span>
+<span><span class="co">## 7  N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837</span></span>
+<span><span class="co">## 9  N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837</span></span>
+<span><span class="co">## 22 N-33-142-B-d-4-2 2013       0.25         CIR Digital    69903</span></span>
+<span><span class="co">## 24 N-33-142-B-d-4-4 2013       0.25         CIR Digital    69903</span></span>
+<span><span class="co">## 5  N-33-142-B-d-4-4 2010       0.25         CIR Digital    69763</span></span>
+<span><span class="co">## 6  N-33-142-B-d-4-2 2010       0.25         CIR Digital    69763</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2016</span>, <span class="op">]</span></span></code></pre></div>
 <p>Note that the result has a pair of objects (images). This means that our Krajkowo reserve is depicted in two photos within one series. Therefore, the <code>seriesID</code> column is used to combine smaller images into a larger mosaic.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">req_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">9</span><span class="op">)</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">##            sheetID year resolution composition  sensor seriesID</span>
-<span class="co">## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837</span>
-<span class="co">## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837</span></code></pre>
+<code class="sourceCode R"><span><span class="va">req_df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">9</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">##            sheetID year resolution composition  sensor seriesID</span></span>
+<span><span class="co">## 7 N-33-142-B-d-4-2 2016       0.25         CIR Digital    69837</span></span>
+<span><span class="co">## 9 N-33-142-B-d-4-4 2016       0.25         CIR Digital    69837</span></span></code></pre>
 <p>The <code><a href="../reference/tile_download.html">tile_download()</a></code> function is used to download orthophotomaps by taking our selected table as the main argument. We can also specify the output folder with the <code>outdir</code> argument.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 61.9 MB</span>
-<span class="fu"><a href="../reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span>, outdir <span class="op">=</span> <span class="st">"./data"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## 1/2</span>
-<span class="co">## 2/2</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># 61.9 MB</span></span>
+<span><span class="fu"><a href="../reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span>, outdir <span class="op">=</span> <span class="st">"./data"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 1/2</span></span>
+<span><span class="co">## 2/2</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="processing">Processing<a class="anchor" aria-label="anchor" href="#processing"></a>
 </h3>
 <p>Let’s load the downloaded orthophotomaps using the <code><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars()</a></code> function from the <strong>stars</strong> package, which allows working with spatiotemporal arrays. In our case, it is a raster consisting of three bands (NIR, R, G) for only one point in time. We don’t need to load the entire data array into memory - we can read the file’s metadata instead by using the <code>proxy</code> argument.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">img1</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"data/69837_329609_N-33-142-B-d-4-2.TIF"</span>, proxy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">img2</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"data/69837_329613_N-33-142-B-d-4-4.TIF"</span>, proxy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">img1</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"data/69837_329609_N-33-142-B-d-4-2.TIF"</span>, proxy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">img2</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"data/69837_329613_N-33-142-B-d-4-4.TIF"</span>, proxy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Now we can perform two operations: rasters merging and cropping to the reserve area. The use of a <code>proxy</code> allows to get the result almost immediately, while processing the entire image (<code>proxy = FALSE</code>) would take several minutes. Images have their own specific Coordinate Reference Systems, so let’s make sure it is the correct one after merging. It should be EPSG 2180 in this case.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">img</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_mosaic.html" class="external-link">st_mosaic</a></span><span class="op">(</span><span class="va">img1</span>, <span class="va">img2</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="va">img</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2180</span> <span class="co"># overwrite CRS to be sure</span>
-<span class="va">img</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crop.html" class="external-link">st_crop</a></span><span class="op">(</span><span class="va">img</span>, <span class="va">krajkowo</span><span class="op">)</span></code></pre></div>
-<p>Let’s display the effect using the <code><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot()</a></code> function, and define the input bands with the <code>rgb</code> argument. It creates a composition consisting of three bands: NIR, R and G in our case. The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the <code>rgb</code> argument name.</p>
+<code class="sourceCode R"><span><span class="va">img</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_mosaic.html" class="external-link">st_mosaic</a></span><span class="op">(</span><span class="va">img1</span>, <span class="va">img2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="va">img</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2180</span> <span class="co"># overwrite CRS to be sure</span></span>
+<span><span class="va">img</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crop.html" class="external-link">st_crop</a></span><span class="op">(</span><span class="va">img</span>, <span class="va">krajkowo</span><span class="op">)</span></span></code></pre></div>
+<p>Let’s display the effect using the <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function, and define the input bands with the <code>rgb</code> argument. It creates a composition consisting of three bands: NIR, R and G in our case. The composition below is shown in infrared, not in natural colors, which may be misinterpreted from the <code>rgb</code> argument name.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">img</span>, rgb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, main <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">img</span>, rgb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, main <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <p><img src="orto-CIR-1.png"></p>
 <p>In the last step, we calculate the NDVI using the near infrared (1) and red (2) bands.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">calc_ndvi</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">img</span><span class="op">)</span> <span class="op">(</span><span class="va">img</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">img</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">img</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">img</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
-<span class="va">ndvi</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_apply.html" class="external-link">st_apply</a></span><span class="op">(</span><span class="va">img</span>, MARGIN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">calc_ndvi</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi</span>, main <span class="op">=</span> <span class="st">"NDVI"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">hcl.colors</a></span><span class="op">(</span><span class="fl">10</span>, palette <span class="op">=</span> <span class="st">"RdYlGn"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">calc_ndvi</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">img</span><span class="op">)</span> <span class="op">(</span><span class="va">img</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">img</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">img</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">img</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">ndvi</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_apply.html" class="external-link">st_apply</a></span><span class="op">(</span><span class="va">img</span>, MARGIN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">calc_ndvi</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ndvi</span>, main <span class="op">=</span> <span class="st">"NDVI"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">hcl.colors</a></span><span class="op">(</span><span class="fl">10</span>, palette <span class="op">=</span> <span class="st">"RdYlGn"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="orto-NDVI-1.png"></p>
 <p>A surprising observation is the relatively low NDVI values for the forest area. There are two reasons for this, i.e. the photos are taken in mid-March (before the start of the growing season) and probably have not been calibrated. For this reason, a better source of data for analysis may be satellite images, which are calibrated spectrally and obtained continuously (if no cloudiness occurs).</p>
 </div>
@@ -270,7 +270,7 @@ body {text-align: justify}
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

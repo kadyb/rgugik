@@ -69,14 +69,14 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">tile_download</span><span class="op">(</span>
-  <span class="va">df_req</span>,
-  outdir <span class="op">=</span> <span class="st">"."</span>,
-  unzip <span class="op">=</span> <span class="cn">TRUE</span>,
-  check_SHA <span class="op">=</span> <span class="cn">FALSE</span>,
-  print_iter <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tile_download</span><span class="op">(</span></span>
+<span>  <span class="va">df_req</span>,</span>
+<span>  outdir <span class="op">=</span> <span class="st">"."</span>,</span>
+<span>  unzip <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  check_SHA <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  print_iter <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -120,18 +120,17 @@ as specified in the input data frame</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-<span class="va">polygon_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"datasets/search_area.gpkg"</span>, package <span class="op">=</span> <span class="st">"rgugik"</span><span class="op">)</span>
-<span class="va">polygon</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">polygon_path</span><span class="op">)</span>
-
-<span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="ortho_request.html">ortho_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span>
-<span class="fu">tile_download</span><span class="op">(</span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span> <span class="co"># download the first image only</span>
-
-<span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="DEM_request.html">DEM_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span>
-<span class="fu">tile_download</span><span class="op">(</span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span> <span class="co"># download the first DEM only</span>
-<span class="op">}</span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="va">polygon_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"datasets/search_area.gpkg"</span>, package <span class="op">=</span> <span class="st">"rgugik"</span><span class="op">)</span></span>
+<span><span class="va">polygon</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">polygon_path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="ortho_request.html">ortho_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span>
+<span><span class="fu">tile_download</span><span class="op">(</span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span> <span class="co"># download the first image only</span></span>
+<span></span>
+<span><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="DEM_request.html">DEM_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span>
+<span><span class="fu">tile_download</span><span class="op">(</span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span> <span class="co"># download the first DEM only</span></span>
+<span><span class="op">}</span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -145,7 +144,7 @@ as specified in the input data frame</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

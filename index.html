@@ -220,11 +220,11 @@
 </h2>
 <p>You can install the released version from <a href="https://cran.r-project.org/" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rgugik"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"rgugik"</span><span class="op">)</span></span></code></pre></div>
 <p>You can install the development version from <a href="https://github.com" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kadyb/rgugik"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kadyb/rgugik"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -239,54 +239,54 @@
 <code><a href="reference/tile_download.html">tile_download()</a></code> - downloads orthoimages based on the data frame obtained using the <code><a href="reference/ortho_request.html">ortho_request()</a></code> function</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span>
-
-<span class="va">polygon_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"datasets/search_area.gpkg"</span>, package <span class="op">=</span> <span class="st">"rgugik"</span><span class="op">)</span>
-<span class="va">polygon</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">polygon_path</span><span class="op">)</span>
-
-<span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="reference/ortho_request.html">ortho_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span>
-
-<span class="co"># select the oldest image</span>
-<span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2001</span>, <span class="op">]</span>
-
-<span class="co"># print metadata</span>
-<span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">)</span>
-<span class="co">#&gt;             5                                                                               </span>
-<span class="co">#&gt; sheetID     "N-33-130-D-b-2-3"                                                              </span>
-<span class="co">#&gt; year        "2001"                                                                          </span>
-<span class="co">#&gt; resolution  "1"                                                                             </span>
-<span class="co">#&gt; composition "RGB"                                                                           </span>
-<span class="co">#&gt; sensor      "Satellite"                                                                     </span>
-<span class="co">#&gt; CRS         "PL-1992"                                                                       </span>
-<span class="co">#&gt; isFilled    "TRUE"                                                                          </span>
-<span class="co">#&gt; URL         "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif"</span>
-<span class="co">#&gt; seriesID    "41"                                                                            </span>
-<span class="co">#&gt; sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      </span>
-<span class="co">#&gt; date        "2001-01-01"                                                                    </span>
-<span class="co">#&gt; filename    "41_3756_N-33-130-D-b-2-3"</span>
-
-<span class="co"># download image</span>
-<span class="fu"><a href="reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">)</span>
-<span class="co">#&gt; 1/1</span>
-
-<span class="va">img</span> <span class="op">=</span> <span class="fu">brick</span><span class="op">(</span><span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span><span class="op">)</span>
-<span class="fu">plotRGB</span><span class="op">(</span><span class="va">img</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">polygon_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"datasets/search_area.gpkg"</span>, package <span class="op">=</span> <span class="st">"rgugik"</span><span class="op">)</span></span>
+<span><span class="va">polygon</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">polygon_path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="reference/ortho_request.html">ortho_request</a></span><span class="op">(</span><span class="va">polygon</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># select the oldest image</span></span>
+<span><span class="va">req_df</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2001</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># print metadata</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             5                                                                               </span></span>
+<span><span class="co">#&gt; sheetID     "N-33-130-D-b-2-3"                                                              </span></span>
+<span><span class="co">#&gt; year        "2001"                                                                          </span></span>
+<span><span class="co">#&gt; resolution  "1"                                                                             </span></span>
+<span><span class="co">#&gt; composition "RGB"                                                                           </span></span>
+<span><span class="co">#&gt; sensor      "Satellite"                                                                     </span></span>
+<span><span class="co">#&gt; CRS         "PL-1992"                                                                       </span></span>
+<span><span class="co">#&gt; isFilled    "TRUE"                                                                          </span></span>
+<span><span class="co">#&gt; URL         "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif"</span></span>
+<span><span class="co">#&gt; seriesID    "41"                                                                            </span></span>
+<span><span class="co">#&gt; sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      </span></span>
+<span><span class="co">#&gt; date        "2001-01-01"                                                                    </span></span>
+<span><span class="co">#&gt; filename    "41_3756_N-33-130-D-b-2-3"</span></span>
+<span></span>
+<span><span class="co"># download image</span></span>
+<span><span class="fu"><a href="reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 1/1</span></span>
+<span></span>
+<span><span class="va">img</span> <span class="op">=</span> <span class="fu">brick</span><span class="op">(</span><span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span><span class="op">)</span></span>
+<span><span class="fu">plotRGB</span><span class="op">(</span><span class="va">img</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-f1-1.png" width="100%"></p>
 </div>
 <div class="section level3">
 <h3 id="administrative-boundaries">Administrative boundaries<a class="anchor" aria-label="anchor" href="#administrative-boundaries"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-
-<span class="co"># get counties from opolskie voivodeship (TERYT 16)</span>
-<span class="va">counties</span> <span class="op">=</span> <span class="va">county_names</span>
-<span class="va">counties</span> <span class="op">=</span> <span class="va">counties</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">counties</span><span class="op">$</span><span class="va">TERYT</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">==</span> <span class="st">"16"</span>, <span class="st">"TERYT"</span><span class="op">]</span>
-<span class="va">counties_geom</span> <span class="op">=</span> <span class="fu"><a href="reference/borders_get.html">borders_get</a></span><span class="op">(</span>TERYT <span class="op">=</span> <span class="va">counties</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">counties_geom</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Opolskie"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get counties from opolskie voivodeship (TERYT 16)</span></span>
+<span><span class="va">counties</span> <span class="op">=</span> <span class="va">county_names</span></span>
+<span><span class="va">counties</span> <span class="op">=</span> <span class="va">counties</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">counties</span><span class="op">$</span><span class="va">TERYT</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">==</span> <span class="st">"16"</span>, <span class="st">"TERYT"</span><span class="op">]</span></span>
+<span><span class="va">counties_geom</span> <span class="op">=</span> <span class="fu"><a href="reference/borders_get.html">borders_get</a></span><span class="op">(</span>TERYT <span class="op">=</span> <span class="va">counties</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">counties_geom</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Opolskie"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-f2-1.png" width="100%"></p>
 </div>
 <div class="section level3">
@@ -391,7 +391,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

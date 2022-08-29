@@ -69,12 +69,12 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">geocodePL_get</span><span class="op">(</span>
-  address <span class="op">=</span> <span class="cn">NULL</span>,
-  road <span class="op">=</span> <span class="cn">NULL</span>,
-  rail_crossing <span class="op">=</span> <span class="cn">NULL</span>,
-  geoname <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">geocodePL_get</span><span class="op">(</span></span>
+<span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  road <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  rail_crossing <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  geoname <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -106,20 +106,19 @@ of Geographical Names (function <code><a href="geonames_download.html">geonames_
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>
-<span class="fu">geocodePL_get</span><span class="op">(</span>address <span class="op">=</span> <span class="st">"Marki"</span><span class="op">)</span> <span class="co"># place</span>
-<span class="fu">geocodePL_get</span><span class="op">(</span>address <span class="op">=</span> <span class="st">"Marki, Andersa"</span><span class="op">)</span> <span class="co"># place and street</span>
-<span class="fu">geocodePL_get</span><span class="op">(</span>address <span class="op">=</span> <span class="st">"Marki, Andersa 1"</span><span class="op">)</span> <span class="co"># place, street and house number</span>
-<span class="fu">geocodePL_get</span><span class="op">(</span>address <span class="op">=</span> <span class="st">"Królewskie Brzeziny 13"</span><span class="op">)</span> <span class="co"># place and house number</span>
-
-<span class="fu">geocodePL_get</span><span class="op">(</span>road <span class="op">=</span> <span class="st">"632"</span><span class="op">)</span> <span class="co"># road number</span>
-<span class="fu">geocodePL_get</span><span class="op">(</span>road <span class="op">=</span> <span class="st">"632 55"</span><span class="op">)</span> <span class="co"># road number and mileage</span>
-
-<span class="fu">geocodePL_get</span><span class="op">(</span>rail_crossing <span class="op">=</span> <span class="st">"001 018 478"</span><span class="op">)</span>
-
-<span class="fu">geocodePL_get</span><span class="op">(</span>geoname <span class="op">=</span> <span class="st">"Las Mierzei"</span><span class="op">)</span> <span class="co"># physiographic object</span>
-<span class="op">}</span>
-</code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">geocodePL_get</span><span class="op">(</span>address <span class="op">=</span> <span class="st">"Marki"</span><span class="op">)</span> <span class="co"># place</span></span>
+<span><span class="fu">geocodePL_get</span><span class="op">(</span>address <span class="op">=</span> <span class="st">"Marki, Andersa"</span><span class="op">)</span> <span class="co"># place and street</span></span>
+<span><span class="fu">geocodePL_get</span><span class="op">(</span>address <span class="op">=</span> <span class="st">"Marki, Andersa 1"</span><span class="op">)</span> <span class="co"># place, street and house number</span></span>
+<span><span class="fu">geocodePL_get</span><span class="op">(</span>address <span class="op">=</span> <span class="st">"Królewskie Brzeziny 13"</span><span class="op">)</span> <span class="co"># place and house number</span></span>
+<span></span>
+<span><span class="fu">geocodePL_get</span><span class="op">(</span>road <span class="op">=</span> <span class="st">"632"</span><span class="op">)</span> <span class="co"># road number</span></span>
+<span><span class="fu">geocodePL_get</span><span class="op">(</span>road <span class="op">=</span> <span class="st">"632 55"</span><span class="op">)</span> <span class="co"># road number and mileage</span></span>
+<span></span>
+<span><span class="fu">geocodePL_get</span><span class="op">(</span>rail_crossing <span class="op">=</span> <span class="st">"001 018 478"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">geocodePL_get</span><span class="op">(</span>geoname <span class="op">=</span> <span class="st">"Las Mierzei"</span><span class="op">)</span> <span class="co"># physiographic object</span></span>
+<span><span class="op">}</span></span></code></pre></div>
     </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -133,7 +132,7 @@ of Geographical Names (function <code><a href="geonames_download.html">geonames_
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

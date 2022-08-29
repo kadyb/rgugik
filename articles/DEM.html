@@ -137,33 +137,33 @@ Wikimedia Commons, the free media repository, <a href="https://commons.wikimedia
 <h2 id="analysis">Analysis<a class="anchor" aria-label="anchor" href="#analysis"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># attach packages</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/" class="external-link">stars</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># attach packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/" class="external-link">stars</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span></span></code></pre></div>
 <p>Our analysis area is the Morasko Meteorite nature reserve located in the Greater Poland voivodeship. It was established in 1976 in order to protect the area of impact craters, which, according to researchers, were formed in the fall of the Morasko meteorite about 5,000 years ago. In addition, the oak-hornbeam forest with rare species of plants (<em>lilium martagon</em>, <em>ceratophyllum submersum</em>) and birds (<em>european nightjar</em>, <em>black woodpecker</em>) is protected.</p>
 <div class="section level3">
 <h3 id="vector-data">Vector data<a class="anchor" aria-label="anchor" href="#vector-data"></a>
 </h3>
 <p>The centroid (geometric center) of the Morasko Meteorite nature reserve has X = 16.895 and Y = 52.487 coordinates in World Geodetic System 1984 (EPSG 4326). Let’s start by creating this point with the <strong>sf</strong> package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">morasko</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_point</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16.895</span>, <span class="fl">52.489</span><span class="op">)</span><span class="op">)</span>
-<span class="va">morasko</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">morasko</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span> <span class="co"># set coordinate system</span>
-<span class="va">morasko</span></code></pre></div>
-<pre><code><span class="co">## Geometry set for 1 feature </span>
-<span class="co">## Geometry type: POINT</span>
-<span class="co">## Dimension:     XY</span>
-<span class="co">## Bounding box:  xmin: 16.895 ymin: 52.489 xmax: 16.895 ymax: 52.489</span>
-<span class="co">## Geodetic CRS:  WGS 84</span></code></pre>
-<pre><code><span class="co">## POINT (16.895 52.489)</span></code></pre>
+<code class="sourceCode R"><span><span class="va">morasko</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_point</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16.895</span>, <span class="fl">52.489</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">morasko</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="va">morasko</span>, crs <span class="op">=</span> <span class="fl">4326</span><span class="op">)</span> <span class="co"># set coordinate system</span></span>
+<span><span class="va">morasko</span></span></code></pre></div>
+<pre><code><span><span class="co">## Geometry set for 1 feature </span></span>
+<span><span class="co">## Geometry type: POINT</span></span>
+<span><span class="co">## Dimension:     XY</span></span>
+<span><span class="co">## Bounding box:  xmin: 16.895 ymin: 52.489 xmax: 16.895 ymax: 52.489</span></span>
+<span><span class="co">## Geodetic CRS:  WGS 84</span></span></code></pre>
+<pre><code><span><span class="co">## POINT (16.895 52.489)</span></span></code></pre>
 <p>Now our point is embedded in space (has a spatial reference). In the next step, let’s create an approximate zone that will include the area of the reserve. The function <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_buffer()</a></code> will be used for this. Before this operation, we need to transform the coordinate system to a system with metric units, e.g. Poland CS92 (EPSG 2180), using <code><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">morasko</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">morasko</span>, crs <span class="op">=</span> <span class="fl">2180</span><span class="op">)</span>
-<span class="va">morasko_buffer</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_buffer</a></span><span class="op">(</span><span class="va">morasko</span>, dist <span class="op">=</span> <span class="fl">400</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">morasko</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_transform.html" class="external-link">st_transform</a></span><span class="op">(</span><span class="va">morasko</span>, crs <span class="op">=</span> <span class="fl">2180</span><span class="op">)</span></span>
+<span><span class="va">morasko_buffer</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_buffer</a></span><span class="op">(</span><span class="va">morasko</span>, dist <span class="op">=</span> <span class="fl">400</span><span class="op">)</span></span></code></pre></div>
 <p>We have created a buffer with a radius of 400 meters. Let’s visualize it.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">morasko_buffer</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, main <span class="op">=</span> <span class="st">"Morasko reserve buffer"</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">morasko</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">morasko_buffer</span>, axes <span class="op">=</span> <span class="cn">TRUE</span>, main <span class="op">=</span> <span class="st">"Morasko reserve buffer"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">morasko</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM-GEOMETRY-1.png"></p>
 <p>Of course, the area shown above is not exactly the reserve area. The exact area can be determined from the polygon layer as in <a href="https://kadyb.github.io/rgugik/articles/orthophotomap.html">orthophotomap</a> example using the General Geographic Database.</p>
 </div>
@@ -172,121 +172,121 @@ Wikimedia Commons, the free media repository, <a href="https://commons.wikimedia
 </h3>
 <p>Now we can search for available elevation data for this area using the <code><a href="../reference/DEM_request.html">DEM_request()</a></code> function (it is analogous to the <code><a href="../reference/ortho_request.html">ortho_request()</a></code> function). The only argument of the function is our reserve buffer.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/DEM_request.html">DEM_request</a></span><span class="op">(</span><span class="va">morasko_buffer</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/DEM_request.html">DEM_request</a></span><span class="op">(</span><span class="va">morasko_buffer</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s check the obtained results.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># display the first 10 rows and the first 5 columns</span>
-<span class="va">req_df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">##             sheetID year              format resolution avgElevErr</span>
-<span class="co">## 1    N-33-130-D-b-1 2007      Intergraph TTN       &lt;NA&gt;        1.5</span>
-<span class="co">## 2  N-33-130-D-b-1-1 2020 ARC/INFO ASCII GRID      5.0 m        0.5</span>
-<span class="co">## 3  N-33-130-D-b-1-1 2017      ASCII XYZ GRID      1.0 m        0.9</span>
-<span class="co">## 4  N-33-130-D-b-1-1 2012 ARC/INFO ASCII GRID      0.5 m        0.1</span>
-<span class="co">## 5     6.179.11.13.4 2018           ASCII TBD      1.0 m        0.1</span>
-<span class="co">## 6     6.179.11.14.1 2018           ASCII TBD      1.0 m        0.1</span>
-<span class="co">## 7     6.179.11.08.4 2018           ASCII TBD      1.0 m        0.1</span>
-<span class="co">## 8     6.179.11.14.3 2018           ASCII TBD      1.0 m        0.1</span>
-<span class="co">## 9     6.179.11.09.3 2018           ASCII TBD      1.0 m        0.1</span>
-<span class="co">## 10    6.179.11.13.2 2018           ASCII TBD      1.0 m        0.1</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># display the first 10 rows and the first 5 columns</span></span>
+<span><span class="va">req_df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">##             sheetID year              format resolution avgElevErr</span></span>
+<span><span class="co">## 1    N-33-130-D-b-1 2007      Intergraph TTN       &lt;NA&gt;        1.5</span></span>
+<span><span class="co">## 2  N-33-130-D-b-1-1 2020 ARC/INFO ASCII GRID      5.0 m        0.5</span></span>
+<span><span class="co">## 3  N-33-130-D-b-1-1 2017      ASCII XYZ GRID      1.0 m        0.9</span></span>
+<span><span class="co">## 4  N-33-130-D-b-1-1 2012 ARC/INFO ASCII GRID      0.5 m        0.1</span></span>
+<span><span class="co">## 5     6.179.11.13.4 2018           ASCII TBD      1.0 m        0.1</span></span>
+<span><span class="co">## 6     6.179.11.14.1 2018           ASCII TBD      1.0 m        0.1</span></span>
+<span><span class="co">## 7     6.179.11.08.4 2018           ASCII TBD      1.0 m        0.1</span></span>
+<span><span class="co">## 8     6.179.11.14.3 2018           ASCII TBD      1.0 m        0.1</span></span>
+<span><span class="co">## 9     6.179.11.09.3 2018           ASCII TBD      1.0 m        0.1</span></span>
+<span><span class="co">## 10    6.179.11.13.2 2018           ASCII TBD      1.0 m        0.1</span></span></code></pre>
 <p>We have received metadata with many types of data of different formats, timeliness, resolution, and accuracy. For our analysis, we need digital terrain model (DTM) and digital surface model (DSM) in the “ARC/INFO ASCII GRID” format. Let’s make data selection by creating two tables and combining them together.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">req_df_DTM</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">format</span> <span class="op">==</span> <span class="st">"ARC/INFO ASCII GRID"</span> <span class="op">&amp;</span>
-                    <span class="va">req_df</span><span class="op">$</span><span class="va">product</span> <span class="op">==</span> <span class="st">"DTM"</span> <span class="op">&amp;</span>
-                    <span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2019</span>, <span class="op">]</span>
-<span class="va">req_df_DSM</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">format</span> <span class="op">==</span> <span class="st">"ARC/INFO ASCII GRID"</span> <span class="op">&amp;</span>
-                    <span class="va">req_df</span><span class="op">$</span><span class="va">product</span> <span class="op">==</span> <span class="st">"DSM"</span> <span class="op">&amp;</span>
-                    <span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2019</span>, <span class="op">]</span>
-
-<span class="co"># combine data tables</span>
-<span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">req_df_DTM</span>, <span class="va">req_df_DSM</span><span class="op">)</span>
-<span class="va">req_df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
-<pre><code><span class="co">##             sheetID year              format resolution avgElevErr</span>
-<span class="co">## 39 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      1.0 m        0.1</span>
-<span class="co">## 11 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      0.5 m        0.1</span></code></pre>
+<code class="sourceCode R"><span><span class="va">req_df_DTM</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">format</span> <span class="op">==</span> <span class="st">"ARC/INFO ASCII GRID"</span> <span class="op">&amp;</span></span>
+<span>                    <span class="va">req_df</span><span class="op">$</span><span class="va">product</span> <span class="op">==</span> <span class="st">"DTM"</span> <span class="op">&amp;</span></span>
+<span>                    <span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2019</span>, <span class="op">]</span></span>
+<span><span class="va">req_df_DSM</span> <span class="op">=</span> <span class="va">req_df</span><span class="op">[</span><span class="va">req_df</span><span class="op">$</span><span class="va">format</span> <span class="op">==</span> <span class="st">"ARC/INFO ASCII GRID"</span> <span class="op">&amp;</span></span>
+<span>                    <span class="va">req_df</span><span class="op">$</span><span class="va">product</span> <span class="op">==</span> <span class="st">"DSM"</span> <span class="op">&amp;</span></span>
+<span>                    <span class="va">req_df</span><span class="op">$</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2019</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># combine data tables</span></span>
+<span><span class="va">req_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">req_df_DTM</span>, <span class="va">req_df_DSM</span><span class="op">)</span></span>
+<span><span class="va">req_df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
+<pre><code><span><span class="co">##             sheetID year              format resolution avgElevErr</span></span>
+<span><span class="co">## 39 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      1.0 m        0.1</span></span>
+<span><span class="co">## 11 N-33-130-D-b-1-1 2019 ARC/INFO ASCII GRID      0.5 m        0.1</span></span></code></pre>
 <p>Now we can download the data using the <code><a href="../reference/tile_download.html">tile_download()</a></code> function with our filtered data frame as input.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># 168.7 MB</span>
-<span class="fu"><a href="../reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span>, outdir <span class="op">=</span> <span class="st">"./data"</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## 1/2</span>
-<span class="co">## 2/2</span></code></pre>
+<code class="sourceCode R"><span><span class="co"># 168.7 MB</span></span>
+<span><span class="fu"><a href="../reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span>, outdir <span class="op">=</span> <span class="st">"./data"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## 1/2</span></span>
+<span><span class="co">## 2/2</span></span></code></pre>
 <p>If you run into any problem with the download, remember that you can pass another download method from <code><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file()</a></code> as a function argument.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span>, outdir <span class="op">=</span> <span class="st">"./data"</span>, method <span class="op">=</span> <span class="st">"wget"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span>, outdir <span class="op">=</span> <span class="st">"./data"</span>, method <span class="op">=</span> <span class="st">"wget"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="processing">Processing<a class="anchor" aria-label="anchor" href="#processing"></a>
 </h3>
 <p>Let’s load the downloaded numerical models using the <code><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars()</a></code> function from the <strong>stars</strong> package, which allows working on spatiotemporal arrays. We have two files, one represents DTM and second represents DSM.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># load data</span>
-<span class="va">DTM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"data/73044_917579_N-33-130-D-b-1-1.asc"</span>, proxy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">DSM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"data/73043_917495_N-33-130-D-b-1-1.asc"</span>, proxy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-
-<span class="co"># name raster</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DTM</span><span class="op">)</span> <span class="op">=</span> <span class="st">"DTM"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DSM</span><span class="op">)</span> <span class="op">=</span> <span class="st">"DSM"</span>
-
-<span class="co"># set coordinate system</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="va">DTM</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2180</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="va">DSM</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2180</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># load data</span></span>
+<span><span class="va">DTM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"data/73044_917579_N-33-130-D-b-1-1.asc"</span>, proxy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">DSM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"data/73043_917495_N-33-130-D-b-1-1.asc"</span>, proxy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># name raster</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DTM</span><span class="op">)</span> <span class="op">=</span> <span class="st">"DTM"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">DSM</span><span class="op">)</span> <span class="op">=</span> <span class="st">"DSM"</span></span>
+<span></span>
+<span><span class="co"># set coordinate system</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="va">DTM</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2180</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="va">DSM</span><span class="op">)</span> <span class="op">=</span> <span class="fl">2180</span></span></code></pre></div>
 <p>You probably noticed the four-fold difference in their sizes. It is due to the difference between their cells resolutions. We need to unify them to a common resolution to be able to combine them into one stack. It is much better to use a lower resolution than to increase it, because we cannot get more information and the processing will be faster. Let’s use the <code><a href="https://r-spatial.github.io/stars/reference/st_warp.html" class="external-link">st_warp()</a></code> function to do this.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">DSM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_warp.html" class="external-link">st_warp</a></span><span class="op">(</span><span class="va">DSM</span>, dest <span class="op">=</span> <span class="va">DTM</span>, cellsize <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">DSM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_warp.html" class="external-link">st_warp</a></span><span class="op">(</span><span class="va">DSM</span>, dest <span class="op">=</span> <span class="va">DTM</span>, cellsize <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p>Now, both models have the same dimensions (the number of rows and columns) and spatial resolution. Thus, we can combine them into one object (<code>DEM</code>).</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">DEM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">DTM</span>, <span class="va">DSM</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 2</span></code></pre>
+<code class="sourceCode R"><span><span class="va">DEM</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">DTM</span>, <span class="va">DSM</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] 2</span></span></code></pre>
 <p>Now we have a DEM object that consists of two attributes (DTM and DSM). In fact, both attributes contains same type of data as they are representing elevation. Therefore, we can collapse the attributes into a new dimension. Let’s do that using <code><a href="https://r-spatial.github.io/stars/reference/redimension.html" class="external-link">st_redimension()</a></code>.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">DEM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/redimension.html" class="external-link">st_redimension</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_dimensions.html" class="external-link">st_dimensions</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">=</span> <span class="st">"elev"</span> <span class="co"># name new data dim</span>
-<span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_dimensions.html" class="external-link">st_dimensions</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##      from   to offset delta               refsys point   values x/y</span>
-<span class="co">## x       1 2188 355733     1 ETRS89 / Poland CS92  TRUE     NULL [x]</span>
-<span class="co">## y       1 2379 517029    -1 ETRS89 / Poland CS92  TRUE     NULL [y]</span>
-<span class="co">## elev    1    2     NA    NA                   NA    NA DTM, DSM</span></code></pre>
+<code class="sourceCode R"><span><span class="va">DEM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/redimension.html" class="external-link">st_redimension</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_dimensions.html" class="external-link">st_dimensions</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">=</span> <span class="st">"elev"</span> <span class="co"># name new data dim</span></span>
+<span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_dimensions.html" class="external-link">st_dimensions</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##      from   to offset delta               refsys point   values x/y</span></span>
+<span><span class="co">## x       1 2188 355733     1 ETRS89 / Poland CS92  TRUE     NULL [x]</span></span>
+<span><span class="co">## y       1 2379 517029    -1 ETRS89 / Poland CS92  TRUE     NULL [y]</span></span>
+<span><span class="co">## elev    1    2     NA    NA                   NA    NA DTM, DSM</span></span></code></pre>
 <p>After this operation, our elevation attribute consists of the DTM and DSM layers (dimensions). Then let’s crop the rasters to our buffer.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">DEM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crop.html" class="external-link">st_crop</a></span><span class="op">(</span><span class="va">DEM</span>, <span class="va">morasko_buffer</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">DEM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crop.html" class="external-link">st_crop</a></span><span class="op">(</span><span class="va">DEM</span>, <span class="va">morasko_buffer</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s check what the result looks like.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">DEM</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors</a></span><span class="op">(</span><span class="fl">99</span>, alpha <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">DEM</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors</a></span><span class="op">(</span><span class="fl">99</span>, alpha <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM-PLOT-1.png"></p>
 <p>In the first quadrant of the circle, we can see five smaller circles. These are the craters formed after the impact of the Morasko meteorite. The largest fragment found weighs 272 kg and it is the largest meteorite found in Poland. The collection of found meteorites can be seen at the <a href="https://muzeumziemi.amu.edu.pl/" class="external-link">Earth Museum</a> in Poznań.</p>
 <p>Let’s calculate the crater width using the terrain transverse profile. We can use our centroid and add a second example point 30 degrees towards N. Next, we connect these points into a line (<code><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring()</a></code>) and then sample this line every 1 m (<code><a href="https://r-spatial.github.io/sf/reference/st_line_sample.html" class="external-link">st_line_sample()</a></code>), because our DEM has this resolution. As a result, we get one complex geometry (<em>MULTIPOINT</em>), which we have to convert into a simple geometry (<em>POINT</em>) consisting of many points. The function <code><a href="https://r-spatial.github.io/sf/reference/st_cast.html" class="external-link">st_cast()</a></code> is used for this.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pts_matrix</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">357121.7</span>, <span class="fl">515765.5</span>,
-                      <span class="fl">357321.2</span>, <span class="fl">516017.9</span><span class="op">)</span>,
-                    ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">line</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring</a></span><span class="op">(</span><span class="va">pts_matrix</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">2180</span><span class="op">)</span>
-<span class="va">line</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_line_sample.html" class="external-link">st_line_sample</a></span><span class="op">(</span><span class="va">line</span>, density <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-<span class="va">line</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html" class="external-link">st_cast</a></span><span class="op">(</span><span class="va">line</span>, <span class="st">"POINT"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pts_matrix</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">357121.7</span>, <span class="fl">515765.5</span>,</span>
+<span>                      <span class="fl">357321.2</span>, <span class="fl">516017.9</span><span class="op">)</span>,</span>
+<span>                    ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">line</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sfc.html" class="external-link">st_sfc</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st.html" class="external-link">st_linestring</a></span><span class="op">(</span><span class="va">pts_matrix</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fl">2180</span><span class="op">)</span></span>
+<span><span class="va">line</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_line_sample.html" class="external-link">st_line_sample</a></span><span class="op">(</span><span class="va">line</span>, density <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">line</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_cast.html" class="external-link">st_cast</a></span><span class="op">(</span><span class="va">line</span>, <span class="st">"POINT"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># plot DTM (first layer)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">[</span>, , , <span class="fl">1</span><span class="op">]</span>, main <span class="op">=</span> <span class="st">"DTM [m]"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors</a></span><span class="op">(</span><span class="fl">99</span>, alpha <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,
-     reset <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">line</span>, col <span class="op">=</span> <span class="st">"red"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># plot DTM (first layer)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">DEM</span><span class="op">[</span>, , , <span class="fl">1</span><span class="op">]</span>, main <span class="op">=</span> <span class="st">"DTM [m]"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">terrain.colors</a></span><span class="op">(</span><span class="fl">99</span>, alpha <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>,</span>
+<span>     reset <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">line</span>, col <span class="op">=</span> <span class="st">"red"</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM-LINE-1.png"></p>
 <p>In the last step, we extract the elevation values for these points using <code><a href="https://r-spatial.github.io/stars/reference/st_extract.html" class="external-link">st_extract()</a></code>.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># take elevation from DTM and DSM layers</span>
-<span class="va">elev_line</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_extract.html" class="external-link">st_extract</a></span><span class="op">(</span><span class="va">DEM</span>, <span class="va">line</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">elev_line</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DTM"</span>, <span class="st">"DSM"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># take elevation from DTM and DSM layers</span></span>
+<span><span class="va">elev_line</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_extract.html" class="external-link">st_extract</a></span><span class="op">(</span><span class="va">DEM</span>, <span class="va">line</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">elev_line</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DTM"</span>, <span class="st">"DSM"</span><span class="op">)</span></span></code></pre></div>
 <p>Now we can see how our transverse profile looks like.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># use 'dev.off()' to reset previous plot</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">elev_line</span><span class="op">[</span>, <span class="st">"DTM"</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"l"</span>, main <span class="op">=</span> <span class="st">"Digital terrain model"</span>,
-     ylab <span class="op">=</span> <span class="st">"Elevation [m]"</span>, xlab <span class="op">=</span> <span class="st">"Distance [m]"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">126</span>, <span class="fl">219</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># use 'dev.off()' to reset previous plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">elev_line</span><span class="op">[</span>, <span class="st">"DTM"</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"l"</span>, main <span class="op">=</span> <span class="st">"Digital terrain model"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Elevation [m]"</span>, xlab <span class="op">=</span> <span class="st">"Distance [m]"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">126</span>, <span class="fl">219</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM-PROFILE-1.png"></p>
 <p>The largest width of the impact crater is about 90 m.</p>
 <p>Okay, we checked the terrain. In the last step, let’s examine the height of the objects on it. For this purpose, we calculate the height of the trees by subtracting the DTM from the DSM. The product of this difference is called normalized DSM, because it takes the terrain elevation as a reference.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">calc</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span> <span class="op">(</span><span class="va">DEM</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">DEM</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>
-<span class="va">nDSM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_apply.html" class="external-link">st_apply</a></span><span class="op">(</span><span class="va">DEM</span>, MARGIN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">calc</span><span class="op">)</span>
-<span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">nDSM</span>, main <span class="op">=</span> <span class="st">"Trees height [m]"</span>,
-     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">hcl.colors</a></span><span class="op">(</span><span class="fl">9</span>, palette <span class="op">=</span> <span class="st">"Greens"</span>, rev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">calc</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">DEM</span><span class="op">)</span> <span class="op">(</span><span class="va">DEM</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">DEM</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">nDSM</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_apply.html" class="external-link">st_apply</a></span><span class="op">(</span><span class="va">DEM</span>, MARGIN <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, FUN <span class="op">=</span> <span class="va">calc</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">nDSM</span>, main <span class="op">=</span> <span class="st">"Trees height [m]"</span>,</span>
+<span>     col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">hcl.colors</a></span><span class="op">(</span><span class="fl">9</span>, palette <span class="op">=</span> <span class="st">"Greens"</span>, rev <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="DEM-TREES-1.png"></p>
 </div>
 </div>
@@ -309,7 +309,7 @@ Wikimedia Commons, the free media repository, <a href="https://commons.wikimedia
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
