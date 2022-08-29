@@ -99,7 +99,7 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="rgugik-">rgugik <img src="reference/figures/logo.png" align="right" width="150"><a class="anchor" aria-label="anchor" href="#rgugik-"></a>
+<div class="page-header"><h1 id="rgugik-">rgugik <img src="reference/figures/logo.png" style="float:right; width:150px"><a class="anchor" aria-label="anchor" href="#rgugik-"></a>
 </h1></div>
 <!-- badges: start -->
 <p><strong>rgugik</strong> is an R package for downloading open data from resources of <a href="https://www.gov.pl/web/gugik" class="external-link">Polish Head Office of Geodesy and Cartography</a> including:</p>
@@ -241,7 +241,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kadyb.github.io/rgugik/">rgugik</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/raster" class="external-link">raster</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/stars/" class="external-link">stars</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">polygon_path</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"datasets/search_area.gpkg"</span>, package <span class="op">=</span> <span class="st">"rgugik"</span><span class="op">)</span></span>
 <span><span class="va">polygon</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">polygon_path</span><span class="op">)</span></span>
@@ -253,7 +253,7 @@
 <span></span>
 <span><span class="co"># print metadata</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;             5                                                                               </span></span>
+<span><span class="co">#&gt;             12                                                                              </span></span>
 <span><span class="co">#&gt; sheetID     "N-33-130-D-b-2-3"                                                              </span></span>
 <span><span class="co">#&gt; year        "2001"                                                                          </span></span>
 <span><span class="co">#&gt; resolution  "1"                                                                             </span></span>
@@ -271,8 +271,8 @@
 <span><span class="fu"><a href="reference/tile_download.html">tile_download</a></span><span class="op">(</span><span class="va">req_df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 1/1</span></span>
 <span></span>
-<span><span class="va">img</span> <span class="op">=</span> <span class="fu">brick</span><span class="op">(</span><span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span><span class="op">)</span></span>
-<span><span class="fu">plotRGB</span><span class="op">(</span><span class="va">img</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">img</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/stars/reference/read_stars.html" class="external-link">read_stars</a></span><span class="op">(</span><span class="st">"41_3756_N-33-130-D-b-2-3.tif"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/stars/reference/st_rgb.html" class="external-link">st_rgb</a></span><span class="op">(</span><span class="va">img</span><span class="op">)</span>, main <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-f1-1.png" width="100%"></p>
 </div>
 <div class="section level3">
