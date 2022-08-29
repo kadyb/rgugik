@@ -25,18 +25,18 @@ knitr::opts_chunk$set(
 
 **rgugik** is an R package for downloading open data from resources of [Polish Head Office of Geodesy and Cartography](https://www.gov.pl/web/gugik) including:
 
-  - [Orthophotomaps](http://www.gugik.gov.pl/pzgik/zamow-dane/ortofotomapa)
-  - [General Geographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-ogolnogeograficznych)
-  - [Topographic Database](http://www.gugik.gov.pl/pzgik/zamow-dane/baza-danych-obiektow-topograficznych-bdot-10k)
+  - [Orthophotomaps](https://www.geoportal.gov.pl/dane/ortofotomapa)
+  - [General Geographic Database](https://www.geoportal.gov.pl/dane/baza-danych-ogolnogeograficznych-bdo)
+  - [Topographic Database](https://www.geoportal.gov.pl/dane/baza-danych-obiektow-topograficznych-bdot)
   - [Register of Towns, Streets and Addresses](https://emuia.gugik.gov.pl)
   - [State Register of Geographical Names](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-nazw-geograficznych)
-  - [State Register of Borders](http://www.gugik.gov.pl/pzgik/zamow-dane/panstwowy-rejestr-granic-i-powierzchni-jednostek-podzialow-terytorialnych-kraju)
+  - [State Register of Borders](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-granic)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)
   - Various digital elevation models as:
-    - [Digital terrain model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-terenu)
-    - [Digital surface model](http://www.gugik.gov.pl/pzgik/zamow-dane/numeryczny-model-pokrycia-terenu)
-    - [Point cloud](http://www.gugik.gov.pl/pzgik/zamow-dane/dane-pomiarowe)
+    - [Digital terrain model](https://www.geoportal.gov.pl/dane/numeryczny-model-terenu)
+    - [Digital surface model](https://www.geoportal.gov.pl/dane/numeryczny-model-pokrycia-terenu)
+    - [Point cloud](https://www.geoportal.gov.pl/dane/dane-pomiarowe-lidar)
 
 It is also possible to geocode addresses or objects using the `geocodePL_get()` function.
 
