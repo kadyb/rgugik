@@ -32,7 +32,7 @@ DEM_request = function(x) {
   }
 
   selected_cols = c("godlo", "akt_rok", "asortyment", "format", "char_przestrz",
-                    "blad_sr_wys", "uklad_xy", "uklad_h", "akt_data","czy_ark_wypelniony",
+                    "blad_sr_wys", "uklad_xy", "uklad_h", "akt_data", "czy_ark_wypelniony",
                     "url_do_pobrania", "nazwa_pliku", "id_serie", "zr_danych")
   selected_cols = paste(selected_cols, collapse = ",")
 
