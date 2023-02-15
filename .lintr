@@ -1,23 +1,17 @@
-linters: linters_with_defaults(
-    absolute_path_linter(),
-    brace_linter(),
-    commas_linter(),
-    equals_na_linter(),
-    function_left_parentheses_linter(),
-    infix_spaces_linter(),
-    line_length_linter(100),
-    nonportable_path_linter(),
-    object_usage_linter(),
-    semicolon_linter(),
-    seq_linter(),
-    spaces_inside_linter(),
-    spaces_left_parentheses_linter(),
-    T_and_F_symbol_linter(),
-    undesirable_function_linter(),
-    unneeded_concatenation_linter(),
+linters: linters_with_tags(
+    tags = NULL,
+    packages = "lintr",
     assignment_linter = NULL,
     commented_code_linter = NULL,
     cyclocomp_linter = NULL,
-    object_name_linter = NULL
+    extraction_operator_linter = NULL,
+    implicit_integer_linter = NULL,
+    line_length_linter(100),
+    object_name_linter = NULL,
+    redundant_ifelse_linter = NULL,
+    undesirable_function_linter = NULL,
+    undesirable_operator_linter = NULL,
+    unused_import_linter = NULL
   )
 encoding: "UTF-8"
+exclusions: list("renv", "packrat") # see ?lintr::exclude
