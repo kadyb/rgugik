@@ -20,6 +20,7 @@
 #' @examples
 #' \dontrun{
 #' library(sf)
+#' options(timeout = 600)
 #' polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 #' polygon = read_sf(polygon_path)
 #'
