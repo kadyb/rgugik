@@ -7,6 +7,8 @@
 #' (different formats of digital terrain model, digital surface model and
 #' point clouds)
 #'
+#' @seealso [`tile_download()`]
+#'
 #' @export
 #'
 #' @examples
@@ -64,7 +66,8 @@ DEM_request = function(x) {
                         #url_zfs = character(),
                         #id_nmt = integer(),
                         id_serie = integer(),
-                        zr_danych = character()
+                        zr_danych = character(),
+                        stringsAsFactors = FALSE
   )
 
   for (i in seq_along(x)) {

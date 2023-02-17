@@ -5,6 +5,8 @@
 #'
 #' @return a data frame with metadata and links to the orthoimages
 #'
+#' @seealso [`tile_download()`]
+#'
 #' @export
 #'
 #' @examples
@@ -61,8 +63,8 @@ ortho_request = function(x) {
                         nazwa_pliku = character(),
                         #url_zfs = character(),
                         #id_orto = integer(),
-                        id_serie = integer()
-                        # where is 'sha1'???
+                        id_serie = integer(),
+                        stringsAsFactors = FALSE
   )
 
   for (i in seq_along(x)) {
