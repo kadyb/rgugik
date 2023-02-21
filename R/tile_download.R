@@ -38,10 +38,6 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, print_iter = TRUE, 
     stop("data frame should come from 'request_ortho'")
   }
 
-  if (check_SHA == TRUE && !"sha1" %in% names(df_req)) {
-    stop("'sha1' column not found")
-  }
-
   if (nrow(df_req) == 0) {
     stop("empty df")
   }
