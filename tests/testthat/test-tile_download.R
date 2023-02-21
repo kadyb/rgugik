@@ -46,13 +46,6 @@ test_that("check file ext", {
 })
 
 
-# internal checkSHA function
-test_that("check checkSHA warning", {
-  expect_warning(rgugik:::checkSHA_fun("fakeSHA", DEM$filename, file_path),
-                 paste(DEM$filename, "incorrect SHA"))
-})
-
-
 # test stops
 df = data.frame("URL" = integer(), "filename" = integer(), "sha1" = integer())
 
@@ -63,6 +56,4 @@ test_that("check stops", {
                "data frame should come from 'request_ortho'")
   expect_error(tile_download(df[, -2]),
                "data frame should come from 'request_ortho'")
-  expect_error(tile_download(df[, -3], check_SHA = TRUE),
-               "'sha1' column not found")
 })

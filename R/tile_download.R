@@ -6,8 +6,6 @@
 #' by default, files are saved in the working directory
 #' @param unzip TRUE (default) or FALSE, when TRUE the downloaded archive will
 #' be extracted and removed; only suitable for certain elevation data
-#' @param check_SHA check the integrity of downloaded files
-#' (logical, FALSE default)
 #' @param print_iter print the current iteration of all
 #' (logical, TRUE default)
 #' @param ... additional argument for [`utils::download.file()`]
@@ -30,8 +28,7 @@
 #' req_df = DEM_request(polygon)
 #' tile_download(req_df[1, ]) # download the first DEM only
 #' }
-tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
-                         print_iter = TRUE, ...) {
+tile_download = function(df_req, outdir = ".", unzip = TRUE, print_iter = TRUE, ...) {
 
   if (!"URL" %in% names(df_req)) {
     stop("data frame should come from 'request_ortho'")
@@ -69,12 +66,6 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
       return(invisible("connection error"))
     }
 
-    # compare checksums (reference is SHA-1)
-    if (check_SHA) {
-      checkSHA_fun(refSHA = df_req[i, "sha1"], filename = df_req[i, "filename"],
-                   filepath = filepath)
-    }
-
     # get file extension and unzip
     ext = substr(df_req[i, "URL"], nchar(df_req[i, "URL"]) - 2, nchar(df_req[i, "URL"]))
     if (unzip && ext == "zip") {
@@ -83,16 +74,4 @@ tile_download = function(df_req, outdir = ".", unzip = TRUE, check_SHA = FALSE,
     }
 
   }
-}
-
-
-# check SHA function
-checkSHA_fun = function(refSHA, filename, filepath) {
-
-  fileSHA = as.character(openssl::sha1(file(filepath)))
-
-  if (!fileSHA == refSHA) {
-    warning(paste(filename, "incorrect SHA"), call. = FALSE, immediate. = TRUE)
-  }
-
 }
