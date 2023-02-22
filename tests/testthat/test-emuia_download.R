@@ -28,7 +28,7 @@ file_path = list.files(tmp, full.names = TRUE)
 file_ext = substr(file_path, nchar(file_path) - 2, nchar(file_path))
 
 test_that("check if zip is removed", {
-  expect_true(!"zip" %in% file_ext)
+  expect_false("zip" %in% file_ext)
 })
 
 
