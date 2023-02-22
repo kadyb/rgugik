@@ -1,7 +1,7 @@
 Package: rgugik
 Type: Package
 Title: Search and Retrieve Spatial Data from 'GUGiK'
-Version: 0.3.3
+Version: 0.4.0
 Authors@R: c(person(given = "Krzysztof",
                     family = "Dyba",
                     role = c("aut", "cre"),
@@ -34,8 +34,7 @@ Depends:
     R (>= 3.5)
 Imports: 
     sf,
-    jsonlite,
-    openssl
+    jsonlite
 Suggests:
     curl,
     knitr,
@@ -45,7 +44,7 @@ Suggests:
     terra
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 URL: https://kadyb.github.io/rgugik/, https://github.com/kadyb/rgugik
 BugReports: https://github.com/kadyb/rgugik/issues
 Roxygen: list(markdown = TRUE)

@@ -32,7 +32,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
     base_URL = "https://services.gugik.gov.pl/uug/?request=GetAddress&address="
     prepared_URL = paste0(base_URL, address)
-    prepared_URL = gsub(" ", "%20", prepared_URL)
+    prepared_URL = gsub(" ", "%20", prepared_URL, fixed = TRUE)
     output = tryGet(jsonlite::fromJSON(prepared_URL))
 
     if (any(output %in% c("error", "warning"))) {
@@ -62,7 +62,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
     base_URL = "https://services.gugik.gov.pl/uug?request=GetRoadMarker&location="
     prepared_URL = paste0(base_URL, road)
-    prepared_URL = gsub(" ", "%20", prepared_URL)
+    prepared_URL = gsub(" ", "%20", prepared_URL, fixed = TRUE)
     output = tryGet(jsonlite::fromJSON(prepared_URL))
 
     if (any(output %in% c("error", "warning"))) {
@@ -87,7 +87,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
       base_URL = "https://services.gugik.gov.pl/uug/?request=GetLevelCrossing&location="
       prepared_URL = paste0(base_URL, rail_crossing)
-      prepared_URL = gsub(" ", "%20", prepared_URL)
+      prepared_URL = gsub(" ", "%20", prepared_URL, fixed = TRUE)
       output = tryGet(jsonlite::fromJSON(prepared_URL))
 
       if (any(output %in% c("error", "warning"))) {
@@ -109,7 +109,7 @@ geocodePL_get = function(address = NULL, road = NULL, rail_crossing = NULL, geon
 
     base_URL = "https://services.gugik.gov.pl/uug/?request=GetLocation&location="
     prepared_URL = paste0(base_URL, geoname)
-    prepared_URL = gsub(" ", "%20", prepared_URL)
+    prepared_URL = gsub(" ", "%20", prepared_URL, fixed = TRUE)
     output = tryGet(jsonlite::fromJSON(prepared_URL))
 
     if (any(output %in% c("error", "warning"))) {

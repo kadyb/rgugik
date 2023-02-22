@@ -24,5 +24,5 @@ test_that("check number of rows", {
 })
 
 test_that("check number of columns", {
-  expect_true(ncol(req_df) == 13)
+  expect_true(ncol(req_df) == 14)
 })

@@ -30,7 +30,7 @@ minmaxDTM_get = function(polygon) {
 
   # input area unit is [m^2]
   if (as.vector(sf::st_area(polygon)) > 100000) {
-    stop(paste("maximum area is", 10, "ha"))
+    stop("maximum area is ", 10, " ha")
   }
 
   geom = sf::st_coordinates(polygon)[, 1:2]

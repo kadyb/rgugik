@@ -7,6 +7,8 @@
 #' (different formats of digital terrain model, digital surface model and
 #' point clouds)
 #'
+#' @seealso [`tile_download()`]
+#'
 #' @export
 #'
 #' @examples
@@ -31,13 +33,13 @@ DEM_request = function(x) {
     epsg = sf::st_crs(x)$epsg
   }
 
-  selected_cols = c("godlo", "akt_rok", "format", "charPrzest", "bladSrWys",
-                    "ukladXY", "ukladH", "czy_ark_wypelniony", "url_do_pobrania",
-                    "nazwa_pliku", "idSerie", "sha1", "asortyment")
+  selected_cols = c("godlo", "akt_rok", "asortyment", "format", "char_przestrz",
+                    "blad_sr_wys", "uklad_xy", "uklad_h", "akt_data", "czy_ark_wypelniony",
+                    "url_do_pobrania", "nazwa_pliku", "id_serie", "zr_danych")
   selected_cols = paste(selected_cols, collapse = ",")
 
   # hard coded URL and parameters
-  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/1/query?"
+  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/4/query?"
   geometryType = "&geometryType=esriGeometryEnvelope"
   spatialRel = "&spatialRel=esriSpatialRelIntersects"
   outFields = paste0("&outFields=", selected_cols)
@@ -47,22 +49,25 @@ DEM_request = function(x) {
   # initial empty df (columns must be identical as in 'selected_cols')
   empty_df = data.frame(godlo = character(),
                         akt_rok = integer(),
+                        asortyment = character(),
                         format = character(),
-                        charPrzest = character(),
-                        bladSrWys = numeric(),
-                        ukladXY = character(),
-                        #modulArch = character(),
-                        ukladH = character(),
-                        #nrZglosz = character(),
+                        char_przestrz = character(),
+                        blad_sr_wys = numeric(),
+                        uklad_xy = character(),
+                        #modul_arch = character(),
+                        uklad_h = character(),
+                        #nr_zglosz = character(),
+                        akt_data = numeric(),
                         czy_ark_wypelniony = character(),
-                        #daneAktualne = integer(),
+                        #dane_aktualne = integer(),
                         #lok_nmt = character(),
                         url_do_pobrania = character(),
                         nazwa_pliku = character(),
-                        #idNmt = integer(),
-                        idSerie = integer(),
-                        sha1 = character(),
-                        asortyment = character()
+                        #url_zfs = character(),
+                        #id_nmt = integer(),
+                        id_serie = integer(),
+                        zr_danych = character(),
+                        stringsAsFactors = FALSE
   )
 
   for (i in seq_along(x)) {
@@ -102,15 +107,19 @@ DEM_request = function(x) {
   empty_df = empty_df[!duplicated(empty_df$nazwa_pliku), ]
 
   # postprocessing
-  colnames(empty_df) = c("sheetID", "year", "format", "resolution", "avgElevErr",
-                         "CRS", "VRS", "isFilled", "URL", "filename", "seriesID",
-                         "sha1", "product")
-  empty_df$CRS = as.factor(empty_df$CRS)
-  empty_df$VRS = as.factor(empty_df$VRS)
-  empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
+  colnames(empty_df) = c("sheetID", "year", "product", "format", "resolution", "avgElevErr",
+                         "CRS", "VRS", "date", "isFilled", "URL", "filename", "seriesID",
+                         "source")
   empty_df$product = factor(empty_df$product,
                             levels = c("Dane NMPT", "Dane NMT", "Dane pomiarowe NMT"),
                             labels = c("DSM", "DTM", "PointCloud"))
+  empty_df$CRS = as.factor(empty_df$CRS)
+  empty_df$VRS = as.factor(empty_df$VRS)
+  empty_df$date = as.Date(as.POSIXct(empty_df$date / 1000, origin = "1970-01-01", tz = "CET"))
+  empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
+  empty_df$source = factor(empty_df$source,
+                           levels = c("Skaning laserowy", "Zdj. lotnicze"),
+                           labels = c("Laser scanning", "Aerial photo"))
 
   return(empty_df)
 }

@@ -13,6 +13,7 @@ tryGet = function(code) {
 
 err_print = function() {
   msg = paste0("\n", "Conection error.", "\n", "If the problem persists, ",
-               "try a different download method from 'download.file()'.")
+               "try a different download method from 'download.file()' ",
+               "and/or increase timeout 'options(timeout = 600)'.")
   message(msg)
 }

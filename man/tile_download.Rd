@@ -4,14 +4,7 @@
 \alias{tile_download}
 \title{Download requested tiles}
 \usage{
-tile_download(
-  df_req,
-  outdir = ".",
-  unzip = TRUE,
-  check_SHA = FALSE,
-  print_iter = TRUE,
-  ...
-)
+tile_download(df_req, outdir = ".", unzip = TRUE, print_iter = TRUE, ...)
 }
 \arguments{
 \item{df_req}{a data frame obtained using the \code{\link[=ortho_request]{ortho_request()}} and
@@ -22,9 +15,6 @@ by default, files are saved in the working directory}
 
 \item{unzip}{TRUE (default) or FALSE, when TRUE the downloaded archive will
 be extracted and removed; only suitable for certain elevation data}
-
-\item{check_SHA}{check the integrity of downloaded files
-(logical, FALSE default)}
 
 \item{print_iter}{print the current iteration of all
 (logical, TRUE default)}
@@ -41,6 +31,7 @@ Download requested tiles
 \examples{
 \dontrun{
 library(sf)
+options(timeout = 600)
 polygon_path = system.file("datasets/search_area.gpkg", package = "rgugik")
 polygon = read_sf(polygon_path)
 

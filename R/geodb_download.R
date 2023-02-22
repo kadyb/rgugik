@@ -30,7 +30,7 @@
 #' }
 geodb_download = function(voivodeships, outdir = ".", unzip = TRUE, ...) {
 
-  if (!is.character(voivodeships) | length(voivodeships) == 0) {
+  if (!is.character(voivodeships) || length(voivodeships) == 0) {
     stop("enter names or TERC")
   }
 

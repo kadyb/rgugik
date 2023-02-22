@@ -62,7 +62,7 @@ parcel_get = function(TERYT = NULL, X = NULL, Y = NULL) {
     }
 
     output = output[2]
-    output = unlist(strsplit(output, "\\|"))
+    output = unlist(strsplit(output, "|", fixed = TRUE))
     wkb = structure(list(output[1]), class = "WKB")
     geom = sf::st_as_sfc(wkb, EWKB = TRUE, crs = 2180)
     geom = sf::st_sf(geom, TERYT = output[2])

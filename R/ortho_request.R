@@ -5,6 +5,8 @@
 #'
 #' @return a data frame with metadata and links to the orthoimages
 #'
+#' @seealso [`tile_download()`]
+#'
 #' @export
 #'
 #' @examples
@@ -29,13 +31,13 @@ ortho_request = function(x) {
     epsg = sf::st_crs(x)$epsg
   }
 
-  selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zrDanych", "ukladXY",
-                    "czy_ark_wypelniony", "url_do_pobrania", "idSerie", "sha1", "akt_data",
-                    "nazwa_pliku")
+  selected_cols = c("godlo", "akt_rok", "piksel", "kolor", "zr_danych", "uklad_xy",
+                    "akt_data", "czy_ark_wypelniony", "url_do_pobrania",
+                    "nazwa_pliku", "id_serie")
   selected_cols = paste(selected_cols, collapse = ",")
 
   # hard coded URL and parameters
-  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/0/query?"
+  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/3/query?"
   geometryType = "&geometryType=esriGeometryEnvelope"
   spatialRel = "&spatialRel=esriSpatialRelIntersects"
   outFields = paste0("&outFields=", selected_cols)
@@ -47,21 +49,22 @@ ortho_request = function(x) {
                         akt_rok = integer(),
                         piksel = numeric(),
                         kolor = character(),
-                        zrDanych = character(),
-                        ukladXY = character(),
-                        #modulArch = character(),
-                        #nrZglosz = character(),
+                        zr_danych = character(),
+                        uklad_xy = character(),
+                        #modul_arch = character(),
+                        #nr_zglosz = character(),
+                        akt_data = numeric(),
+                        #akt_dzien = character(),
                         czy_ark_wypelniony = character(),
-                        #daneAktualne = integer(),
-                        #daneAktDo10cm = integer(),
+                        #dane_aktualne = integer(),
+                        #dane_aktualne_do_10cm = integer(),
                         #lok_orto = character(),
                         url_do_pobrania = character(),
-                        idSerie = integer(),
-                        sha1 = character(),
-                        akt_data = numeric(),
-                        #idorto = integer(),
-                        nazwa_pliku = character()
-                        #ESRI_OID = integer()
+                        nazwa_pliku = character(),
+                        #url_zfs = character(),
+                        #id_orto = integer(),
+                        id_serie = integer(),
+                        stringsAsFactors = FALSE
   )
 
   for (i in seq_along(x)) {
@@ -102,15 +105,15 @@ ortho_request = function(x) {
 
   # postprocessing
   colnames(empty_df) = c("sheetID", "year", "resolution", "composition",
-                         "sensor", "CRS", "isFilled", "URL", "seriesID",
-                         "sha1", "date", "filename")
+                         "sensor", "CRS", "date", "isFilled", "URL",
+                         "filename", "seriesID")
   empty_df$composition = as.factor(empty_df$composition)
   empty_df$date = as.Date(as.POSIXct(empty_df$date / 1000, origin = "1970-01-01", tz = "CET"))
   empty_df$CRS = as.factor(empty_df$CRS)
   empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
   empty_df$sensor = factor(empty_df$sensor,
-             levels = c("Scena sat.", "Zdj. analogowe", "Zdj. cyfrowe"),
-             labels = c("Satellite", "Analog", "Digital"))
+                           levels = c("Scena sat.", "Zdj. analogowe", "Zdj. cyfrowe"),
+                           labels = c("Satellite", "Analog", "Digital"))
 
   return(empty_df)
 }

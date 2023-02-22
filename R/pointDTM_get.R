@@ -43,7 +43,7 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
   # the greater distance between points, the larger area can be used
   # input area unit is [m^2]
   if (as.vector(sf::st_area(polygon)) > 200000 * distance) {
-    stop(paste("maximum area is", 20 * distance, "ha"))
+    stop("maximum area is ", 20 * distance, " ha")
   }
 
   base_URL = "https://services.gugik.gov.pl/nmt/?request=GetHByPointList&list="
@@ -63,15 +63,15 @@ pointDTM_get = function(polygon, distance = 1, print_iter = TRUE) {
     str_pts = paste(sel_pts[, 2], sel_pts[, 1]) # X, Y coordinates are inverted
     str_pts = paste(str_pts, collapse = ",")
     prepared_URL = paste0(base_URL, str_pts)
-    prepared_URL = gsub(" ", "%20", prepared_URL)
+    prepared_URL = gsub(" ", "%20", prepared_URL, fixed = TRUE)
     str_output = tryGet(readLines(prepared_URL, warn = FALSE))
 
     if (any(str_output %in% c("error", "warning"))) {
       return(NULL)
     }
 
-    str_output = unlist(strsplit(str_output, ","))
-    str_output = unlist(strsplit(str_output, " "))
+    str_output = unlist(strsplit(str_output, ",", fixed = TRUE))
+    str_output = unlist(strsplit(str_output, " ", fixed = TRUE))
     elev = str_output[1:(length(str_output) / 3) * 3] # take every 3rd element (elevation)
     return(elev)
     }

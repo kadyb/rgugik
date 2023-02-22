@@ -31,3 +31,6 @@ req_df = req_df[req_df$composition == "CIR", ]
 req_df = req_df[req_df$resolution <= 0.25 & req_df$year >= 2016, ]
 }
 }
+\seealso{
+\code{\link[=tile_download]{tile_download()}}
+}

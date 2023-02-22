@@ -30,3 +30,6 @@ req_df = req_df[req_df$year > 2018, ]
 req_df = req_df[req_df$product == "PointCloud" & req_df$format == "LAS", ]
 }
 }
+\seealso{
+\code{\link[=tile_download]{tile_download()}}
+}
