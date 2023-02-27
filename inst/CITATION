@@ -3,7 +3,7 @@ citHeader("To cite rgugik in publications, please use:")
 bibentry(
   entry    = "Article",
   title    = "rgugik: Search and Retrieve Spatial Data from the Polish Head Office of Geodesy and Cartography in R",
-  author   = c(person("Krzysztof, "Dyba"),
+  author   = c(person("Krzysztof", "Dyba"),
                person("Jakub", "Nowosad")),
   journal  = "Journal of Open Source Software",
   year     = "2021",
