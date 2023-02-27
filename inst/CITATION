@@ -1,12 +1,10 @@
 citHeader("To cite rgugik in publications, please use:")
 
-citEntry(
+bibentry(
   entry    = "Article",
   title    = "rgugik: Search and Retrieve Spatial Data from the Polish Head Office of Geodesy and Cartography in R",
-  author   = personList(
-              as.person("Krzysztof Dyba"),
-              as.person("Jakub Nowosad")
-             ),
+  author   = c(person("Krzysztof, "Dyba"),
+               person("Jakub", "Nowosad")),
   journal  = "Journal of Open Source Software",
   year     = "2021",
   volume   = "6",
