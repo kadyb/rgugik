@@ -95,11 +95,11 @@ There are the additional functions for obtaining digital terrain model:
   - `pointDTM100_download()` for voivodeships areas (low resolution grid)
   - `minmaxDTM_get()` to find the minimum and maximum elevation (small areas)
 
-The names of administrative units and their IDs can be obtained using these functions:
+The names of administrative units and their IDs are included in these objects:
 
-  - `voivodeship_names()` (16)
-  - `county_names()` (380)
-  - `commune_names()` (2476)
+  - `voivodeship_names` (16)
+  - `county_names` (380)
+  - `commune_names` (2476)
 
 ## Installation
 

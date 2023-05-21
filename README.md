@@ -10,7 +10,7 @@
 status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://github.com/kadyb/rgugik/actions)
 [![codecov](https://codecov.io/gh/kadyb/rgugik/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kadyb/rgugik)
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit/)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.02948/status.svg)](https://doi.org/10.21105/joss.02948)
 <!-- badges: end -->
 
@@ -63,12 +63,12 @@ There are the additional functions for obtaining digital terrain model:
 - `minmaxDTM_get()` to find the minimum and maximum elevation (small
   areas)
 
-The names of administrative units and their IDs can be obtained using
-these functions:
+The names of administrative units and their IDs are included in these
+objects:
 
-- `voivodeship_names()` (16)
-- `county_names()` (380)
-- `commune_names()` (2476)
+- `voivodeship_names` (16)
+- `county_names` (380)
+- `commune_names` (2476)
 
 ## Installation
 
