@@ -10,7 +10,7 @@
 status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://github.com/kadyb/rgugik/actions)
 [![codecov](https://codecov.io/gh/kadyb/rgugik/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kadyb/rgugik)
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit/)
+MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.02948/status.svg)](https://doi.org/10.21105/joss.02948)
 <!-- badges: end -->
 
@@ -18,27 +18,26 @@ MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/
 [Polish Head Office of Geodesy and
 Cartography](https://www.gov.pl/web/gugik) including:
 
--   [Orthophotomaps](https://www.geoportal.gov.pl/dane/ortofotomapa)
--   [General Geographic
-    Database](https://www.geoportal.gov.pl/dane/baza-danych-ogolnogeograficznych-bdo)
--   [Topographic
-    Database](https://www.geoportal.gov.pl/dane/baza-danych-obiektow-topograficznych-bdot)
--   [Register of Towns, Streets and
-    Addresses](https://emuia.gugik.gov.pl)
--   [State Register of Geographical
-    Names](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-nazw-geograficznych)
--   [State Register of
-    Borders](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-granic)
--   Location (geometry) of cadastral parcels using TERYT (parcel ID) or
-    coordinates
--   3D models of buildings (LOD1, LOD2)
--   Various digital elevation models as:
-    -   [Digital terrain
-        model](https://www.geoportal.gov.pl/dane/numeryczny-model-terenu)
-    -   [Digital surface
-        model](https://www.geoportal.gov.pl/dane/numeryczny-model-pokrycia-terenu)
-    -   [Point
-        cloud](https://www.geoportal.gov.pl/dane/dane-pomiarowe-lidar)
+- [Orthophotomaps](https://www.geoportal.gov.pl/dane/ortofotomapa)
+- [General Geographic
+  Database](https://www.geoportal.gov.pl/dane/baza-danych-ogolnogeograficznych-bdo)
+- [Topographic
+  Database](https://www.geoportal.gov.pl/dane/baza-danych-obiektow-topograficznych-bdot)
+- [Register of Towns, Streets and Addresses](https://emuia.gugik.gov.pl)
+- [State Register of Geographical
+  Names](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-nazw-geograficznych)
+- [State Register of
+  Borders](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-granic)
+- Location (geometry) of cadastral parcels using TERYT (parcel ID) or
+  coordinates
+- 3D models of buildings (LOD1, LOD2)
+- Various digital elevation models as:
+  - [Digital terrain
+    model](https://www.geoportal.gov.pl/dane/numeryczny-model-terenu)
+  - [Digital surface
+    model](https://www.geoportal.gov.pl/dane/numeryczny-model-pokrycia-terenu)
+  - [Point
+    cloud](https://www.geoportal.gov.pl/dane/dane-pomiarowe-lidar)
 
 It is also possible to geocode addresses or objects using the
 `geocodePL_get()` function.
@@ -59,18 +58,17 @@ It is also possible to geocode addresses or objects using the
 
 There are the additional functions for obtaining digital terrain model:
 
--   `pointDTM_get()` for small areas (high resolution grid)
--   `pointDTM100_download()` for voivodeships areas (low resolution
-    grid)
--   `minmaxDTM_get()` to find the minimum and maximum elevation (small
-    areas)
+- `pointDTM_get()` for small areas (high resolution grid)
+- `pointDTM100_download()` for voivodeships areas (low resolution grid)
+- `minmaxDTM_get()` to find the minimum and maximum elevation (small
+  areas)
 
 The names of administrative units and their IDs can be obtained using
 these functions:
 
--   `voivodeship_names()` (16)
--   `county_names()` (380)
--   `commune_names()` (2477)
+- `voivodeship_names()` (16)
+- `county_names()` (380)
+- `commune_names()` (2476)
 
 ## Installation
 
@@ -93,10 +91,10 @@ remotes::install_github("kadyb/rgugik")
 
 ### Orthophotomap
 
--   `ortho_request()` - returns a data frame with metadata and links to
-    the orthoimages for a given geometry (point, line or polygon)
--   `tile_download()` - downloads orthoimages based on the data frame
-    obtained using the `ortho_request()` function
+- `ortho_request()` - returns a data frame with metadata and links to
+  the orthoimages for a given geometry (point, line or polygon)
+- `tile_download()` - downloads orthoimages based on the data frame
+  obtained using the `ortho_request()` function
 
 ``` r
 library(rgugik)
@@ -113,19 +111,18 @@ req_df = req_df[req_df$year == 2001, ]
 
 # print metadata
 t(req_df)
-#>             5                                                                               
+#>             12                                                                              
 #> sheetID     "N-33-130-D-b-2-3"                                                              
 #> year        "2001"                                                                          
 #> resolution  "1"                                                                             
 #> composition "RGB"                                                                           
 #> sensor      "Satellite"                                                                     
 #> CRS         "PL-1992"                                                                       
+#> date        "2001-01-01"                                                                    
 #> isFilled    "TRUE"                                                                          
 #> URL         "https://opendata.geoportal.gov.pl/ortofotomapa/41/41_3756_N-33-130-D-b-2-3.tif"
-#> seriesID    "41"                                                                            
-#> sha1        "312c81963a31e268fc20c442733c48e1aa33838f"                                      
-#> date        "2001-01-01"                                                                    
-#> filename    "41_3756_N-33-130-D-b-2-3"
+#> filename    "41_3756_N-33-130-D-b-2-3"                                                      
+#> seriesID    "41"
 
 # download image
 tile_download(req_df)
@@ -157,11 +154,11 @@ plot(st_geometry(counties_geom), main = "Opolskie")
 More advanced examples of the practical (step by step) use of this
 package can be found in the vignettes:
 
--   [Orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html)
--   [Digital elevation
-    model](https://kadyb.github.io/rgugik/articles/DEM.html)
--   [Topographic
-    Database](https://kadyb.github.io/rgugik/articles/topodb.html)
+- [Orthophotomap](https://kadyb.github.io/rgugik/articles/orthophotomap.html)
+- [Digital elevation
+  model](https://kadyb.github.io/rgugik/articles/DEM.html)
+- [Topographic
+  Database](https://kadyb.github.io/rgugik/articles/topodb.html)
 
 ## Acknowledgment
 

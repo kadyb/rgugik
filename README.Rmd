@@ -99,7 +99,7 @@ The names of administrative units and their IDs can be obtained using these func
 
   - `voivodeship_names()` (16)
   - `county_names()` (380)
-  - `commune_names()` (2477)
+  - `commune_names()` (2476)
 
 ## Installation
 

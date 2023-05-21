@@ -5,7 +5,7 @@
 \alias{commune_names}
 \title{Communes in Poland}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2477 rows and 2 columns.
+An object of class \code{data.frame} with 2476 rows and 2 columns.
 }
 \usage{
 commune_names
@@ -13,6 +13,9 @@ commune_names
 \description{
 The data frame contains names of communes,
 and their identifiers (TERC, 7 characters).
+}
+\details{
+Last update: 1 January 2023
 }
 \examples{
 commune_names
