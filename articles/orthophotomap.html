@@ -218,7 +218,7 @@ preferable way).</li>
 <p>We can also calculate the area of this polygon.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">krajkowo_area</span> <span class="op">=</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_measures.html" class="external-link">st_area</a></span><span class="op">(</span><span class="va">krajkowo</span><span class="op">)</span> <span class="co"># [m^2]</span></span>
-<span><span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/units/man/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">krajkowo_area</span>, <span class="st">"ha"</span><span class="op">)</span> <span class="co"># convert to [ha]</span></span></code></pre></div>
+<span><span class="fu">units</span><span class="fu">::</span><span class="fu"><a href="https://r-quantities.github.io/units/reference/units.html" class="external-link">set_units</a></span><span class="op">(</span><span class="va">krajkowo_area</span>, <span class="st">"ha"</span><span class="op">)</span> <span class="co"># convert to [ha]</span></span></code></pre></div>
 <pre><code><span><span class="co">## 165.2744 [ha]</span></span></code></pre>
 <p>The <code><a href="https://r-spatial.github.io/sf/reference/geos_measures.html" class="external-link">st_area()</a></code> function returned the area in m^2, and
 after the conversion we got the result of 165 ha.</p>
