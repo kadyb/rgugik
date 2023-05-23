@@ -1,5 +1,7 @@
 # rgugik development version
 
+* The list of communes has been updated (as of 01 January 2023).
+
 # rgugik 0.4.0
 
 * The `ortho_request()` and `DEM_request()` functions have been updated
