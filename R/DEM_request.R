@@ -111,7 +111,7 @@ DEM_request = function(x) {
                          "CRS", "VRS", "date", "isFilled", "URL", "filename", "seriesID",
                          "source")
   empty_df$product = factor(empty_df$product,
-                            levels = c("Dane NMPT", "Dane NMT", "Dane pomiarowe NMT"),
+                            levels = c("NMPT", "NMT", "chmura punktow"),
                             labels = c("DSM", "DTM", "PointCloud"))
   empty_df$CRS = as.factor(empty_df$CRS)
   empty_df$VRS = as.factor(empty_df$VRS)
