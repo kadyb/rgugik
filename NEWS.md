@@ -1,6 +1,6 @@
 # rgugik development version
 
-* The list of communes has been updated (as of 01 January 2023).
+* The list of communes has been updated (as of 02 January 2024).
 
 * Update product names in `DEM_request()`.
 

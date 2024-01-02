@@ -4,7 +4,7 @@
 #' @description The data frame contains names of communes,
 #' and their identifiers (TERC, 7 characters).
 #'
-#' @details Last update: 1 January 2023
+#' @details Last update: 2 January 2024
 #'
 #' @importFrom utils data
 #'
