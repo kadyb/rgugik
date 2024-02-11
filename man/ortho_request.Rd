@@ -19,6 +19,12 @@ a data frame with metadata and links to the orthoimages
 \description{
 Get metadata and links to available orthoimages
 }
+\details{
+The server can return a maximum of 1000 records in a single query.
+If your area of interest exceeds this limit, you can generate a grid of
+smaller polygons (\code{\link[sf:st_make_grid]{sf::st_make_grid()}}) or a regular grid of points
+(\code{\link[sf:st_sample]{sf::st_sample()}}).
+}
 \examples{
 \dontrun{
 library(sf)

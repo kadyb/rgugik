@@ -3,6 +3,12 @@
 #' @param x an `sf`, `sfc` or `SpatVector` object with one or more features
 #' (requests are based on the bounding boxes of the provided features)
 #'
+#' @details
+#' The server can return a maximum of 1000 records in a single query.
+#' If your area of interest exceeds this limit, you can generate a grid of
+#' smaller polygons ([`sf::st_make_grid()`]) or a regular grid of points
+#' ([`sf::st_sample()`]).
+#'
 #' @return a data frame with metadata and links to the orthoimages
 #'
 #' @seealso [`tile_download()`]

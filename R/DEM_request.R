@@ -7,6 +7,12 @@
 #' (different formats of digital terrain model, digital surface model and
 #' point clouds)
 #'
+#' @details
+#' The server can return a maximum of 1000 records in a single query.
+#' If your area of interest exceeds this limit, you can generate a grid of
+#' smaller polygons ([`sf::st_make_grid()`]) or a regular grid of points
+#' ([`sf::st_sample()`]).
+#'
 #' @seealso [`tile_download()`]
 #'
 #' @export
