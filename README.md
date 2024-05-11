@@ -10,7 +10,7 @@
 status](https://github.com/kadyb/rgugik/workflows/rcmdcheck/badge.svg)](https://github.com/kadyb/rgugik/actions)
 [![codecov](https://codecov.io/gh/kadyb/rgugik/branch/master/graph/badge.svg)](https://app.codecov.io/gh/kadyb/rgugik)
 [![License:
-MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit/)
+MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.02948/status.svg)](https://doi.org/10.21105/joss.02948)
 <!-- badges: end -->
 
@@ -18,26 +18,26 @@ MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/
 [Polish Head Office of Geodesy and
 Cartography](https://www.gov.pl/web/gugik) including:
 
-- [Orthophotomaps](https://www.geoportal.gov.pl/dane/ortofotomapa)
+- [Orthophotomaps](https://www.geoportal.gov.pl/pl/dane/ortofotomapa-orto/)
 - [General Geographic
-  Database](https://www.geoportal.gov.pl/dane/baza-danych-ogolnogeograficznych-bdo)
+  Database](https://www.geoportal.gov.pl/pl/dane/baza-danych-obiektow-ogolnogeograficznych-bdoo/)
 - [Topographic
-  Database](https://www.geoportal.gov.pl/dane/baza-danych-obiektow-topograficznych-bdot)
+  Database](https://www.geoportal.gov.pl/pl/dane/baza-danych-obiektow-topograficznych-bdot10k/)
 - [Register of Towns, Streets and Addresses](https://emuia.gugik.gov.pl)
 - [State Register of Geographical
-  Names](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-nazw-geograficznych)
+  Names](https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-nazw-geograficznych-prng/)
 - [State Register of
-  Borders](https://www.geoportal.gov.pl/dane/panstwowy-rejestr-granic)
+  Borders](https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-granic-prg/)
 - Location (geometry) of cadastral parcels using TERYT (parcel ID) or
   coordinates
 - 3D models of buildings (LOD1, LOD2)
 - Various digital elevation models as:
   - [Digital terrain
-    model](https://www.geoportal.gov.pl/dane/numeryczny-model-terenu)
+    model](https://www.geoportal.gov.pl/pl/dane/numeryczny-model-terenu-nmt/)
   - [Digital surface
-    model](https://www.geoportal.gov.pl/dane/numeryczny-model-pokrycia-terenu)
+    model](https://www.geoportal.gov.pl/pl/dane/numeryczny-model-pokrycia-terenu-nmpt/)
   - [Point
-    cloud](https://www.geoportal.gov.pl/dane/dane-pomiarowe-lidar)
+    cloud](https://www.geoportal.gov.pl/pl/dane/dane-pomiarowe-lidar-lidar/)
 
 It is also possible to geocode addresses or objects using the
 `geocodePL_get()` function.
@@ -111,7 +111,7 @@ req_df = req_df[req_df$year == 2001, ]
 
 # print metadata
 t(req_df)
-#>             12                                                                              
+#>             23                                                                              
 #> sheetID     "N-33-130-D-b-2-3"                                                              
 #> year        "2001"                                                                          
 #> resolution  "1"                                                                             
