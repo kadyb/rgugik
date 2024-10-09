@@ -1,102 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://kadyb.github.io/rgugik/404.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/articles/DEM.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/articles/orthophotomap.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/articles/spatialdb_description.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/articles/topodb.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/index.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/DEM_request.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/borders_download.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/borders_get.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/commune_names.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/county_names.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/emuia_download.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/geocodePL_get.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/geodb_download.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/geonames_download.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/minmaxDTM_get.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/models3D_download.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/ortho_request.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/parcel_get.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/pointDTM100_download.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/pointDTM_get.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/rgugik-package.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/tile_download.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/topodb_download.html</loc>
-  </url>
-  <url>
-    <loc>https://kadyb.github.io/rgugik/reference/voivodeship_names.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://kadyb.github.io/rgugik/404.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/CONTRIBUTING.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/LICENSE-text.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/LICENSE.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/articles/DEM.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/articles/index.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/articles/orthophotomap.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/articles/spatialdb_description.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/articles/topodb.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/authors.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/index.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/news/index.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/DEM_request.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/borders_download.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/borders_get.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/commune_names.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/county_names.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/emuia_download.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/geocodePL_get.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/geodb_download.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/geonames_download.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/index.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/minmaxDTM_get.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/models3D_download.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/ortho_request.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/parcel_get.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/pointDTM100_download.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/pointDTM_get.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/rgugik-package.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/tile_download.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/topodb_download.html</loc></url>
+<url><loc>https://kadyb.github.io/rgugik/reference/voivodeship_names.html</loc></url>
 </urlset>
+
