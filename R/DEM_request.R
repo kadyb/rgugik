@@ -45,7 +45,7 @@ DEM_request = function(x) {
   selected_cols = paste(selected_cols, collapse = ",")
 
   # hard coded URL and parameters
-  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/4/query?"
+  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/1/query?"
   geometryType = "&geometryType=esriGeometryEnvelope"
   spatialRel = "&spatialRel=esriSpatialRelIntersects"
   outFields = paste0("&outFields=", selected_cols)

@@ -1,7 +1,7 @@
 Package: rgugik
 Type: Package
 Title: Search and Retrieve Spatial Data from 'GUGiK'
-Version: 0.4.1
+Version: 0.4.2
 Authors@R: c(person(given = "Krzysztof",
                     family = "Dyba",
                     role = c("aut", "cre"),
