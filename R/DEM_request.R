@@ -8,7 +8,7 @@
 #' point clouds)
 #'
 #' @details
-#' The server can return a maximum of 1000 records in a single query.
+#' The server can return a maximum of 2000 records in a single query.
 #' If your area of interest exceeds this limit, you can generate a grid of
 #' smaller polygons ([`sf::st_make_grid()`]) or a regular grid of points
 #' ([`sf::st_sample()`]).
@@ -101,8 +101,8 @@ DEM_request = function(x) {
 
     output = output$features[[1]]
 
-    # MaxRecordCount: 1000
-    if (nrow(output) == 1000) {
+    # MaxRecordCount: 2000
+    if (nrow(output) == 2000) {
       warning("maximum number of records, reduce the area")
     }
 

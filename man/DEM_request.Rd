@@ -19,7 +19,7 @@ point clouds)
 Get metadata and links to available digital elevation models
 }
 \details{
-The server can return a maximum of 1000 records in a single query.
+The server can return a maximum of 2000 records in a single query.
 If your area of interest exceeds this limit, you can generate a grid of
 smaller polygons (\code{\link[sf:st_make_grid]{sf::st_make_grid()}}) or a regular grid of points
 (\code{\link[sf:st_sample]{sf::st_sample()}}).
