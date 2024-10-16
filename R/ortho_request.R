@@ -52,7 +52,7 @@ ortho_request = function(x) {
 
   # initial empty df (columns must be identical as in 'selected_cols')
   empty_df = data.frame(godlo = character(),
-                        akt_rok = integer(),
+                        akt_rok = character(),
                         piksel = numeric(),
                         kolor = character(),
                         zr_danych = character(),
@@ -114,7 +114,7 @@ ortho_request = function(x) {
                          "sensor", "CRS", "date", "isFilled", "URL",
                          "filename", "seriesID")
   empty_df$composition = as.factor(empty_df$composition)
-  empty_df$date = as.Date(as.POSIXct(empty_df$date / 1000, origin = "1970-01-01", tz = "CET"))
+  empty_df$date = as.Date(empty_df$date, format = "%Y-%m-%d")
   empty_df$CRS = as.factor(empty_df$CRS)
   empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
   empty_df$sensor = factor(empty_df$sensor,

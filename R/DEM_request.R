@@ -63,7 +63,7 @@ DEM_request = function(x) {
                         #modul_arch = character(),
                         uklad_h = character(),
                         #nr_zglosz = character(),
-                        akt_data = numeric(),
+                        akt_data = character(),
                         czy_ark_wypelniony = character(),
                         #dane_aktualne = integer(),
                         #lok_nmt = character(),
@@ -121,7 +121,7 @@ DEM_request = function(x) {
                             labels = c("DSM", "DTM", "PointCloud"))
   empty_df$CRS = as.factor(empty_df$CRS)
   empty_df$VRS = as.factor(empty_df$VRS)
-  empty_df$date = as.Date(as.POSIXct(empty_df$date / 1000, origin = "1970-01-01", tz = "CET"))
+  empty_df$date = as.Date(empty_df$date, format = "%Y-%m-%d")
   empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
   empty_df$source = factor(empty_df$source,
                            levels = c("Skaning laserowy", "Zdj. lotnicze"),
