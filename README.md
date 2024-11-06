@@ -44,17 +44,17 @@ It is also possible to geocode addresses or objects using the
 
 **Corresponding functions**
 
-| Function                              | Input                  | Dastaset EN                              | Dataset PL                                |
-|:--------------------------------------|:-----------------------|:-----------------------------------------|:------------------------------------------|
-| `ortho_request()`, `tile_download()`  | geometry               | Orthophotomap                            | Ortofotomapa                              |
-| `geodb_download()`                    | voivodeship            | General Geographic Database              | Baza Danych Obiektów Ogólnogeograficznych |
-| `topodb_download()`                   | county                 | Topographic Database                     | Baza Danych Obiektów Topograficznych      |
-| `emuia_download()`                    | commune                | Register of Towns, Streets and Addresses | Ewidencja Miejscowości, Ulic i Adresów    |
-| `geonames_download()`                 | type                   | State Register of Geographical Names     | Państwowy Rejestr Nazw Geograficznych     |
-| `borders_get()`, `borders_download()` | type                   | State Register of Borders                | Państwowy Rejestr Granic                  |
-| `parcel_get()`                        | parcel ID, coordinates | Location of cadastral parcels            | Lokalizacja działek katastralnych         |
-| `models3D_download()`                 | county                 | 3D models of buildings                   | Modele 3D budynków                        |
-| `DEM_request()`, `tile_download()`    | geometry               | Digital elevation models                 | Cyfrowe modele wysokościowe               |
+| Function | Input | Dastaset EN | Dataset PL |
+|:---|:---|:---|:---|
+| `ortho_request()`, `tile_download()` | geometry | Orthophotomap | Ortofotomapa |
+| `geodb_download()` | voivodeship | General Geographic Database | Baza Danych Obiektów Ogólnogeograficznych |
+| `topodb_download()` | county | Topographic Database | Baza Danych Obiektów Topograficznych |
+| `emuia_download()` | commune | Register of Towns, Streets and Addresses | Ewidencja Miejscowości, Ulic i Adresów |
+| `geonames_download()` | type | State Register of Geographical Names | Państwowy Rejestr Nazw Geograficznych |
+| `borders_get()`, `borders_download()` | type | State Register of Borders | Państwowy Rejestr Granic |
+| `parcel_get()` | parcel ID, coordinates | Location of cadastral parcels | Lokalizacja działek katastralnych |
+| `models3D_download()` | county | 3D models of buildings | Modele 3D budynków |
+| `DEM_request()`, `tile_download()` | geometry | Digital elevation models | Cyfrowe modele wysokościowe |
 
 There are the additional functions for obtaining digital terrain model:
 
@@ -196,5 +196,5 @@ BibTeX version can be obtained with `citation("rgugik")`.
 ## Related projects
 
 If you don’t feel familiar with R, there is a similar
-[QGIS](https://www.qgis.org/en/site/) tool in the
+[QGIS](https://www.qgis.org/) tool in the
 [EnviroSolutions](https://github.com/envirosolutionspl) repository.

@@ -198,4 +198,4 @@ BibTeX version can be obtained with `citation("rgugik")`.
 
 ## Related projects
 
-If you don't feel familiar with R, there is a similar [QGIS](https://www.qgis.org/en/site/) tool in the [EnviroSolutions](https://github.com/envirosolutionspl) repository.
+If you don't feel familiar with R, there is a similar [QGIS](https://www.qgis.org/) tool in the [EnviroSolutions](https://github.com/envirosolutionspl) repository.
