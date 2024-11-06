@@ -7,6 +7,7 @@ linters: linters_with_tags(
     expect_comparison_linter = NULL,
     extraction_operator_linter = NULL,
     implicit_integer_linter = NULL,
+    indentation_linter = NULL,
     line_length_linter(100),
     missing_package_linter = NULL,
     namespace_linter = NULL,
