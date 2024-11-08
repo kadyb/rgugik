@@ -25,6 +25,6 @@ Download State Register of Borders
 }
 \examples{
 \dontrun{
-borders_download("administrative units") # 375 MB
+borders_download("administrative units") # 366 MB
 }
 }

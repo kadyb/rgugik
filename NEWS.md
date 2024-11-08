@@ -3,6 +3,8 @@
 * Fixed "*Error in if (nrow(output) == 1000) { : argument is of length zero*"
 in `ortho_request()` and `DEM_request()`.
 
+* Updated data sources in `borders_download()` function.
+
 # rgugik 0.4.1
 
 * The list of communes has been updated (as of 02 January 2024).
