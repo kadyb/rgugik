@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' borders_download("administrative units") # 375 MB
+#' borders_download("administrative units") # 366 MB
 #' }
 borders_download = function(type, outdir = ".", unzip = TRUE, ...) {
 
@@ -27,11 +27,11 @@ borders_download = function(type, outdir = ".", unzip = TRUE, ...) {
   }
 
   if (type == "administrative units") {
-    URL = "ftp://91.223.135.109/prg/jednostki_administracyjne.zip"
+    URL = "https://opendata.geoportal.gov.pl/prg/granice/00_jednostki_administracyjne.zip"
   }
 
   if (type == "special units") {
-    URL = "ftp://91.223.135.109/prg/granice_specjalne_shp.zip"
+    URL = "https://opendata.geoportal.gov.pl/prg/granice/00_granice_specjalne_shp.zip"
   }
 
   if (type == "addresses") {
