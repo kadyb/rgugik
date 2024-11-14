@@ -28,6 +28,8 @@ Cartography](https://www.gov.pl/web/gugik) including:
   Names](https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-nazw-geograficznych-prng/)
 - [State Register of
   Borders](https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-granic-prg/)
+- [Land and Building
+  Registers](https://integracja.gugik.gov.pl/eziudp/index.php?zbior=egib)
 - Location (geometry) of cadastral parcels using TERYT (parcel ID) or
   coordinates
 - 3D models of buildings (LOD1, LOD2)
@@ -50,6 +52,7 @@ It is also possible to geocode addresses or objects using the
 | `geodb_download()` | voivodeship | General Geographic Database | Baza Danych Obiektów Ogólnogeograficznych |
 | `topodb_download()` | county | Topographic Database | Baza Danych Obiektów Topograficznych |
 | `emuia_download()` | commune | Register of Towns, Streets and Addresses | Ewidencja Miejscowości, Ulic i Adresów |
+| `egib_download()` | county | Land and Building Register | Ewidencja Gruntów i Budynków |
 | `geonames_download()` | type | State Register of Geographical Names | Państwowy Rejestr Nazw Geograficznych |
 | `borders_get()`, `borders_download()` | type | State Register of Borders | Państwowy Rejestr Granic |
 | `parcel_get()` | parcel ID, coordinates | Location of cadastral parcels | Lokalizacja działek katastralnych |
