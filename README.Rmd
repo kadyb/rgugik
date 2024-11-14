@@ -31,6 +31,7 @@ knitr::opts_chunk$set(
   - [Register of Towns, Streets and Addresses](https://emuia.gugik.gov.pl)
   - [State Register of Geographical Names](https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-nazw-geograficznych-prng/)
   - [State Register of Borders](https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-granic-prg/)
+  - [Land and Building Registers](https://integracja.gugik.gov.pl/eziudp/index.php?zbior=egib)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
   - 3D models of buildings (LOD1, LOD2)
   - Various digital elevation models as:
@@ -47,6 +48,7 @@ ds_pl = c("Ortofotomapa",
           "Baza Danych Obiektów Ogólnogeograficznych",
           "Baza Danych Obiektów Topograficznych",
           "Ewidencja Miejscowości, Ulic i Adresów",
+          "Ewidencja Gruntów i Budynków",
           "Państwowy Rejestr Nazw Geograficznych",
           "Państwowy Rejestr Granic",
           "Lokalizacja działek katastralnych",
@@ -57,6 +59,7 @@ ds_en = c("Orthophotomap",
           "General Geographic Database",
           "Topographic Database",
           "Register of Towns, Streets and Addresses",
+          "Land and Building Register",
           "State Register of Geographical Names",
           "State Register of Borders",
           "Location of cadastral parcels",
@@ -67,6 +70,7 @@ fun = c("`ortho_request()`, `tile_download()`",
         "`geodb_download()`",
         "`topodb_download()`",
         "`emuia_download()`",
+        "`egib_download()`",
         "`geonames_download()`",
         "`borders_get()`, `borders_download()`",
         "`parcel_get()`",
@@ -77,6 +81,7 @@ input = c("geometry",
           "voivodeship",
           "county",
           "commune",
+          "county",
           "type",
           "type",
           "parcel ID, coordinates",
