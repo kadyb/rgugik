@@ -29,7 +29,7 @@ Cartography](https://www.gov.pl/web/gugik) including:
 - [State Register of
   Borders](https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-granic-prg/)
 - [Land and Building
-  Registers](https://integracja.gugik.gov.pl/eziudp/index.php?zbior=egib)
+  Registers](https://www.geoportal.gov.pl/pl/dane/ewidencja-gruntow-i-budynkow-egib/)
 - Location (geometry) of cadastral parcels using TERYT (parcel ID) or
   coordinates
 - 3D models of buildings (LOD1, LOD2)
