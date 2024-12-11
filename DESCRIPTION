@@ -17,13 +17,13 @@ Authors@R: c(person(given = "Krzysztof",
                     role = "ctb",
                     email = "maciej.beresewicz@ue.poznan.pl", 
                     comment = c(ORCID = "0000-0002-8281-4301")),
-             person("GUGiK",
-                    role = "ctb",
-                    comment = "source of the data"),
-            person(given = "Grzegorz", 
+             person(given = "Grzegorz",
                     family = "Sapijaszko", 
                     role = "ctb",
-                    email = "grzegorz@sapijaszko.net"))
+                    email = "grzegorz@sapijaszko.net")
+             person("GUGiK",
+                    role = "ctb",
+                    comment = "source of the data"))
 Description: Automatic open data acquisition from resources of Polish Head Office
     of Geodesy and Cartography ('Główny Urząd Geodezji i Kartografii')
     (<https://www.gov.pl/web/gugik>).
