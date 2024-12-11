@@ -67,31 +67,35 @@
 
 
 <dt id="arg-layer">layer<a class="anchor" aria-label="anchor" href="#arg-layer"></a></dt>
-<dd><p>Requested layer, <code>parcels</code> default. Other common layer is <code>buildings</code> (budynki).
-You can check available layers by <code><a href="egib_layers.html">egib_layers()</a></code> data set.</p></dd>
+<dd><p>Requested layer, <code>parcels</code> default. Other common layer is
+<code>buildings</code>.
+You can check available layers by <code><a href="egib_layers.html">egib_layers()</a></code> dataset.</p></dd>
 
 
 <dt id="arg-outdir">outdir<a class="anchor" aria-label="anchor" href="#arg-outdir"></a></dt>
 <dd><p>name of the output directory where the data has to be stored,
-current directory by default. If you don't want to download data, pass a <code>NULL</code> value.</p></dd>
+current directory by default. If you don't want to download data, pass a
+<code>NULL</code> value.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>any other parameter passed to <code><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">sf::read_sf()</a></code> function</p></dd>
+<dd><p>any other parameter passed to <code><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">sf::read_sf()</a></code> function.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Simple feature data frame of objects for requested layer.</p>
+    <p>If the <code>outdir</code> argument is specified, the data will be downloaded
+to disk in geopackage format. If the <code>outdir</code> argument is <code>NULL</code>,
+simple feature data frame is returned.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>The EGiB data (Ewidencja Gruntów i Budynków) consist of 2 primary layers:
-cadastral data (parcels, "dzialki" in Polish) and buildings footprints (budynki).
-The data is maintained on county level, which results in 380 units/different
-sources of data. It may contain additional layers like points of detailed
-horizontal and vertical geodetic control network (osnowa_pozioma
-and osnowa_pionowa respectively).</p>
+    <p>The EGiB data (<em>Ewidencja Gruntów i Budynków</em>) consist of 2 primary layers:
+cadastral data (parcels) and buildings footprints.
+The data is maintained on county level, which results in 380 units (different
+sources of data). It may contain additional layers like points of detailed
+horizontal and vertical geodetic control network ("<em>osnowa_pozioma</em>"
+and "<em>osnowa_pionowa</em>" respectively).</p>
 <p><a href="https://www.geoportal.gov.pl/en/data/land-and-building-register-egib/" class="external-link">https://www.geoportal.gov.pl/en/data/land-and-building-register-egib/</a>
 <a href="https://www.geoportal.gov.pl/en/data/detailed-control-network-database-bdsog/" class="external-link">https://www.geoportal.gov.pl/en/data/detailed-control-network-database-bdsog/</a></p>
     </div>
@@ -99,8 +103,8 @@ and osnowa_pionowa respectively).</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="va">parcels</span> <span class="op">&lt;-</span> <span class="fu">egib_download</span><span class="op">(</span>county <span class="op">=</span> <span class="st">"Świętochłowice"</span>, layer <span class="op">=</span> <span class="st">"parcels"</span>, outdir <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># 3.9 MB</span></span></span>
 <span class="r-in"><span><span class="fu">egib_download</span><span class="op">(</span>TERYT <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"2476"</span>, <span class="st">"2264"</span><span class="op">)</span>, layer <span class="op">=</span> <span class="st">"buildings"</span>, outdir <span class="op">=</span> <span class="st">"."</span><span class="op">)</span> <span class="co"># 2.2 + 2.6 MB</span></span></span>
+<span class="r-in"><span><span class="va">parcels</span> <span class="op">=</span> <span class="fu">egib_download</span><span class="op">(</span>county <span class="op">=</span> <span class="st">"Świętochłowice"</span>, layer <span class="op">=</span> <span class="st">"parcels"</span>, outdir <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="co"># 3.9 MB</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
