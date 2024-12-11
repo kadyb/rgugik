@@ -5,7 +5,8 @@ in `ortho_request()` and `DEM_request()`.
 
 * Updated data sources in `borders_download()` function.
 
-* added `egib_download()` function for downloading Land and Building Register layers.
+* Added `egib_download()` function for downloading Land and Building Register
+layers (EGiB). Thanks to Grzegorz Sapijaszko.
 
 # rgugik 0.4.1
 
