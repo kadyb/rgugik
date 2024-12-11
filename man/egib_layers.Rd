@@ -3,7 +3,7 @@
 \docType{data}
 \name{egib_layers}
 \alias{egib_layers}
-\title{Available urls and layers of Land and building register (EGiB)}
+\title{Available URLs and layers of Land and Building Register (EGiB)}
 \format{
 An object of class \code{data.frame} with 380 rows and 4 columns.
 }
@@ -12,8 +12,8 @@ egib_layers
 }
 \description{
 The data frame contains the names of counties,
-their identifiers (TERYT, 4 characters), URL ofthe EGiB data (WFS)
-and the names of available layers.
+their identifiers (TERYT, 4 characters), the URL to the EGiB data (as Web
+Feature Service) and the names of available layers.
 }
 \examples{
 egib_layers

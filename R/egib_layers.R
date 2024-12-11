@@ -1,9 +1,9 @@
 #' @name egib_layers
-#' @title Available urls and layers of Land and building register (EGiB)
+#' @title Available URLs and layers of Land and Building Register (EGiB)
 #'
 #' @description The data frame contains the names of counties,
-#' their identifiers (TERYT, 4 characters), URL ofthe EGiB data (WFS)
-#' and the names of available layers.
+#' their identifiers (TERYT, 4 characters), the URL to the EGiB data (as Web
+#' Feature Service) and the names of available layers.
 #'
 #' @importFrom utils data
 #'

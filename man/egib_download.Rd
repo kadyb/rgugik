@@ -17,34 +17,38 @@ egib_download(
 
 \item{TERYT}{County ID (4 characters).}
 
-\item{layer}{Requested layer, \code{parcels} default. Other common layer is \code{buildings} (budynki).
-You can check available layers by \code{\link[=egib_layers]{egib_layers()}} data set.}
+\item{layer}{Requested layer, \code{parcels} default. Other common layer is
+\code{buildings}.
+You can check available layers by \code{\link[=egib_layers]{egib_layers()}} dataset.}
 
 \item{outdir}{name of the output directory where the data has to be stored,
-current directory by default. If you don't want to download data, pass a \code{NULL} value.}
+current directory by default. If you don't want to download data, pass a
+\code{NULL} value.}
 
-\item{...}{any other parameter passed to \code{\link[sf:st_read]{sf::read_sf()}} function}
+\item{...}{any other parameter passed to \code{\link[sf:st_read]{sf::read_sf()}} function.}
 }
 \value{
-Simple feature data frame of objects for requested layer.
+If the \code{outdir} argument is specified, the data will be downloaded
+to disk in geopackage format. If the \code{outdir} argument is \code{NULL},
+simple feature data frame is returned.
 }
 \description{
 Download Land and Building Register (EGiB) layers
 }
 \examples{
 \dontrun{
-parcels <- egib_download(county = "Świętochłowice", layer = "parcels", outdir = NULL) # 3.9 MB
 egib_download(TERYT = c("2476", "2264"), layer = "buildings", outdir = ".") # 2.2 + 2.6 MB
+parcels = egib_download(county = "Świętochłowice", layer = "parcels", outdir = NULL) # 3.9 MB
 }
 
 }
 \references{
-The EGiB data (Ewidencja Gruntów i Budynków) consist of 2 primary layers:
-cadastral data (parcels, "dzialki" in Polish) and buildings footprints (budynki).
-The data is maintained on county level, which results in 380 units/different
-sources of data. It may contain additional layers like points of detailed
-horizontal and vertical geodetic control network (osnowa_pozioma
-and osnowa_pionowa respectively).
+The EGiB data (\emph{Ewidencja Gruntów i Budynków}) consist of 2 primary layers:
+cadastral data (parcels) and buildings footprints.
+The data is maintained on county level, which results in 380 units (different
+sources of data). It may contain additional layers like points of detailed
+horizontal and vertical geodetic control network ("\emph{osnowa_pozioma}"
+and "\emph{osnowa_pionowa}" respectively).
 
 \url{https://www.geoportal.gov.pl/en/data/land-and-building-register-egib/}
 \url{https://www.geoportal.gov.pl/en/data/detailed-control-network-database-bdsog/}

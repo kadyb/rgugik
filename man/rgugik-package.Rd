@@ -30,8 +30,8 @@ Authors:
 Other contributors:
 \itemize{
   \item Maciej Beręsewicz \email{maciej.beresewicz@ue.poznan.pl} (\href{https://orcid.org/0000-0002-8281-4301}{ORCID}) [contributor]
-  \item GUGiK (source of the data) [contributor]
   \item Grzegorz Sapijaszko \email{grzegorz@sapijaszko.net} [contributor]
+  \item GUGiK (source of the data) [contributor]
 }
 
 }
