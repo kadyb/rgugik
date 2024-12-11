@@ -3,6 +3,7 @@
 export(DEM_request)
 export(borders_download)
 export(borders_get)
+export(egib_download)
 export(emuia_download)
 export(geocodePL_get)
 export(geodb_download)
