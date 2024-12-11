@@ -8,8 +8,8 @@
 <title>Search and Retrieve Spatial Data from GUGiK • rgugik</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Search and Retrieve Spatial Data from GUGiK">
 <meta name="description" content="Automatic open data acquisition from resources of Polish Head Office of Geodesy and Cartography (Główny Urząd Geodezji i Kartografii) (&lt;https://www.gov.pl/web/gugik&gt;). Available datasets include various types of numeric, raster and vector data, such as orthophotomaps, digital elevation models (digital terrain models, digital surface model, point clouds), state register of borders, spatial databases, geometries of cadastral parcels, 3D models of buildings, and more. It is also possible to geocode addresses or objects using the geocodePL_get() function.">
 <meta property="og:description" content="Automatic open data acquisition from resources of Polish Head Office of Geodesy and Cartography (Główny Urząd Geodezji i Kartografii) (&lt;https://www.gov.pl/web/gugik&gt;). Available datasets include various types of numeric, raster and vector data, such as orthophotomaps, digital elevation models (digital terrain models, digital surface model, point clouds), state register of borders, spatial databases, geometries of cadastral parcels, 3D models of buildings, and more. It is also possible to geocode addresses or objects using the geocodePL_get() function.">
@@ -71,6 +71,7 @@
 <li><a href="https://emuia.gugik.gov.pl" class="external-link">Register of Towns, Streets and Addresses</a></li>
 <li><a href="https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-nazw-geograficznych-prng/" class="external-link">State Register of Geographical Names</a></li>
 <li><a href="https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-granic-prg/" class="external-link">State Register of Borders</a></li>
+<li><a href="https://integracja.gugik.gov.pl/eziudp/index.php?zbior=egib" class="external-link">Land and Building Registers</a></li>
 <li>Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates</li>
 <li>3D models of buildings (LOD1, LOD2)</li>
 <li>Various digital elevation models as:
@@ -124,12 +125,18 @@
 <td align="left">Ewidencja Miejscowości, Ulic i Adresów</td>
 </tr>
 <tr class="odd">
+<td align="left"><code><a href="reference/egib_download.html">egib_download()</a></code></td>
+<td align="left">county</td>
+<td align="left">Land and Building Register</td>
+<td align="left">Ewidencja Gruntów i Budynków</td>
+</tr>
+<tr class="even">
 <td align="left"><code><a href="reference/geonames_download.html">geonames_download()</a></code></td>
 <td align="left">type</td>
 <td align="left">State Register of Geographical Names</td>
 <td align="left">Państwowy Rejestr Nazw Geograficznych</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">
 <code><a href="reference/borders_get.html">borders_get()</a></code>, <code><a href="reference/borders_download.html">borders_download()</a></code>
 </td>
@@ -137,19 +144,19 @@
 <td align="left">State Register of Borders</td>
 <td align="left">Państwowy Rejestr Granic</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><code><a href="reference/parcel_get.html">parcel_get()</a></code></td>
 <td align="left">parcel ID, coordinates</td>
 <td align="left">Location of cadastral parcels</td>
 <td align="left">Lokalizacja działek katastralnych</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code><a href="reference/models3D_download.html">models3D_download()</a></code></td>
 <td align="left">county</td>
 <td align="left">3D models of buildings</td>
 <td align="left">Modele 3D budynków</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">
 <code><a href="reference/DEM_request.html">DEM_request()</a></code>, <code><a href="reference/tile_download.html">tile_download()</a></code>
 </td>
@@ -186,7 +193,7 @@
 <p>You can install the development version from <a href="https://github.com" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kadyb/rgugik"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"kadyb/rgugik"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
