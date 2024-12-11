@@ -71,6 +71,12 @@ smaller polygons (<code><a href="https://r-spatial.github.io/sf/reference/st_mak
 (<code><a href="https://r-spatial.github.io/sf/reference/st_sample.html" class="external-link">sf::st_sample()</a></code>).</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>The type of the <code>resolution</code> attribute is not returned correctly.
+Currently it is returned as an integer, while it should be floating point.
+This is an upstream issue in Geoportal.</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="tile_download.html">tile_download()</a></code></p></div>
     </div>
