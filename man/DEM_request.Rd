@@ -24,6 +24,11 @@ If your area of interest exceeds this limit, you can generate a grid of
 smaller polygons (\code{\link[sf:st_make_grid]{sf::st_make_grid()}}) or a regular grid of points
 (\code{\link[sf:st_sample]{sf::st_sample()}}).
 }
+\note{
+The type of the \code{avgElevErr} attribute is not returned correctly.
+Currently it is returned as an integer, while it should be floating point.
+This is an upstream issue in Geoportal.
+}
 \examples{
 \dontrun{
 library(sf)

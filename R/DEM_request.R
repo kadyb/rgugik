@@ -13,6 +13,10 @@
 #' smaller polygons ([`sf::st_make_grid()`]) or a regular grid of points
 #' ([`sf::st_sample()`]).
 #'
+#' @note The type of the `avgElevErr` attribute is not returned correctly.
+#' Currently it is returned as an integer, while it should be floating point.
+#' This is an upstream issue in Geoportal.
+#'
 #' @seealso [`tile_download()`]
 #'
 #' @export
