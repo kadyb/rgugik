@@ -48,7 +48,7 @@ topodb_download = function(county = NULL, TERYT = NULL, outdir = ".",
     stop("incorrect TERYT")
   }
 
-  base_URL = "https://opendata.geoportal.gov.pl/bdot10k/"
+  base_URL = "https://opendata.geoportal.gov.pl/bdot10k/schemat2021/"
 
   if (!is.null(county)) {
     sel_vector = df_names[, "NAME"] %in% county
