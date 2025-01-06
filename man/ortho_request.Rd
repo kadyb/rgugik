@@ -20,15 +20,10 @@ a data frame with metadata and links to the orthoimages
 Get metadata and links to available orthoimages
 }
 \details{
-The server can return a maximum of 2000 records in a single query.
+The server can return a maximum of 1000 records in a single query.
 If your area of interest exceeds this limit, you can generate a grid of
 smaller polygons (\code{\link[sf:st_make_grid]{sf::st_make_grid()}}) or a regular grid of points
 (\code{\link[sf:st_sample]{sf::st_sample()}}).
-}
-\note{
-The type of the \code{resolution} attribute is not returned correctly.
-Currently it is returned as an integer, while it should be floating point.
-This is an upstream issue in Geoportal.
 }
 \examples{
 \dontrun{

@@ -8,14 +8,10 @@
 #' point clouds)
 #'
 #' @details
-#' The server can return a maximum of 2000 records in a single query.
+#' The server can return a maximum of 1000 records in a single query.
 #' If your area of interest exceeds this limit, you can generate a grid of
 #' smaller polygons ([`sf::st_make_grid()`]) or a regular grid of points
 #' ([`sf::st_sample()`]).
-#'
-#' @note The type of the `avgElevErr` attribute is not returned correctly.
-#' Currently it is returned as an integer, while it should be floating point.
-#' This is an upstream issue in Geoportal.
 #'
 #' @seealso [`tile_download()`]
 #'
@@ -45,11 +41,12 @@ DEM_request = function(x) {
 
   selected_cols = c("godlo", "akt_rok", "asortyment", "format", "char_przestrz",
                     "blad_sr_wys", "uklad_xy", "uklad_h", "akt_data", "czy_ark_wypelniony",
-                    "url_do_pobrania", "nazwa_pliku", "id_serie", "zr_danych")
+                    "url_do_pobrania", "nazwa_pliku", "id_serie", "zr_danych",
+                    "blad_sr_syt")
   selected_cols = paste(selected_cols, collapse = ",")
 
   # hard coded URL and parameters
-  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/1/query?"
+  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/4/query?"
   geometryType = "&geometryType=esriGeometryEnvelope"
   spatialRel = "&spatialRel=esriSpatialRelIntersects"
   outFields = paste0("&outFields=", selected_cols)
@@ -77,6 +74,8 @@ DEM_request = function(x) {
                         #id_nmt = integer(),
                         id_serie = integer(),
                         zr_danych = character(),
+                        dt_pzgik = character(),
+                        blad_sr_syt = numeric(),
                         stringsAsFactors = FALSE
   )
 
@@ -105,8 +104,8 @@ DEM_request = function(x) {
 
     output = output$features[[1]]
 
-    # MaxRecordCount: 2000
-    if (nrow(output) == 2000) {
+    # MaxRecordCount: 1000
+    if (nrow(output) == 1000) {
       warning("maximum number of records, reduce the area")
     }
 
@@ -119,17 +118,18 @@ DEM_request = function(x) {
   # postprocessing
   colnames(empty_df) = c("sheetID", "year", "product", "format", "resolution", "avgElevErr",
                          "CRS", "VRS", "date", "isFilled", "URL", "filename", "seriesID",
-                         "source")
+                         "source", "avgPlanarErr")
   empty_df$product = factor(empty_df$product,
                             levels = c("NMPT", "NMT", "chmura punktow"),
                             labels = c("DSM", "DTM", "PointCloud"))
   empty_df$CRS = as.factor(empty_df$CRS)
   empty_df$VRS = as.factor(empty_df$VRS)
-  empty_df$date = as.Date(empty_df$date, format = "%Y-%m-%d")
+  empty_df$date = as.Date(as.POSIXct(empty_df$date / 1000, origin = "1970-01-01", tz = "CET"))
   empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
   empty_df$source = factor(empty_df$source,
                            levels = c("Skaning laserowy", "Zdj. lotnicze"),
                            labels = c("Laser scanning", "Aerial photo"))
+  empty_df = empty_df[, c(1:4, 14, 5, 15, 6:13)] # reorder columns
 
   return(empty_df)
 }

@@ -4,14 +4,10 @@
 #' (requests are based on the bounding boxes of the provided features)
 #'
 #' @details
-#' The server can return a maximum of 2000 records in a single query.
+#' The server can return a maximum of 1000 records in a single query.
 #' If your area of interest exceeds this limit, you can generate a grid of
 #' smaller polygons ([`sf::st_make_grid()`]) or a regular grid of points
 #' ([`sf::st_sample()`]).
-#'
-#' @note The type of the `resolution` attribute is not returned correctly.
-#' Currently it is returned as an integer, while it should be floating point.
-#' This is an upstream issue in Geoportal.
 #'
 #' @return a data frame with metadata and links to the orthoimages
 #'
@@ -47,7 +43,7 @@ ortho_request = function(x) {
   selected_cols = paste(selected_cols, collapse = ",")
 
   # hard coded URL and parameters
-  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/0/query?"
+  base_URL = "https://mapy.geoportal.gov.pl/gprest/services/SkorowidzeFOTOMF/MapServer/3/query?"
   geometryType = "&geometryType=esriGeometryEnvelope"
   spatialRel = "&spatialRel=esriSpatialRelIntersects"
   outFields = paste0("&outFields=", selected_cols)
@@ -56,7 +52,7 @@ ortho_request = function(x) {
 
   # initial empty df (columns must be identical as in 'selected_cols')
   empty_df = data.frame(godlo = character(),
-                        akt_rok = character(),
+                        akt_rok = integer(),
                         piksel = numeric(),
                         kolor = character(),
                         zr_danych = character(),
@@ -102,8 +98,8 @@ ortho_request = function(x) {
 
     output = output$features[[1]]
 
-    # MaxRecordCount: 2000
-    if (nrow(output) == 2000) {
+    # MaxRecordCount: 1000
+    if (nrow(output) == 1000) {
       warning("maximum number of records, reduce the area")
     }
 
@@ -118,7 +114,7 @@ ortho_request = function(x) {
                          "sensor", "CRS", "date", "isFilled", "URL",
                          "filename", "seriesID")
   empty_df$composition = as.factor(empty_df$composition)
-  empty_df$date = as.Date(empty_df$date, format = "%Y-%m-%d")
+  empty_df$date = as.Date(as.POSIXct(empty_df$date / 1000, origin = "1970-01-01", tz = "CET"))
   empty_df$CRS = as.factor(empty_df$CRS)
   empty_df$isFilled = ifelse(empty_df$isFilled == "TAK", TRUE, FALSE)
   empty_df$sensor = factor(empty_df$sensor,
