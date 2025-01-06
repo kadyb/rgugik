@@ -5,7 +5,7 @@
 \alias{commune_names}
 \title{Communes in Poland}
 \format{
-An object of class \code{data.frame} with 2477 rows and 2 columns.
+An object of class \code{data.frame} with 2479 rows and 2 columns.
 }
 \usage{
 commune_names
