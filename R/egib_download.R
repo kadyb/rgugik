@@ -127,7 +127,7 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
       }
       egib_url = paste0("WFS:", egib_url)
 
-      print(paste0(k, "/", nrow(layer_names))) # print iteration
+      writeLines(paste0(k, "/", nrow(layer_names))) # print iteration
 
       message(paste("Downloading layer", layer, "for", county_name, "county. TERYT:", TERYT))
 
