@@ -1,3 +1,5 @@
+# skip test on GitHub and CRAN
+skip_on_ci()
 skip_on_cran()
 
 tmp = tempdir()

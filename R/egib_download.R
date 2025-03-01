@@ -31,6 +31,7 @@
 #' and "*osnowa_pionowa*" respectively).
 #'
 #' \url{https://www.geoportal.gov.pl/en/data/land-and-building-register-egib/}
+#'
 #' \url{https://www.geoportal.gov.pl/en/data/detailed-control-network-database-bdsog/}
 
 egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir = ".", ...) {
@@ -84,18 +85,18 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
   } else {
     sel_vector = layer_names[, "TERYT"] %in% TERYT
     layer_names = layer_names[sel_vector, ]
-    layer_names = layer_names[match(TERYT, layer_names$TERYT),]
+    layer_names = layer_names[match(TERYT, layer_names$TERYT), ]
 
   }
 
-  if (nrow(layer_names > 1L) & is.null(outdir)) {
+  if (nrow(layer_names > 1L) && is.null(outdir)) {
     message("There is more than one county provided, however you didn't specified the output directory.")
     message("Only the first will be taken.")
     layer_names = layer_names[1, ]
   }
 
   for (k in seq_len(nrow(layer_names))) {
-    print(k)
+    print(paste(k, "/", nrow(layer_names)))
 
     TERYT = layer_names[k, "TERYT"]
     county_name = layer_names[k, "NAME"]
@@ -122,7 +123,7 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
     if (any(grepl(layer, layers))) {
       layer = layers[which(grepl(layer, layers))]
       if (length(layer) > 1L) {
-        stop(paste0("There is more than 1 layer simillar to requested: ",
+        stop(paste0("There is more than 1 layer similar to requested: ",
                       paste0(unlist(layer), collapse = ", "), ". Please specify."))
       }
       egib_url = paste0("WFS:", egib_url)
@@ -140,6 +141,7 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
         outfile = paste0(outdir, "/", TERYT, ".gpkg")
         message(paste("Writing the data to", outfile))
         sf::write_sf(output, dsn = outfile, layer = layer, append = FALSE)
+        return(invisible(NULL))
       }
     }
   }

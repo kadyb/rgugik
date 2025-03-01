@@ -51,5 +51,6 @@ horizontal and vertical geodetic control network ("\emph{osnowa_pozioma}"
 and "\emph{osnowa_pionowa}" respectively).
 
 \url{https://www.geoportal.gov.pl/en/data/land-and-building-register-egib/}
+
 \url{https://www.geoportal.gov.pl/en/data/detailed-control-network-database-bdsog/}
 }
