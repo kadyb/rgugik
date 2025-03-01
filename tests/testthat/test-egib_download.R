@@ -6,7 +6,7 @@ tmp = tempdir()
 output = egib_download(county = "Świętochłowice", layer = "dzialki", outdir = NULL)
 
 # if output is "connection error", return NULL
-if (typeof(voivodeship_geom) == "character") return(NULL)
+if (typeof(output) == "character") return(NULL)
 
 # output should be sf data frame
 expect_s3_class(output, c("sf", "data.frame"))
