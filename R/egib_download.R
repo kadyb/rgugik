@@ -89,14 +89,13 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
 
   }
 
-  if (nrow(layer_names > 1L) && is.null(outdir)) {
+  if (nrow(layer_names) > 1L && is.null(outdir)) {
     message("There is more than one county provided, however you didn't specified the output directory.")
     message("Only the first will be taken.")
     layer_names = layer_names[1, ]
   }
 
   for (k in seq_len(nrow(layer_names))) {
-    print(paste(k, "/", nrow(layer_names)))
 
     TERYT = layer_names[k, "TERYT"]
     county_name = layer_names[k, "NAME"]
@@ -128,6 +127,8 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
       }
       egib_url = paste0("WFS:", egib_url)
 
+      print(paste0(k, "/", nrow(layer_names))) # print iteration
+
       message(paste("Downloading layer", layer, "for", county_name, "county. TERYT:", TERYT))
 
       output = tryGet(sf::read_sf(dsn = egib_url, layer = layer,
@@ -141,9 +142,11 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
         outfile = paste0(outdir, "/", TERYT, ".gpkg")
         message(paste("Writing the data to", outfile))
         sf::write_sf(output, dsn = outfile, layer = layer, append = FALSE)
-        return(invisible(NULL))
       }
     }
   }
-  return(output)
+
+  if (!is.null(outdir)) return(invisible(0L))
+  else return(output)
+
 }

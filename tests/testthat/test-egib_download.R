@@ -3,10 +3,13 @@ skip_on_ci()
 skip_on_cran()
 
 tmp = tempdir()
-status = egib_download(county = "Świętochłowice", layer = "dzialki", outdir = tmp)
+output = egib_download(county = "Świętochłowice", layer = "dzialki", outdir = NULL)
 
-# status should be sf data frame
-expect_s3_class(status, c("sf", "data.frame"))
+# if output is "connection error", return NULL
+if (typeof(voivodeship_geom) == "character") return(NULL)
+
+# output should be sf data frame
+expect_s3_class(output, c("sf", "data.frame"))
 
 # test stops
 test_that("check stops", {
