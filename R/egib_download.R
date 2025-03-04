@@ -12,7 +12,7 @@
 #'
 #' @return If the `outdir` argument is specified, the data will be downloaded
 #' to disk in geopackage format. If the `outdir` argument is `NULL`,
-#' simple feature data frame is returned.
+#' simple feature data frame is returned, but only for the first object.
 #'
 #' @export
 #'
@@ -120,18 +120,18 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
     }
 
     if (any(grepl(layer, layers))) {
-      layer = layers[which(grepl(layer, layers))]
-      if (length(layer) > 1L) {
+      layer_sel = layers[which(grepl(layer, layers))]
+      if (length(layer_sel) > 1L) {
         stop(paste0("There is more than 1 layer similar to requested: ",
-                      paste0(unlist(layer), collapse = ", "), ". Please specify."))
+                      paste0(unlist(layer_sel), collapse = ", "), ". Please specify."))
       }
       egib_url = paste0("WFS:", egib_url)
 
       writeLines(paste0(k, "/", nrow(layer_names))) # print iteration
 
-      message(paste("Downloading layer", layer, "for", county_name, "county. TERYT:", TERYT))
+      message(paste("Downloading layer", layer_sel, "for", county_name, "county. TERYT:", TERYT))
 
-      output = tryGet(sf::read_sf(dsn = egib_url, layer = layer,
+      output = tryGet(sf::read_sf(dsn = egib_url, layer = layer_sel,
                                   options = "CONSIDER_EPSG_AS_URN=YES", ...))
 
       if (any(output %in% c("error", "warning"))) {
@@ -141,7 +141,7 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
       if (!is.null(outdir)) {
         outfile = paste0(outdir, "/", TERYT, ".gpkg")
         message(paste("Writing the data to", outfile))
-        sf::write_sf(output, dsn = outfile, layer = layer, append = FALSE)
+        sf::write_sf(output, dsn = outfile, layer = layer_sel, append = FALSE)
       }
     }
   }

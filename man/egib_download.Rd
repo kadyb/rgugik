@@ -30,7 +30,7 @@ current directory by default. If you don't want to download data, pass a
 \value{
 If the \code{outdir} argument is specified, the data will be downloaded
 to disk in geopackage format. If the \code{outdir} argument is \code{NULL},
-simple feature data frame is returned.
+simple feature data frame is returned, but only for the first object.
 }
 \description{
 Download Land and Building Register (EGiB) layers
