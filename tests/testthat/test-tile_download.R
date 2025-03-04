@@ -30,7 +30,7 @@ test_that("check file ext", {
 
 # DEM
 tmp = tempfile()
-sttus = tile_download(DEM, outdir = tmp)
+status = tile_download(DEM, outdir = tmp)
 
 if (!is.null(status)) {
   return(NULL)
