@@ -100,9 +100,8 @@ egib_download = function(county = NULL, TERYT = NULL, layer = "parcels", outdir 
     TERYT = layer_names[k, "TERYT"]
     county_name = layer_names[k, "NAME"]
 
-    layers = layer_names[k, "LAYERS"] |>
-      strsplit(split = ", ") |>
-      as.list()
+    layers = strsplit(layer_names[k, "LAYERS"], split = ", ")
+    layers = as.list(layers)
     layers = layers[[1]]
 
     egib_url = layer_names[k, "URL"]
