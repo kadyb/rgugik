@@ -114,7 +114,7 @@ req_df = req_df[req_df$year == 2001, ]
 
 # print metadata
 t(req_df)
-#>             27                                                                              
+#>             30                                                                              
 #> sheetID     "N-33-130-D-b-2-3"                                                              
 #> year        "2001"                                                                          
 #> resolution  "1"                                                                             
@@ -169,7 +169,7 @@ package can be found in the vignettes:
 Poland](https://www.gov.pl/web/gugik) is the main source of the provided
 data. The data is made available in accordance with the [Act of May 17,
 1989 Geodetic and Cartographic
-Law](http://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19890300163)
+Law](https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19890300163)
 (amended on 16 April 2020).
 
 All datasets can be explored interactively using the

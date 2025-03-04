@@ -178,7 +178,7 @@ More advanced examples of the practical (step by step) use of this package can b
 
 ## Acknowledgment
 
-[Head Office of Geodesy and Cartography in Poland](https://www.gov.pl/web/gugik) is the main source of the provided data. The data is made available in accordance with the [Act of May 17, 1989 Geodetic and Cartographic Law](http://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19890300163) (amended on 16 April 2020).
+[Head Office of Geodesy and Cartography in Poland](https://www.gov.pl/web/gugik) is the main source of the provided data. The data is made available in accordance with the [Act of May 17, 1989 Geodetic and Cartographic Law](https://isap.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU19890300163) (amended on 16 April 2020).
 
 All datasets can be explored interactively using the [Geoportal](https://mapy.geoportal.gov.pl).
 

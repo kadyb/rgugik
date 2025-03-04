@@ -31,5 +31,5 @@ geonames_download(type = "place", format = "SHP") # 18.2 MB
 }
 }
 \references{
-\url{http://isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20150000219/O/D20150219.pdf}
+\url{https://isap.sejm.gov.pl/isap.nsf/download.xsp/WDU20150000219/O/D20150219.pdf}
 }
