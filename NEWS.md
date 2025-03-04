@@ -1,5 +1,7 @@
 # rgugik development version
 
+# rgugik 0.4.2
+
 * Fixed "*Error in if (nrow(output) == 1000) { : argument is of length zero*"
 in `ortho_request()` and `DEM_request()`.
 
