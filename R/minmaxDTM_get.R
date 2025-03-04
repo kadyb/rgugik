@@ -54,7 +54,8 @@ minmaxDTM_get = function(polygon) {
   }
 
   if (length(output) == 1) {
-    stop("incorrect geometry")
+    message("The returned object is not valid. Please try again.")
+    return(invisible(NULL))
   }
 
   print(paste("Polygon area:", output[["Polygon area"]], "m^2"))
