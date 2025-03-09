@@ -32,7 +32,7 @@ ortho_request = function(x) {
   if (length(x) == 0) stop("no geometries")
 
   if (inherits(x, "SpatVector")) {
-    epsg = terra::crs(x, describe = TRUE)$epsg
+    epsg = terra::crs(x, describe = TRUE)$code
   } else {
     epsg = sf::st_crs(x)$epsg
   }
