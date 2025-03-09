@@ -1,5 +1,8 @@
 # rgugik development version
 
+* Corrected the attribute name where the EPSG code was stored in the SpatVector
+object.
+
 # rgugik 0.4.2
 
 * Fixed "*Error in if (nrow(output) == 1000) { : argument is of length zero*"
