@@ -96,7 +96,12 @@ ortho_request = function(x) {
       return(invisible("connection error"))
     }
 
-    output = output$features[[1]]
+    if (any(names(output) == "error")) {
+      message("HTTP 500 Internal Error")
+      return(NULL)
+    } else {
+      output = output$features[[1]]
+    }
 
     # MaxRecordCount: 1000
     if (nrow(output) == 1000) {
