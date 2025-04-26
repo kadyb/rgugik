@@ -32,7 +32,8 @@ Cartography](https://www.gov.pl/web/gugik) including:
   Registers](https://www.geoportal.gov.pl/pl/dane/ewidencja-gruntow-i-budynkow-egib/)
 - Location (geometry) of cadastral parcels using TERYT (parcel ID) or
   coordinates
-- 3D models of buildings (LOD1, LOD2)
+- [3D models of
+  buildings](https://www.geoportal.gov.pl/pl/dane/inne-dane/modele-3d-budynkow/)
 - Various digital elevation models as:
   - [Digital terrain
     model](https://www.geoportal.gov.pl/pl/dane/numeryczny-model-terenu-nmt/)
@@ -71,7 +72,7 @@ objects:
 
 - `voivodeship_names` (16)
 - `county_names` (380)
-- `commune_names` (2476)
+- `commune_names` (2479)
 
 ## Installation
 
@@ -114,7 +115,7 @@ req_df = req_df[req_df$year == 2001, ]
 
 # print metadata
 t(req_df)
-#>             30                                                                              
+#>             31                                                                              
 #> sheetID     "N-33-130-D-b-2-3"                                                              
 #> year        "2001"                                                                          
 #> resolution  "1"                                                                             

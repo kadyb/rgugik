@@ -33,7 +33,7 @@ knitr::opts_chunk$set(
   - [State Register of Borders](https://www.geoportal.gov.pl/pl/dane/panstwowy-rejestr-granic-prg/)
   - [Land and Building Registers](https://www.geoportal.gov.pl/pl/dane/ewidencja-gruntow-i-budynkow-egib/)
   - Location (geometry) of cadastral parcels using TERYT (parcel ID) or coordinates
-  - 3D models of buildings (LOD1, LOD2)
+  - [3D models of buildings](https://www.geoportal.gov.pl/pl/dane/inne-dane/modele-3d-budynkow/)
   - Various digital elevation models as:
     - [Digital terrain model](https://www.geoportal.gov.pl/pl/dane/numeryczny-model-terenu-nmt/)
     - [Digital surface model](https://www.geoportal.gov.pl/pl/dane/numeryczny-model-pokrycia-terenu-nmpt/)
@@ -104,7 +104,7 @@ The names of administrative units and their IDs are included in these objects:
 
   - `voivodeship_names` (16)
   - `county_names` (380)
-  - `commune_names` (2476)
+  - `commune_names` (2479)
 
 ## Installation
 
