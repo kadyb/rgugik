@@ -3,6 +3,8 @@
 * Corrected the attribute name where the EPSG code was stored in the SpatVector
 object.
 
+* Updated the `county_names` dataset.
+
 # rgugik 0.4.2
 
 * Fixed "*Error in if (nrow(output) == 1000) { : argument is of length zero*"
